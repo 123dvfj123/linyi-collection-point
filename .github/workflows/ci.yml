@@ -1,0 +1,31 @@
+# 持续集成：W1–W6 只做结构自检，保证流水线是绿的；W7 之后由 R10 扩展为真实测试。
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  sanity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 仓库结构自检
+        run: |
+          echo "检查关键目录是否存在"
+          test -f README.md
+          test -f CONTRIBUTING.md
+          test -d docs/01-requirements
+          test -d docs/06-logbook
+          echo "结构自检通过"
+
+      - name: 检查是否误提交敏感文件
+        run: |
+          if git ls-files | grep -E '(^|/)\.env$'; then
+            echo "::error::检测到 .env 被提交，请立即移除并轮换密钥"
+            exit 1
+          fi
+          echo "未发现敏感文件"

@@ -1,0 +1,45 @@
+# ---------- 依赖 ----------
+node_modules/
+.pnpm-store/
+
+# ---------- 构建产物 ----------
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# ---------- 环境变量（绝对不要提交密钥） ----------
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# ---------- 数据库与日志 ----------
+*.sqlite
+*.sqlite3
+*.db
+logs/
+*.log
+npm-debug.log*
+coverage/
+.nyc_output/
+
+# ---------- 编辑器与系统 ----------
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---------- Office 临时文件 ----------
+~$*.docx
+~$*.xlsx
+~$*.pptx
+*.tmp
+
+# ---------- 个人草稿 ----------
+docs/06-logbook/_draft/
+scratch/
