@@ -1,0 +1,50 @@
+# Continuous integration.
+# Weeks 1 to 6 only check the repository structure. From week 7 the backend and
+# frontend jobs are enabled once the skeletons exist.
+
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  sanity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check required files and folders
+        run: |
+          test -f README.md
+          test -f CONTRIBUTING.md
+          test -d docs/01-requirements
+          test -d docs/06-logbook
+          echo "structure check passed"
+
+      - name: Check that no environment file was committed
+        run: |
+          if git ls-files | grep -E '(^|/)\.env$'; then
+            echo "::error::a .env file is tracked, remove it and rotate the keys"
+            exit 1
+          fi
+          echo "no environment file tracked"
+
+      # Uncomment from week 7, once backend/package.json exists.
+      # backend:
+      #   runs-on: ubuntu-latest
+      #   defaults:
+      #     run:
+      #       working-directory: backend
+      #   steps:
+      #     - uses: actions/checkout@v4
+      #     - uses: actions/setup-node@v4
+      #       with:
+      #         node-version: '18'
+      #         cache: npm
+      #         cache-dependency-path: backend/package-lock.json
+      #     - run: npm ci
+      #     - run: npm run lint
+      #     - run: npm test -- --coverage

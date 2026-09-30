@@ -1,0 +1,45 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# build output
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# environment files - never commit secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# database and logs
+*.sqlite
+*.sqlite3
+*.db
+logs/
+*.log
+npm-debug.log*
+coverage/
+.nyc_output/
+
+# editors and operating system
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Office lock files
+~$*.docx
+~$*.xlsx
+~$*.pptx
+*.tmp
+
+# personal drafts
+docs/06-logbook/_draft/
+scratch/
