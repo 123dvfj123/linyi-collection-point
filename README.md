@@ -40,7 +40,7 @@ docker compose up -d
 | R3 需求文档官 | （填写） | @ | SRS/RTM/需求获取 | `docs/01-requirements/` |
 | R4 前端组长 | （填写） | @ | 前端架构/设计系统/UML | `docs/02-design/`、`frontend/src/components/` |
 | R5 前端开发 | （填写） | @ | 居民端/员工端/后台页面 | `frontend/src/views/` |
-| R6 后端组长 | （填写） | @ | 架构/数据模型/API/推荐算法 | `backend/src/`、`docs/03-api/` |
+| R6 后端组长 | Hu Qing Kai | @123dvfj123 | 架构/数据模型/API/推荐算法 | `backend/src/`、`docs/03-api/` |
 | R7 后端开发 | （填写） | @ | 库位/取件/计费/盘点模块 | `backend/src/modules/` |
 | R8 测试组长 | （填写） | @ | 测试计划/用例/缺陷/验收 | `docs/04-testing/` |
 | R9 文档与质量 | （填写） | @ | 报告统稿/手册/术语表 | `docs/07-report/` |
