@@ -18,7 +18,7 @@ paths:
                 $ref: "#/components/schemas/HealthResponse"
   /auth/login:
     post:
-      summary: Staff or admin login
+      summary: Login for resident, staff, owner or admin
       requestBody:
         required: true
         content:
@@ -237,6 +237,7 @@ components:
           type: array
           items:
             type: string
+            enum: [resident, staff, owner, admin]
     Parcel:
       type: object
       properties:
