@@ -22,7 +22,7 @@ Use a layered architecture inside a single deployable Spring Boot service.
 ### Package structure
 
 ```text
-com.linyi
+com.group23
 ├── config
 ├── common
 ├── auth

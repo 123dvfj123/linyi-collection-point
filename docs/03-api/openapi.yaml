@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: LinYi Parcel Collection Point API
+  title: Community Parcel Collection Point API
   version: 0.1.0-draft
   description: Draft OpenAPI contract. The backend owns the final paths and fields.
 servers:
