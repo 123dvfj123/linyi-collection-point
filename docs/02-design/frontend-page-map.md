@@ -11,7 +11,7 @@
 - Main layout: sidebar, top bar, user menu, notifications and breadcrumb.
 - Route guards: redirect unauthenticated users to `/login` and unauthorised users to a 403 page.
 - Error pages: 403 and 404.
-- Role names follow the SRS: Resident, Collection Point Staff, Collection Point Owner, System Administrator.
+- Role names follow the SRS: Resident, Staff, Owner, System Administrator.
 
 ## Page List
 

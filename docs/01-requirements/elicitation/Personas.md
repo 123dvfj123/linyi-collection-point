@@ -15,8 +15,8 @@
 | Persona | System role | Age | Primary goal |
 |---|---|---|---|
 | Emily Chen | Resident | 34 | Pick up parcels quickly, at any time, without confusion |
-| Daniel Wu | Collection point staff | 27 | Shelve and hand over parcels fast and without errors |
-| Linda Zhang | Collection point owner | 45 | Understand daily operations and keep the collection point profitable |
+| Daniel Wu | Staff | 27 | Shelve and hand over parcels fast and without errors |
+| Linda Zhang | Owner | 45 | Understand daily operations and keep the collection point profitable |
 
 ---
 
@@ -50,7 +50,7 @@ Emily leaves for work at 8:30 and gets home around 19:30. She shops online 6 to 
 
 ---
 
-## Persona 2: Daniel Wu (Collection Point Staff)
+## Persona 2: Daniel Wu (Staff)
 
 | Field | Detail |
 |---|---|
@@ -80,7 +80,7 @@ Daniel opens the collection point at 8:00. Couriers deliver two or three batches
 
 ---
 
-## Persona 3: Linda Zhang (Collection Point Owner)
+## Persona 3: Linda Zhang (Owner)
 
 | Field | Detail |
 |---|---|
