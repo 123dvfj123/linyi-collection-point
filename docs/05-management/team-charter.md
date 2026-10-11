@@ -8,7 +8,7 @@
 | Owner | R1 (Liu JiaHao) |
 | Version | v1.0 |
 | Status | Agreed by all members |
-| Related | [Project plan](plans/PLAN.md), [CONTRIBUTING.md](../../../CONTRIBUTING.md), [Glossary](../../GLOSSARY.md) |
+| Related | [Project plan](plans/PLAN.md), [CONTRIBUTING.md](../../../CONTRIBUTING.md), [Glossary](../../glossary.md) |
 
 ## 1. Purpose of this charter
 
@@ -28,7 +28,7 @@ arrangements around those rules.
 
 | Item | Detail |
 |---|---|
-| Project | LinYi, a community parcel collection point management system |
+| Project | Community parcel collection point management system |
 | Deliverable | A web application, plus a report, a presentation and personal logbooks |
 | Duration | Eight weeks, five sprints |
 | Assessment | Progress review 10%, presentation 10%, report 15%, logbook 15% |
@@ -43,7 +43,7 @@ The sprint plan is in [`plans/PLAN.md`](plans/PLAN.md). The requirements are in
 |---|---|---|---|---|
 | R1 | Project manager | Liu JiaHao | 13662451 | [Django-coder6](https://github.com/Django-coder6) |
 | R2 | Product owner | Chan Yin Cho | 14489395 | [ohcyc246](https://github.com/ohcyc246) |
-| R3 | Requirements analyst | Li Cheuk Fung | 1432036 | [Kennethli13](https://github.com/Kennethli13) |
+| R3 | Requirements analyst | Li Cheuk Fung | 14320368 | [Kennethli13](https://github.com/Kennethli13) |
 | R4 | Frontend lead, product architect A | Yuan Chong Jun | 13705584 | [RookieVENENO](https://github.com/RookieVENENO) |
 | R5 | Frontend developer | Tan Yuan Ting | 13374348 | [Christine049](https://github.com/Christine049) |
 | R6 | Backend lead, product architect B | Hu Qing Kai | 13661454 | [123dvfj123](https://github.com/123dvfj123) |
@@ -152,7 +152,7 @@ These are the things that, when they slip, cause the most damage.
 5. **A problem is raised within half a day.** Being stuck silently for two days
    is worse than admitting you are stuck.
 6. **We use the agreed vocabulary.** The definitions are in
-   [`GLOSSARY.md`](../../GLOSSARY.md). Terms that are no longer used are listed
+   [`glossary.md`](../../glossary.md). Terms that are no longer used are listed
    there too.
 7. **We do not commit secrets.** No `.env` files, no passwords, no tokens.
 

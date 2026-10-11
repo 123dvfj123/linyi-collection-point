@@ -1,10 +1,10 @@
 # Glossary
 
-## COMP 3500SEF Group 23, LinYi
+## Community Parcel Collection Point Management System
 
 | Item | Detail |
 |---|---|
-| Task | T-00-01 |
+| Task | T-00-07 |
 | Owner | R9, reviewed by R2 |
 | Version | v1.0 |
 | Status | Active |
@@ -171,7 +171,7 @@ In the report, figures and tables are numbered by chapter: `Figure 4-1`,
 
 | Kind | Convention | Example |
 |---|---|---|
-| Java package | lower case, single word per module | `com.linyi.pickup` |
+| Java package | lower case, single word per module | `com.group23.pickup` |
 | Java class | UpperCamelCase | `PickupCodeService` |
 | Java method and field | lowerCamelCase | `verifyPickupCode` |
 | Database table | snake case, plural | `storage_locations` |
