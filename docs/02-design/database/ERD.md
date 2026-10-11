@@ -14,7 +14,7 @@
 - username: string, unique
 - passwordHash: string
 - fullName: string
-- role: enum(resident, courier, staff, admin)
+- role: enum(resident, staff, owner, admin)
 - phone: string
 - active: boolean
 - createdAt: timestamp

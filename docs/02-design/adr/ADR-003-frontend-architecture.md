@@ -32,7 +32,7 @@ TypeScript is deferred. It should only be added through a new ADR if a concrete 
 ## Responsibilities
 
 - R4 owns the frontend architecture, router, Pinia store structure, API wrapper, shared components and code review.
-- R5 implements resident, staff and admin pages inside those standards.
+- R5 implements resident, staff, owner and admin pages inside those standards.
 - R4 and R5 must reuse shared components instead of creating separate copies.
 - API field names and response shapes must follow the OpenAPI contract owned by R6.
 
