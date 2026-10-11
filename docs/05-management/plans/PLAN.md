@@ -31,6 +31,56 @@ to the task it belongs to.
 
 Frontend foundation is owned by R4: application layout, routing, Pinia setup, Axios wrapper and shared components. Feature pages are implemented by R5 under R4's standards and reviewed by R4. Page-level ownership follows docs/02-design/frontend-page-map.md
 
+## Sprint 1, week 2
+
+The goal is a frozen requirements and design baseline. At the end of this week
+the SRS is complete, every requirement has a test mapping, and the design
+baseline is committed so that Sprint 2 can start building without further
+decisions.
+
+| ID | Task | Owner | Folder |
+|---|---|---|---|
+| T-10-05 | SRS chapters 1 and 2: background, problem, goals, scope, overall description | R3 | docs/01-requirements/specification |
+| T-10-06 | Functional requirements, 47 items grouped by role, each with rationale and MoSCoW priority | R3, R2 | docs/01-requirements/specification |
+| T-10-07 | Non-functional requirements, 14 items, each with a measurable target and a verification method | R3 | docs/01-requirements/specification |
+| T-10-08 | Product backlog with acceptance criteria and MoSCoW order | R2 | docs/01-requirements/specification |
+| T-10-09 | Requirements traceability matrix mapping each requirement to its design, code and test cases | R3, R8 | docs/01-requirements |
+| T-10-10 | Requirements validation: internal walkthrough, findings recorded and closed | R2 | docs/05-management/minutes |
+| T-10-11 | Requirements change process and change log | R2 | docs/05-management |
+| T-10-12 | Priority review meeting, resolving conflicts between resident convenience and staff effort | R2 | docs/05-management/minutes |
+| T-10-13 | Prototype-driven requirement confirmation with three respondents | R2 | docs/01-requirements/elicitation |
+| T-20-01 | Architecture design: layered structure, module boundaries, system context | R6 | docs/02-design |
+| T-20-02 | Database design: entity relationship diagram, tables, unique constraints, indexes | R6 | docs/02-design/database |
+| T-20-03 | Interface design: OpenAPI 3 specification covering the endpoints Sprint 2 needs | R6, R10 | docs/03-api |
+| T-20-04 | State machine design for the parcel, storage location and exception ticket, as PlantUML sources | R7 | docs/02-design/uml |
+| T-20-05 | UI prototype for the resident, staff and admin pages | R5 | docs/02-design |
+| T-20-06 | Design system: colour, type, spacing and component rules | R4 | docs/02-design |
+| T-20-07 | UML baseline: use case diagrams, sequence diagrams and the class diagram, as PlantUML sources | R4 | docs/02-design/uml |
+| T-20-08 | Design review meeting covering architecture, database, API and UI, findings recorded | R6 | docs/05-management/minutes |
+| T-20-09 | Frontend engineering conventions: folder structure, naming, component split, state management | R5 | docs/02-design |
+| T-20-10 | Usability review of the prototype against the ten heuristics, findings recorded | R9 | docs/02-design |
+| T-20-11 | Activity models for the intake and handover business processes | R4 | docs/02-design/uml |
+| T-20-12 | High fidelity visual designs for the pickup, intake and dashboard pages | R4 | docs/02-design |
+| T-20-13 | Architecture decision records, including the database choice | R6 | docs/02-design/adr |
+| T-20-14 | Report chapters 4 and 5: figure captions and explanatory text | R1 | docs/07-report/chapters |
+| T-20-15 | Storage location recommender design: zone rules, scoring, hot and cold zones | R6, R7 | docs/02-design |
+| T-20-16 | Overdue fee engine design: rule table, pure calculation function, cap and waiver | R7 | docs/02-design |
+| T-00-06 | Weekly stand-up, risk register, change log and weekly report | R1 | docs/05-management |
+| T-50-19 | Requirement walkthrough support and the first draft of the test plan | R8 | docs/04-testing |
+| T-30-01 | Docker Compose for PostgreSQL, Redis, backend and frontend, started early so Sprint 2 can build on it | R10 | repository root |
+
+Deliverables that must exist at the end of the week:
+
+1. `SRS.md` complete, chapters 1 to 7.
+2. `RTM.md` with every must-have requirement mapped to at least one test case.
+3. `docs/02-design/uml/` containing the use case, sequence, class, state and
+   activity sources, all in PlantUML.
+4. `openapi.yaml` covering every endpoint Sprint 2 will call.
+5. `ERD.md` consistent with the parcel status model in the SRS.
+6. `docs/05-management/risk-register.md` and `change-log.md`.
+7. Release tag `v0.1.0`.
+
+
 ## Sprint 2, weeks 3 to 4
 
 The goal is that a staff member can record a parcel, the system suggests a
