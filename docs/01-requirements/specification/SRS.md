@@ -145,18 +145,18 @@ The system has four user roles.
 | Role | Description | Persona | Main permissions |
 |---|---|---|---|
 | Resident | A person living near a collection point who receives parcels. | Emily Chen | View own parcels, status, storage location, and pickup code; receive notifications. |
-| Collection point staff | An employee who handles parcels at a collection point. | Daniel Wu | Register parcels, perform shelving, search parcels, confirm handover, handle exceptions. |
-| Collection point owner | The person responsible for one or more collection points. | Linda Zhang | View statistics and overdue parcels, review operation logs, manage staff accounts for own collection points. |
-| System administrator | A technical user who maintains the system. | None (technical role) | Manage all users, collection points, and system configuration. |
+| Staff | An employee who handles parcels at a collection point. | Daniel Wu | Register parcels, perform shelving, search parcels, confirm handover, handle exceptions. |
+| Owner | The person responsible for one or more collection points. | Linda Zhang | View statistics and overdue parcels, review operation logs, manage staff accounts for own collection points. |
+| System Administrator | A technical user who maintains the system. | None (technical role) | Manage all users, collection points, and system configuration. |
 
 ### 2.4 System Boundary
 
 ```mermaid
 flowchart LR
     R["Resident"] --> S
-    ST["Collection point staff"] --> S
-    O["Collection point owner"] --> S
-    A["System administrator"] --> S
+    ST["Staff"] --> S
+    O["Owner"] --> S
+    A["System Administrator"] --> S
     subgraph S["Community Parcel Collection Point Management System (web, software only)"]
         direction TB
         F1["Parcel registration and shelving"]
