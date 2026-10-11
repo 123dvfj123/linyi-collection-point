@@ -1,4 +1,4 @@
-# LinYi - Community Parcel Collection Point Management System
+## - Community Parcel Collection Point Management System
 
 COMP 3500SEF Software Engineering, group project, 10 members.
 
@@ -29,7 +29,7 @@ by staff through the web interface.
 
 | Role ID | Role | Name | Student ID | GitHub |
 | :---: | --- | --- | --- | --- |
-| RI | Project Lead / Team Leader | Liu Jialiao | 13662451 | [Django-coder6](https://github.com/Django-coder6) |
+| R1 | Project Lead / Team Leader | Liu JiaHao | 13662451 | [Django-coder6](https://github.com/Django-coder6) |
 | R2 | Product Owner | Chan Yin Cho | 14489395 | [ohcyc246](https://github.com/ohcyc246) |
 | R3 | Requirements Documentation Officer / Business Analyst | Li Cheuk Fung | 1432036 | [Kennethli13](https://github.com/Kennethli13) |
 | R4 | Frontend Lead + Product Architect A | Yuan Chong Jun | 13705584| [RookieVENENO](https://github.com/RookieVENENO/) |
