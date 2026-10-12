@@ -2,7 +2,7 @@
 name: Task
 about: One WBS task that needs to be done
 title: "[T-xx-xx] "
-labels: type/feature
+labels: type: code
 assignees: ''
 ---
 

@@ -46,6 +46,10 @@ decisions.
 | ID | Task | Owner | Folder |
 |---|---|---|---|
 | T-10-05 | SRS chapters 1 and 2: background, problem, goals, scope, overall description | R3 | docs/01-requirements/specification |
+| T-10-05a | Design baseline consistency sweep: ERD, OpenAPI, ADR statuses and retired terminology | R6 | docs/02-design |
+> **Task id note.** `T-10-05` covers SRS chapters 1 and 2 only. Chapter 3 is
+> always `T-10-06`. The consistency sweep is `T-10-05a`. Do not reuse `T-10-05`
+> for chapter 3.
 | T-10-06 | Functional requirements, 47 items grouped by role, each with rationale and MoSCoW priority | R3, R2 | docs/01-requirements/specification |
 | T-10-07 | Non-functional requirements, 14 items, each with a measurable target and a verification method | R3 | docs/01-requirements/specification |
 | T-10-08 | Product backlog with acceptance criteria and MoSCoW order | R2 | docs/01-requirements/specification |
@@ -153,3 +157,4 @@ A task is done when:
 3. one other person has approved it and CI is green
 4. the deliverable sits in the folder listed above
 5. the person who did it has written a logbook entry with a link
+
