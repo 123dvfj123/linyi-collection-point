@@ -95,39 +95,39 @@ hands the parcel over. Everything else waits.
 | ID | Task | Owner | Folder |
 |---|---|---|---|
 | T-30-01 | Docker Compose with PostgreSQL, Redis, backend and frontend | R10 | repository root |
-| T-30-02 | Spring Boot skeleton: controller / service / repository / entity / dto, unified error handling | R6 | backend/src/main/java/com/linyi/common |
+| T-30-02 | Spring Boot skeleton: controller / service / repository / entity / dto, unified error handling | R6 | backend/src/main/java/com/group23/common |
 | T-30-03 | Flyway migrations and seed data | R7 | backend/src/main/resources/db/migration |
 | T-30-04 | Frontend skeleton: Vite, router, Pinia, Axios wrapper, shared layout, /login and /dashboard placeholders | R4 | frontend/src |
 | T-30-05 | Checkstyle, Spotless, commitlint, Git hooks | R10 | repository root |
 | T-30-06 | CI runs `./mvnw verify` and frontend tests | R10 | .github/workflows |
-| T-41-01 | Registration, login, JWT, four-role RBAC | R6 | backend/src/main/java/com/linyi/auth |
+| T-41-01 | Registration, login, JWT, four-role RBAC | R6 | backend/src/main/java/com/group23/auth |
 | T-41-02 | Login page; connect to the auth store and route guards | R5 | frontend/src/views |
-| T-41-03 | Audit log interceptor | R7 | backend/src/main/java/com/linyi/common |
-| T-41-04 | Unit tests for auth and RBAC | R8 | backend/src/test/java/com/linyi |
-| T-42-01 | Staff records a parcel, carrier recognised from the waybill prefix, duplicate waybills rejected | R7 | backend/src/main/java/com/linyi/parcel |
-| T-42-02 | Storage location recommender: size filter, zone priority, turnover score, safe under concurrency | R6 | backend/src/main/java/com/linyi/location |
-| T-42-03 | Storage location management: zones, states, manual override | R7 | backend/src/main/java/com/linyi/location |
-| T-42-04 | Pickup code issue and handover, one-time use, transaction and unique constraint | R6 | backend/src/main/java/com/linyi/pickup |
+| T-41-03 | Audit log interceptor | R7 | backend/src/main/java/com/group23/common |
+| T-41-04 | Unit tests for auth and RBAC | R8 | backend/src/test/java/com/group23 |
+| T-42-01 | Staff records a parcel, carrier recognised from the waybill prefix, duplicate waybills rejected | R7 | backend/src/main/java/com/group23/parcel |
+| T-42-02 | Storage location recommender: size filter, zone priority, turnover score, safe under concurrency | R6 | backend/src/main/java/com/group23/location |
+| T-42-03 | Storage location management: zones, states, manual override | R7 | backend/src/main/java/com/group23/location |
+| T-42-04 | Pickup code issue and handover, one-time use, transaction and unique constraint | R6 | backend/src/main/java/com/group23/pickup |
 | T-42-05	| Pickup verification and handover page	| R4 | frontend/src/views |
 | T-42-06 | Location board component with zone filter and full-shelf warning | R5 | frontend/src/components |
 | T-42-07 | Staff workbench: intake form, suggested location, handover screen | R5 | frontend/src/views |
-| T-42-08 | Unit and integration tests for the intake to handover path | R8 | backend/src/test/java/com/linyi |
+| T-42-08 | Unit and integration tests for the intake to handover path | R8 | backend/src/test/java/com/group23 |
 | T-42-09 | Front end and back end integration, defect fixes | R5 | frontend and backend |
 
 ## Sprint 3, weeks 5 to 6
 
 | ID | Task | Owner | Folder |
 |---|---|---|---|
-| T-43-01 | Notifications: in-app message plus a pluggable provider interface | R7 | backend/src/main/java/com/linyi/notify |
-| T-43-03 | Delegated collection codes: one-time, expiry, revoke | R6 | backend/src/main/java/com/linyi/pickup |
-| T-43-04 | Exception parcel tickets: damaged, wrong item, refused, lost | R7 | backend/src/main/java/com/linyi/ticket |
+| T-43-01 | Notifications: in-app message plus a pluggable provider interface | R7 | backend/src/main/java/com/group23/notify |
+| T-43-03 | Delegated collection codes: one-time, expiry, revoke | R6 | backend/src/main/java/com/group23/pickup |
+| T-43-04 | Exception parcel tickets: damaged, wrong item, refused, lost | R7 | backend/src/main/java/com/group23/ticket |
 | T-43-05 | Admin pages: collection points, locations, staff, fee rules | R5 | frontend/src/views |
-| T-43-12 | Stocktake: task generation, difference recording, reason categories | R7 | backend/src/main/java/com/linyi/stocktake |
+| T-43-12 | Stocktake: task generation, difference recording, reason categories | R7 | backend/src/main/java/com/group23/stocktake |
 | T-43-07 | Second integration test round, clear P0 and P1 defects | R10 | docs/04-testing |
 | T-43-08 | Progress review pack: demo script, slides, contributor screenshot, RTM | R1 | docs/05-management |
-| T-44-01 | Billing engine: rule table, pure calculation function, cap and waiver | R7 | backend/src/main/java/com/linyi/billing |
+| T-44-01 | Billing engine: rule table, pure calculation function, cap and waiver | R7 | backend/src/main/java/com/group23/billing |
 | T-44-03 | Operations dashboard: location utilisation, daily intake and pickup volume | R5 | frontend/src/views |
-| T-44-04 | Security hardening: token refresh, phone masking, rate limiting | R6 | backend/src/main/java/com/linyi/config |
+| T-44-04 | Security hardening: token refresh, phone masking, rate limiting | R6 | backend/src/main/java/com/group23/config |
 
 ## Sprint 4, weeks 7 to 8
 

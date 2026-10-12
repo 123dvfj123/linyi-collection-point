@@ -4,7 +4,7 @@
 
 | Output | Folder | Example filename |
 |---|---|---|
-| Code (backend) | `backend/src/main/java/com/linyi/<module>/` | `StorageLocationService.java` |
+| Code (backend) | `backend/src/main/java/com/group23/<module>/` | `StorageLocationService.java` |
 | Code (frontend) | `frontend/src/views/` | `LocationBoard.vue` |
 | Requirements | `docs/01-requirements/specification/` | `SRS.md` |
 | Survey and interview notes | `docs/01-requirements/elicitation/` | `20260305_survey-results.xlsx` |

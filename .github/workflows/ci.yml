@@ -22,7 +22,7 @@ jobs:
           test -f CONTRIBUTING.md
           test -d docs/01-requirements
           test -d docs/06-logbook
-          test -d backend/src/main/java/com/linyi
+          test -d backend/src/main/java/com/group23
           echo "structure check passed"
 
       - name: Check that no environment file was committed
