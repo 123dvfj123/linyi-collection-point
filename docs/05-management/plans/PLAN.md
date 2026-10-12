@@ -14,6 +14,11 @@ to the task it belongs to.
 | Sprint 3 | 5-6 | notifications, exceptions, stocktake, billing, progress review | v0.3.0 |
 | Sprint 4 | 7-8 | full test pass, report, presentation, logbooks | v1.0.0 |
 
+Sprint 0 and Sprint 1 are one week each rather than the usual two to four.
+This is a deliberate compression during the startup phase, where the work is
+documentation and setup rather than development. Sprints 2 to 4 follow the
+usual two week length.
+
 ## Module ownership
 
 | Module | Name | Owner |
