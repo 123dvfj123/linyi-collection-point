@@ -61,9 +61,6 @@ by staff through the web interface.
 
 ## Getting started
 
-This section is filled in during Sprint 2 (week 3) once the backend and
-frontend skeletons exist.
-
 ```bash
 git clone https://github.com/Django-coder6/3500SEF-Group23-Project-LMS.git
 cd 3500SEF-Group23-Project-LMS
@@ -78,6 +75,10 @@ cd frontend
 npm install
 cd ..
 
+# build environment variable
+cp .env.example .env
+
+# enable all services
 docker compose up -d
 ```
 
