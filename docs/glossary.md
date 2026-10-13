@@ -6,7 +6,7 @@
 |---|---|
 | Task | T-00-07 |
 | Owner | R9, reviewed by R2 |
-| Version | v1.0 |
+| Version | v1.1 |
 | Status | Active |
 
 This glossary is the single source of truth for vocabulary in the project. It
@@ -229,3 +229,4 @@ code, comments, commits, documents or the report.
 | Version | Date | Change | Author |
 |---|---|---|---|
 | v1.0 | Week 1 | Initial glossary, including the list of terms no longer used | R9 |
+| v1.1 | Week 2 | Added `design system` and `design token`, so the glossary stays the single source of terminology (CR-012) | R4 |
