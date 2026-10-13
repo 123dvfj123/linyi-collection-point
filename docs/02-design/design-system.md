@@ -142,11 +142,11 @@ Mapping (values from `docs/03-api/openapi.yaml` and
 | Exception ticket | `processing` | warning |
 | Exception ticket | `resolved` | success |
 
-The parcel enumeration is settled at these three values: `openapi.yaml` and
-`ERD.md` now agree on them (CR-006) and `StatusTag` follows the contract.
-`backend-state-machines.md` still lists an earlier seven value parcel set; that
-file is the backend's to reconcile, and no page invents a different spelling in
-the meantime.
+The parcel enumeration is these three values, ruled by CR-006 and consistent
+across `docs/03-api/openapi.yaml`, `docs/02-design/database/ERD.md` and
+`docs/02-design/backend-state-machines.md`. An exception is not a parcel state:
+it is a separate `ParcelException` ticket (`open -> processing -> resolved`)
+recorded against the parcel, which keeps the status it had.
 
 Exception types (`overdue`, `damaged`, `wrong_recipient`, `refused`, `lost`) are
 categories, not states. They are shown as a neutral chip and never carry a status
