@@ -1,0 +1,31 @@
+@startuml activity-parcel-intake
+title Activity Diagram(Parcel Intake And Shelving)
+|Counter (Staff)|
+start
+:Courier delivers a batch;
+:Scan or type the waybill;
+|System|
+if (Duplicate waybill?) then (yes)
+  :Reject and show the existing parcel;
+  stop
+else (no)
+  :Recommend a storage location;
+  if (A suitable location is free?) then (no)
+    :Report that no location is free;
+    |Counter (Staff)|
+    :Choose a location manually;
+    |System|
+  else (yes)
+    |Counter (Staff)|
+    :Accept the recommended location;
+    |System|
+  endif
+endif
+|Counter (Staff)|
+:Shelve the parcel;
+|System|
+:Record the location and issue a pickup code;
+:Notify the resident;
+|Counter (Staff)|
+stop
+@enduml

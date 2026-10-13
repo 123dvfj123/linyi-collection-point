@@ -6,7 +6,7 @@
 |---|---|
 | Task | T-00-07 |
 | Owner | R9, reviewed by R2 |
-| Version | v1.0 |
+| Version | v1.1 |
 | Status | Active |
 
 This glossary is the single source of truth for vocabulary in the project. It
@@ -41,7 +41,7 @@ requirements, the database and the user interface.
 | retention period | 免費保管期 | How many days a parcel may be kept before an overdue fee starts. Three days by default, configurable per point. |
 | overdue parcel | 逾期包裹 | A parcel held longer than the retention period. |
 | overdue fee | 超期費用 | The amount charged once a parcel passes the retention period. |
-| exception parcel | 異常件 | A parcel that cannot follow the normal flow: damaged, misdelivered, refused or lost. |
+| exception parcel | 異常件 | A parcel that cannot follow the normal flow. The five exception types are `overdue`, `damaged`, `wrong_recipient`, `refused` and `lost`, and this entry is where that list is maintained. |
 | exception ticket | 異常件工單 | The record that tracks one exception parcel from report to resolution. |
 | stocktake | 盤點 | Counting what is physically on the shelves and comparing it with the system record. |
 | difference | 盤點差異 | A stocktake result where the shelf and the record disagree, either missing or unrecorded. |
@@ -99,6 +99,8 @@ role. The permissions are combined in that case.
 | RBAC | 角色權限控制 | Role-based access control. What a user may do depends on their role. |
 | seed data | 種子資料 | The sample data loaded into a fresh database so the system can be demonstrated. |
 | migration | 資料庫遷移 | A versioned script that changes the database structure. Applied by Flyway. |
+| design system | 設計系統 | The single source of truth for the interface: the tokens and component rules in `docs/02-design/design-system.md`. |
+| design token | 設計變數 | A named visual value (colour, size, spacing, radius). A page uses tokens, never raw values. |
 
 ## 4. Technology terms
 
@@ -187,6 +189,12 @@ The project was first described as a smart locker system. That framing was
 dropped because the system controls no hardware. These words must not appear in
 code, comments, commits, documents or the report.
 
+> **Exemption.** Archived artefacts under `docs/02-design/prototype/` are the
+> historical record of the week 1 interface exploration. They are not live
+> documents and are exempt from this rule; rewriting them would destroy the
+> evidence that the interface design was explored rather than assumed. See
+> `docs/02-design/prototype/README.md`.
+
 | Do not use | Use instead | Why |
 |---|---|---|
 | locker cabinet, 櫃機 | collection point | The system manages sites, not cabinets. |
@@ -221,3 +229,4 @@ code, comments, commits, documents or the report.
 | Version | Date | Change | Author |
 |---|---|---|---|
 | v1.0 | Week 1 | Initial glossary, including the list of terms no longer used | R9 |
+| v1.1 | Week 2 | Added `design system` and `design token`, so the glossary stays the single source of terminology (CR-012) | R4 |

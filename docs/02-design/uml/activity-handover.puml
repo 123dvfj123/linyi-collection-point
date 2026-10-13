@@ -1,0 +1,26 @@
+@startuml activity-handover
+title Activity Diagram(Parcel Handover)
+|Counter (Staff)|
+start
+:Resident presents the pickup code;
+:Enter the pickup code;
+|System|
+if (Pickup code valid?) then (no)
+  :Reject the handover;
+  stop
+else (yes)
+  if (Code already used?) then (yes)
+    :Reject the handover;
+    stop
+  else (no)
+    :Show the parcel and its location;
+  endif
+endif
+|Counter (Staff)|
+:Fetch the parcel from the shelf;
+:Confirm the handover;
+|System|
+:Mark the code used and record the handover;
+:Free the storage location;
+stop
+@enduml

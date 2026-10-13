@@ -3,7 +3,7 @@
 - GitHub: @ohcyc246
 - Role: R2 Product Owner
 - Modules: TBD
-- Period covered: W01-W16
+- Period covered: W01-W08
 ## Weekly log
 
 | Week | Date | Task | Description | Time | Hours | Status | Evidence | With | Problem and fix | Note |

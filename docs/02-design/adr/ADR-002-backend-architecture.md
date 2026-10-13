@@ -1,6 +1,7 @@
 # ADR-002: Backend Architecture
 
-- Status: Proposed
+- Status: Accepted
+- Accepted: 2026-10-12
 - Date: 2026-10-10
 - Owners: R6 Backend Lead, R7 Backend Developer
 
@@ -38,7 +39,7 @@ com.group23
 
 ### Cross-cutting rules
 
-- Every response uses a shared envelope: `data`, `error`, `requestId`.
+- Success responses return the payload as defined in the contract, unwrapped; only failures are wrapped as `{ error: { code, message, requestId } }`.
 - All unexpected exceptions are handled by `@RestControllerAdvice`.
 - Date and time values use ISO 8601 strings in UTC.
 - State changes go through dedicated service methods, never directly in controllers.

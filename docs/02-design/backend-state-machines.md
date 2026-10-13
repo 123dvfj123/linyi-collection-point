@@ -3,34 +3,31 @@
 - Status: Draft
 - Date: 2026-10-10
 - Owners: R6 Backend Lead
+- Related: CR-006, CR-007, docs/02-design/database/ERD.md
 
 ## Parcel
 
-States:
+States (CR-006):
 
 ```text
 registered
-in_storage
-ready_for_pickup
-out_for_delivery
-picked_up
-returned
-exception
+shelved
+collected
 ```
 
 Allowed transitions:
 
 ```text
-registered -> in_storage
-in_storage -> ready_for_pickup
-ready_for_pickup -> picked_up
-ready_for_pickup -> returned
-in_storage -> exception
-ready_for_pickup -> exception
-exception -> in_storage
-exception -> ready_for_pickup
-exception -> returned
+registered -> shelved
+shelved -> collected
 ```
+
+An exception is not a parcel state. It is recorded as a `ParcelException`
+(`open -> processing -> resolved`) against the parcel, and the parcel keeps the
+status it had. The three earlier values `ready_for_pickup`, `out_for_delivery`
+and `returned` described courier and logistics stages, which SRS section 1.5
+puts outside the system boundary. The state machine diagrams in
+`docs/02-design/uml/` must use this same state list.
 
 ## Location
 
