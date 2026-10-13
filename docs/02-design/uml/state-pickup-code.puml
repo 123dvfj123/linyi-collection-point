@@ -1,5 +1,6 @@
 @startuml state-pickup-code
 title State Diagram(Pickup Code Lifecycle)
+!pragma layout smetana
 
 ' Source: ERD.md and backend-state-machines.md.
 

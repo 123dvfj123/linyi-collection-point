@@ -1,5 +1,6 @@
 @startuml state-storage-location
 title State Diagram(Storage Location Lifecycle)
+!pragma layout smetana
 
 ' Source: ERD.md and backend-state-machines.md.
 

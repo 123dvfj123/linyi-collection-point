@@ -1,5 +1,6 @@
 @startuml state-exception-ticket
 title State Diagram(Exception Ticket Lifecycle)
+!pragma layout smetana
 
 ' Source: CR-006, ERD.md and backend-state-machines.md.
 

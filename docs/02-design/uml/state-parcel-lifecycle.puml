@@ -1,5 +1,6 @@
 @startuml state-parcel-lifecycle
 title State Diagram(Parcel Lifecycle)
+!pragma layout smetana
 
 ' Source: CR-006, ERD.md and backend-state-machines.md.
 
