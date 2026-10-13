@@ -1,7 +1,7 @@
 @startuml state-pickup-code
 title State Diagram(Pickup Code Lifecycle)
 
-' Source: PR #90 revision of backend-state-machines.md.
+' Source: ERD.md and backend-state-machines.md.
 
 state "active" as Active
 state "used" as Used

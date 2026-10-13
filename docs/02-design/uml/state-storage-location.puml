@@ -1,7 +1,7 @@
 @startuml state-storage-location
 title State Diagram(Storage Location Lifecycle)
 
-' Source: PR #90 revision of backend-state-machines.md.
+' Source: ERD.md and backend-state-machines.md.
 
 state "available" as Available
 state "reserved" as Reserved

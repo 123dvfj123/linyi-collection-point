@@ -1,7 +1,7 @@
 @startuml state-exception-ticket
 title State Diagram(Exception Ticket Lifecycle)
 
-' Source: CR-006 and the PR #90 revision of backend-state-machines.md.
+' Source: CR-006, ERD.md and backend-state-machines.md.
 
 state "open" as Open
 state "processing" as Processing
