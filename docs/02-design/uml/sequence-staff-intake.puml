@@ -1,0 +1,20 @@
+@startuml sequence-staff-intake
+title Sequence Diagram(Staff Intake And Shelving)
+actor Staff
+participant "Web UI" as UI
+participant "Parcel API" as API
+database "PostgreSQL" as DB
+
+Staff -> UI : submit waybill
+UI -> API : POST /parcels
+API -> DB : find parcel by trackingNo
+alt duplicate waybill
+  API --> UI : 409 Conflict
+  UI --> Staff : Parcel already registered
+else new parcel
+  API -> DB : insert parcel (transaction)
+  DB --> API : Parcel id
+  API --> UI : 201 created
+  UI --> Staff : show the storage location
+end
+@enduml
