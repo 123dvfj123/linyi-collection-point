@@ -1,6 +1,6 @@
 # Frontend API Dependencies
 
-- Status: Draft, aligned with OpenAPI v0.2.0-draft (CR-003, CR-004, CR-006, CR-007)
+- Status: Draft, aligned with OpenAPI v0.2.0-draft (CR-003, CR-004, CR-006, CR-007). The two endpoints that are needed by the frontend but are outside the Sprint 2 contract are listed under "Endpoints deferred to Sprint 3" instead of in the P0 list.
 - Task: T-30-04
 - Owners: R4 Frontend Lead, R6 Backend Lead
 - Consumers: R4 and R5 frontend implementation
@@ -23,11 +23,9 @@
 |---|---|---|---|---|---|
 | P0 | `GET /health` | Development | Service health check | status | In OpenAPI draft |
 | P0 | `POST /auth/login` | Login | Login | username, password, token, user.roles | In OpenAPI draft |
-| P0 | `GET /auth/me` | App shell | Restore current session | user.id, user.username, user.roles | Confirmed by R6 as not part of the Sprint 2 contract; to be added in Sprint 3 |
 | P0 | `GET /parcels` | Parcel list | List and filter parcels | page, pageSize, status, keyword, items, total | In OpenAPI draft |
 | P0 | `POST /parcels` | Parcel create | Register an incoming parcel | trackingNo, carrier, recipientName, recipientPhone, size, locationId | In OpenAPI draft |
 | P0 | `POST /parcels/batch` | Parcel create | Register a batch of up to 50 parcels | parcels, created, rejected | In OpenAPI draft (raised to must-have by CR-003) |
-| P0 | `GET /parcels/{id}` | Parcel detail | Retrieve one parcel | id, trackingNo, status, size, locationId, expectedVersion | Confirmed by R6 as not part of the Sprint 2 contract; to be added in Sprint 3 |
 | P0 | `PATCH /parcels/{id}/status` | Parcel detail | Controlled status update | status, reason, expectedVersion | In OpenAPI draft |
 | P0 | `GET /locations` | Dashboard, location board | List storage locations | id, code, zone, size, status, parcelId | In OpenAPI draft |
 | P0 | `POST /locations/recommend` | Parcel create | Recommend an available location | size, zone, recommendedLocation, reason | In OpenAPI draft |
@@ -45,6 +43,18 @@
 | P1 | `GET /audit-logs` | Audit page | List audit records | Proposed, needs SRS requirement IDs |
 | P1 | `GET /settings` | Settings page | Load system configuration | Proposed, needs SRS requirement IDs |
 | P1 | `PUT /settings` | Settings page | Update system configuration | Proposed, needs SRS requirement IDs |
+
+## Endpoints deferred to Sprint 3
+
+These two endpoints are needed by the frontend, but R6 ruled them out of the
+Sprint 2 contract, so they are deliberately not in the P0 list above and must
+not be built against yet. They are kept here, with the consequence of their
+absence, so nobody has to rediscover it at implementation time.
+
+| Method and path | Used by | Purpose | Important fields | Consequence while the endpoint is missing |
+|---|---|---|---|---|
+| `GET /auth/me` | App shell | Restore the current session | user.id, user.username, user.roles | Refreshing the page cannot re-validate the session against the server. The shell has to trust the token it kept and treat an HTTP 401 as "session gone" and redirect to `/login`, and the role list is only available from the login response until this endpoint exists |
+| `GET /parcels/{id}` | Parcel detail | Retrieve one parcel | id, trackingNo, status, size, locationId, expectedVersion | The detail page has to read the parcel out of a list response it already holds. A direct link to, or a refresh of, the detail page has nothing to load the parcel from until this endpoint exists |
 
 ## Status Values Needed by the Frontend
 
