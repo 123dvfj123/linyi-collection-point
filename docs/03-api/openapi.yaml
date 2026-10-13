@@ -17,6 +17,13 @@
 # Requirement identifiers in the endpoint descriptions use the IS-nn identifiers
 # defined in SRS section 1.5. FR identifiers are added when SRS chapter 3
 # (issue #76) defines them and the traceability matrix is built.
+#
+# - PickupCode and ParcelException are declared as component schemas before they
+#   have endpoints of their own. Issue #81 requires every state machine name in
+#   docs/02-design/backend-state-machines.md to match an enum here, and the
+#   frontend needs the canonical values. The /exceptions endpoints that would
+#   use them are still P1 "Proposed" in docs/03-api/frontend-api-dependencies.md
+#   until SRS chapter 3 defines the requirement identifiers.
 
 openapi: 3.0.3
 info:
@@ -149,7 +156,9 @@ paths:
       description: >
         Satisfies IS-3 and IS-6. The status value is restricted by CR-006, and
         the update is guarded by expectedVersion optimistic locking. A stale
-        version is rejected with 409 rather than overwriting a newer state.
+        version is rejected with 409 rather than overwriting a newer state. A
+        transition the state machine does not allow is rejected with 422, per
+        docs/02-design/backend-state-machines.md.
       parameters:
         - name: id
           in: path
@@ -183,6 +192,11 @@ paths:
                 $ref: "#/components/schemas/Parcel"
         "409":
           description: Version conflict
+        "422":
+          description: >
+            Illegal transition. The requested status is not reachable from the
+            parcel's current status. Only registered -> shelved and
+            shelved -> collected are allowed (CR-006).
   /locations:
     get:
       summary: List locations and occupancy
@@ -258,7 +272,9 @@ paths:
         client (CR-007), because accepting it would let one staff member record
         a handover as another and make the operation log unreliable (NFR-6).
         The call is idempotent by pickup code: repeating it returns the
-        handover already recorded for that code.
+        handover already recorded for that code, with the same 200 response, and
+        never writes a second handover row. A repeat is therefore not a conflict
+        case; the recorded result is returned unchanged.
       requestBody:
         required: true
         content:
@@ -279,8 +295,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Handover"
-        "409":
-          description: Handover already completed
 components:
   securitySchemes:
     bearerAuth:
@@ -471,6 +485,63 @@ components:
         createdAt:
           type: string
           format: date-time
+    PickupCode:
+      type: object
+      description: >
+        Declared so the state machine names in
+        docs/02-design/backend-state-machines.md match an enum here (issue #81).
+        No endpoint returns this schema yet; see the contract decisions at the
+        top of the file.
+      properties:
+        id:
+          type: string
+          format: uuid
+        parcelId:
+          type: string
+          format: uuid
+        code:
+          type: string
+          description: Unique. The value the resident shows at the counter.
+        status:
+          type: string
+          enum: [active, used, expired, revoked]
+        expiresAt:
+          type: string
+          format: date-time
+        usedAt:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+    ParcelException:
+      type: object
+      description: >
+        The entity is persisted as `ExceptionRecord` and modelled as
+        `ParcelException`. An exception is a separate flow, not a parcel status
+        (CR-006). Declared here so the state machine names match an enum
+        (issue #81); no endpoint returns this schema yet.
+      properties:
+        id:
+          type: string
+          format: uuid
+        parcelId:
+          type: string
+          format: uuid
+        type:
+          type: string
+          description: >
+            The five types ruled to match SRS IS-8. `wrong_recipient` keeps its
+            underscore because it is a database identifier, not display text.
+          enum: [overdue, damaged, wrong_recipient, refused, lost]
+        status:
+          type: string
+          enum: [open, processing, resolved]
+        note:
+          type: string
+        assigneeId:
+          type: string
+          format: uuid
     ErrorResponse:
       type: object
       properties:
