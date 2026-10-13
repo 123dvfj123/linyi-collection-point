@@ -1,0 +1,24 @@
+@startuml state-pickup-code
+title State Diagram(Pickup Code Lifecycle)
+!pragma layout smetana
+
+' Source: ERD.md and backend-state-machines.md.
+
+state "active" as Active
+state "used" as Used
+state "expired" as Expired
+state "revoked" as Revoked
+
+[*] --> Active : issue pickup code
+Active --> Used : confirm handover
+Active --> Expired : reach expiry time
+Active --> Revoked : revoke pickup code
+Used --> [*]
+Expired --> [*]
+Revoked --> [*]
+
+note right of Used
+  A used code is retained for the handover audit record.
+end note
+
+@enduml

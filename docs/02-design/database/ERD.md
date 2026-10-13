@@ -146,3 +146,15 @@ describes the problem, so an exception never adds a value to `Parcel.status`.
   already agree with the state machines and with the OpenAPI enums.
 - `Handover.result` (`collected`, `returned`, `exception`) is the outcome of one
   handover, not a parcel status.
+
+## State Machine Sources
+
+The lifecycle of each status value is modelled by these PlantUML sources:
+
+- `Parcel.status`: `docs/02-design/uml/state-parcel-lifecycle.puml`
+- `Location.status`: `docs/02-design/uml/state-storage-location.puml`
+- `PickupCode.status`: `docs/02-design/uml/state-pickup-code.puml`
+- `ParcelException.status`: `docs/02-design/uml/state-exception-ticket.puml`
+
+`ParcelException` is a separate record, so its ticket states do not extend
+`Parcel.status`.

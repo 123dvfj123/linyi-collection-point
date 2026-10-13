@@ -33,7 +33,10 @@ for the domain objects are owned by R7 (T-20-04) and live here too.
 | activity-parcel-intake.puml | Activity Diagram(Parcel Intake And Shelving) | Intake process | SRS 2.2, business rules | R4 | done |
 | activity-handover.puml | Activity Diagram(Parcel Handover) | Handover process | SRS 2.2, business rules | R4 | done |
 | usecase-resident-parcel-tracking.puml | Use Case Diagram(Resident Parcel Tracking) | Resident goals | SRS 2.2, SRS 2.3 | R4 | deferred |
-| state-*.puml | State Diagram(...) | Object lifecycles | backend-state-machines.md | R7 | not R4 |
+| state-parcel-lifecycle.puml | State Diagram(Parcel Lifecycle) | Parcel lifecycle | backend-state-machines.md, CR-006 | R7 | done |
+| state-storage-location.puml | State Diagram(Storage Location Lifecycle) | Storage location lifecycle | backend-state-machines.md | R7 | done |
+| state-pickup-code.puml | State Diagram(Pickup Code Lifecycle) | Pickup code lifecycle | backend-state-machines.md | R7 | done |
+| state-exception-ticket.puml | State Diagram(Exception Ticket Lifecycle) | Exception ticket lifecycle | backend-state-machines.md, CR-006 | R7 | done |
 
 ### Coverage decision: the resident use case diagram
 
