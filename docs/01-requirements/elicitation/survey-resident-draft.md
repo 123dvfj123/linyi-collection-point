@@ -1,6 +1,6 @@
-# LinYi — Resident Parcel Collection Survey
+# Resident Parcel Collection Survey
 
-**Description:** This voluntary, anonymous survey supports the LinYi (Neighbourhood Parcel Collection Point Management System) course project. Please do not submit names, phone numbers, or tracking numbers. Results will be summarized for requirements analysis.
+**Description:** This voluntary, anonymous survey supports the Community Parcel Collection Point Management System course project. Please do not submit names, phone numbers, or tracking numbers. Results will be summarized for requirements analysis.
 
 **Status:** A Google Forms URL has been supplied by the project member; form title and contents are not independently verified.
 

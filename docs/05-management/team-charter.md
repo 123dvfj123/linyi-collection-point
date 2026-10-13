@@ -8,7 +8,7 @@
 | Owner | R1 (Liu JiaHao) |
 | Version | v1.0 |
 | Status | Agreed by all members |
-| Related | [Project plan](plans/PLAN.md), [CONTRIBUTING.md](../../../CONTRIBUTING.md), [Glossary](../../glossary.md) |
+| Related | [Project plan](plans/PLAN.md), [CONTRIBUTING.md](../../CONTRIBUTING.md), [Glossary](../glossary.md) |
 
 ## 1. Purpose of this charter
 
@@ -47,7 +47,7 @@ The sprint plan is in [`plans/PLAN.md`](plans/PLAN.md). The requirements are in
 | R4 | Frontend lead, product architect A | Yuan Chong Jun | 13705584 | [RookieVENENO](https://github.com/RookieVENENO) |
 | R5 | Frontend developer | Tan Yuan Ting | 13374348 | [Christine049](https://github.com/Christine049) |
 | R6 | Backend lead, product architect B | Hu Qing Kai | 13661454 | [123dvfj123](https://github.com/123dvfj123) |
-| R7 | Backend developer | Huang Wei Jia | 13686319 | [Momoka17](https://github.com/Momoka17) |
+| R7 | Backend developer | Huang Wei Jia | 13686319 | [Allen06914](https://github.com/Allen06914) |
 | R8 | QA lead | Wu Kehao | 14612273 | [fannaodawang](https://github.com/fannaodawang) |
 | R9 | Documentation and quality | Guo Yuhui | 14294174 | [RavenG7](https://github.com/RavenG7) |
 | R10 | Infrastructure and integration | Chan Sung Ming | 14480597 | [smcheese9731-sys](https://github.com/smcheese9731-sys) |
@@ -152,7 +152,7 @@ These are the things that, when they slip, cause the most damage.
 5. **A problem is raised within half a day.** Being stuck silently for two days
    is worse than admitting you are stuck.
 6. **We use the agreed vocabulary.** The definitions are in
-   [`glossary.md`](../../glossary.md). Terms that are no longer used are listed
+   [`glossary.md`](../glossary.md). Terms that are no longer used are listed
    there too.
 7. **We do not commit secrets.** No `.env` files, no passwords, no tokens.
 

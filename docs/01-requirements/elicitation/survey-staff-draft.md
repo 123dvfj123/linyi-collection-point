@@ -1,6 +1,6 @@
-# LinYi — Collection Point Staff Survey
+# Collection Point Staff Survey
 
-**Description:** This voluntary, anonymous survey examines parcel intake, shelving, searching, handover confirmation, and operational challenges at collection points for the LinYi course project. Do not include customer personal information.
+**Description:** This voluntary, anonymous survey examines parcel intake, shelving, searching, handover confirmation, and operational challenges at collection points for the Community Parcel Collection Point Management System course project. Do not include customer personal information.
 
 **Status:** A Google Forms URL has been supplied by the project member; form title and contents are not independently verified.
 
