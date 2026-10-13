@@ -29,7 +29,7 @@ for the domain objects are owned by R7 (T-20-04) and live here too.
 | sequence-staff-intake.puml | Sequence Diagram(Staff Intake And Shelving) | Intake path | openapi /parcels, /locations/recommend | R4 | done |
 | sequence-resident-pickup.puml | Sequence Diagram(Resident Pickup Handover) | Pickup path | openapi /pickup/verify, /pickup/confirm | R4 | done |
 | sequence-login-role-guard.puml | Sequence Diagram(Login And Role Guard) | Authentication path | openapi /auth/login, ADR-003 | R4 | done |
-| class-parcel-and-location.puml | Class Diagram(Parcel And Storage Location Domain) | Domain structure | ERD.md, CR-006 | R4 | done |
+| class-parcel-and-location.puml | Class Diagram(Parcel And Storage Location Domain) | Domain structure | ERD.md, CR-006, SRS IS-8 | R4 | done |
 | activity-parcel-intake.puml | Activity Diagram(Parcel Intake And Shelving) | Intake process | SRS 2.2, business rules | R4 | done |
 | activity-handover.puml | Activity Diagram(Parcel Handover) | Handover process | SRS 2.2, business rules | R4 | done |
 | usecase-resident-parcel-tracking.puml | Use Case Diagram(Resident Parcel Tracking) | Resident goals | SRS 2.2, SRS 2.3 | R4 | deferred |
@@ -51,7 +51,7 @@ recorded here instead of being invented inside a diagram.
 | Finding | Where | What is needed |
 |---|---|---|
 | `POST /parcels` does not define the `409` that duplicate-waybill rejection needs | `docs/03-api/openapi.yaml` | R6 adds the `409` response, or the requirement is restated. The sequence diagram shows the rejection as the business rule requires. |
-| `POST /pickup/confirm` still carries `operatorId` in the request body | `docs/03-api/openapi.yaml` vs `change-log.md` CR-007 | CR-007 moved the operator to the authenticated session. The OpenAPI still lists the field; it should be removed. |
+| ~~`POST /pickup/confirm` carries `operatorId`~~ | Resolved | R6 removed the field in PR #90, per CR-007. The sequence diagram already reads the operator from the session. |
 
 ## How to render
 

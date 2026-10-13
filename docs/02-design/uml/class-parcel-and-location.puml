@@ -37,7 +37,8 @@ enum ExceptionType {
   overdue
   damaged
   wrong_recipient
-  other
+  refused
+  lost
 }
 enum ExceptionStatus {
   open
@@ -85,7 +86,7 @@ class ParcelException {
 class Handover {
   - id: UUID
   - pickupCodeId: UUID
-  - staffId: UUID
+  - operatorId: UUID
   - result: HandoverResult
   - timestamp: DateTime
 }
