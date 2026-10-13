@@ -16,7 +16,8 @@
 #
 # Requirement identifiers in the endpoint descriptions use the IS-nn identifiers
 # defined in SRS section 1.5. FR identifiers are added when SRS chapter 3
-# (issue #76) defines them and the traceability matrix is built.
+# (issue #76, R3) defines them and the traceability matrix is built; that
+# outstanding work is tracked in issue #74 rather than only in this comment.
 #
 # - PickupCode and ParcelException are declared as component schemas before they
 #   have endpoints of their own. Issue #81 requires every state machine name in
