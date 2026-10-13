@@ -61,14 +61,12 @@ by staff through the web interface.
 
 ## Getting started
 
-This section is filled in during Sprint 2 (week 3) once the backend and
-frontend skeletons exist.
-
 ```bash
 git clone https://github.com/Django-coder6/3500SEF-Group23-Project-LMS.git
 cd 3500SEF-Group23-Project-LMS
 
 # backend (Java 17 and the Maven wrapper)
+# not runnable until T-30-02 lands (issue #75)
 cd backend
 ./mvnw clean install        # on Windows use: mvnw.cmd clean install
 cd ..
@@ -78,8 +76,26 @@ cd frontend
 npm install
 cd ..
 
+# build environment variable
+cp .env.example .env
+
+# Start the database, the cache and the frontend.
+# The backend is behind the "full" profile because its build files (pom.xml
+# and the Maven wrapper) arrive with T-30-02; see issue #75.
 docker compose up -d
+
+# Once those are merged, start everything:
+docker compose --profile full up -d
 ```
+
+
+| Service | URL |
+|---|---|
+| Frontend | http://localhost:80 |
+| Backend health | http://localhost:8080/api/health |
+| PostgreSQL | localhost:5432 |
+| Redis | localhost:6379 |
+
 
 ## Sprint status
 
