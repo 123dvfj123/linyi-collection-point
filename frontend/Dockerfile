@@ -1,23 +1,27 @@
-# 階段一：Build stage (使用 Node 20 建置靜態檔案)
+# Stage 1: Build stage (Use Node 20 to build static files)
 FROM node:20 AS builder
 WORKDIR /app
 
-# 複製 package.json 並安裝依賴套件
+# Consumed by Vite at build time (see .env.example)
+ARG VITE_API_BASE_URL=/api
+ENV VITE_API_BASE_URL=\$VITE_API_BASE_URL
+
+# Copy package.json and install dependencies
 COPY package*.json ./
 RUN npm ci
 
-# 複製其餘原始碼並執行建置 (Vite)
+# Copy the rest of the source code and execute the build (Vite)
 COPY . .
 RUN npm run build
 
-# 階段二：Serve stage (使用 Nginx 提供靜態網頁服務)
+# Stage 2: Serve stage (Use Nginx to provide static web services)
 FROM nginx:alpine
 
-# 將前端編譯出的靜態檔案複製到 Nginx 的預設託管目錄
+# Copy the static files compiled by the frontend to the default hosting directory of Nginx
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# 宣告 Nginx 預設 port
+# Declare the default Nginx port
 EXPOSE 80
 
-# 啟動 Nginx
+# Start Nginx
 CMD ["nginx", "-g", "daemon off;"]

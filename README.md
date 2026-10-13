@@ -78,18 +78,27 @@ cd ..
 # build environment variable
 cp .env.example .env
 
-# enable all services
+# Start the database, the cache and the frontend.
+# The backend is behind the "full" profile because its build files (pom.xml
+# and the Maven wrapper) arrive with T-30-02; see issue #75.
 docker compose up -d
 
-#The backend still needs its build files (T-30-02, issue #75)
-#Once those are merged, start everything with:
+# Once those are merged, start everything:
 docker compose --profile full up -d
-Frontend: http://localhost:80
-PostgreSQL: localhost:5432   
-Redis: localhost:6379
-Backend health check once started: http://localhost:8080/api/health
 
+# The backend still needs its build files (T-30-02, issue #75)
+# Once those are merged, start everything with:
+docker compose --profile full up -d
 ```
+
+
+| Service | URL |
+|---|---|
+| Frontend | http://localhost:80 |
+| Backend health | http://localhost:8080/api/health |
+| PostgreSQL | localhost:5432 |
+| Redis | localhost:6379 |
+
 
 ## Sprint status
 

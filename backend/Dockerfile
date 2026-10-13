@@ -1,26 +1,31 @@
-# 階段一：Build stage (使用 JDK 與 Maven wrapper 建置專案)
+# NOTE: this image cannot be built yet. It expects backend/pom.xml, the Maven
+# wrapper (.mvn/, mvnw) and backend/src, which are delivered by [T-30-02]
+# (issue #75). The backend service is therefore behind the "full" profile in
+# docker-compose.yml, so `docker compose up -d` does not try to build it.
+
+# Stage 1: Build stage (Use JDK and Maven wrapper to build the project)
 FROM eclipse-temurin:17-jdk AS builder
 WORKDIR /app
 
-# 複製 maven wrapper 相關檔案與 pom.xml
+# Copy maven wrapper related files and pom.xml
 COPY .mvn/ .mvn/
 COPY mvnw pom.xml ./
 
-# 賦予 mvnw 執行權限並下載依賴套件 (利用快取機制)
+# Grant execution permissions to mvnw and download dependencies (utilizing caching mechanism)
 RUN chmod +x mvnw
 RUN ./mvnw dependency:go-offline
 
-# 複製原始碼並打包 (略過測試以加速)
+# Copy source code and package it (skip tests to accelerate)
 COPY src ./src
 RUN ./mvnw clean package -DskipTests
 
-# 階段二：Run stage (使用輕量級 JRE 運行專案)
+# Stage 2: Run stage (Use lightweight JRE to run the project)
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 
-# 從 builder 階段把打包好的 jar 檔複製過來
+# Copy the packaged jar file from the builder stage
 COPY --from=builder /app/target/*.jar app.jar
 
-# 宣告對外暴露的 port (Spring Boot 預設為 8080)
+# Declare the exposed port (Spring Boot default is 8080)
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
