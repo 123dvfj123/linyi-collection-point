@@ -26,7 +26,7 @@ This document specifies the software requirements for the Community Parcel Colle
 
 ### 1.2 Background
 
-Online shopping has made parcel delivery a daily activity in residential communities. Couriers often deliver parcels in bulk to a nearby **collection point** (for example, a convenience store or a community service room), where staff keep the parcels until residents pick them up. Existing platforms and apps exist in this market, and the team is analysing three of them in the competitor analysis (T-10-03).
+Online shopping has made parcel delivery a daily activity in residential communities. Couriers often deliver parcels in bulk to a nearby **collection point** (for example, a convenience store or a community service room), where staff keep the parcels until residents pick them up. Requirements were elicited through four questionnaires, one per user role; the elicitation method and its limits are recorded in `docs/01-requirements/elicitation/survey-results.md`.
 
 Many small collection points still rely on manual registration, paper notebooks, and informal communication. As parcel volume grows, this causes errors, delays, and disputes.
 
@@ -52,7 +52,7 @@ Many small collection points still rely on manual registration, paper notebooks,
 | G5 | Provide role-based access so each user only sees what they need. |
 | G6 | Deliver a usable web system within the eight-week project schedule (week 1 to week 8). |
 
-> Quantified targets (for example, handover time and notification delay) will be defined in the non-functional requirements chapter after survey data from R3 is available.
+> Quantified targets (for example, handover time and notification delay) are derived from the questionnaire and recorded in `survey-results.md` section 7; they are specified in the non-functional requirements chapter.
 
 ### 1.5 Scope
 
@@ -71,7 +71,7 @@ Many small collection points still rely on manual registration, paper notebooks,
 | IS-5 | Notification to residents when a parcel is shelved (in-system notification). |
 | IS-6 | Parcel query and status tracking for residents and staff. |
 | IS-7 | **Handover** workflow: verifying a pickup code or identity and confirming handover. |
-| IS-8 | Handling of exceptions: overdue, returned, or problem parcels. |
+| IS-8 | Handling of exceptions: overdue, damaged, wrong-recipient, refused or lost parcels. |
 | IS-9 | Operation log for every parcel and staff action. |
 | IS-10 | Statistics and overdue-parcel reports for owners. |
 | IS-11 | Collection point and staff account management. |
@@ -87,7 +87,7 @@ Many small collection points still rely on manual registration, paper notebooks,
 | OS-4 | Native mobile apps for iOS or Android. | The system is a web application only (responsive browser access). |
 | OS-5 | Integration with real third-party courier or e-commerce systems. | Only simulated or manually entered data is used. |
 | OS-6 | Real SMS or telecom gateway integration. | Notifications are in-system only in this version. |
-| OS-7 | Advanced analytics, AI-based forecasting, or recommendation features. | Beyond the course timeline. |
+| OS-7 | Advanced analytics and AI-based forecasting. The storage location *suggestion* remains in scope as a deterministic rule set that staff may ignore; it is not predictive and never applied automatically. | Beyond the course timeline. |
 
 ### 1.6 Definitions, Acronyms, and Terminology
 
@@ -110,7 +110,7 @@ The following project terms must be used consistently in all documents and code.
 | [R1] | Course brief and Week 1 announcements, 3500SEF Group 23 |
 | [R2] | Personas (`docs/01-requirements/elicitation/personas.md`) |
 | [R3] | User Journey Maps (`docs/01-requirements/elicitation/user-journey-maps.md`) |
-| [R4] | Interview records and competitor analysis (`docs/01-requirements/elicitation/`, by R3) |
+| [R4] | Requirements elicitation records: questionnaires and analysis (`docs/01-requirements/elicitation/survey-results.md`, by R2 and R3) |
 | [R5] | IEEE Std 830 / ISO/IEC/IEEE 29148, used as SRS structure guidance |
 
 ---
@@ -131,7 +131,7 @@ The system is a new, standalone web application. It does not replace any existin
 | Notification | Notify residents when parcels are ready |
 | Search and tracking | Find parcels by code, phone number, or status |
 | Handover | Verify code or identity and confirm handover |
-| Exception handling | Manage overdue, returned, and problem parcels |
+| Exception handling | Manage overdue, damaged, wrong-recipient, refused and lost parcels |
 | Reporting | Volume statistics and overdue-parcel lists |
 | Audit | Operation log of all parcel-related actions |
 | Administration | Manage collection points, staff, and configuration |
@@ -144,10 +144,17 @@ The system has four user roles.
 
 | Role | Description | Persona | Main permissions |
 |---|---|---|---|
-| Resident | A person living near a collection point who receives parcels. | Emily Chen | View own parcels, status, storage location, and pickup code; receive notifications. |
-| Staff | An employee who handles parcels at a collection point. | Daniel Wu | Register parcels, perform shelving, search parcels, confirm handover, handle exceptions. |
-| Owner | The person responsible for one or more collection points. | Linda Zhang | View statistics and overdue parcels, review operation logs, manage staff accounts for own collection points. |
-| System Administrator | A technical user who maintains the system. | None (technical role) | Manage all users, collection points, and system configuration. |
+| Resident | A person living near a collection point who receives parcels. | Resident persona | View own parcels, status, storage location, and pickup code; receive notifications. |
+| Staff | An employee who handles parcels at a collection point. | Staff persona | Register parcels, perform shelving, search parcels, confirm handover, handle exceptions. |
+| Owner | The person responsible for one or more collection points. | Owner persona | View statistics and overdue parcels, review operation logs, manage staff accounts for own collection points. |
+| System Administrator | A technical user who maintains the system. | System administrator persona | Manage all users, collection points, and system configuration; review the operation log for all points. |
+
+> The personas are **illustrative composites built from the four role questionnaires, not real
+> individuals**. They carry no personal name: the questionnaire did not ask for one, and the
+> ethics statement requires that no respondent be named in any project document. Each persona
+> combines the answer patterns of its role group. The actor names used in the use case and
+> sequence diagrams are these same four role identifiers. See
+> `docs/01-requirements/elicitation/Personas.md`.
 
 ### 2.4 System Boundary
 
@@ -201,13 +208,13 @@ flowchart LR
 | A1 | Staff enter or import parcel data manually because no real courier integration exists. |
 | A2 | Each resident has a phone number or account that can be used to identify them. |
 | A3 | Staff and residents have access to a device with a web browser and an internet connection. |
-| A4 | The personas and journey maps are AI-simulated and will be validated against R3's survey and interview results. |
+| A4 | The personas are composites built from the four role questionnaires, and the journey maps are derived from them. Both trace to `survey-results.md`; neither is a real individual. |
 | A5 | The technology stack and deployment environment will be agreed by the team in a later week. |
 
 ### 2.8 Open Issues (To Be Resolved with R3)
 
 | ID | Issue |
 |---|---|
-| OI-1 | Confirm the most common identification method for handover (pickup code, phone number, or both) from interviews. |
+| OI-1 | Confirm the most common identification method for handover (pickup code, phone number, or both), using the prototype confirmation session (T-10-13); the questionnaires did not ask. |
 | OI-2 | Confirm whether owners also need to act as staff in small collection points. |
 | OI-3 | Confirm overdue-parcel rules (number of days, handling method) with real collection point owners. |
