@@ -40,9 +40,10 @@ OpenAI Codex was used for project-scope discussion, front-end prototype code and
   feature pages against `docs/02-design/design-system.md`.
 - **Rename the skeleton's placeholder tokens**: `frontend/src/style.css` and the placeholder
   views use `--colour-*`, while `design-system.md` section 5.2 defines `--color-*`. Do this as
-  a small pull request after PR #97 merges, so the two do not collide.
+  a small pull request after PR #97 merges, so the two do not collide. Drafted on branch
+  `chore/W03-design-tokens`; lint passes, eleven tests pass and the build succeeds.
 - Answer the reviews on PR #97 and PR #99 and get them merged; the activity-model follow-up is
-  on branch `docs/W03-activity-decisions`.
+  PR #103.
 - Build `StatusTag` from the mapping in `design-system.md` section 5.3, which now agrees with
   `ERD.md` and `openapi.yaml`.
 - Draw the high fidelity designs for pickup, intake and dashboard (T-20-12) once the tokens exist.
