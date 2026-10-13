@@ -80,6 +80,15 @@ cp .env.example .env
 
 # enable all services
 docker compose up -d
+
+#The backend still needs its build files (T-30-02, issue #75)
+#Once those are merged, start everything with:
+docker compose --profile full up -d
+Frontend: http://localhost:80
+PostgreSQL: localhost:5432   
+Redis: localhost:6379
+Backend health check once started: http://localhost:8080/api/health
+
 ```
 
 ## Sprint status
