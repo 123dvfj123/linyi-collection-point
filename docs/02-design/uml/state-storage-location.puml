@@ -1,0 +1,27 @@
+@startuml state-storage-location
+title State Diagram(Storage Location Lifecycle)
+
+' Source: PR #90 revision of backend-state-machines.md.
+
+state "available" as Available
+state "reserved" as Reserved
+state "occupied" as Occupied
+state "disabled" as Disabled
+
+[*] --> Available : create location
+Available --> Reserved : reserve for parcel
+Reserved --> Occupied : shelve parcel
+Reserved --> Available : cancel reservation
+Occupied --> Available : remove parcel
+Available --> Disabled : disable location
+Disabled --> Available : enable location
+
+note right of Occupied
+  One storage location can hold at most one parcel.
+end note
+
+note right of Disabled
+  Disabled locations are excluded from recommendations.
+end note
+
+@enduml
