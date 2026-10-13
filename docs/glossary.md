@@ -99,6 +99,8 @@ role. The permissions are combined in that case.
 | RBAC | 角色權限控制 | Role-based access control. What a user may do depends on their role. |
 | seed data | 種子資料 | The sample data loaded into a fresh database so the system can be demonstrated. |
 | migration | 資料庫遷移 | A versioned script that changes the database structure. Applied by Flyway. |
+| design system | 設計系統 | The single source of truth for the interface: the tokens and component rules in `docs/02-design/design-system.md`. |
+| design token | 設計變數 | A named visual value (colour, size, spacing, radius). A page uses tokens, never raw values. |
 
 ## 4. Technology terms
 
