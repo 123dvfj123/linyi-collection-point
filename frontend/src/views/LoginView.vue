@@ -67,9 +67,9 @@ async function submit() {
 .card {
   width: 100%;
   max-width: 340px;
-  background: var(--colour-surface);
-  border: 1px solid var(--colour-border);
-  border-radius: var(--radius);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -82,7 +82,7 @@ async function submit() {
 .hint {
   margin: 0;
   font-size: 13px;
-  color: var(--colour-muted);
+  color: var(--color-text-muted);
 }
 .field {
   display: flex;
@@ -93,20 +93,20 @@ async function submit() {
 .field input {
   font: inherit;
   padding: 8px 10px;
-  border: 1px solid var(--colour-border);
-  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
 }
 .error {
   margin: 0;
   font-size: 13px;
-  color: var(--colour-danger);
+  color: var(--color-danger);
 }
 .submit {
   font: inherit;
   padding: 9px 12px;
   border: none;
-  border-radius: var(--radius);
-  background: var(--colour-primary);
+  border-radius: var(--radius-sm);
+  background: var(--color-primary);
   color: #fff;
   cursor: pointer;
 }
@@ -117,6 +117,6 @@ async function submit() {
 .mock {
   margin: 0;
   font-size: 12px;
-  color: var(--colour-muted);
+  color: var(--color-text-muted);
 }
 </style>
