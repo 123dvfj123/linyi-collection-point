@@ -10,6 +10,7 @@
 | Survey and interview notes | `docs/01-requirements/elicitation/` | `20260305_survey-results.xlsx` |
 | UML and ER diagrams | `docs/02-design/uml/`, `docs/02-design/database/` | `usecase-intake.puml` |
 | Design decisions | `docs/02-design/adr/` | `ADR-002-spring-boot-backend.md` |
+| UI prototype (throw-away reference) | `docs/02-design/prototype/` | `index.html` |
 | API specification | `docs/03-api/` | `openapi.yaml` |
 | Test cases and reports | `docs/04-testing/` | `test-cases-pickup.xlsx` |
 | Meeting minutes | `docs/05-management/minutes/` | `20260305_weekly-meeting.md` |

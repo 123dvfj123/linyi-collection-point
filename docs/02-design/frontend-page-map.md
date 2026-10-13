@@ -1,16 +1,21 @@
 # Frontend Page Map and Routing
 
-- Status: Proposed
+- Status: Active (aligned with the router, issue #82)
 - Task: T-30-04
 - Owners: R4 Frontend Lead, R5 Frontend Developer
 - Assumption: the frontend workstream has two students; R4 owns architecture and R5 implements pages under that structure.
+
+`frontend/src/router/index.js` registers exactly the routes in the Page List
+below: the same path, the same view name and the same role list. A view that is
+still a placeholder says so and names the role that will implement it. Change
+one file, change the other.
 
 ## Application Shell
 
 - Public layout: login.
 - Main layout: sidebar, top bar, user menu, notifications and breadcrumb.
 - Route guards: redirect unauthenticated users to `/login` and unauthorised users to a 403 page.
-- Error pages: 403 and 404.
+- Error pages: 403 and 404, deliberately outside the main layout so that they render even when the shell cannot.
 - Role names follow the SRS: Resident, Staff, Owner, System Administrator.
 
 ## Page List
@@ -31,6 +36,12 @@
 | P1 | `/users` | `UserListView.vue` | Owner, Admin | Manage staff and resident accounts | R5 |
 | P1 | `/settings` | `SettingsView.vue` | Admin | Manage collection points and basic configuration | R5 |
 | P1 | `/audit` | `AuditLogView.vue` | Owner, Admin | Review sensitive operations and state changes | R5 |
+| — | `/403` | `Error403View.vue` | Any signed-in user | Forbidden: the role is not permitted on that route | R4 |
+| — | `/:pathMatch(.*)*` (any unknown path) | `NotFoundView.vue` | Public | 404 fallback for an unknown route | R4 |
+
+The Access column uses the display names from the SRS. The router uses the role
+enum from the OpenAPI contract: `resident`, `staff`, `owner`, `admin`. "Admin"
+means `admin`, the System Administrator role.
 
 ## Component Map
 
