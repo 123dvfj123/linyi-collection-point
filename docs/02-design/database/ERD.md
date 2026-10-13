@@ -82,7 +82,7 @@ describes the problem, so an exception never adds a value to `Parcel.status`.
 
 - id: UUID
 - parcelId: FK -> Parcel
-- type: enum(overdue, damaged, wrong_recipient, other)
+- type: enum(overdue, damaged, wrong_recipient, refused, lost)
 - status: enum(open, processing, resolved)
 - note: string
 - assigneeId: FK -> User
