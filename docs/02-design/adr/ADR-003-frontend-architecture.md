@@ -67,6 +67,7 @@ Rejected as the main frontend architecture. It makes reusable components, route 
 
 - One application layout and one router configuration.
 - One Axios instance in `frontend/src/api/http.js`.
+- The API base path is `/api` in every environment (recorded by issue #82). The Vite dev server proxies `/api` to `http://localhost:8080`, so local development does not depend on CORS; `VITE_API_BASE_URL` overrides the path for a deployed build only.
 - Feature API modules live under `frontend/src/api/`.
 - Shared Pinia stores live under `frontend/src/stores/`.
 - Reusable components live under `frontend/src/components/`.
