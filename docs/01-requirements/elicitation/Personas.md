@@ -6,35 +6,37 @@
 |---|---|
 | Task | T-10-04 |
 | Owner | R2 |
-| Version | v1.1 |
+| Version | v1.2 |
 | Status | Complete for Sprint 1 |
 | Source | Derived from the four role questionnaires, see [survey results](survey-results.md) |
-| Method | Composite personas. Each persona combines the answer patterns that appeared in the corresponding questionnaire group. |
+| Method | Composite personas, identified by role only. Each persona combines the answer patterns that appeared in the corresponding questionnaire group. |
 
-> These personas are composites, not real individuals. The name, age and
-> occupation are illustrative, but every goal and pain point below is traceable
-> to at least one answer in the survey of that role. Where the survey and an
-> earlier draft of this document disagreed, the survey answer was used.
+> These personas are composites, not real individuals. **They are identified by
+> role and carry no personal name**, because the ethics statement requires that
+> no respondent be named in any project document. The age, occupation and living
+> situation are illustrative; every goal and pain point below is traceable to at
+> least one answer in the questionnaire for that role. Where the questionnaire
+> and an earlier draft of this document disagreed, the questionnaire was used.
 >
 > **Project terminology:** collection point, storage location, shelving,
 > handover, pickup code.
 
 ## Overview
 
-| Persona | System role | Survey base | Primary goal |
+| Identifier | System role | Survey base | Primary goal |
 |---|---|---|---|
-| Emily Chen | Resident | 11 responses | Know quickly that a parcel has arrived, and where it is |
-| Daniel Wu | Staff | 7 responses | Register a batch fast, and hand over with a reliable record |
-| Linda Zhang | Owner | 7 responses | See overdue parcels and staff activity across all owned points |
-| Alex Ho | System administrator | 4 responses | Keep accounts, access control and point configuration under control |
+| Resident persona | Resident | 11 responses | Know quickly that a parcel has arrived, and where it is |
+| Staff persona | Staff | 7 responses | Register a batch fast, and hand over with a reliable record |
+| Owner persona | Owner | 7 responses | See overdue parcels and staff activity across all owned points |
+| System administrator persona | System administrator | 4 responses | Keep accounts, access control and point configuration under control |
 
 ---
 
-## Persona 1: Emily Chen (Resident)
+## Persona 1: Resident persona
 
 | Field | Detail |
 |---|---|
-| Name | Emily Chen |
+| Identifier | Resident persona |
 | Age | 34 |
 | Occupation | Office worker in the city |
 | Living situation | Apartment block with one collection point at the entrance |
@@ -57,7 +59,7 @@
 
 ### Daily scenario
 
-Emily orders online two or three times a month. On the delivery day she has no
+The resident persona orders online two or three times a month. On the delivery day she has no
 idea whether the parcel has reached the collection point. Sometimes she gets a
 message the next day, and it does not say where the parcel is stored. She goes
 to the point after work, joins a short queue, and waits while staff look for her
@@ -84,17 +86,17 @@ parcel.
 
 ### Out of character
 
-Emily did **not** ask for a delegated collection code. In the survey nobody
+The resident persona did **not** ask for a delegated collection code. In the survey nobody
 chose it. The team has therefore reduced its priority rather than assume she
 needs it.
 
 ---
 
-## Persona 2: Daniel Wu (Staff)
+## Persona 2: Staff persona
 
 | Field | Detail |
 |---|---|
-| Name | Daniel Wu |
+| Identifier | Staff persona |
 | Age | 27 |
 | Occupation | Full-time staff member at a community collection point |
 | Work situation | Serves a small residential point, a few dozen parcels on a typical day, with occasional large batches |
@@ -118,8 +120,8 @@ needs it.
 
 ### Daily scenario
 
-Daniel opens the point in the morning. A courier arrives with a trolley and
-Daniel works through it on the counter, entering each parcel and putting it on
+The staff persona opens the point in the morning. A courier arrives with a trolley and
+The staff persona works through it on the counter, entering each parcel and putting it on
 a shelf. In the evening residents come in one after another. He takes a pickup
 code, fetches the parcel and completes the handover. When something is disputed,
 he has no dependable record of who handled the parcel.
@@ -141,17 +143,17 @@ he has no dependable record of who handled the parcel.
 
 ### Out of character
 
-Daniel did **not** ask the system to choose the storage location for him. The
+The staff persona did **not** ask the system to choose the storage location. The
 recommendation feature is therefore delivered as a suggestion he can accept or
 ignore, never as an automatic assignment.
 
 ---
 
-## Persona 3: Linda Zhang (Owner)
+## Persona 3: Owner persona
 
 | Field | Detail |
 |---|---|
-| Name | Linda Zhang |
+| Identifier | Owner persona |
 | Age | 45 |
 | Occupation | Runs a small retail business and operates collection points alongside it |
 | Business situation | Manages more than one collection point, and six or more staff across them |
@@ -173,7 +175,7 @@ ignore, never as an automatic assignment.
 
 ### Daily scenario
 
-Linda spends most of the day in her shop and visits each collection point
+The owner persona spends most of the day in her shop and visits each collection point
 briefly. She earns a handling fee per parcel, so throughput and complaint rates
 matter. At the end of the day she asks staff for the numbers and writes them
 down herself. She cannot quickly say how many parcels have been sitting for
@@ -197,17 +199,17 @@ disputing.
 
 ### Out of character
 
-Linda was not asked for, and did not ask for, control over fee or overdue rules.
+The owner persona was not asked for, and did not ask for, control over fee or overdue rules.
 Nobody in the survey chose fee configuration. Those settings are therefore kept
 as an administrator responsibility, with a per-point default.
 
 ---
 
-## Persona 4: Alex Ho (System Administrator)
+## Persona 4: System administrator persona
 
 | Field | Detail |
 |---|---|
-| Name | Alex Ho |
+| Identifier | System administrator persona |
 | Age | 31 |
 | Occupation | Part-time technical support for the collection point operator |
 | Situation | Maintains accounts, access control and configuration for a small group of collection points |
@@ -231,9 +233,9 @@ indicative and are used only where they agree with decisions already taken.
 
 ### Daily scenario
 
-Alex sets up a new collection point, creates the owner account, and adds the
-first staff accounts. When somebody leaves, Alex disables the account rather
-than deleting it, so that historical records keep their author. Alex also
+The system administrator persona sets up a new collection point, creates the owner account, and adds the
+first staff accounts. When somebody leaves, the system administrator persona disables the account rather
+than deleting it, so that historical records keep their author. That persona also
 handles enquiries when a resident disputes a handover and the point has to show
 what happened.
 
@@ -252,7 +254,7 @@ what happened.
 
 ### Out of character
 
-Alex was not asked to design the interface for others, and takes no part in the
+The system administrator persona was not asked to design the interface for others, and takes no part in the
 day-to-day parcel workflow.
 
 ---
@@ -262,11 +264,11 @@ day-to-day parcel workflow.
 | Use | Where |
 |---|---|
 | Deciding which requirements are must-have | SRS Chapter 3, MoSCoW priorities |
-| Naming the main actor of a use case | SRS Chapter 5 |
+| Naming the actors of the use case and sequence diagrams | `docs/02-design/uml/`; the diagrams use these identical role identifiers |
 | Writing test scenarios in the language of the user | `docs/04-testing/` |
 | Justifying scope reductions in the report | Report Chapter 3 |
 
-The persona who most often decides a requirement is Emily Chen, because the
-resident group had the largest number of responses. Where a decision would
-affect staff time, Daniel Wu's needs take precedence, because staff are the
-users who will spend the most time in the system.
+The persona that most often decides a requirement is the resident persona,
+because the resident group had the largest number of responses. Where a
+decision would affect staff time, the staff persona takes precedence, because
+staff are the users who will spend the most time in the system.
