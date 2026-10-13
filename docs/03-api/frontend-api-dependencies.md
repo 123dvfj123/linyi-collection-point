@@ -11,7 +11,7 @@
 - The backend owns the final endpoint paths and response fields.
 - The frontend must not invent fields before R6 updates the OpenAPI draft.
 - Requests and responses use JSON.
-- The shared response envelope from ADR-002 is `data`, `error` and `requestId`.
+- Success responses are flat payloads; only failures are wrapped, as `error: { code, message, requestId }`, per ADR-002.
 - Dates use ISO 8601 strings in UTC and are formatted in the frontend.
 - Parcel sizes use `small`, `medium` and `large`.
 - Parcel, location and exception status values are stable strings, not UI labels.

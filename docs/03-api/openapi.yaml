@@ -127,6 +127,16 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Parcel"
+        "409":
+          description: >
+            A parcel with this tracking number already exists. The body uses the
+            shared ErrorResponse shape with code DUPLICATE_TRACKING_NO. The
+            rejection branch is the one drawn in
+            docs/02-design/uml/sequence-staff-intake.puml.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
   /parcels/batch:
     post:
       summary: Register a batch of incoming parcels
@@ -197,11 +207,20 @@ paths:
           description: >
             Illegal transition. The requested status is not reachable from the
             parcel's current status. Only registered -> shelved and
-            shelved -> collected are allowed (CR-006).
+            shelved -> collected are allowed (CR-006). The body uses the shared
+            ErrorResponse shape, so the frontend handles one error form whatever
+            the status code.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
   /locations:
     get:
       summary: List locations and occupancy
-      description: Satisfies IS-4, management of storage locations.
+      description: >
+        Satisfies IS-4, management of storage locations. The response is a bare
+        array rather than a page on purpose: the location board loads the whole
+        board in one go, so the shape is agreed and is not reopened in Sprint 3.
       responses:
         "200":
           description: Location list
@@ -349,6 +368,14 @@ components:
         trackingNo:
           type: string
           description: Unique. The same waybill cannot be registered twice.
+        carrier:
+          type: string
+        recipientName:
+          type: string
+        recipientPhone:
+          type: string
+          description: >
+            Masked in list responses as 138****8888 (ethics statement section 2).
         status:
           type: string
           description: Parcel lifecycle status (CR-006).
@@ -361,6 +388,12 @@ components:
         expectedVersion:
           type: integer
           format: int64
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
     ParcelCreateRequest:
       type: object
       required: [trackingNo, carrier, recipientName, recipientPhone, size]
