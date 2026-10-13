@@ -18,7 +18,7 @@
 }
 .note {
   margin: 0;
-  color: var(--colour-muted);
+  color: var(--color-text-muted);
   font-size: 14px;
 }
 </style>

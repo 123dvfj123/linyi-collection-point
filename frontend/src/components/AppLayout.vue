@@ -53,8 +53,8 @@ function signOut() {
 .sidebar {
   width: 220px;
   flex: 0 0 220px;
-  background: var(--colour-surface);
-  border-right: 1px solid var(--colour-border);
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-border);
   padding: 16px 12px;
 }
 .brand {
@@ -69,14 +69,14 @@ function signOut() {
 }
 .nav-link {
   padding: 8px 10px;
-  border-radius: var(--radius);
-  color: var(--colour-text);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
   text-decoration: none;
   font-size: 14px;
 }
 .nav-link.router-link-active {
-  background: var(--colour-primary-soft);
-  color: var(--colour-primary);
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
 }
 .body {
   flex: 1;
@@ -89,16 +89,16 @@ function signOut() {
   align-items: center;
   gap: 12px;
   padding: 12px 20px;
-  border-bottom: 1px solid var(--colour-border);
-  background: var(--colour-surface);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
 }
 .who {
   font-size: 14px;
 }
 .role {
   font-size: 12px;
-  color: var(--colour-muted);
-  border: 1px solid var(--colour-border);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
   border-radius: 999px;
   padding: 1px 8px;
 }
@@ -107,8 +107,8 @@ function signOut() {
   font: inherit;
   font-size: 13px;
   background: none;
-  border: 1px solid var(--colour-border);
-  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
   padding: 4px 10px;
   cursor: pointer;
 }

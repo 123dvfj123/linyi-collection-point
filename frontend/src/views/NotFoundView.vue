@@ -27,14 +27,14 @@ const router = useRouter()
 }
 .note {
   margin: 0;
-  color: var(--colour-muted);
+  color: var(--color-text-muted);
   font-size: 14px;
 }
 .back {
   font: inherit;
   font-size: 13px;
-  border: 1px solid var(--colour-border);
-  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
   background: none;
   padding: 5px 12px;
   cursor: pointer;

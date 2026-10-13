@@ -1,25 +1,7 @@
 /*
- * Base styles only.
- *
- * The real design tokens (status colours, spacing scale, type scale,
- * breakpoints) come from docs/02-design/design-system.md. This file holds the
- * minimum the skeleton needs until that document lands.
+ * Base styles only. The design tokens live in src/styles/tokens.css, which
+ * expresses docs/02-design/design-system.md as CSS custom properties.
  */
-:root {
-  --colour-text: #1f2329;
-  --colour-muted: #6b7280;
-  --colour-surface: #ffffff;
-  --colour-page: #f6f7f9;
-  --colour-border: #dfe3e8;
-  --colour-primary: #2563eb;
-  --colour-primary-soft: #e8effd;
-  --colour-danger: #d93025;
-  --radius: 6px;
-
-  font-family: system-ui, -apple-system, 'Segoe UI', 'Microsoft YaHei', sans-serif;
-  line-height: 1.5;
-  color: var(--colour-text);
-}
 
 * {
   box-sizing: border-box;
@@ -27,7 +9,9 @@
 
 body {
   margin: 0;
-  background: var(--colour-page);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: var(--text-body);
   -webkit-font-smoothing: antialiased;
 }
 
