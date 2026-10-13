@@ -266,7 +266,7 @@ locally unless the page map records it as a deliberate exception.
 
 | Component | Rule |
 |---|---|
-| `AppLayout` | Sidebar 240 px at the desktop breakpoint; below it the sidebar becomes a drawer. Surface and border come from tokens. |
+| `AppLayout` | Sidebar 220 px, persistent from 641 px up; at 640 px and below it collapses to a single row above the content. Surface and border come from tokens. |
 | `PageHeader` | Title uses `--text-title-lg`; description uses `--color-text-muted`; actions align right and are the only primary button on the page. |
 | `StatusTag` | Maps a status value to its label and colour role in section 5.3. Pill radius, caption text, always shows the label. |
 | `ParcelTable` | See section 11. |
@@ -302,9 +302,9 @@ locally unless the page map records it as a deliberate exception.
 
 | Breakpoint | Width | Layout |
 |---|---|---|
-| base (mobile first) | up to 640 px | single column; sidebar is a drawer; tables become card lists; metric cards stack |
-| md | 641-1023 px | two-column content where useful; sidebar still a drawer |
-| lg | 1024 px and above | persistent sidebar; full tables; multi-column dashboard |
+| base (mobile first) | 375-640 px | single column; the sidebar collapses to a single row above the content; tables become card lists; metric cards stack |
+| md | 641-1023 px | the sidebar stays; two-column content where useful; tables drop to their priority columns |
+| lg | 1024 px and above | full tables; multi-column dashboard |
 
 The design target is the phone. The desktop layout only has to remain usable
 (survey section 7). These breakpoints are the same ones the page prototype in
