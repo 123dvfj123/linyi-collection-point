@@ -5,22 +5,35 @@ start
 :Resident presents the pickup code;
 :Enter the pickup code;
 |System|
-if (Pickup code valid?) then (no)
-  :Reject the handover;
-  stop
-else (yes)
-  if (Code already used?) then (yes)
+if (Pickup code found?) then (no)
+  |Counter (Staff)|
+  :Verify identity: phone number and surname;\n(counter procedure: the contract has no fallback operation, CD-2);
+  |System|
+  if (Identity confirmed?) then (no)
     :Reject the handover;
     stop
-  else (no)
-    :Show the parcel and its location;
+  else (yes)
+    :Record a manual handover for the operator;
   endif
+else (yes)
+  :Show the parcel and its location;
+endif
+if (Pickup code expired?) then (yes)
+  :Reject the handover and tell the resident to ask for a new code;
+  stop
+endif
+if (Pickup code already used?) then (yes)
+  :Reject the handover;
+  stop
 endif
 |Counter (Staff)|
 :Fetch the parcel from the shelf;
 :Confirm the handover;
 |System|
-:Mark the code used and record the handover;
-:Free the storage location;
+fork
+  :Mark the code used and record the handover;
+fork again
+  :Free the storage location;
+end fork
 stop
 @enduml

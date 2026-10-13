@@ -24,8 +24,11 @@ endif
 |Counter (Staff)|
 :Shelve the parcel;
 |System|
-:Record the location and issue a pickup code;
-:Notify the resident;
+fork
+  :Record the location and issue a pickup code;
+fork again
+  :Notify the resident;
+end fork
 |Counter (Staff)|
 stop
 @enduml
