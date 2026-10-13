@@ -4,7 +4,7 @@
 - GitHub: @Allen06914
 - Role: R7 backend developer
 - Modules: M2 parcel intake, M5 delegated collection, M6 billing engine, M7 notifications, M8 exception parcels, M9 stocktake and reconciliation
-- Period covered: W00-W16
+- Period covered: W01-W08
 
 ## Weekly log
 
