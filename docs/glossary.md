@@ -41,7 +41,7 @@ requirements, the database and the user interface.
 | retention period | 免費保管期 | How many days a parcel may be kept before an overdue fee starts. Three days by default, configurable per point. |
 | overdue parcel | 逾期包裹 | A parcel held longer than the retention period. |
 | overdue fee | 超期費用 | The amount charged once a parcel passes the retention period. |
-| exception parcel | 異常件 | A parcel that cannot follow the normal flow: damaged, misdelivered, refused or lost. |
+| exception parcel | 異常件 | A parcel that cannot follow the normal flow. The five exception types are `overdue`, `damaged`, `wrong_recipient`, `refused` and `lost`, and this entry is where that list is maintained. |
 | exception ticket | 異常件工單 | The record that tracks one exception parcel from report to resolution. |
 | stocktake | 盤點 | Counting what is physically on the shelves and comparing it with the system record. |
 | difference | 盤點差異 | A stocktake result where the shelf and the record disagree, either missing or unrecorded. |
@@ -186,6 +186,12 @@ In the report, figures and tables are numbered by chapter: `Figure 4-1`,
 The project was first described as a smart locker system. That framing was
 dropped because the system controls no hardware. These words must not appear in
 code, comments, commits, documents or the report.
+
+> **Exemption.** Archived artefacts under `docs/02-design/prototype/` are the
+> historical record of the week 1 interface exploration. They are not live
+> documents and are exempt from this rule; rewriting them would destroy the
+> evidence that the interface design was explored rather than assumed. See
+> `docs/02-design/prototype/README.md`.
 
 | Do not use | Use instead | Why |
 |---|---|---|

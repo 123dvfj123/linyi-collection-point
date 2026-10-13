@@ -125,7 +125,7 @@ hands the parcel over. Everything else waits.
 |---|---|---|---|
 | T-43-01 | Notifications: in-app message plus a pluggable provider interface | R7 | backend/src/main/java/com/group23/notify |
 | T-43-03 | Delegated collection codes: one-time, expiry, revoke | R6 | backend/src/main/java/com/group23/pickup |
-| T-43-04 | Exception parcel tickets: damaged, wrong item, refused, lost | R7 | backend/src/main/java/com/group23/ticket |
+| T-43-04 | Exception parcel tickets: the five types maintained in the glossary | R7 | backend/src/main/java/com/group23/ticket |
 | T-43-05 | Admin pages: collection points, locations, staff, fee rules | R5 | frontend/src/views |
 | T-43-12 | Stocktake: task generation, difference recording, reason categories | R7 | backend/src/main/java/com/group23/stocktake |
 | T-43-07 | Second integration test round, clear P0 and P1 defects | R10 | docs/04-testing |

@@ -37,7 +37,7 @@ none of them may be carried into the Vue application.
 |---|---|---|
 | 柜机 and 柜格, with cabinet status and a cabinet door fault exception | The system controls no hardware. It manages collection points and storage locations on shelves. | Glossary, list of terms no longer used; SRS 1.5 |
 | Couriers managed as user accounts alongside residents | The courier is an external actor with no account. Staff record what the courier delivers. | `survey-results.md`, conclusion 1 |
-| Cabinet door faults as an exception type | No hardware, so no door faults. The exception types are overdue, damaged, wrong recipient and other. | `ERD.md` |
+| Cabinet door faults as an exception type | No hardware, so no door faults. The exception types are `overdue`, `damaged`, `wrong_recipient`, `refused` and `lost`. | `glossary.md` |
 | Chinese interface text | Repository content, documents and the report are written in English. | Team charter, section 5.3 |
 | One fixed navigation set for a single operator | Routing is by role. Resident, Staff, Owner and Administrator each see a different set of pages. | `frontend-page-map.md` |
 
