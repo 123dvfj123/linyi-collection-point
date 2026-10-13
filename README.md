@@ -66,6 +66,7 @@ git clone https://github.com/Django-coder6/3500SEF-Group23-Project-LMS.git
 cd 3500SEF-Group23-Project-LMS
 
 # backend (Java 17 and the Maven wrapper)
+# not runnable until T-30-02 lands (issue #75)
 cd backend
 ./mvnw clean install        # on Windows use: mvnw.cmd clean install
 cd ..
@@ -84,10 +85,6 @@ cp .env.example .env
 docker compose up -d
 
 # Once those are merged, start everything:
-docker compose --profile full up -d
-
-# The backend still needs its build files (T-30-02, issue #75)
-# Once those are merged, start everything with:
 docker compose --profile full up -d
 ```
 

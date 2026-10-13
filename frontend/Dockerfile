@@ -4,7 +4,7 @@ WORKDIR /app
 
 # Consumed by Vite at build time (see .env.example)
 ARG VITE_API_BASE_URL=/api
-ENV VITE_API_BASE_URL=\$VITE_API_BASE_URL
+ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
 
 # Copy package.json and install dependencies
 COPY package*.json ./
