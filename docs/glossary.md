@@ -85,7 +85,7 @@ role. The permissions are combined in that case.
 | acceptance criteria | 驗收標準 | The condition that must hold for a task to count as complete. |
 | traceability matrix, RTM | 需求追蹤矩陣 | The table that maps each requirement to its design, code and test cases. |
 | use case | 用例 | A description of one interaction between an actor and the system, with its primary flow and exceptions. |
-| sprint | 迭代 | A fixed block of work. In this project each sprint is one or two weeks. |
+| sprint | 迭代 | A fixed block of work. This project runs for eight weeks in five sprints: Sprint 0 and Sprint 1 are one week each, Sprint 2 to Sprint 4 are two weeks each. |
 | stand-up | 站會 | The short regular meeting where each person reports progress and blockers. |
 | retrospective | 回顧 | The short meeting at the end of a sprint where the team agrees what to change. |
 | increment | 增量 | The working part of the system produced by one sprint. |

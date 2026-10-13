@@ -50,7 +50,7 @@ Many small collection points still rely on manual registration, paper notebooks,
 | G3 | Keep an accurate, traceable record of every parcel from arrival to handover. |
 | G4 | Provide the owner with simple statistics and overdue-parcel monitoring. |
 | G5 | Provide role-based access so each user only sees what they need. |
-| G6 | Deliver a usable web system within the 16-week course schedule. |
+| G6 | Deliver a usable web system within the eight-week project schedule (week 1 to week 8). |
 
 > Quantified targets (for example, handover time and notification delay) will be defined in the non-functional requirements chapter after survey data from R3 is available.
 
@@ -83,7 +83,7 @@ Many small collection points still rely on manual registration, paper notebooks,
 |---|---|---|
 | OS-1 | Control of any hardware device, including scanners, printers, door access, or any other physical equipment. | The system is software only. |
 | OS-2 | Courier and logistics functions such as route planning, dispatching, and delivery tracking before arrival at the collection point. | Handled by courier companies. |
-| OS-3 | Online payment, billing, and settlement of handling fees. | Beyond the course timeline. |
+| OS-3 | Online payment and settlement of handling fees through the system. Overdue fee *calculation* is in scope (see the retention period and overdue fee definitions in the glossary); taking payment is not. | Beyond the course timeline. |
 | OS-4 | Native mobile apps for iOS or Android. | The system is a web application only (responsive browser access). |
 | OS-5 | Integration with real third-party courier or e-commerce systems. | Only simulated or manually entered data is used. |
 | OS-6 | Real SMS or telecom gateway integration. | Notifications are in-system only in this version. |
@@ -188,7 +188,7 @@ flowchart LR
 
 ### 2.6 Design and Implementation Constraints
 
-- The project must be completed within the 16-week course schedule (Week 1 to Week 16).
+- The project runs for eight weeks (week 1 to week 8) and is delivered in five sprints. The course itself runs for sixteen weeks; the in-class progress review falls in weeks 10 to 12 and the final report and logbook deadline is 2026-12-08.
 - The system is a web application only; no hardware device control is allowed.
 - All documents and code must follow the project terminology in Section 1.6.
 - All work must follow the team's GitHub workflow in `CONTRIBUTING.md` (feature branches, pull requests into `develop`, review before merge).

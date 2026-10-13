@@ -218,8 +218,6 @@ A log entry should include: task ID, description, time spent, status, evidence l
 ## Questions
 
 If you have questions about these rules, please ask in the team chat. R1 (Project Manager) or R10 (DevOps & Integration) will make the final decision. Changes to this document require a PR and review by at least one other member before merge.
-git push
-```
 
 Do not use `git push --force`. If it is genuinely necessary, say so in the
 group chat first and only force push your own branch.

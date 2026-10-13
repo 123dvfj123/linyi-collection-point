@@ -149,6 +149,35 @@ hands the parcel over. Everything else waits.
 | T-50-13 | Every member finalises their personal logbook | everyone | docs/06-logbook |
 | T-50-14 | Retrospective and lessons learned | R1 | docs/05-management |
 
+## Assessment milestones
+
+These dates come from the course brief, not from the team. The eight-week
+project plan above has to fit around them.
+
+| Date | Item | Owner |
+|---|---|---|
+| 2026-09-30 | Logbook interim submission 1 | every member |
+| 2026-10-15 | Logbook interim submission 2 | every member |
+| 2026-10-30 | Logbook interim submission 3 | every member |
+| 2026-11-03 to 2026-11-23 | In-class progress review, weeks 10 to 12 (10 per cent) | R1, whole team |
+| 2026-11-15 | Logbook interim submission 4 | every member |
+| 2026-11-24 or 2026-11-30 | Written test (20 per cent, individual) | every member |
+| 2026-12-08 | Project report (15 per cent) and final logbook (15 per cent) | R1 submits the report |
+
+### How the two calendars fit together
+
+The project is planned to finish at the end of week 8, which is around
+2026-11-22. The in-class progress review falls in weeks 10 to 12, which overlaps
+the end of the project. The consequence is deliberate:
+
+- the Sprint 3 increment is what gets demonstrated at the progress review,
+  not the final build, so the demonstration material has to be ready by the
+  end of week 6;
+- Sprint 4 is used for testing, the report, the recorded presentation and the
+  logbooks, with the 2026-12-08 deadline as the hard stop;
+- the written test falls in the same period as Sprint 4, so Sprint 4 carries
+  the lightest development load.
+
 ## Definition of done
 
 A task is done when:
