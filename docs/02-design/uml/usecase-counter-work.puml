@@ -1,0 +1,25 @@
+@startuml usecase-counter-work
+left to right direction
+title Use Case Diagram(Collection Point Counter Work)
+
+actor "Staff" as Staff
+actor "Courier" as Courier
+
+rectangle "Community Parcel Collection Point System" {
+  usecase "Register incoming parcel" as UC_Register
+  usecase "Shelve parcel" as UC_Shelve
+  usecase "Search parcel" as UC_Search
+  usecase "Verify pickup code and hand over" as UC_Handover
+  usecase "Register parcel exception" as UC_Exception
+  usecase "Issue pickup code" as UC_Code
+}
+
+Courier --> UC_Register : delivers batch
+Staff --> UC_Register
+Staff --> UC_Shelve
+Staff --> UC_Search
+Staff --> UC_Handover
+Staff --> UC_Exception
+UC_Shelve ..> UC_Code : <<include>>
+
+@enduml

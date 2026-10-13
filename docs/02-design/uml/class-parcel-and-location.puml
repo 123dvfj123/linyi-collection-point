@@ -1,0 +1,99 @@
+@startuml class-parcel-and-location
+title Class Diagram(Parcel And Storage Location Domain)
+enum UserRole {
+  resident
+  staff
+  owner
+  admin
+}
+enum ParcelStatus {
+  registered
+  shelved
+  collected
+}
+enum ParcelSize {
+  small
+  medium
+  large
+}
+enum LocationStatus {
+  available
+  reserved
+  occupied
+  disabled
+}
+enum PickupCodeStatus {
+  active
+  used
+  expired
+  revoked
+}
+enum HandoverResult {
+  collected
+  returned
+  exception
+}
+enum ExceptionType {
+  overdue
+  damaged
+  wrong_recipient
+  refused
+  lost
+}
+enum ExceptionStatus {
+  open
+  processing
+  resolved
+}
+class User {
+  - id: UUID
+  - username: String
+  - passwordHash: String
+  - role: UserRole
+}
+class Location {
+  - id : UUID
+  - code : String
+  - zone : String
+  - size : ParcelSize
+  - status : LocationStatus
+}
+
+class Parcel {
+  - id : UUID
+  - trackingNo : String
+  - carrier : String
+  - recipientName : String
+  - recipientPhone : String
+  - size : ParcelSize
+  - status : ParcelStatus
+  - version : long
+}
+class PickupCode {
+  - id: UUID
+  - code: String
+  - parcelId: UUID
+  - status: PickupCodeStatus
+  - expiresAt: DateTime
+}
+class ParcelException {
+  - id: UUID
+  - parcelId: UUID
+  - type: ExceptionType
+  - status: ExceptionStatus
+  - description: String
+}
+class Handover {
+  - id: UUID
+  - pickupCodeId: UUID
+  - operatorId: UUID
+  - result: HandoverResult
+  - timestamp: DateTime
+}
+User "1" -- "0..N" Parcel : registeredBy >
+Location "1" -- "0..1" Parcel : holds >
+Parcel "1" -- "0..1" PickupCode : has >
+PickupCode "1" -- "0..1" Handover : results in >
+User "1" -- "0..N" Handover : operatedBy >
+Parcel "1" -- "0..N" ParcelException : raises >
+@enduml
