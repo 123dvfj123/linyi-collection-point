@@ -9,7 +9,7 @@
 | Version | v0.1 (draft, Chapters 1 and 2 only) |
 | Author | R2 |
 | Status | Draft, pending team review |
-| Related documents | [personas.md](../elicitation/personas.md), [user-journey-maps.md](../elicitation/user-journey-maps.md) |
+| Related documents | [personas.md](../elicitation/Personas.md), [user-journey-maps.md](../elicitation/user-journey-maps.md) |
 
 ## Table of Contents
 
@@ -108,7 +108,7 @@ The following project terms must be used consistently in all documents and code.
 | Ref | Document |
 |---|---|
 | [R1] | Course brief and Week 1 announcements, 3500SEF Group 23 |
-| [R2] | Personas (`docs/01-requirements/elicitation/personas.md`) |
+| [R2] | Personas (`docs/01-requirements/elicitation/Personas.md`) |
 | [R3] | User Journey Maps (`docs/01-requirements/elicitation/user-journey-maps.md`) |
 | [R4] | Requirements elicitation records: questionnaires and analysis (`docs/01-requirements/elicitation/survey-results.md`, by R2 and R3) |
 | [R5] | IEEE Std 830 / ISO/IEC/IEEE 29148, used as SRS structure guidance |
