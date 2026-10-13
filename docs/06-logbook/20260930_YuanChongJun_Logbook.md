@@ -33,6 +33,7 @@ records a meeting rather than tool work carries the meeting time itself.
 | W03 | 2026-10-14 | T-00-05 | Corrected this logbook after R1's review of PR #100: re-dated the two week 1 rows to the evidence that actually exists (the topic-selection minutes of 2 October, and the page map of 10 October), folded the duplicate prototype row into its evidence date, and rewrote the design system row's problem statement so it no longer claims the state machine document is out of date. | 00:15-00:40 | 0.4 | done | [PR #100](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/100) | R1 | R1 checked the cited dates against the repository and found three of them unsupported. The fix was to look up the first commit of each cited artefact instead of reasoning about it. | The page map row moved into week 2, where its evidence lives. |
 | W03 | 2026-10-14 | T-20-11 | Revised the handover models after the review of PR #103: the identity fallback now ends at its own stop so it cannot fall through and record a second handover, the used-code path is idempotent in both the activity and the sequence model (200 with the recorded handover, no second row), expired is separated from not found, and each fork carries a note that its branches are one transaction. | 00:40-00:53 | 0.2 | done | [PR #103](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/103) | R1 | The two models disagreed with the contract in the same way: the activity model rejected a used code while the contract answers 200. The wording was taken from `openapi.yaml` rather than invented. | Rendered with the PlantUML extension's jar; `-checkonly` exits 0. |
 | W03 | 2026-10-14 | T-30-04 | Replaced the skeleton's placeholder tokens with the design system tokens: added `frontend/src/styles/tokens.css` (the design system as CSS custom properties, including the Element Plus variable mapping), reduced `style.css` to base styles, and renamed `--colour-*` to `--color-*` across eighteen files. | 00:53-01:05 | 0.2 | done | [PR #104](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/104) | R5, R6 | The skeleton had invented `--colour-*` while the design system defines `--color-*`, so the two could not be used together. Lint passes, eleven tests pass and the build succeeds. | The placeholder blue and the invented 6 px radius become the design system's values. |
+| W03 | 2026-10-14 | T-20-04 / T-00-05 | Handed R7 the state name list the state machines must use, on issue #81, and pointed at `design-system.md` section 5.3 as the list's home; also updated the descriptions of PR #100 and PR #104 after their reviews. | 01:05-01:20 | 0.25 | done | [issue #81](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/issues/81), [the comment](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/issues/81#issuecomment-6151027622) | R7, R1 | R7's state machines have to carry the same state names as the ERD and the contract, and the list existed only inside the design system document, so it was handed over explicitly rather than left to be found. | R7 opened `docs/W02-uml-state-machines-r7` the same evening. |
 
 ## AI use
 
@@ -40,11 +41,9 @@ OpenAI Codex was used for project-scope discussion, front-end prototype code and
 
 ## Next planned work
 
-- PR #100 (this logbook) and PR #104 (the design tokens) are the last two of the week; the rest
-  of the week 2 checklist is merged into `develop`.
-- Tell R7 where the status name list lives: `design-system.md` section 5.3. The week 2 brief
-  lists that list as R4's contribution to R7's state machine work.
-- Build `StatusTag` from the mapping in `design-system.md` section 5.3.
-- Draw the high fidelity designs for pickup, intake and dashboard (T-20-12) once the tokens are
-  on `develop`.
+- Sprint 2 starts: implement the pages against `docs/02-design/ui-prototype.md`, reading the tokens
+  in `frontend/src/styles/tokens.css`.
+- Build `StatusTag` from the mapping in `design-system.md` section 5.3, in one place.
+- Draw the high fidelity designs for pickup, intake and dashboard (T-20-12).
 - Build the shared components named in the frontend page map.
+- Answer the review of R7's state machines on `docs/W02-uml-state-machines-r7` when it opens.
