@@ -36,12 +36,15 @@ OpenAI Codex was used for project-scope discussion, front-end prototype code and
 
 ## Next planned work
 
-- The design system is written and open in PR #102; R5 can start feature pages once it merges.
+- The design system (PR #102) and the UI prototype (PR #94) are merged, so R5 can start the
+  feature pages against `docs/02-design/design-system.md`.
+- **Rename the skeleton's placeholder tokens**: `frontend/src/style.css` and the placeholder
+  views use `--colour-*`, while `design-system.md` section 5.2 defines `--color-*`. Do this as
+  a small pull request after PR #97 merges, so the two do not collide.
+- Answer the reviews on PR #97 and PR #99 and get them merged; the activity-model follow-up is
+  on branch `docs/W03-activity-decisions`.
+- Build `StatusTag` from the mapping in `design-system.md` section 5.3, which now agrees with
+  `ERD.md` and `openapi.yaml`.
 - Draw the high fidelity designs for pickup, intake and dashboard (T-20-12) once the tokens exist.
+- Move the open items list out of PR #97 so it is readable outside an unmerged pull request.
 - Build the shared components named in the frontend page map.
-- Answer the reviews on PR #97, #99 and #102, and re-review PR #94, which R5 has now revised.
-- Do not build `StatusTag` from the current ERD. The three parcel states and the five exception
-  types only reach `develop` when PR #90 merges; the contract owner reports five of the six
-  review items closed at head 94690b3.
-- Move the open items list out of PR #97. It is currently readable only inside an unmerged pull
-  request, which is why the contract owner had to work from the review comment instead of the file.
