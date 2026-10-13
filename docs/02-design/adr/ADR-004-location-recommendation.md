@@ -1,6 +1,7 @@
 # ADR-004: Location Recommendation
 
-- Status: Proposed
+- Status: Accepted
+- Accepted: 2026-10-12
 - Date: 2026-10-10
 - Owners: R6 Backend Lead, R7 Backend Developer
 
@@ -22,7 +23,7 @@ If no location is available:
 
 - Return HTTP 200 with `recommendedLocation = null`.
 - Return `reason = "no_location_available"`.
-- Let the frontend show a full-locker message and offer manual assignment.
+- Let the frontend show a no-available-location message and offer manual assignment.
 
 ## Alternatives Considered
 

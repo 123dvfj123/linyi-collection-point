@@ -1,6 +1,7 @@
 # ADR-002: Backend Architecture
 
-- Status: Proposed
+- Status: Accepted
+- Accepted: 2026-10-12
 - Date: 2026-10-10
 - Owners: R6 Backend Lead, R7 Backend Developer
 

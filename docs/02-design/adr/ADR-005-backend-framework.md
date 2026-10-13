@@ -1,6 +1,7 @@
 # ADR-005: Backend Framework
 
-- Status: Proposed
+- Status: Accepted
+- Accepted: 2026-10-12
 - Date: 2026-10-10
 - Owners: R6 Backend Lead, R7 Backend Developer
 
@@ -27,7 +28,7 @@ Use Spring Boot 3 as the backend framework with:
 
 ### Express + Sequelize
 
-Kept the original choice. Rejected because the backend members are more familiar with Java and because transaction, locking and validation features are more structured in Spring Boot.
+Rejected because the backend members are more familiar with Java and because transaction, locking and validation features are more structured in Spring Boot.
 
 ### Spring Boot with MyBatis
 
@@ -46,6 +47,6 @@ Rejected. It adds a framework learning curve and does not provide a clear advant
 
 ## Verification
 
-- `mvn -q test` passes in CI.
+- `./mvnw -B verify` passes in CI.
 - `GET /api/health` returns a healthy response.
 - OpenAPI remains the source of truth for frontend field names.

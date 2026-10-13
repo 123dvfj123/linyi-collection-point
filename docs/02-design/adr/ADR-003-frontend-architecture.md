@@ -1,6 +1,7 @@
 # ADR-003: Frontend Architecture
 
-- Status: Proposed
+- Status: Accepted
+- Accepted: 2026-10-12
 - Date: 2026-10-11
 - Task: T-30-04
 - Owners: R4 Frontend Lead (implementation lead), R5 Frontend Developer
