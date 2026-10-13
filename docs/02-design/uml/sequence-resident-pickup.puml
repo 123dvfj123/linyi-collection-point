@@ -9,10 +9,13 @@ database "PostgreSQL" as SQL
 Resident -> Staff : present the pickup code
 Staff -> UI : enter the pickup code
 UI -> API : POST /pickup/verify  (pickupCode)
-API -> SQL : find an active pickup code
-alt code invalid or expired
+API -> SQL : find the pickup code
+alt code not found
   API --> UI : 404 Not Found
   UI -> Staff : reject the handover
+else code expired or revoked
+  API --> UI : 404 Not Found
+  UI -> Staff : reject the handover and ask for a new code
 else code valid
   API --> UI : 200 { parcelSummary, location }
   UI -> Staff : show the parcel and its location
@@ -21,8 +24,9 @@ else code valid
   UI -> API : POST /pickup/confirm  (pickupCode, result)
   API -> SQL : begin transaction, lock the pickup code
   alt code already used
-    API -> SQL : roll back
-    API --> UI : 409 Conflict
+    API -> SQL : no write, the handover already exists
+    API --> UI : 200 Handover, the one already recorded
+    UI -> Staff : show the handover already recorded
   else code still active
     API -> SQL : mark code used, insert handover, free location
     API --> UI : 200 Handover
@@ -30,4 +34,6 @@ else code valid
   end
 end
 note over API : operatorId is taken from the authenticated session (CR-007)
+note over API, SQL : POST /pickup/confirm is idempotent by pickup code: a repeat returns the recorded handover with the same 200 and never writes a second row (NFR-4)
+note over API : the contract folds expired and revoked codes into 404 "not found or invalid"
 @enduml
