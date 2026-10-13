@@ -1,31 +1,21 @@
 # Personal logbook - Hu QingKai (R6, backend lead)
 
-Student ID: 13661454
-GitHub: @123dvfj123
-Modules: backend architecture, data model, API, recommender
-Period: W00-W16
+- Student ID: 13661454
+- GitHub: @123dvfj123
+- Role: R6 backend lead and product architect B
+- Modules: M1 users and permissions, M3 storage locations and the recommender, M4 pickup and handover, M10 reporting, audit and admin
+- Period covered: W01-W08
 
 ## Weekly log
 
-## Week 0
-
-### 2026-10-02
-
-- Attended the kickoff meeting with R1. Went through the Sprint 0–4 schedule and settled on a hybrid Scrum + plan-driven process. (2.0 h)
-- Caught up with R7 about the backend scope: architecture, data model, API ownership and recommender. (1.0 h)
-
-Status: done.
-Evidence: meeting minutes will be filed under docs/05-management/minutes.
-Note: backend scope to be confirmed in Sprint 1.
-
-## Week 1
-
-### 2026-10-10
-
-- Drafted the backend design baseline: ERD, backend architecture ADR, framework ADR, location recommendation ADR, state machines and the OpenAPI draft. (3.0 h)
-- Discussed with R1 and R4 and revised the backend technology choice. Settled on Spring Boot 3 with Java 17 and PostgreSQL, replacing the earlier Express + Sequelize assumption. (1.0 h)
-- Went through the frontend API dependency list with R4 and confirmed that the backend will own the final endpoint paths, field names and status values. (0.5 h)
-
-Status: done.
-Evidence: design PR #38.
-Note: design documents are ready for review in PR #35.
+| Week | Date | Task | Description (output produced) | Time | Hours | Status | Evidence (links) | With | Problem and fix | Note |
+|---|---|---|---|---|---|---|---|---|---|---|
+| W01 | 2026-10-02 | T-00-01 | Attended the topic-selection and role-allocation meeting. The team chose the community parcel collection point management system, agreed it is software only, allocated the roles R1 to R10 and adopted a hybrid Scrum and plan-driven way of working. Took the backend scope. | 20:00-22:00 | 2.0 | done | [minutes 2026-10-02](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/blob/develop/docs/05-management/minutes/20261002_topic-selection.md), [team charter](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/blob/develop/docs/05-management/team-charter.md) | R1, R2, R3, R4, R5, R7, R8, R9, R10 | The first framing had the system controlling physical lockers; the meeting decided it records receiving, shelving and handover only, with no hardware control | Recorded as decisions D1 and D2 in the minutes |
+| W01 | 2026-10-02 | T-00-01 | Agreed the backend scope with R7 face to face: architecture, data model, API ownership and the storage location recommender. | 22:00-23:00 | 1.0 | done | [PLAN.md module ownership](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/blob/develop/docs/05-management/plans/PLAN.md) | R7 | The split was not written down at the time, so it was only fixed later when the plan's module table was published | R6 takes M1, M3, M4 and M10; R7 takes M2 and M5 to M9 |
+| W01 | 2026-10-10 | T-20-02 | Wrote the backend design baseline: the entity relationship diagram, ADR-002 for the backend architecture, ADR-004 for the recommender, ADR-005 for the framework, the four state machines for the parcel, storage location, pickup code and exception, and a draft OpenAPI file. | 19:00-22:00 | 3.0 | done | [PR #38](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/38), `docs/02-design/database/ERD.md` | R7 | The first draft carried seven parcel status values, three of which described courier stages that the scope statement puts outside the system; found in the week 1 review and reduced to three in week 2 | The four ADRs were still marked Proposed until the week 2 consistency sweep |
+| W01 | 2026-10-10 | T-20-01 | Reviewed the backend technology choice with R1 and R4 and moved the stack from Node.js with Express 4 and MySQL 8 to Java 17, Spring Boot 3, Spring Data JPA, Flyway and PostgreSQL 16. | 22:00-23:00 | 1.0 | done | [ADR-005](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/blob/develop/docs/02-design/adr/ADR-005-backend-framework.md), [PR #38](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/38) | R1, R4 | The handover needs real transactions and row locking, and the persistence layer has to map cleanly onto the entity relationship diagram; Express and Sequelize showed neither | Recorded as CR-001 |
+| W01 | 2026-10-10 | T-30-04 | Walked through the frontend API dependency list with R4 and confirmed that the backend owns the final endpoint paths, field names and status values. | 23:00-23:30 | 0.5 | done | [frontend-api-dependencies.md](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/blob/develop/docs/03-api/frontend-api-dependencies.md) | R4 | The list named two endpoints the backend had not agreed to, so they were left open instead of being frozen | The list stayed aligned with contract v0.1 until the week 2 update |
+| W02 | 2026-10-13 | T-10-05a | Aligned the entity relationship diagram with CR-006: the parcel status reduced to registered, shelved and collected, the exception split out as a separate ParcelException entity with ExceptionRecord as the persisted entity, the relationship renamed, and the concurrency notes rewritten with the expectedVersion optimistic lock, the unique constraints on the tracking number and the pickup code, the one-parcel-per-location partial constraint and the idempotent handover. | 14:00-16:00 | 2.0 | done | [PR #90](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/90), `docs/02-design/database/ERD.md`, `docs/02-design/backend-state-machines.md` | R7 | The diagram still carried three courier stages that the SRS puts outside the system boundary, and nothing was written down to stop two parcels claiming one storage location, which is what risk RSK-08 describes | The same three status values were copied into the state machine note so the UML diagrams cannot drift away from the ERD |
+| W02 | 2026-10-13 | T-10-05a | Corrected the four architecture decision records: ADR-002, ADR-003, ADR-004 and ADR-005 moved from Proposed to Accepted with the acceptance date, the self-contradicting line in ADR-005's Express and Sequelize alternative removed, its verification command put on the Maven wrapper, and the retired "locker" wording in ADR-004 replaced. | 16:00-16:30 | 0.5 | done | [PR #90](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/90), `docs/02-design/adr/` | R1 | The records still said Proposed even though CR-001 records the framework decision as implemented, and ADR-005 said the Express alternative was both kept and rejected | "Locker" was already on the glossary's retired-terms list |
+| W02 | 2026-10-13 | T-20-03 | Cleaned up and extended the OpenAPI contract: the retired codename removed from the title, operatorId removed from the handover request body and documented as read from the authenticated session, the parcel status constrained to an enum, POST /parcels/batch added for batch registration, a bearer security scheme added, the location recommendation corrected so the null answer is expressed properly, every endpoint mapped to the requirement it serves, and a Contract decisions block added. | 16:30-19:00 | 2.5 | done | [PR #90](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/90), `docs/03-api/openapi.yaml` | R4, R10 | Accepting the operator identifier from the client would let one staff member record a handover as another and make the operation log unreliable, which breaks NFR-6; the batch endpoint was missing even though CR-003 had raised it to must-have | Validated with the Swagger CLI and the Redocly linter: the file is valid, 0 errors and 16 style warnings |
+| W02 | 2026-10-13 | T-20-03 | Updated the frontend API dependency list to the version 0.2.0-draft contract: the parcel status list reduced to three values, the operator removed from the handover request, the batch endpoint added, and the two endpoints that are not part of the Sprint 2 contract marked as such. | 19:00-19:30 | 0.5 | done | [PR #90](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/90), `docs/03-api/frontend-api-dependencies.md` | R4 | The list said "needs R6 confirmation" for two endpoints, which left the frontend unable to tell whether to build against them | Co-owned with R4 |
