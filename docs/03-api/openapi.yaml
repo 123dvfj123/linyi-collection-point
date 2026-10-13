@@ -1,14 +1,40 @@
+# Contract decisions
+#
+# This file is the frozen Sprint 2 contract for the frontend.
+#
+# - CR-003 (FR-18): batch registration of up to 50 parcels is a must-have, so
+#   POST /parcels/batch is part of this contract.
+# - CR-004: the location recommendation is advice only. The staff member may
+#   ignore it and assign a location by hand; it is never applied automatically.
+# - CR-006: the parcel status model is registered / shelved / collected only.
+#   Courier and logistics stages are outside the system boundary (SRS section
+#   1.5), and an exception is a separate flow rather than a parcel status.
+# - CR-007: the handover operator is read from the authenticated session, never
+#   from the request body, so one staff member cannot record a handover as
+#   another (NFR-6).
+# - CRJ-001: no complex scoring algorithm for the recommendation.
+#
+# Requirement identifiers in the endpoint descriptions use the IS-nn identifiers
+# defined in SRS section 1.5. FR identifiers are added when SRS chapter 3
+# (issue #76) defines them and the traceability matrix is built.
+
 openapi: 3.0.3
 info:
-  title: Community Parcel Collection Point API
-  version: 0.1.0-draft
-  description: Draft OpenAPI contract. The backend owns the final paths and fields.
+  title: Community Parcel Collection Point Management System API
+  version: 0.2.0-draft
+  description: >
+    Draft OpenAPI contract for Sprint 2. The backend owns the final paths and
+    fields; the frontend must not invent fields before they appear here.
 servers:
   - url: /api
+security:
+  - bearerAuth: []
 paths:
   /health:
     get:
       summary: Service health check
+      description: Operational check. Satisfies no business requirement.
+      security: []
       responses:
         "200":
           description: Service is healthy
@@ -19,6 +45,8 @@ paths:
   /auth/login:
     post:
       summary: Login for resident, staff, owner or admin
+      description: Satisfies IS-1, role-based access control for the four roles.
+      security: []
       requestBody:
         required: true
         content:
@@ -43,13 +71,17 @@ paths:
   /parcels:
     get:
       summary: List parcels
+      description: Satisfies IS-6, parcel query and status tracking.
       parameters:
         - name: status
           in: query
+          description: Filter by parcel status (CR-006).
           schema:
             type: string
+            enum: [registered, shelved, collected]
         - name: keyword
           in: query
+          description: Matches tracking number, recipient name or recipient phone.
           schema:
             type: string
         - name: page
@@ -71,6 +103,9 @@ paths:
                 $ref: "#/components/schemas/PagedParcels"
     post:
       summary: Register an incoming parcel
+      description: >
+        Satisfies IS-2, registration of an incoming parcel. The parcel starts in
+        the registered state.
       requestBody:
         required: true
         content:
@@ -84,9 +119,37 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Parcel"
+  /parcels/batch:
+    post:
+      summary: Register a batch of incoming parcels
+      description: >
+        Satisfies IS-2 and CR-003, which raised batch registration to a
+        must-have. Up to 50 parcels in one request. Each entry is validated on
+        its own so one bad row does not discard the rest of the batch. The
+        response reports which entries were created and which were rejected and
+        why.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ParcelBatchCreateRequest"
+      responses:
+        "201":
+          description: Batch processed, per-entry result in the body
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ParcelBatchResult"
+        "400":
+          description: The batch itself is invalid, for example more than 50 entries
   /parcels/{id}/status:
     patch:
       summary: Update parcel status
+      description: >
+        Satisfies IS-3 and IS-6. The status value is restricted by CR-006, and
+        the update is guarded by expectedVersion optimistic locking. A stale
+        version is rejected with 409 rather than overwriting a newer state.
       parameters:
         - name: id
           in: path
@@ -104,8 +167,10 @@ paths:
               properties:
                 status:
                   type: string
+                  enum: [registered, shelved, collected]
                 reason:
                   type: string
+                  description: Free-text note recorded with the change.
                 expectedVersion:
                   type: integer
                   format: int64
@@ -121,6 +186,7 @@ paths:
   /locations:
     get:
       summary: List locations and occupancy
+      description: Satisfies IS-4, management of storage locations.
       responses:
         "200":
           description: Location list
@@ -133,6 +199,13 @@ paths:
   /locations/recommend:
     post:
       summary: Recommend an available location
+      description: >
+        Satisfies IS-3. This is a suggestion only, per CR-004: the staff member
+        may ignore it and assign a location by hand, and the result is never
+        applied automatically. The rule is deterministic, per CRJ-001. When no
+        location is free the endpoint still returns 200, with
+        `recommendedLocation` null and `reason` `no_location_available`, so the
+        frontend can offer manual assignment.
       requestBody:
         required: true
         content:
@@ -156,6 +229,7 @@ paths:
   /pickup/verify:
     post:
       summary: Verify a pickup code
+      description: Satisfies IS-7, the first half of the handover workflow.
       requestBody:
         required: true
         content:
@@ -178,19 +252,23 @@ paths:
   /pickup/confirm:
     post:
       summary: Confirm handover
+      description: >
+        Satisfies IS-7, the second half of the handover workflow. The operator
+        is read from the authenticated session and is not accepted from the
+        client (CR-007), because accepting it would let one staff member record
+        a handover as another and make the operation log unreliable (NFR-6).
+        The call is idempotent by pickup code: repeating it returns the
+        handover already recorded for that code.
       requestBody:
         required: true
         content:
           application/json:
             schema:
               type: object
-              required: [pickupCode, operatorId]
+              required: [pickupCode]
               properties:
                 pickupCode:
                   type: string
-                operatorId:
-                  type: string
-                  format: uuid
                 result:
                   type: string
                   enum: [collected, returned, exception]
@@ -204,6 +282,15 @@ paths:
         "409":
           description: Handover already completed
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >
+        JWT issued by POST /auth/login. The backend reads the authenticated user
+        from this token, which is how the handover operator is determined and why
+        the client must not send it (CR-007).
   responses:
     Unauthorized:
       description: Unauthorized
@@ -246,8 +333,11 @@ components:
           format: uuid
         trackingNo:
           type: string
+          description: Unique. The same waybill cannot be registered twice.
         status:
           type: string
+          description: Parcel lifecycle status (CR-006).
+          enum: [registered, shelved, collected]
         size:
           type: string
         locationId:
@@ -274,6 +364,38 @@ components:
         locationId:
           type: string
           format: uuid
+    ParcelBatchCreateRequest:
+      type: object
+      required: [parcels]
+      properties:
+        parcels:
+          type: array
+          description: Between 1 and 50 parcels, per CR-003.
+          minItems: 1
+          maxItems: 50
+          items:
+            $ref: "#/components/schemas/ParcelCreateRequest"
+    ParcelBatchResult:
+      type: object
+      properties:
+        created:
+          type: array
+          description: The parcels that were registered.
+          items:
+            $ref: "#/components/schemas/Parcel"
+        rejected:
+          type: array
+          description: The entries that were not registered, with the reason.
+          items:
+            type: object
+            properties:
+              index:
+                type: integer
+                description: Zero-based position of the entry in the request.
+              trackingNo:
+                type: string
+              reason:
+                type: string
     PagedParcels:
       type: object
       properties:
@@ -299,8 +421,11 @@ components:
           type: string
         size:
           type: string
+          enum: [small, medium, large]
         status:
           type: string
+          description: Storage location state. Unchanged by CR-006, see the ERD status note.
+          enum: [available, reserved, occupied, disabled]
         parcelId:
           type: string
           format: uuid
@@ -309,10 +434,19 @@ components:
       type: object
       properties:
         recommendedLocation:
-          $ref: "#/components/schemas/Location"
+          description: >
+            The suggested location, or null when none is free. OpenAPI 3.0
+            ignores `nullable` next to `$ref`, so the reference is wrapped in
+            allOf to make the null case real (CR-004).
+          type: object
           nullable: true
+          allOf:
+            - $ref: "#/components/schemas/Location"
         reason:
           type: string
+          description: >
+            Why this location was suggested, or `no_location_available` when
+            `recommendedLocation` is null.
     PickupVerifyResponse:
       type: object
       properties:
@@ -333,6 +467,7 @@ components:
           format: uuid
         result:
           type: string
+          enum: [collected, returned, exception]
         createdAt:
           type: string
           format: date-time

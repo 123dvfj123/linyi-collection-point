@@ -1,6 +1,6 @@
 # Frontend API Dependencies
 
-- Status: Draft aligned with PR #38 OpenAPI v0.1
+- Status: Draft, aligned with OpenAPI v0.2.0-draft (CR-003, CR-004, CR-006, CR-007)
 - Task: T-30-04
 - Owners: R4 Frontend Lead, R6 Backend Lead
 - Consumers: R4 and R5 frontend implementation
@@ -23,15 +23,16 @@
 |---|---|---|---|---|---|
 | P0 | `GET /health` | Development | Service health check | status | In OpenAPI draft |
 | P0 | `POST /auth/login` | Login | Login | username, password, token, user.roles | In OpenAPI draft |
-| P0 | `GET /auth/me` | App shell | Restore current session | user.id, user.username, user.roles | Proposed, needs R6 confirmation |
+| P0 | `GET /auth/me` | App shell | Restore current session | user.id, user.username, user.roles | Confirmed by R6 as not part of the Sprint 2 contract; to be added in Sprint 3 |
 | P0 | `GET /parcels` | Parcel list | List and filter parcels | page, pageSize, status, keyword, items, total | In OpenAPI draft |
 | P0 | `POST /parcels` | Parcel create | Register an incoming parcel | trackingNo, carrier, recipientName, recipientPhone, size, locationId | In OpenAPI draft |
-| P0 | `GET /parcels/{id}` | Parcel detail | Retrieve one parcel | id, trackingNo, status, size, locationId, expectedVersion | Proposed, needs R6 confirmation |
+| P0 | `POST /parcels/batch` | Parcel create | Register a batch of up to 50 parcels | parcels, created, rejected | In OpenAPI draft (raised to must-have by CR-003) |
+| P0 | `GET /parcels/{id}` | Parcel detail | Retrieve one parcel | id, trackingNo, status, size, locationId, expectedVersion | Confirmed by R6 as not part of the Sprint 2 contract; to be added in Sprint 3 |
 | P0 | `PATCH /parcels/{id}/status` | Parcel detail | Controlled status update | status, reason, expectedVersion | In OpenAPI draft |
 | P0 | `GET /locations` | Dashboard, location board | List storage locations | id, code, zone, size, status, parcelId | In OpenAPI draft |
 | P0 | `POST /locations/recommend` | Parcel create | Recommend an available location | size, zone, recommendedLocation, reason | In OpenAPI draft |
 | P0 | `POST /pickup/verify` | Pickup workflow | Validate a pickup code | pickupCode, parcelSummary, location | In OpenAPI draft |
-| P0 | `POST /pickup/confirm` | Pickup workflow | Confirm handover | pickupCode, operatorId, result | In OpenAPI draft |
+| P0 | `POST /pickup/confirm` | Pickup workflow | Confirm handover | pickupCode, result (the operator comes from the session, CR-007) | In OpenAPI draft |
 
 ## P1 Endpoint List
 
@@ -49,13 +50,14 @@
 
 ### Parcel
 
-`registered`, `in_storage`, `ready_for_pickup`, `out_for_delivery`, `picked_up`, `returned`, `exception`.
+`registered`, `shelved`, `collected` (CR-006). An exception is not a parcel
+status; it is a separate record, listed below.
 
 ### Location
 
 `available`, `reserved`, `occupied`, `disabled`.
 
-### Exception
+### Exception (`ParcelException`)
 
 `open`, `processing`, `resolved`.
 
