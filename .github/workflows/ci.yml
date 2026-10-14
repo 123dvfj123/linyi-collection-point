@@ -33,6 +33,9 @@ jobs:
           fi
           echo "no environment file tracked"
 
+      - name: Check that every document version header matches its revision history
+        run: python3 scripts/check_doc_versions.py .
+
   # Uncomment in Sprint 2, once backend/pom.xml exists.
   # backend:
   #   runs-on: ubuntu-latest
