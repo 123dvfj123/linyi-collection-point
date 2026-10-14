@@ -5,8 +5,7 @@
 - Task: T-20-09
 - Owner: R5 Frontend Developer
 - Agreed with: R4 Frontend Lead
-- Issue: #83, the frontend workstream issue. It also carries T-20-05 and
-  T-20-10, so this document answers T-20-09 only and its pull request does not
+- Issue: #83, the frontend workstream issue. It carries T-20-05, T-20-09 and T-20-10, so this document answers T-20-09 only and its pull request does not
   close the issue on its own.
 - Depends on: `docs/02-design/adr/ADR-003-frontend-architecture.md` (T-30-04),
   `docs/02-design/frontend-page-map.md` (T-30-04),
