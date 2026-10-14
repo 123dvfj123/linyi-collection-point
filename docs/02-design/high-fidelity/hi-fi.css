@@ -187,3 +187,260 @@ input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 2px
   .page-actions { display: block; }
   .page-actions .btn { width: 100%; margin-bottom: var(--space-2); }
 }
+
+/* ---------------------------------------------------------------------------
+ * Depth, and equal-height panels.
+ *
+ * The treatment follows the archived reference prototype
+ * (docs/02-design/prototype/styles.css, PR #62): a tinted shell, a soft fill
+ * behind a status label, and a raised header. Everything is derived from the
+ * tokens above, so no new value is introduced.
+ * ------------------------------------------------------------------------ */
+
+/* A split row stretches by default, so neither card of a pair looks cut off:
+   dashboard pairs storage locations with alerts, pickup pairs the code field
+   with the result panel. Where the two cards hold very different amounts of
+   content, the modifier keeps the shorter one at its natural height instead of
+   padding it out with empty space (intake: the form beside the suggestion). */
+.split { align-items: stretch; }
+.split--top { align-items: start; }
+
+.sidebar { background: linear-gradient(180deg, var(--color-primary-soft), var(--color-surface-soft)); }
+.page-header {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-resting);
+  padding: var(--space-4);
+}
+.tag { background: color-mix(in srgb, currentColor 12%, var(--color-surface)); }
+.metric { border-left: 4px solid var(--color-primary-soft); }
+.card > h2 { padding-bottom: var(--space-2); border-bottom: 1px solid var(--color-border); }
+
+/* ---------------------------------------------------------------------------
+ * Shell, background and glass (design system 5.1, 5.2, 5.5).
+ *
+ * The palette is the one the reviewer chose, and it lives in tokens.css, not
+ * here: ink-900 for the shell, grey-400 for the page, paper-100 for a panel,
+ * and slate-500 as the single accent. The rules below only read semantic tokens.
+ * ------------------------------------------------------------------------ */
+
+body { background: var(--color-bg-gradient) fixed; }
+
+.sidebar { background: var(--color-sidebar-gradient); border-right: 0; }
+.brand { color: var(--color-sidebar-text); }
+.nav a { color: var(--color-sidebar-text); }
+.nav a:hover { background: var(--color-sidebar-active-bg); }
+.nav a[aria-current="page"] { background: var(--color-sidebar-active-bg); color: var(--color-sidebar-text); }
+.topbar, .page-header, .card {
+  background: var(--color-surface-glass);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+}
+.topbar { border-bottom: 1px solid var(--color-border); }
+.table-wrap { background: var(--color-surface-glass); backdrop-filter: var(--blur-glass); -webkit-backdrop-filter: var(--blur-glass); }
+tbody tr { background: transparent; }
+tbody tr:hover { background: var(--color-primary-soft); }
+
+/* ---------------------------------------------------------------------------
+ * Liquid glass (design system 5.5).
+ *
+ * The reviewer asked for the look of a floating glass bar: a large radius, a
+ * light top edge and a stronger blur, so a panel reads as glass over the sand
+ * gradient instead of as flat white. Every value is a token.
+ * ------------------------------------------------------------------------ */
+
+.card, .page-header, .table-wrap {
+  border-radius: var(--radius-xl);
+  border: 1px solid color-mix(in srgb, var(--paper-100) 55%, transparent);
+  background: var(--color-surface-glass);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+  box-shadow: var(--shadow-resting);
+}
+.topbar { border-radius: 0 0 var(--radius-xl) var(--radius-xl); }
+.nav a { border-radius: var(--radius-pill); }
+.nav a:focus-visible { outline-color: var(--color-sidebar-text); }
+
+/* Frosted, not opaque, and layered for depth (design system 5.5 and 7.3).
+   A panel now has: a vertical glass gradient (thicker at the top), a translucent
+   edge, a near shadow plus a far shadow, and a one pixel highlight along the top
+   edge. Every value is either a token or a mix derived from one. */
+.card, .table-wrap {
+  background: var(--color-surface-glass-gradient);
+  border: 1px solid color-mix(in srgb, var(--paper-100) 60%, transparent);
+  box-shadow: var(--shadow-resting), inset 0 1px 0 color-mix(in srgb, var(--paper-100) 70%, transparent);
+}
+.page-header {
+  background: var(--color-surface-glass-gradient);
+  border: 1px solid color-mix(in srgb, var(--paper-100) 60%, transparent);
+  box-shadow: var(--shadow-floating), inset 0 1px 0 color-mix(in srgb, var(--paper-100) 70%, transparent);
+}
+.topbar {
+  background: var(--color-surface-glass);
+  border-bottom: 1px solid color-mix(in srgb, var(--paper-100) 55%, transparent);
+  box-shadow: var(--shadow-resting);
+}
+.sidebar { box-shadow: var(--shadow-floating); }
+.tag { box-shadow: inset 0 1px 0 color-mix(in srgb, var(--paper-100) 60%, transparent); }
+
+/* Reviewer round 3: the secondary panel takes the accent surface, the row
+   actions become round and grey, and form controls are dimmer than a surface. */
+.split > :last-child {
+  background: var(--color-surface-alt);
+  border-color: color-mix(in srgb, var(--paper-100) 30%, transparent);
+  color: var(--color-sidebar-text);
+}
+.split > :last-child .muted, .split > :last-child .caption { color: color-mix(in srgb, var(--paper-100) 78%, transparent); }
+.split > :last-child .card > h2, .split > :last-child > h2 { border-bottom-color: color-mix(in srgb, var(--paper-100) 30%, transparent); }
+.split > :last-child .tag {
+  color: var(--color-sidebar-text);
+  background: color-mix(in srgb, var(--ink-900) 28%, transparent);
+  border-color: color-mix(in srgb, var(--paper-100) 45%, transparent);
+}
+.split > :last-child .cell {
+  background: color-mix(in srgb, var(--paper-100) 16%, transparent);
+  border-color: color-mix(in srgb, var(--paper-100) 30%, transparent);
+  border-left-color: var(--color-sidebar-text);
+  color: var(--color-sidebar-text);
+}
+.split > :last-child .btn { background: color-mix(in srgb, var(--paper-100) 18%, transparent); border-color: color-mix(in srgb, var(--paper-100) 40%, transparent); color: var(--color-sidebar-text); }
+.split > :last-child .btn--primary { background: var(--ink-900); border-color: var(--ink-900); color: var(--paper-100); }
+.split > :last-child .kv dt { color: color-mix(in srgb, var(--paper-100) 78%, transparent); }
+
+.actions-cell .btn {
+  border-radius: var(--radius-pill);
+  background: var(--grey-400);
+  border-color: transparent;
+  padding: 0 var(--space-4);
+}
+.actions-cell .btn:hover { background: color-mix(in srgb, var(--grey-400) 82%, var(--ink-900)); }
+
+input[type="text"], textarea, select { background: var(--color-field); border-color: color-mix(in srgb, var(--ink-900) 22%, var(--color-field)); }
+
+/* ---------------------------------------------------------------------------
+ * Reviewer round 4.
+ *
+ *  1. The secondary panel goes back to the same glass as every other card.
+ *  2. The accent (--color-accent) is used in more places, at a readable strength for text.
+ *  3. The storage cells are dimmed to the field tone, like the inputs.
+ *  4. More depth: deeper shadows, and a vignette between the shell and the
+ *     content so the two read as two panes of glass.
+ *  5. Row actions take the same radius as every other control.
+ * ------------------------------------------------------------------------ */
+
+/* 1. secondary panel back to glass */
+.split > :last-child {
+  background: var(--color-surface-glass-gradient);
+  border-color: color-mix(in srgb, var(--paper-100) 60%, transparent);
+  color: var(--color-text);
+  box-shadow: var(--shadow-floating), inset 0 1px 0 color-mix(in srgb, var(--paper-100) 70%, transparent);
+}
+.split > :last-child .muted, .split > :last-child .caption { color: var(--color-text-muted); }
+.split > :last-child .card > h2, .split > :last-child > h2 { border-bottom-color: var(--color-border); }
+.split > :last-child .tag { color: inherit; background: color-mix(in srgb, currentColor 12%, var(--color-surface)); border-color: currentColor; }
+.split > :last-child .cell { background: var(--color-field); border-color: var(--color-border); border-left-color: var(--color-accent); color: var(--color-text); }
+.split > :last-child .btn { background: color-mix(in srgb, var(--color-surface) 60%, transparent); border-color: var(--color-border); color: var(--color-text); }
+.split > :last-child .kv dt { color: var(--color-text-muted); }
+
+/* 2. the accent, used more widely */
+.btn--link { color: var(--color-accent-strong); }
+.seg button[aria-pressed="true"] { background: color-mix(in srgb, var(--color-accent) 22%, var(--color-surface)); color: var(--color-accent-strong); }
+.metric { border-left-color: var(--color-accent); }
+thead th { background: color-mix(in srgb, var(--color-accent) 12%, var(--color-surface)); color: var(--color-accent-strong); }
+tbody tr:hover { background: color-mix(in srgb, var(--color-accent) 10%, var(--color-surface)); }
+.nav a:hover { background: color-mix(in srgb, var(--color-accent) 22%, var(--ink-900)); }
+.nav a[aria-current="page"] { background: color-mix(in srgb, var(--color-accent) 42%, var(--ink-900)); }
+.cell[aria-selected="true"] { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+
+/* 3. storage cells dimmed */
+.cell { background: var(--color-field); }
+
+/* 4. depth: vignette between the two panes of glass */
+.main { position: relative; }
+.main::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--space-12);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--ink-900) 22%, transparent), transparent);
+  pointer-events: none;
+}
+.content { background: linear-gradient(115deg, transparent 0%, color-mix(in srgb, var(--paper-100) 18%, transparent) 100%); }
+
+/* 5. row actions match the control radius */
+.actions-cell .btn { border-radius: var(--radius-sm); }
+
+/* ---------------------------------------------------------------------------
+ * Reviewer round 5.
+ *
+ *  A. The accent carries more weight: the tints are stronger and the primary
+ *     action uses the readable accent, which still meets 4.5:1 for paper text.
+ *  B. The shell is the glass layer that sits on top: it is slightly
+ *     translucent, so the page gradient shows through it, and its inner edge
+ *     carries a bright reflection, so the pane above reads as a separate sheet
+ *     over the pane below.
+ * ------------------------------------------------------------------------ */
+
+/* A. stronger accent */
+thead th { background: color-mix(in srgb, var(--color-accent) 32%, var(--color-surface)); color: var(--color-accent-strong); }
+tbody tr:hover { background: color-mix(in srgb, var(--color-accent) 20%, var(--color-surface)); }
+.seg button[aria-pressed="true"] { background: color-mix(in srgb, var(--color-accent) 42%, var(--color-surface)); color: var(--color-accent-strong); }
+.metric { border-left-width: 5px; }
+.selected-row, .cell[aria-selected="true"] { background: color-mix(in srgb, var(--color-accent) 24%, var(--color-surface)); }
+.btn--primary { background: var(--color-accent-strong); border-color: var(--color-accent-strong); color: var(--paper-100); }
+.nav a[aria-current="page"] { background: color-mix(in srgb, var(--color-accent) 58%, var(--ink-900)); }
+
+/* B. the shell as a pane of glass on top of the page */
+.sidebar {
+  position: relative;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--ink-900) 90%, transparent) 0%, color-mix(in srgb, var(--ink-900) 76%, transparent) 100%);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+  border-right: 1px solid color-mix(in srgb, var(--paper-100) 16%, transparent);
+}
+/* the reflection along the inner edge of the pane */
+.sidebar::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 2px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--paper-100) 60%, transparent) 0%, color-mix(in srgb, var(--paper-100) 10%, transparent) 55%, transparent 100%);
+  pointer-events: none;
+}
+/* a soft gloss across the pane itself */
+.sidebar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(125deg, color-mix(in srgb, var(--paper-100) 8%, transparent) 0%, transparent 45%);
+  pointer-events: none;
+}
+.sidebar > * { position: relative; }
+
+/* A primary action keeps the accent fill even inside the secondary panel
+   (the earlier scope rule was more specific than .btn--primary). */
+.split > :last-child .btn--primary {
+  background: var(--color-accent-strong);
+  border-color: var(--color-accent-strong);
+  color: var(--paper-100);
+}
+
+/* ---------------------------------------------------------------------------
+ * Reviewer round 6: a wider reflection, a stronger glass read, a brighter page.
+ * ------------------------------------------------------------------------ */
+
+/* The reflection is a band with a long fade, not a hairline, plus a bright cut
+   edge on the pane itself. */
+.sidebar { box-shadow: var(--shadow-floating), inset -1px 0 0 color-mix(in srgb, var(--paper-100) 45%, transparent); }
+.sidebar::after {
+  width: var(--space-12);
+  background: linear-gradient(270deg, color-mix(in srgb, var(--paper-100) 38%, transparent) 0%, color-mix(in srgb, var(--paper-100) 16%, transparent) 30%, color-mix(in srgb, var(--paper-100) 4%, transparent) 65%, transparent 100%);
+}
+.sidebar::before { background: linear-gradient(115deg, color-mix(in srgb, var(--paper-100) 12%, transparent) 0%, transparent 52%); }
+
+/* A little more light: the panels sit higher and the vignette is softer. */
+.main::before { background: linear-gradient(90deg, color-mix(in srgb, var(--ink-900) 16%, transparent), transparent); }
+.card, .table-wrap, .page-header, .split > :last-child {
+  border-color: color-mix(in srgb, var(--paper-100) 70%, transparent);
+}

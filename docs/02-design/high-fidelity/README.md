@@ -21,6 +21,8 @@ member uses all day.
 Every value is a design token. `hi-fi.css` links `frontend/src/styles/tokens.css`
 instead of copying it, so these pages cannot drift from the design system.
 
+Two cards that sit side by side share one height by default (`.split`), so a row never looks cut off. Intake is the exception: its suggestion panel is short, so `.split--top` leaves it at its natural height instead of stretching it into empty space. Dashboard and pickup keep the shared height, because their pairs (board beside alerts, code beside result) hold comparable amounts of content.
+
 ## Where the decisions come from
 
 The course treats interface design as one of the four design activities, beside
