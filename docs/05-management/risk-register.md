@@ -8,7 +8,7 @@
 |---|---|
 | Task | T-00-06 |
 | Owner | R1 |
-| Version | v1.0 |
+| Version | v1.2 |
 | Status | Active, reviewed at the end of every sprint |
 
 ## How to read this register
@@ -36,7 +36,7 @@ Likelihood and impact are rated high, medium or low. Status is one of
 | RSK-11 | Java and Spring Boot are new to part of the team, so Sprint 2 falls behind while people learn the framework | Medium | High | The backend skeleton is built in week 3 with a working health endpoint before any business code. The two backend members pair on the first module | R6 | By the end of week 3 the application does not start | Being monitored |
 | RSK-12 | The repository carries 38 branches, most of them merged or auto-generated, which makes the history hard to read | High | Low | The DevOps role removes the auto-generated branches and the merged working branches, leaving `develop` and `main`. A few branches with unmerged work are assessed first. The count was re-checked on 14 October: 38 remote branches, so the cleanup has not been done yet | R10 | A reviewer cannot tell which branches matter | Being monitored |
 | RSK-13 | Simulated survey data exists on an unmerged branch and would contradict the real questionnaire results if it were merged | Medium | High | The branch is not merged. The simulated files are left on the branch and the branch is closed. A note is added to the pull request explaining why | R3 | Any file named simulation, or any response count that does not match the real survey | Occurred, being handled |
-| RSK-14 | The requirements traceability matrix does not exist, so no requirement can be shown to have a test | High | Medium | The matrix is a Sprint 1 deliverable with a test-plan cross-check. Every must-have requirement must map to at least one test case. **Blocked on issue #76 (SRS chapter 3): the functional requirement identifiers do not exist yet, so no row can be written.** `test-plan.md` already cites FR-6, FR-17, FR-39, NFR-1, NFR-4, NFR-5, NFR-7, NFR-10 and NFR-12, none of which is defined in the SRS | R3 | A requirement is quoted in review with no test reference | Being monitored |
+| RSK-14 | The requirements traceability matrix does not exist, so no requirement can be shown to have a test | High | Medium | The matrix is a Sprint 1 deliverable with a test-plan cross-check. Every must-have requirement must map to at least one test case. **The blocker was cleared on 14 October: SRS chapter 3 defines 47 functional requirements (PR #114), so all three functional identifiers `test-plan.md` cites — FR-6, FR-17 and FR-39 — now resolve to real requirements instead of placeholders. The six cited NFR identifiers (NFR-1, NFR-4, NFR-5, NFR-7, NFR-10, NFR-12) are reserved for chapter 4, issue #77.** What remains is R8 allocating the test-case ids, writing the matrix rows, and creating the matrix document itself, which is still missing | R8 | A requirement is quoted in review with no test reference | Occurred, being handled |
 
 ## Closed risks
 
@@ -54,6 +54,7 @@ Likelihood and impact are rated high, medium or low. Status is one of
 | Sprint 0 | Week 1 | Initial register: 13 risks, 2 closed |
 | Sprint 1 | Week 2 | Two risks added (RSK-14, RSK-15); RSK-02, RSK-04, RSK-05 and RSK-13 moved to being handled |
 | Sprint 1, close-out | Week 3, 14 October | RSK-06 and RSK-15 closed with evidence. RSK-12 re-checked (38 branches, still open). RSK-14 recorded as blocked on issue #76. RSK-09 remains open: five of ten logbooks still carry `W01-W16` as the period, and two carry a single data row |
+| Sprint 1, close-out follow-up | Week 3, 14 October | RSK-14 unblocked by SRS chapter 3 (PR #114) and moved to being handled, with R8 as the owner of the remaining test mapping |
 
 ## Revision history
 
