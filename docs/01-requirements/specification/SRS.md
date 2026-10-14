@@ -15,7 +15,7 @@
 
 - [1. Introduction](#1-introduction)
 - [2. Overall Description](#2-overall-description)
-
+- [3. Functional Requirements](#3-functional-requirements)
 ---
 
 ## 1. Introduction
@@ -218,3 +218,100 @@ flowchart LR
 | OI-1 | Confirm the most common identification method for handover (pickup code, phone number, or both), using the prototype confirmation session (T-10-13); the questionnaires did not ask. |
 | OI-2 | Confirm whether owners also need to act as staff in small collection points. |
 | OI-3 | Confirm overdue-parcel rules (number of days, handling method) with real collection point owners. |
+
+## 3. Functional Requirements
+
+**Task:** T-10-06 · **Related issue:** #76 · **Status:** Draft for team review (R2 approval pending) · **Contribution:** R3
+
+This draft identifies **47 functional requirements** grouped by the four agreed login roles. Each row records a stable proposed requirement identifier, one verifiable statement, rationale, source evidence or change record, MoSCoW priority and a proposed verification method. Where survey evidence does not independently support a behavior, the supporting SRS scope, design artifact, test-plan reference or CR is named instead. No synthetic interview or simulated dataset is used as empirical evidence.
+
+### 3.0 Requirement conventions and numbering
+
+The planned 47 functional requirements are grouped as follows: Resident `FR-1–FR-10`, Staff `FR-11–FR-25`, Owner `FR-26–FR-39`, and System administrator `FR-40–FR-47`. **Route A (proposed)** preserves known meanings for `FR-6`, `FR-9`, `FR-10`, `FR-17`, `FR-18`, `FR-19`, `FR-20`, and `FR-39` because they are already referenced in the test plan or change log. This numbering allocation is proposed for R2 approval and is **not yet frozen**.
+
+Requirement statements use *shall* for testable required behavior and *should* for lower-priority proposals. The `Should not have — current release` label is used only for explicitly deferred delegated collection (CR-005). All other `proposed` priorities require R2 confirmation; the CR-003 and CR-004 priorities are approved in the change log.
+
+Only the role-based persona identifiers are used: **Resident persona**, **Staff persona**, **Owner persona**, **System administrator persona**. Parcel lifecycle values are `registered`, `shelved`, and `collected`. The approved exception types are `overdue`, `damaged`, `wrong_recipient`, `refused`, and `lost`; exception records have a separate `open → processing → resolved` lifecycle. See `docs/glossary.md`.
+
+**Scope boundaries:** No hardware control, courier login, online fee payment/settlement or genuine courier integration. Any storage suggestion must be optional, ignorable by staff and never applied automatically. The administrator can view logs from all collection points, whereas an owner is restricted to points they manage.
+
+### 3.1 Resident persona — 10 requirements
+
+| ID | Requirement statement | Rationale | Source | MoSCoW | Verification method |
+|---|---|---|---|---|---|
+| FR-1 | The system shall allow a registered resident to sign in through the web application. | Provides the resident with authenticated access to personal parcel information. | SRS IS-1; frontend-page-map `/login` | Must — proposed | Authentication test: resident can sign in with valid credentials. |
+| FR-2 | The system shall display only parcels associated with the authenticated resident in the resident parcel list. | Prevents residents from seeing other people's parcel records. | R5: parcel status 3/11; CR-013; SRS IS-6 | Must — proposed | Access-control test: no other resident’s parcel appears in list. |
+| FR-3 | The system shall allow a resident to open a detail view for one of their own parcels. | Supports self-service lookup of a single delivery. | R5: status 3/11; frontend-page-map `/my-parcels/:id` | Must — proposed | UI/API test: own parcel detail accessible; other resident’s denied. |
+| FR-4 | The system shall display the current approved lifecycle status for each parcel shown to its resident. | Provides visibility without introducing courier-only statuses. | R5: status 3/11; CR-006 | Must — proposed | Status test: displayed value matches persisted parcel state. |
+| FR-5 | The system shall display the assigned storage location of a shelved parcel to its resident. | Helps locate parcels; visibility was a recurring concern. | R3: location-related problems 5/11; R5: location 2/11 | Must — proposed | Integration test: displayed shelf matches assigned location. |
+| FR-6 | The system shall create an in-system arrival notification when a parcel is shelved. | Aligns with existing notification tests and primary resident need. | R3: late notification 4/11; R4: 9/11 within 1 hour; test-plan §6 | Must — proposed | Integration test: shelving triggers one in-system arrival notification. |
+| FR-7 | The system shall allow a resident to view their own in-system arrival notifications. | Makes notifications accessible without a telecom integration. | R5: notification 4/11; SRS IS-5; OS-6 | Must — proposed | UI test: signed-in resident can access only own notifications. |
+| FR-8 | The system shall allow a resident to retrieve the pickup code for one of their own parcels through an authenticated detail action. | Limits exposure of a sensitive pickup credential. | R5: pickup code 2/11; CR-013 (proposed) | Must — proposed; confirm CR-013 | Authorization test: pickup code returned only to owning resident. |
+| FR-9 | [Future work] The system should allow a resident to issue a time-limited delegated collection authorization. | Documents a considered feature without committing it to the current release. | R5: delegated code 0/11; CR-005 | Should not have — current release | Deferred: no current-release acceptance test (CR-005). |
+| FR-10 | [Future work] The system should allow a resident to revoke an unused delegated collection authorization. | Describes a potential safety mechanism for later implementation. | R5: delegated code 0/11; CR-005 | Should not have — current release | Deferred: no current-release acceptance test (CR-005). |
+
+### 3.2 Staff persona — 15 requirements
+
+| ID | Requirement statement | Rationale | Source | MoSCoW | Verification method |
+|---|---|---|---|---|---|
+| FR-11 | The system shall allow an authenticated staff member to view a list of parcels belonging to their assigned collection point. | Enables the operational parcel workspace without cross-point exposure. | SRS §2.3; frontend-page-map `/parcels`; A5 (3/4), directional | Must (provisional—R2 review) | Role-scope query test: staff list contains assigned-point parcels only. |
+| FR-12 | The system shall allow an authenticated staff member to register a single arriving parcel at their assigned collection point. | Supports basic manual intake without courier integration. | S2 (3/7 spreadsheets, 2/7 software); SRS IS-2 | Must (provisional—R2 review) | API integration test: staff can register one valid parcel. |
+| FR-13 | The system shall allow an authenticated staff member to view the handling history of a parcel belonging to their assigned collection point. | Provides a traceable record for operational disputes. | S4 (3/7 handover confirmation); CR-007; frontend-page-map `/parcels/:id` | Must (provisional—R2 review) | Parcel history integration test: events displayed for eligible parcel. |
+| FR-14 | The system shall allow staff to record a parcel's assigned storage location when shelving the parcel. | Supports accurate shelf placement. | SRS IS-3; CR-006; frontend-page-map `/locations` | Must (provisional—R2 review) | Shelving test: saved parcel location matches staff selection. |
+| FR-15 | The system shall display the current availability status of storage locations at a staff member's assigned collection point. | Allows manual selection of an appropriate location. | S5 (4/7 preferred manual/no suggestion); frontend-page-map `/locations` | Must (provisional—R2 review) | UI test: current location availability is displayed accurately. |
+| FR-16 | The system shall allow a staff member to select a storage location manually for a parcel. | Preserves staff control over shelving. | S5 (4/7 preferred manual/no suggestion); CR-004 | Must (provisional—R2 review) | Workflow test: manually chosen location persists after shelving. |
+| FR-17 | The system shall reject registration of a parcel when its waybill number already exists as a parcel record. | Prevents duplicate intake records. | `test-plan.md` §6 (FR-17); SRS IS-2 | Must (provisional—R2 review) | Duplicate-waybill API test: second registration rejected. |
+| FR-18 | The system shall allow an authenticated staff member to register a batch of up to 50 arriving parcels in one intake operation. | Batch intake is the most frequently selected staff bottleneck and the first Sprint 2 staff feature. | **S3: 4/7**; **CR-003** | **Must (approved via CR-003)** | Batch intake test: up to 50 valid parcels registered in one operation. |
+| FR-19 | The system should display an optional storage location suggestion for a parcel; the suggestion shall never be applied automatically. | Permits a deterministic aid without reducing staff control. | **S4: 0/7** chose it; **CR-004** | **Should (approved via CR-004)** | UI/integration test: suggestion shown without changing stored allocation. |
+| FR-20 | The system should allow the staff member to ignore a storage location suggestion and complete shelving using a manually selected location; the suggestion shall never be applied automatically. | Makes optional recommendations explicitly overridable. | **S5: 4/7** preferred manual/no suggestion; **CR-004** | **Should (approved via CR-004)** | Workflow test: ignoring suggestion allows manual assignment and no automatic change. |
+| FR-21 | The system shall allow staff to verify an active pickup code before a parcel handover. | Code verification is a top staff priority. | **S4: 3/7**; frontend-page-map `/pickup` | Must (provisional—R2 review) | Verification test: valid active code accepted; invalid/used code rejected. |
+| FR-22 | The system shall record a confirmed parcel handover with the staff operator identity obtained from the authenticated session. | Creates a reliable, attributable handover record. | **S4: 3/7**; **CR-007** | Must (provisional—R2 review) | Handover integration test: operator matches authenticated session. |
+| FR-23 | The system shall allow staff to register a parcel exception using exactly one of the approved types: `overdue`, `damaged`, `wrong_recipient`, `refused`, or `lost`. | Keeps exception recording deterministic and aligned with design. | **CR-010; CR-011**; SRS IS-8 | Should (provisional—R2 review) | Validation test: five supported exception types accepted; unsupported type rejected. |
+| FR-24 | The system shall allow staff to update an exception record only through the lifecycle `open` → `processing` → `resolved`. | Makes exception processing traceable and testable. | **CR-006; CR-010**; backend-state-machines.md | Should (provisional—R2 review) | State-transition test: only permitted exception transitions are accepted. |
+| FR-25 | The system shall record an audit entry whenever a staff member confirms a parcel handover. | Supports traceability of sensitive operations. | **CR-007** (operator from security context); S4 (3/7 handover record); SRS IS-9 | Must (provisional—R2 review) | Audit test: confirmed handover creates a traceable operation entry. |
+
+### 3.3 Owner persona — 14 requirements
+
+| ID | Requirement statement | Rationale | Source | MoSCoW | Verification method |
+|---|---|---|---|---|---|
+| FR-26 | The system shall allow an owner to view the daily parcel summary for collection points under that owner's management. | Owner needs operational visibility across their sites. | O1: 6/7 manage multiple points; O5: reports 4/7 | Must — proposed | Authorization test: owner dashboard covers managed points only. |
+| FR-27 | The system shall allow an owner to view parcel records from collection points under that owner's management. | Provides site-scoped oversight without platform-wide privilege. | O1: 6/7 multiple points; SRS §2.3 | Must — proposed | API test: owner cannot retrieve parcels from unowned point. |
+| FR-28 | The system shall allow an owner to filter parcel records by a collection point under that owner's management. | Supports multi-point operations. | O1: 6/7 multiple points; SRS IS-10 | Must — proposed | Filter test: selecting managed point limits parcel results. |
+| FR-29 | The system shall display an overdue parcel report for collection points under the owner's management. | The overdue report is the most requested owner report. | O3: 6/7 selected overdue reports | Must — proposed | Reporting test: only overdue parcels in owned points appear. |
+| FR-30 | The system should allow an owner to compare parcel volume between collection points under that owner's management. | Responds to cross-point reporting interest. | O4: 6/7 must-have or nice-to-have | Should — proposed | Cross-point report test: compares only managed points. |
+| FR-31 | The system shall allow an owner to view the number of parcels collected at a collection point under that owner's management. | Supports routine parcel throughput monitoring. | O3: collected report 1/7; SRS IS-10 | Should — proposed | Report test: collected count matches prepared dataset. |
+| FR-32 | The system shall allow an owner to list staff accounts assigned to the owner's collection points. | Supports personnel administration without global account access. | O2: staff volume by owner; O5: staff management 2/7 | Must — proposed | Account-list test: staff list restricted to owner-managed points. |
+| FR-33 | The system shall allow an owner to assign an existing staff account to one of the owner's collection points. | Supports authorized staffing for each managed point. | O2; SRS IS-11; role boundary SRS §2.3 | Should — proposed; confirm API | Authorization test: owner cannot assign staff outside managed points. |
+| FR-34 | The system shall restrict an owner's parcel query results to collection points managed by that owner. | Prevents leakage across independently owned sites. | O1: 6/7 multi-point; A5: 3/4; SRS §2.3 | Must — proposed | Negative access-control test: unowned point query denied. |
+| FR-35 | The system shall allow an owner to view operation logs for collection points under that owner's management only. | Keeps owner audit access distinct from administrator access across all points. | O5: audit log 1/7; O6: 4/7 grouped by parcel/location; CR-008 | Must — proposed | Audit access test: other owners’ point logs are excluded. |
+| FR-36 | The system shall allow an owner to filter accessible operation log entries by parcel identifier. | Supports parcel-specific dispute tracing. | O6: 4/7 prefer grouping by parcel or location | Should — proposed | Audit filter test: parcel ID returns matching authorized entries. |
+| FR-37 | The system shall allow an owner to filter accessible operation log entries by storage location identifier. | Supports shelf-location-based investigation. | O6: 4/7 prefer grouping by parcel or location | Should — proposed | Audit filter test: location ID returns matching authorized entries. |
+| FR-38 | The system shall allow an owner to view the retention period applied to a collection point under that owner's management. | Allows interpretation of overdue calculations without owner-wide configuration authority. | O3: overdue 6/7; A6: retention setting 2/4 | Should — proposed | Read-only UI test: owner sees configured retention value. |
+| FR-39 | The system shall calculate an overdue fee for an eligible parcel using the configured retention period and fee rule without taking payment. | Preserves the already referenced fee-engine requirement and the online-payment exclusion. | test-plan §6 FR-39; SRS OS-3; team Week 2 task brief | Should — proposed; confirm business rule | Fee-calculation test: compare 20 agreed boundary and rounding cases; no payment is initiated. |
+
+### 3.4 System administrator persona — 8 requirements
+
+| ID | Requirement statement | Rationale | Source | MoSCoW | Verification method |
+|---|---|---|---|---|---|
+| FR-40 | The system shall allow a system administrator to list user accounts across all collection points. | Supports platform-wide account management. | **A3: 2/4** chose user management; SRS IS-12 | Must (provisional—R2 review) | Admin account-list test: records across two points are visible. |
+| FR-41 | The system shall allow a system administrator to approve a pending user registration. | Reflects the preferred account-creation approach, subject to design confirmation. | **A2: 3/4** chose self-registration with approval | Should (provisional—R2 review) | Registration approval workflow test: pending account can be approved. |
+| FR-42 | The system shall allow a system administrator to disable a user account. | Enables platform-wide access administration. | **A3: 2/4** chose user management; SRS IS-12 | Must (provisional—R2 review) | Account-management test: disabled user loses access. |
+| FR-43 | The system shall allow a system administrator to create a collection point record. | Supports centralized multi-point administration. | **A3: 2/4** chose collection point management; SRS IS-12 | Must (provisional—R2 review) | Point-management test: new point is persisted and retrievable. |
+| FR-44 | The system shall allow a system administrator to update the basic configuration of a collection point. | Enables administrative maintenance without giving this power to owners. | **A6:** retention period 2/4; notification rules 1/4; SRS IS-12 | Should (provisional—R2 review) | Configuration update test: saved admin settings are retrieved unchanged. |
+| FR-45 | The system shall restrict an authenticated user to operations permitted by that user's assigned role. | Protects role boundaries throughout the platform. | **A4: 2/4** RBAC; SRS IS-1; CR-009 | Must (provisional—R2 review) | Role matrix test: forbidden actions are rejected for all four roles. |
+| FR-46 | The system shall associate each collection-point-scoped data record with a collection point identifier. | Supports tenant scoping in a shared database. | **A5: 3/4** shared database with site ID; ADR-002 | Must (provisional—R2 review) | Data-integrity test: scoped records store valid collection point ID. |
+| FR-47 | The system shall allow a system administrator to view operation log records across **all** collection points. | Implements the platform-wide audit use case, distinct from an Owner persona's logs for **their own** collection points only. | **CR-008** (UC_AdminAudit); SRS §2.3; frontend-page-map `/audit` | Must (provisional—R2 review) | All-point audit test: administrator sees logs across two or more points. |
+
+
+### 3.5 Numbering and approval handoff
+
+**Selected route:** Route A — retain every FR identifier already cited by the repository and align its new definition to that citation. Identifiers preserved: `FR-6`, `FR-9`, `FR-10`, `FR-17`, `FR-18`, `FR-19`, `FR-20`, `FR-39`. The remaining role-grouped IDs are proposed and must be confirmed by R2 before the requirement baseline is frozen. The referenced NFR IDs (`NFR-1`, `NFR-4`, `NFR-5`, `NFR-6`, `NFR-7`, `NFR-10`, `NFR-12`) are reserved for Chapter 4 and are not silently renumbered here.
+
+**Checks before approval:** R2 to confirm MoSCoW and proposed ID meanings; R6 to confirm endpoint/data-model feasibility (especially proposed CR-013 resident pickup-code access); R8 to map each Must-have to a concrete test case and confirm FR-39 fee calculation rules; R4 to confirm `FR-47` matches `UC_AdminAudit`, while Owner audit remains limited to managed points via `FR-35`.
+
+**No current implementation promise for deferred items:** `FR-9` and `FR-10` remain future work under `CR-005`. Staff location suggestions `FR-19` and `FR-20` are optional only, may be ignored, and are **never automatically applied** (`CR-004`). Exception types follow the five approved glossary values (`CR-010` / `CR-011`); parcel lifecycle is `registered`, `shelved`, `collected` (`CR-006`). The system can calculate overdue fees (`FR-39`) but does not take online payments (`SRS OS-3`).
+
+### 3.6 Verification approach
+
+Verification entries indicate **proposed tests**, not tests that have already been created or executed. R8 owns final test-case ID allocation and execution status. Time and coverage targets are defined separately in Chapter 4 and the existing test plan; this chapter does not claim those tests have passed.
+
