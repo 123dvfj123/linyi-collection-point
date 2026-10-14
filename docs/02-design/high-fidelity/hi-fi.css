@@ -1,0 +1,189 @@
+/*
+ * High fidelity pages: dashboard, intake and pickup (T-20-12).
+ *
+ * Every value below is a design token. Nothing here invents a colour, a size or
+ * a spacing step: the rules are docs/02-design/design-system.md (component 10,
+ * table 11, form 12, responsive 13, accessibility 14) and the tokens are
+ * frontend/src/styles/tokens.css, linked rather than copied so the two cannot
+ * drift.
+ *
+ * Two deliberate omissions, recorded for the design system owner:
+ *   1. No shadow. design-system.md 7.3 names --shadow-resting and
+ *      --shadow-floating, but tokens.css does not define them, so cards use the
+ *      border token instead of a value invented here.
+ *   2. The primary button label uses --color-surface for contrast on the brand
+ *      fill, because the token set has no inverse or on-primary text token.
+ */
+
+@import url("../../../frontend/src/styles/tokens.css");
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--color-bg); color: var(--color-text); font: var(--text-body); }
+
+/* AppLayout (design system 10): sidebar 220 px, persistent from 641 px up */
+.shell { display: flex; min-height: 100vh; }
+.sidebar { flex: 0 0 220px; width: 220px; background: var(--color-surface); border-right: 1px solid var(--color-border); padding: var(--space-6) var(--space-4); }
+.brand { font: var(--text-title); margin: 0 0 var(--space-6); }
+.nav { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-1); }
+.nav a { display: flex; align-items: center; min-height: 44px; padding: 0 var(--space-3); border-radius: var(--radius-sm); color: var(--color-text); text-decoration: none; }
+.nav a:hover { background: var(--color-surface-soft); }
+.nav a[aria-current="page"] { background: var(--color-primary-soft); color: var(--color-primary-strong); font-weight: 600; }
+.nav a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.main { flex: 1 1 auto; min-width: 0; }
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding: var(--space-2) var(--space-6); background: var(--color-surface); border-bottom: 1px solid var(--color-border); }
+.who { display: flex; align-items: center; gap: var(--space-3); color: var(--color-text-muted); font: var(--text-body-sm); }
+.content { padding: var(--space-8) var(--space-6); }
+
+/* PageHeader (design system 10) */
+.page-header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-6); }
+.page-header h1 { font: var(--text-title-lg); margin: 0 0 var(--space-1); }
+.page-header p { margin: 0; color: var(--color-text-muted); }
+.page-actions { display: flex; gap: var(--space-2); }
+
+/* Buttons: 44 px target, visible focus, rest-hover-focus-active-disabled (14) */
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: var(--color-surface); color: var(--color-text); font: var(--text-body); cursor: pointer; }
+.btn:hover { background: var(--color-surface-soft); }
+.btn:active { background: var(--color-border); }
+.btn:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.btn--primary { background: var(--color-primary); border-color: var(--color-primary); color: var(--color-on-primary); }
+.btn--primary:hover { background: var(--color-primary-strong); border-color: var(--color-primary-strong); }
+.btn--link { border-color: transparent; background: transparent; color: var(--color-primary); text-decoration: underline; padding: 0 var(--space-2); }
+.btn:disabled { opacity: .55; cursor: not-allowed; }
+
+/* Card / panel */
+.card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); box-shadow: var(--shadow-resting); padding: var(--space-4); }
+.card > h2 { font: var(--text-title); margin: 0 0 var(--space-3); }
+.muted { color: var(--color-text-muted); }
+.caption { font: var(--text-caption); }
+
+/* MetricCard (design system 10): value display, label caption */
+.metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-4); margin-bottom: var(--space-6); }
+.metric .value { font: var(--text-display); }
+.metric .label { font: var(--text-caption); color: var(--color-text-muted); }
+
+/* StatusTag (design system 10 + 5.3): pill, caption, label always present */
+.tag { display: inline-flex; align-items: center; padding: 2px var(--space-2); border: 1px solid currentColor; border-radius: var(--radius-pill); font: var(--text-caption); }
+.tag--info { color: var(--color-info); }
+.tag--success { color: var(--color-success); }
+.tag--warning { color: var(--color-warning); }
+.tag--danger { color: var(--color-danger); }
+.tag--neutral { color: var(--color-text-muted); }
+
+/* Table (design system 11) */
+.table-wrap { border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; background: var(--color-surface); }
+table { width: 100%; border-collapse: collapse; }
+thead th { position: sticky; top: 0; background: var(--color-surface-soft); color: var(--color-text-muted); font: var(--text-caption); text-align: left; padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--color-border); }
+tbody td { height: 40px; padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--color-border); font: var(--text-body-sm); }
+tbody tr:last-child td { border-bottom: 0; }
+tbody tr:hover { background: var(--color-surface-soft); }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+.actions-cell { text-align: right; white-space: nowrap; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; }
+
+/* LocationGrid (design system 10) */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: var(--space-2); }
+.cell { border: 1px solid var(--color-border); border-left-width: 4px; border-radius: var(--radius-sm); padding: var(--space-2); background: var(--color-surface); font: var(--text-caption); }
+.cell b { display: block; font-weight: 600; }
+.cell small { color: var(--color-text-muted); }
+.cell--success { border-left-color: var(--color-success); }
+.cell--warning { border-left-color: var(--color-warning); }
+.cell--info { border-left-color: var(--color-info); }
+.cell--neutral { border-left-color: var(--color-text-muted); }
+.cell[aria-selected="true"] { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+
+/* Form (design system 12) */
+.field { display: grid; grid-template-columns: 150px minmax(0, 1fr); align-items: center; gap: var(--space-3); margin-bottom: var(--space-3); }
+.field > label { font: var(--text-body-sm); }
+.field .hint { margin-top: var(--space-1); font: var(--text-caption); color: var(--color-text-muted); }
+.req { color: var(--color-danger); }
+input[type="text"], textarea, select { width: 100%; min-height: 44px; padding: var(--space-2) var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: var(--color-surface); color: var(--color-text); font: var(--text-body); }
+input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.seg { display: inline-flex; border: 1px solid var(--color-border); border-radius: var(--radius-sm); overflow: hidden; }
+.seg button { min-height: 44px; padding: 0 var(--space-4); border: 0; background: var(--color-surface); color: var(--color-text); font: var(--text-body); cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--color-border); }
+.seg button[aria-pressed="true"] { background: var(--color-primary-soft); color: var(--color-primary-strong); font-weight: 600; }
+.seg button:focus-visible { outline: 2px solid var(--color-focus); outline-offset: -2px; }
+.modes { display: inline-flex; gap: 0; margin-bottom: var(--space-4); }
+
+/* Layout helpers */
+.split { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: var(--space-6); align-items: start; }
+.stack { display: grid; gap: var(--space-4); }
+.list { margin: 0; padding-left: var(--space-4); color: var(--color-text); font: var(--text-body-sm); }
+.list li + li { margin-top: var(--space-1); }
+
+/* Pickup: the counter screen, everything above the fold */
+.code-input { height: 72px; text-align: center; letter-spacing: .35em; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 32px; }
+.result-head { font: var(--text-title); }
+.kv { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: var(--space-2) var(--space-3); font: var(--text-body-sm); }
+.kv dt { color: var(--color-text-muted); }
+.kv dd { margin: 0; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+/* Responsive (design system 13): the phone is the design target */
+@media (max-width: 640px) {
+  .shell { flex-direction: column; }
+  .sidebar { flex: none; width: auto; border-right: 0; border-bottom: 1px solid var(--color-border); padding: var(--space-3) var(--space-4); }
+  .brand { margin-bottom: var(--space-3); }
+  .nav { grid-auto-flow: column; grid-auto-columns: max-content; overflow-x: auto; }
+  .nav a { padding: 0 var(--space-2); }
+  .topbar { padding: var(--space-2) var(--space-4); }
+  .content { padding: var(--space-4); }
+  .page-header { flex-direction: column; }
+  .metrics { grid-template-columns: 1fr 1fr; }
+  .split { grid-template-columns: 1fr; }
+  .field, .kv { grid-template-columns: 1fr; }
+  tbody td { height: 44px; }
+}
+/* Utility used by the three pages. */
+.section { margin-top: var(--space-6); }
+.section > h2 { font: var(--text-title); margin: 0 0 var(--space-3); }
+
+
+/* Table becomes a card list below 640 px (design system 11). */
+@media (max-width: 640px) {
+  thead { display: none; }
+  .table-wrap { border: 0; background: transparent; }
+  tbody tr { display: block; margin-bottom: var(--space-2); padding: var(--space-2) var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); }
+  tbody td { display: grid; grid-template-columns: 45% minmax(0, 1fr); gap: var(--space-2); height: auto; border: 0; padding: var(--space-1) 0; }
+  tbody td::before { content: attr(data-label); color: var(--color-text-muted); font: var(--text-caption); }
+  .actions-cell { text-align: left; }
+}
+
+/* Mobile overflow fixes: nothing may scroll sideways at 375 px (design system 13). */
+@media (max-width: 640px) {
+  html, body { max-width: 100%; overflow-x: hidden; }
+  .sidebar { max-width: 100vw; overflow: hidden; }
+  .nav { max-width: 100%; overflow-x: auto; }
+  .page-actions { flex-wrap: wrap; }
+  .btn { white-space: normal; max-width: 100%; }
+}
+
+/* Mobile: nothing may force the page wider than the viewport (design system 13). */
+@media (max-width: 640px) {
+  .shell, .main, .content, .card, .split > *, .topbar > *, .who > * { min-width: 0; }
+  .topbar, .who { flex-wrap: wrap; }
+  h1, h2, p, dt, dd, li, label, .value { overflow-wrap: anywhere; }
+}
+
+/* Grid tracks must be allowed to shrink: minmax(0, 1fr), not 1fr, whose auto
+   minimum is the min-content of the track (the 32 px code field is the widest). */
+@media (max-width: 640px) {
+  .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .split { grid-template-columns: minmax(0, 1fr); }
+  .field, .kv { grid-template-columns: minmax(0, 1fr); }
+  .code-input { min-width: 0; max-width: 100%; font-size: 28px; }
+}
+
+
+/* Mobile layout: plain block flow, so no grid or table min-content can widen the
+   page. Same visual result, none of the track sizing traps. */
+@media (max-width: 640px) {
+  body { width: 100%; }
+  .shell, .main, .content, .split, .card, .table-wrap { width: 100%; max-width: 100%; }
+  .split, .metrics { display: block; }
+  .metrics .card { margin-bottom: var(--space-3); }
+  .page-actions { display: block; }
+  .page-actions .btn { width: 100%; margin-bottom: var(--space-2); }
+}

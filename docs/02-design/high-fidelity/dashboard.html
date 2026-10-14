@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard - Community Parcel Collection Point</title>
+<link rel="stylesheet" href="hi-fi.css">
+</head>
+<body><div class="shell">
+  <nav class="sidebar" aria-label="Main">
+    <p class="brand">Collection Point</p>
+    <ul class="nav">
+      <li><a href="dashboard.html" aria-current="page">Dashboard</a></li>
+      <li><a href="#">My parcels</a></li>
+      <li><a href="#">Parcels</a></li>
+      <li><a href="#">Locations</a></li>
+      <li><a href="pickup.html">Pickup</a></li>
+      <li><a href="#">Exceptions</a></li>
+      <li><a href="#">Reports</a></li>
+      <li><a href="#">Users</a></li>
+      <li><a href="#">Settings</a></li>
+      <li><a href="#">Audit</a></li>
+    </ul>
+  </nav>
+  <div class="main">
+    <header class="topbar">
+      <span class="caption muted">Block A collection point</span>
+      <div class="who"><span>staff1</span><span class="tag tag--neutral">Staff</span><a class="btn btn--link" href="#">Sign out</a></div>
+    </header>
+    <main class="content">      <div class="page-header">
+        <div>
+          <h1>Dashboard</h1>
+          <p>Today at this collection point. Batch intake is the first staff feature built.</p>
+        </div>
+        <div class="page-actions"><a class="btn btn--primary" href="intake.html">Register a parcel</a></div>
+      </div>
+
+      <section class="metrics" aria-label="Today">
+        <div class="card metric"><div class="value">12</div><div class="label">Received today</div></div>
+        <div class="card metric"><div class="value">34</div><div class="label">Waiting for pickup</div></div>
+        <div class="card metric"><div class="value">9</div><div class="label">Handovers today</div></div>
+        <div class="card metric"><div class="value">3</div><div class="label">Open exceptions</div></div>
+      </section>
+
+      <div class="split">
+        <section class="card">
+          <h2>Storage locations</h2>
+          <p class="caption muted">Zone A has no free location for a large parcel.</p>
+          <div class="grid">
+            <div class="cell cell--info"><b>A-01-1</b><small>Occupied</small></div>
+            <div class="cell cell--warning"><b>A-01-2</b><small>Reserved</small></div>
+            <div class="cell cell--info"><b>A-01-3</b><small>Occupied</small></div>
+            <div class="cell cell--success" aria-selected="true"><b>A-02-2</b><small>Available</small></div>
+            <div class="cell cell--info"><b>B-01-1</b><small>Occupied</small></div>
+            <div class="cell cell--neutral"><b>B-01-3</b><small>Disabled</small></div>
+          </div>
+        </section>
+        <section class="card">
+          <h2>Alerts</h2>
+          <ul class="list">
+            <li><span class="tag tag--warning">Shelf full</span> Zone A, large items</li>
+            <li><span class="tag tag--warning">Due today</span> 2 parcels reach the retention period</li>
+            <li><span class="tag tag--danger">Open</span> 3 exception tickets</li>
+          </ul>
+        </section>
+      </div>
+
+      <section class="section">
+        <h2>Recent parcels</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Waybill</th><th>Status</th><th>Location</th><th class="num">Held</th><th class="actions-cell">Action</th></tr></thead>
+            <tbody><tr><td data-label="Waybill" data-label="Waybill" class="mono">SF1234567890</td><td data-label="Status" data-label="Waybill"><span class="tag tag--success">Shelved</span></td><td data-label="Location" data-label="Waybill" class="mono">A-03-2</td><td data-label="Held" data-label="Waybill" class="num">1 day</td><td data-label="Action" data-label="Waybill" class="actions-cell"><button class="btn">Open</button></td></tr><tr><td data-label="Waybill" data-label="Waybill" class="mono">YT9876543210</td><td data-label="Status" data-label="Waybill"><span class="tag tag--info">Registered</span></td><td data-label="Location" data-label="Waybill" class="muted">not shelved</td><td data-label="Held" data-label="Waybill" class="num">0 days</td><td data-label="Action" data-label="Waybill" class="actions-cell"><button class="btn">Shelve</button></td></tr><tr><td data-label="Waybill" data-label="Waybill" class="mono">JD5566778899</td><td data-label="Status" data-label="Waybill"><span class="tag tag--success">Shelved</span></td><td data-label="Location" data-label="Waybill" class="mono">A-01-3</td><td data-label="Held" data-label="Waybill" class="num">4 days</td><td data-label="Action" data-label="Waybill" class="actions-cell"><button class="btn">Open</button></td></tr><tr><td data-label="Waybill" data-label="Waybill" class="mono">SF1234567999</td><td data-label="Status" data-label="Waybill"><span class="tag tag--neutral">Collected</span></td><td data-label="Location" data-label="Waybill" class="muted">released</td><td data-label="Held" data-label="Waybill" class="num">3 days</td><td data-label="Action" data-label="Waybill" class="actions-cell"><button class="btn">View</button></td></tr></tbody>
+          </table>
+        </div>
+      </section>    </main>
+  </div>
+</div>
