@@ -38,6 +38,7 @@
   --color-danger: var(--red-600);
   --color-info: var(--blue-600);
   --color-focus: var(--teal-600);
+  --color-on-primary: var(--white);
 
   /* Typography (design system 6). */
   --font-family-base: Inter, "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
@@ -66,6 +67,11 @@
   --duration-base: 200ms;
   --duration-slow: 300ms;
   --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+
+  /* Elevation (design system 7.3). Primitives, not aliases: a shadow needs an
+     alpha channel and no colour token carries one. */
+  --shadow-resting: 0 1px 2px rgb(21 49 47 / 6%), 0 1px 3px rgb(21 49 47 / 8%);
+  --shadow-floating: 0 8px 24px rgb(21 49 47 / 14%);
 }
 
 /*

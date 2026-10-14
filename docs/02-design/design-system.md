@@ -105,6 +105,7 @@ Rules:
 | `--color-danger` | `--red-600` | danger, destructive action |
 | `--color-info` | `--blue-600` | information feedback |
 | `--color-focus` | `--teal-600` | focus outline |
+| `--color-on-primary` | `--white` | text on the brand fill |
 
 ### 5.3 Status semantics
 
@@ -208,6 +209,11 @@ label, so the interface still reads in greyscale.
 |---|---|
 | `--shadow-resting` | cards at rest |
 | `--shadow-floating` | dropdowns, drawers, dialogs |
+
+Both shadow tokens are primitives in `tokens.css`, because a shadow needs an alpha
+channel that no colour token carries: `--shadow-resting` is
+`0 1px 2px rgb(21 49 47 / 6%), 0 1px 3px rgb(21 49 47 / 8%)` and `--shadow-floating` is
+`0 8px 24px rgb(21 49 47 / 14%)`.
 
 Elevation pairs with a z-index layer; a floating element must sit above the
 content it covers, and the two must not be chosen independently.
