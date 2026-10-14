@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pickup verification - Community Parcel Collection Point</title>
+<link rel="stylesheet" href="hi-fi.css">
+</head>
+<body><div class="shell">
+  <nav class="sidebar" aria-label="Main">
+    <p class="brand">Collection Point</p>
+    <ul class="nav">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="#">My parcels</a></li>
+      <li><a href="#">Parcels</a></li>
+      <li><a href="#">Locations</a></li>
+      <li><a href="pickup.html" aria-current="page">Pickup</a></li>
+      <li><a href="#">Exceptions</a></li>
+      <li><a href="#">Reports</a></li>
+      <li><a href="#">Users</a></li>
+      <li><a href="#">Settings</a></li>
+      <li><a href="#">Audit</a></li>
+    </ul>
+  </nav>
+  <div class="main">
+    <header class="topbar">
+      <span class="caption muted">Block A collection point</span>
+      <div class="who"><span>staff1</span><span class="tag tag--neutral">Staff</span><a class="btn btn--link" href="#">Sign out</a></div>
+    </header>
+    <main class="content">      <div class="page-header">
+        <div>
+          <h1>Verify a pickup code</h1>
+          <p>The counter screen. Three steps, three minutes or less.</p>
+        </div>
+        <div class="page-actions"></div>
+      </div>
+
+      <div class="split">
+        <section class="card">
+          <h2>Code</h2>
+          <input class="code-input" type="text" value="4821" aria-label="Pickup code" autocomplete="off">
+          <div class="page-actions" style="margin-top: var(--space-4)">
+            <button class="btn btn--primary">Verify</button>
+            <button class="btn btn--link">Resident lost the code? Use identity verification</button>
+          </div>
+          <p class="caption muted" style="margin-top: var(--space-3)">An invalid code says only that it is not recognised; it never hints which digit is wrong. The identity fallback needs a contract decision (CD-2) before it can be built.</p>
+        </section>
+
+        <section class="card">
+          <h2>Result</h2>
+          <dl class="kv">
+            <dt>Waybill</dt><dd class="mono">SF1234567890</dd>
+            <dt>Status</dt><dd><span class="tag tag--success">Shelved</span></dd>
+            <dt>Location</dt><dd class="mono">Zone A &middot; A-03-2</dd>
+            <dt>Recipient</dt><dd>Resident of this point &middot; phone ending 8888</dd>
+          </dl>
+          <div class="page-actions" style="margin-top: var(--space-4)">
+            <button class="btn btn--primary">Confirm handover</button>
+          </div>
+          <p class="caption muted" style="margin-top: var(--space-3)">Irreversible, so it opens a confirmation dialog. No person is named on any screen (CR-009).</p>
+        </section>
+      </div>
+
+      <section class="section">
+        <h2>Recent handovers</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Code</th><th class="num">Time</th><th>Operator</th><th class="actions-cell">Result</th></tr></thead>
+            <tbody><tr><td data-label="Code" data-label="Code" class="mono">4821</td><td data-label="Time" data-label="Code" class="num">19:14</td><td data-label="Operator" data-label="Code">staff1</td><td data-label="Result" data-label="Code" class="actions-cell"><span class="tag tag--neutral">Collected</span></td></tr><tr><td data-label="Code" data-label="Code" class="mono">7154</td><td data-label="Time" data-label="Code" class="num">18:52</td><td data-label="Operator" data-label="Code">staff1</td><td data-label="Result" data-label="Code" class="actions-cell"><span class="tag tag--neutral">Collected</span></td></tr><tr><td data-label="Code" data-label="Code" class="mono">3390</td><td data-label="Time" data-label="Code" class="num">18:40</td><td data-label="Operator" data-label="Code">staff2</td><td data-label="Result" data-label="Code" class="actions-cell"><span class="tag tag--warning">Returned</span></td></tr></tbody>
+          </table>
+        </div>
+      </section>    </main>
+  </div>
+</div>

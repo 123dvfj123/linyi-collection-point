@@ -56,8 +56,8 @@ tokens are grouped. We deliver them as CSS custom properties, in three tiers:
 
 | Tier | Meaning | Example |
 |---|---|---|
-| Primitive | a raw value, no meaning attached | `--teal-600: #0f766e` |
-| Semantic | a role, aliased to a primitive | `--color-primary: var(--teal-600)` |
+| Primitive | a raw value, no meaning attached | `--slate-500: #778899` |
+| Semantic | a role, aliased to a primitive | `--color-focus: var(--slate-500)` |
 | Component | a component-scoped alias, only when a component must differ | `--table-header-bg: var(--color-surface-soft)` |
 
 Rules:
@@ -73,38 +73,51 @@ Rules:
 
 | Token | Value | Role |
 |---|---|---|
-| `--teal-50` | `#dff5f0` | brand tint |
-| `--teal-600` | `#0f766e` | brand |
-| `--teal-700` | `#0b5e59` | brand strong |
-| `--slate-50` | `#f5f8f8` | page background |
-| `--slate-100` | `#e8f2f0` | soft surface |
-| `--slate-200` | `#d9e5e2` | border |
-| `--slate-500` | `#6a7c7a` | muted text |
-| `--slate-700` | `#15312f` | body text |
+| `--ink-900` | `#21262b` | shell, body text, primary action |
+| `--grey-400` | `#a9a9a9` | page base |
+| `--paper-100` | `#f1f1f1` | surfaces, text on the shell |
+| `--slate-500` | `#778899` | the single accent: focus, soft fill, current navigation item |
 | `--green-600` | `#16825d` | success |
 | `--amber-600` | `#a6610b` | warning |
 | `--red-600` | `#b42318` | danger |
 | `--blue-600` | `#246da8` | information |
-| `--white` | `#ffffff` | surface |
+
+One accent, four status roles and neutrals. The interface is deliberately
+greyscale, so colour carries status only and never decoration.
 
 ### 5.2 Semantic
 
-| Token | Alias | Used for |
+| Token | Value | Used for |
 |---|---|---|
-| `--color-bg` | `--slate-50` | page background |
-| `--color-surface` | `--white` | cards, tables, dialogs |
-| `--color-surface-soft` | `--slate-100` | table header, hover rows |
-| `--color-border` | `--slate-200` | dividers, inputs |
-| `--color-text` | `--slate-700` | body text |
-| `--color-text-muted` | `--slate-500` | secondary text, meta |
-| `--color-primary` | `--teal-600` | primary action, active nav |
-| `--color-primary-strong` | `--teal-700` | pressed primary |
-| `--color-primary-soft` | `--teal-50` | selected row, subtle fill |
+| `--color-bg` | `--grey-400` | page background |
+| `--color-bg-gradient` | derived | page background, grey to a deeper grey |
+| `--color-surface` | `--paper-100` | cards, tables, dialogs |
+| `--color-surface-soft` | derived | table header, hover rows |
+| `--color-border` | derived | dividers, inputs |
+| `--color-text` | `--ink-900` | body text |
+| `--color-text-muted` | derived | secondary text, meta |
+| `--color-primary` | `--ink-900` | primary action |
+| `--color-primary-strong` | derived | pressed primary |
+| `--color-primary-soft` | derived | selected row, subtle fill |
 | `--color-success` | `--green-600` | success feedback |
 | `--color-warning` | `--amber-600` | warning feedback |
 | `--color-danger` | `--red-600` | danger, destructive action |
 | `--color-info` | `--blue-600` | information feedback |
-| `--color-focus` | `--teal-600` | focus outline |
+| `--color-focus` | `--slate-500` | focus outline |
+| `--color-on-primary` | `--paper-100` | text on the primary fill |
+| `--color-sidebar` | `--ink-900` | shell surface |
+| `--color-sidebar-gradient` | derived | shell surface, a slight sheen |
+| `--color-sidebar-text` | `--paper-100` | text on the shell |
+| `--color-sidebar-active-bg` | derived | the current navigation item |
+| `--color-surface-glass` | derived | frosted panel over the gradient |
+| `--color-surface-glass-gradient` | derived | the same panel, thicker at the top |
+| `--color-surface-alt` | `--slate-500` | a slate panel, reserved and currently unused |
+| `--color-accent` | `--slate-500` | the accent: focus, tints, indicators, selected states |
+| `--color-accent-strong` | derived | accent text that must reach 4.5:1, such as a link |
+| `--color-field` | derived | form controls, dimmer than a surface |
+
+`derived` means the value is a `color-mix` of two primitives, so it still names no
+raw value of its own.
 
 ### 5.3 Status semantics
 
@@ -162,6 +175,15 @@ colour.
 Colour is never the only carrier of meaning: every status also shows its text
 label, so the interface still reads in greyscale.
 
+### 5.5 Frosted surfaces
+
+Panels over the page gradient use `--color-surface-glass-gradient`: `--paper-100`
+mixed with transparency rather than a flat surface, so a panel reads as glass and the
+gradient shows through it. The blur is one token, `--blur-glass`, not a value written
+per component. A static blur may stay under `prefers-reduced-motion`; only a blur that
+moves must be dropped. Body text on every glass surface still meets the 4.5:1 rule of
+section 5.4, because the surface resolves to near-white at either end of the gradient.
+
 ## 6. Typography
 
 | Token | Size / line-height / weight | Used for |
@@ -200,6 +222,7 @@ label, so the interface still reads in greyscale.
 | `--radius-sm` | 4 | inputs, buttons |
 | `--radius-md` | 8 | cards, table container |
 | `--radius-lg` | 12 | panels, dialogs |
+| `--radius-xl` | 20 | glass panels |
 | `--radius-pill` | 999 | status pills, chips |
 
 ### 7.3 Elevation
@@ -208,6 +231,11 @@ label, so the interface still reads in greyscale.
 |---|---|
 | `--shadow-resting` | cards at rest |
 | `--shadow-floating` | dropdowns, drawers, dialogs |
+
+Both shadow tokens are primitives in `tokens.css`, because a shadow needs an alpha
+channel that no colour token carries: `--shadow-resting` is
+`0 1px 2px rgb(33 38 43 / 9%), 0 10px 24px rgb(33 38 43 / 16%)` and `--shadow-floating` is
+`0 18px 44px rgb(33 38 43 / 24%)`.
 
 Elevation pairs with a z-index layer; a floating element must sit above the
 content it covers, and the two must not be chosen independently.
