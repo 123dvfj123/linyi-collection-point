@@ -8,7 +8,7 @@
 |---|---|
 | Task | T-00-06 |
 | Owner | R1, with process sections maintained by R2 |
-| Version | v1.1 |
+| Version | v1.2 |
 | Status | Active |
 
 ## 1. What this log records
