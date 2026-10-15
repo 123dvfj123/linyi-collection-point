@@ -1,14 +1,12 @@
 # ADR-004: Location Recommendation
 
-- Status: Accepted
-- Accepted: 2026-10-12
-- Date: 2026-10-10
-- Amended: 2026-10-15 (T-20-15). Steps 4, 5 and 7 were added and step 3 was
-  restated when R7's rule table, merged in PR #122, was accepted for
-  implementation. The normative rule table is
-  `docs/02-design/location-recommender-rules.md` section 4; the ruling that
-  accepted it is `docs/02-design/location-recommender.md` section 5.
-- Owners: R6 Backend Lead, R7 Backend Developer
+| Version | v1.1 |
+|---|---|
+| Status | Accepted |
+| Accepted | 2026-10-12 |
+| Date | 2026-10-10 |
+| Amended | 2026-10-15 (T-20-15): steps 4, 5 and 7 were added and step 3 was restated when R7's rule table, merged in PR #122, was accepted for implementation. The normative rule table is `docs/02-design/location-recommender-rules.md` section 4, and the ruling that accepted it is `docs/02-design/location-recommender.md` section 5 |
+| Owners | R6 Backend Lead, R7 Backend Developer |
 
 ## Context
 
@@ -62,7 +60,7 @@ Rejected. "No location available" is a normal business state, not a server error
 - The frontend does not need to know business rules.
 - The endpoint remains stable even if the ordering rules change later.
 - Because a step can order the set but never widen it, the amendment in the
-  Amended line above keeps every original guarantee: the rules stay deterministic,
+  Amended row above keeps every original guarantee: the rules stay deterministic,
   weighted scoring is still excluded (CRJ-001), and the suggestion is still
   advisory and never applied automatically (CR-004).
 

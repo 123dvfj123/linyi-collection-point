@@ -88,7 +88,7 @@ than being quietly dropped.
 
 | # | Decision |
 |---|---|
-| D21 | The architecture, database, API and UI baselines are accepted as the review baseline for Sprint 2. The ten checks in section 3 passed and are what the review verified |
+| D21 | The architecture, database, API and UI baselines are accepted as the review baseline for Sprint 2. The eleven checks in section 3 passed and are what the review verified |
 | D22 | The resident read path is part of Sprint 2 and the contract carries it, per CR-013. `GET /my-parcels` returns the caller's own parcels only and the pickup code is delivered by its own path, so a sensitive value is not put into a list |
 | D23 | The location recommender is a deterministic, read-only suggestion and is never applied automatically. CRJ-001 rules out a scored ranking, and 0 of 7 staff in S4 asked for the feature, so it stays a `Should` |
 | D24 | R7's storage location rule table ([location-recommender-rules.md](../../02-design/location-recommender-rules.md), PR #122) is accepted as the order T-42-02 implements, including the exact-fit, cold/normal/hot and code tie-breaker steps it proposed. ADR-004 is amended to record the same order, and the `LOCATION_UNAVAILABLE` conflict on a stale suggestion is agreed behaviour that stays out of the frozen contract until a change record approves it |
