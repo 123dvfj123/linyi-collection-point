@@ -60,8 +60,15 @@ Rejected. "No location available" is a normal business state, not a server error
 
 - The recommendation is predictable and testable.
 - The frontend does not need to know business rules.
-- The endpoint remains stable even if the scoring changes later.
+- The endpoint remains stable even if the ordering rules change later.
 - Because a step can order the set but never widen it, the amendment in the
   Amended line above keeps every original guarantee: the rules stay deterministic,
   weighted scoring is still excluded (CRJ-001), and the suggestion is still
   advisory and never applied automatically (CR-004).
+
+## Revision history
+
+| Version | Date | Change | Author |
+|---|---|---|---|
+| v1.0 | Week 1 | Initial decision: a deterministic rule instead of a weighted scoring algorithm | R6 |
+| v1.1 | Week 2 | Decision amended to R7's rule table, merged in PR #122 and accepted as `location-recommender-rules.md` section 4: steps 4, 5 and 7 added, step 3 restated. The consequences were reworded so the rule reads as an ordering rather than a score (CR-016) | R6 |
