@@ -8,7 +8,7 @@
 |---|---|
 | Task | T-00-06 |
 | Owner | R1 |
-| Version | v1.2 |
+| Version | v1.3 |
 | Status | Active, reviewed at the end of every sprint |
 
 ## How to read this register
@@ -44,8 +44,8 @@ Likelihood and impact are rated high, medium or low. Status is one of
 |---|---|---|
 | RSK-C01 | The team has no Git experience, so commits and pull requests would be inconsistent | Closed. A one-hour training session was held in week 1, and every member completed a practice pull request |
 | RSK-C02 | The repository scaffold might overwrite work already committed by members | Closed. The main and develop branches were compared before the restructure, and the restructure was applied on a branch off develop |
-| RSK-06 | The frontend has no code at all, only folders, so Sprint 2 cannot start on the frontend | High | High | The frontend skeleton is the first frontend task of Sprint 2 and is scheduled in week 3, not week 4 | R4 | By the end of Wednesday in week 3 there is no runnable frontend | Being monitored |
-| RSK-15 | Diagram sources are committed as exported images rather than text, so changes cannot be reviewed | Low | Medium | The working agreement requires PlantUML, draw.io or Mermaid sources. Exported images go only to the report figures folder | R4 | A pull request adds a `.png` where a `.puml` is expected | Being monitored |
+| RSK-06 | The frontend has no code at all, only folders, so Sprint 2 cannot start on the frontend | Closed in the week 3 close-out review. The folder-only state no longer holds: the Vue 3 skeleton with the router, the store and the API wrapper landed in PR #97. Owner R4; the trigger was no runnable frontend by the end of Wednesday in week 3 |
+| RSK-15 | Diagram sources are committed as exported images rather than text, so changes cannot be reviewed | Closed in the week 3 close-out review. The working agreement requires PlantUML, draw.io or Mermaid sources, and exported images go only to the report figures folder. Owner R4; the trigger was a pull request adding a `.png` where a `.puml` is expected |
 
 ## Review record
 
@@ -63,3 +63,4 @@ Likelihood and impact are rated high, medium or low. Status is one of
 | v1.0 | Week 1 | Initial register | R1 |
 | v1.1 | Week 2 | Sprint 1 review, two risks added | R1 |
 | v1.2 | Week 3 | Sprint 1 close-out review: RSK-06 and RSK-15 closed, RSK-12 number refreshed, RSK-14 blocker recorded | R1 |
+| v1.3 | Week 3 | RSK-06 and RSK-15 reformatted as closed-risk rows. Both carried the eight-column shape of the active table, which broke the Closed risks table and left their status reading "Being monitored" | R4 |
