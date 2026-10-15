@@ -38,12 +38,17 @@
   --color-focus: var(--slate-500);
   --color-on-primary: var(--paper-100);
   --color-sidebar: var(--ink-900);
-  --color-sidebar-gradient: linear-gradient(180deg, var(--ink-900) 0%, color-mix(in srgb, var(--ink-900) 90%, var(--grey-400)) 100%);
+  /* The shell is the dark pane of the two panes of glass in design system 5.5: it is
+     translucent at both ends, more so at the bottom, so the page gradient shows through
+     it. The gradient is written in terms of --color-sidebar, so that token carries the
+     shell colour for anything that needs it flat. Values are the ones the reviewed high
+     fidelity pages render, moved here so the mock and the component cannot drift (CR-018). */
+  --color-sidebar-gradient: linear-gradient(180deg, color-mix(in srgb, var(--color-sidebar) 90%, transparent) 0%, color-mix(in srgb, var(--color-sidebar) 76%, transparent) 100%);
   --color-sidebar-text: var(--paper-100);
-  --color-sidebar-active-bg: color-mix(in srgb, var(--slate-500) 45%, var(--ink-900));
+  --color-sidebar-active-bg: color-mix(in srgb, var(--slate-500) 58%, var(--ink-900));
+  --color-sidebar-hover-bg: color-mix(in srgb, var(--slate-500) 22%, var(--ink-900));
   --color-surface-glass: color-mix(in srgb, var(--paper-100) 68%, transparent);
   --color-surface-glass-gradient: linear-gradient(180deg, color-mix(in srgb, var(--paper-100) 80%, transparent) 0%, color-mix(in srgb, var(--paper-100) 60%, transparent) 100%);
-  --color-surface-alt: var(--slate-500);
   --color-accent: var(--slate-500);
   --color-accent-strong: color-mix(in srgb, var(--slate-500) 62%, var(--ink-900));
   --color-field: color-mix(in srgb, var(--paper-100) 58%, var(--grey-400));
