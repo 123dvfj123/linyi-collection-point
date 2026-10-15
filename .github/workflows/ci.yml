@@ -1,6 +1,6 @@
 # Continuous integration.
-# The sanity and frontend job always runs. The backend jobs is enabled in
-# Sprint 2 once backend/pom.xml exist.
+# The sanity and frontend job always run. The backend job is enabled in
+# Sprint 2 once backend/pom.xml exists.
 
 name: CI
 
@@ -57,7 +57,7 @@ jobs:
   #         name: surefire-reports
   #         path: backend/target/surefire-reports/
 
-  frontend:
+    frontend:
     runs-on: ubuntu-latest
     defaults:
       run:
