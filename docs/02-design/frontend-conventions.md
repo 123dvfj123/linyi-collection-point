@@ -1,6 +1,6 @@
 # Frontend Engineering Conventions
 
-- Status: Proposed
+- Status: Accepted
 - Date: 2026-10-14
 - Task: T-20-09
 - Owner: R5 Frontend Developer
@@ -96,6 +96,10 @@ frontend/
    write a new hex colour in a component.
 8. Presentational components (tags, cards, tables) receive data through props and
    emit events. Only pages and container components talk to stores.
+9. The shared components are named and owned by the Component Map in
+   `frontend-page-map.md`: `PageHeader`, `StatusTag`, `ParcelTable`,
+   `LocationGrid`, `MetricCard`, `ConfirmDialog`. Build the named one rather
+   than a new variant, and add a Component Map entry before adding a seventh.
 
 ## 5. State management (Pinia)
 
