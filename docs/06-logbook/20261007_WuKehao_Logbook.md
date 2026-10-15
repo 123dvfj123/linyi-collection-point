@@ -3,7 +3,7 @@
 - GitHub: fannaodawang
 - Role: R8 QA Lead
 - Modules: TBD
-- Period covered: W01-W08
+- Period covered: W01-W16
 ## Weekly log
 
 | Week | Date | Task | Description | Time | Hours | Status | Evidence | With | Problem and fix | Note |
