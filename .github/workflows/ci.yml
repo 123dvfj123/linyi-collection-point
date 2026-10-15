@@ -1,6 +1,6 @@
 # Continuous integration.
-# The sanity job always runs. The backend and frontend jobs are enabled in
-# Sprint 2 once backend/pom.xml and frontend/package.json exist.
+# The sanity and frontend job always runs. The backend jobs is enabled in
+# Sprint 2 once backend/pom.xml exist.
 
 name: CI
 
@@ -57,20 +57,19 @@ jobs:
   #         name: surefire-reports
   #         path: backend/target/surefire-reports/
 
-  # Uncomment in Sprint 2, once frontend/package.json exists.
-  # frontend:
-  #   runs-on: ubuntu-latest
-  #   defaults:
-  #     run:
-  #       working-directory: frontend
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: actions/setup-node@v4
-  #       with:
-  #         node-version: '20'
-  #         cache: npm
-  #         cache-dependency-path: frontend/package-lock.json
-  #     - run: npm ci
-  #     - run: npm run lint
-  #     - run: npm run test -- --run
-  #     - run: npm run build
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run test:run
+      - run: npm run build
