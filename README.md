@@ -66,7 +66,7 @@ git clone https://github.com/Django-coder6/3500SEF-Group23-Project-LMS.git
 cd 3500SEF-Group23-Project-LMS
 
 # backend (Java 17 and the Maven wrapper)
-# not runnable until T-30-02 lands (issue #75)
+# not runnable until T-30-02 lands (issue #137)
 cd backend
 ./mvnw clean install        # on Windows use: mvnw.cmd clean install
 cd ..
@@ -81,7 +81,7 @@ cp .env.example .env
 
 # Start the database, the cache and the frontend.
 # The backend is behind the "full" profile because its build files (pom.xml
-# and the Maven wrapper) arrive with T-30-02; see issue #75.
+# and the Maven wrapper) arrive with T-30-02; see issue #137.
 docker compose up -d
 
 # Once those are merged, start everything:
