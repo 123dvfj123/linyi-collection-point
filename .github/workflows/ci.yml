@@ -1,5 +1,5 @@
 # Continuous integration.
-# The sanity and frontend job always run. The backend job is enabled in
+# The sanity and frontend jobs always run. The backend job is enabled in
 # Sprint 2 once backend/pom.xml exists.
 
 name: CI
