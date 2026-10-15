@@ -46,6 +46,33 @@ this pull request keeps to that list. The resident's interaction is shown in
 `sequence-resident-pickup.puml`, and the resident goals are recorded in the SRS
 role table. The diagram is tracked as a follow-up rather than silently dropped.
 
+## The question each diagram answers
+
+The baseline statement above says that every diagram answers one question about
+the system. These are those questions. Report section 4 can use them directly,
+and a reviewer can use them to check that a diagram has not drifted from its
+purpose.
+
+| Diagram | The question it answers |
+|---|---|
+| `usecase-counter-work.puml` | What must the system let a counter staff member do, and which of those goals are inside the system boundary? |
+| `usecase-oversight-and-administration.puml` | What do the owner and the system administrator need to see or change that the counter role does not? |
+| `sequence-staff-intake.puml` | In what order does an intake reach the API, and what does the API answer when no location is free, or when the waybill is already registered? |
+| `sequence-resident-pickup.puml` | What does a handover do when the code is not found, expired, revoked or already used, and what makes a repeated confirmation safe? |
+| `sequence-login-role-guard.puml` | Where does a session come from, and at what point is a role refused its landing page? |
+| `class-parcel-and-location.puml` | Which objects hold the domain data, how are they related, and which rules does the structure itself enforce? |
+| `activity-parcel-intake.puml` | What decisions does an intake make, in what order, and what follows from each answer? |
+| `activity-handover.puml` | What decisions does a handover make before anything is recorded, and what is written when it succeeds? |
+| `state-parcel-lifecycle.puml` | Which states can a parcel be in, what moves it between them, and why is an exception not one of them? |
+| `state-storage-location.puml` | Which states can a storage location be in, and what makes one unavailable? |
+| `state-pickup-code.puml` | Which states can a pickup code be in, and which of its transitions are one-way? |
+| `state-exception-ticket.puml` | How does an exception ticket move from being raised to being closed? |
+
+The deferred resident use case diagram is deliberately not in this table: it has
+no source to describe yet, and its scope is recorded under the coverage decision
+above.
+
+
 ## Open findings raised by this baseline
 
 Tracing the diagrams against the contract surfaced two inconsistencies. Both are

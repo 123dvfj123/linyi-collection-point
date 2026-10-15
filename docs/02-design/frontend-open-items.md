@@ -5,7 +5,7 @@
 | Status | Working list, not a contract |
 | Owner | R4 Frontend Lead, with R5 |
 | Raised | 2026-10-13, from R6's Sprint 2 contract note and R4's read of the contract |
-| Revised | 2026-10-15, against OpenAPI v0.3.0-draft after CR-013 was approved |
+| Revised | 2026-10-15, against OpenAPI v0.3.0-draft after CR-013 was approved, and again the same day to close item 5 |
 | Source of truth | `docs/03-api/openapi.yaml`. The rows below are what the frontend needs from it |
 
 These are the points that surfaced while aligning the frontend with the Sprint 2
@@ -19,12 +19,14 @@ names who decides and which file changes when it is decided.
 | 2 | ~~`Parcel` responses carry only `id, trackingNo, status, size, locationId, expectedVersion`~~ | Staff could not match a parcel to a resident in a list or detail view, and there were no timestamps for the audit view | **Closed.** The `Parcel` schema now also carries `carrier`, `recipientName`, `recipientPhone` (masked in list responses, 138****8888), `createdAt` and `updatedAt` | `docs/03-api/openapi.yaml` — done |
 | 3 | `/locations` returns a bare array while `/parcels` returns `PagedParcels` | Two list shapes for the frontend to handle | Accepted for Sprint 2; note it in the contract | `docs/03-api/openapi.yaml` |
 | 4 | `POST /parcels/batch` answers `created[]` plus `rejected[{ index, trackingNo, reason }]` | The batch registration screen must show a per-row error and must not fail the whole batch | R5 implements; the UML does not show it yet | `docs/02-design/uml/activity-parcel-intake.puml` |
-| 5 | The intake sequence diagram does not show `POST /locations/recommend`, although the UML README indexes it | The recommendation is only a suggestion that staff may ignore, so the diagram should show it or the index should drop it | R4 | `docs/02-design/uml/` |
+| 5 | ~~The intake sequence diagram does not show `POST /locations/recommend`, although the UML README indexes it~~ | The recommendation is only a suggestion that staff may ignore, so the diagram should show it or the index should drop it | **Done 2026-10-13.** The diagram shows the call and both of its answers, a free location and `recommendedLocation: null` with `reason: no_location_available`, so the diagram and the index now agree. Commit `7cf3929`, PR #95 | - |
 | 6 | Parcel status (`registered/shelved/collected`), exception status (`open/processing/resolved`) and location status (`available/reserved/occupied/disabled`) are stable strings, not labels | `StatusTag` must map every value to one label and one colour, in one place | R4, when `StatusTag` is built | `docs/02-design/frontend-page-map.md` (component map) |
 | 7 | `PATCH /parcels/{id}/status` requires `expectedVersion` and answers 409 when it is stale | The detail page must send the version and show a "someone else just changed this" prompt | R5, Sprint 2 | page work; `docs/02-design/frontend-page-map.md` |
 | 8 | `POST /pickup/confirm` is idempotent and no longer accepts `operatorId` | The handover button must not double-submit | R4/R5, Sprint 2; the sequence diagram already covers it | page work |
 
 Items 1 and 2 are decided, so nothing in this list blocks a Sprint 2 feature
-page any more. Item 3 is a scope note that is accepted. Items 4 and 5 are UML
-updates on R4's side. Items 6 to 8 are page work the frontend does when it
-builds the corresponding screen.
+page any more. Item 3 is a scope note that is accepted. Item 5 is done.
+Item 4 is the one diagram update still open: the activity diagram shows the
+single-parcel path, and the contract's per-row batch answer, created[] with
+`rejected[{ index, trackingNo, reason }]`, is not drawn. Items 6 to 8 are page
+work the frontend does when it builds the corresponding screen.
