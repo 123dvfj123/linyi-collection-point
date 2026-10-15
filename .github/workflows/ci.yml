@@ -36,6 +36,9 @@ jobs:
       - name: Check that every document version header matches its revision history
         run: python3 scripts/check_doc_versions.py .
 
+      - name: Check that every markdown table row has as many cells as its header
+        run: python3 scripts/check_table_columns.py .
+
   # Uncomment in Sprint 2, once backend/pom.xml exists.
   # backend:
   #   runs-on: ubuntu-latest
