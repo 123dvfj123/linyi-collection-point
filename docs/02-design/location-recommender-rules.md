@@ -1,7 +1,11 @@
 # Storage Location Recommender Rules
 
-- Status: Proposed
+- Status: Accepted
 - Date: 2026-10-15
+- Accepted: 2026-10-15, by R6 as the reviewer and the ADR owner of T-20-15. This
+  table is the order T-42-02 implements and the normative home of the rule
+- Design record: `docs/02-design/location-recommender.md` holds the ruling, the
+  evidence and the reasoning; this file holds the rule
 - Task: T-20-15
 - Owners: R6 Backend Lead, R7 Backend Developer
 - Reviewer: R6 Backend Lead
@@ -19,7 +23,8 @@ record. The staff member keeps the final choice.
 
 This is a pair task under D18. R7 prepared this first draft, and R6 is the only
 reviewer for the task. R6 owns the final backend, data-model and ADR decision
-before the rules are implemented in T-42-02.
+before the rules are implemented in T-42-02, and accepted the table on
+2026-10-15.
 
 ### 1.1 Requirement and ADR trace
 
@@ -102,14 +107,14 @@ The rule is deliberately not "always put a small parcel in the first small
 slot". If no exact-fit slot exists, a larger slot remains a valid fallback.
 
 Rules 3, 4 and 6 refine the accepted ADR rather than merely restating it.
-ADR-004 currently orders same-zone candidates by the least recently updated
-location. R6 owns that decision. If R6 accepts these refinements, ADR-004 must
-be updated to the same ordering before T-42-02 implements it. If R6 rejects
-them, the implementation follows the current ADR.
+ADR-004 originally ordered same-zone candidates by the least recently updated
+location. R6 owns that decision, accepted these refinements on 2026-10-15, and
+amended ADR-004 to the same ordering before T-42-02 implements it. The
+acceptance is recorded in `docs/02-design/location-recommender.md` section 5;
+the amendment is recorded in ADR-004's Amended line.
 
-This document does not modify ADR-004. Keeping the accepted ADR unchanged
-until R6 rules on the proposed refinements avoids presenting an unapproved
-ordering as an accepted architecture decision.
+ADR-004 is amended in the ADR rather than in this file, so that the accepted
+architecture decision stays in the ADR and this document stays the rule table.
 
 ## 5. Zone rules and hot/cold zones
 
@@ -133,8 +138,9 @@ locations, it has no candidate and no hot/cold label.
 | normal | greater than `0.20` and less than `0.80` | 1 |
 | hot | `0.80` to `1.00` inclusive | 2 |
 
-The 20 percent and 80 percent thresholds are proposed for R6 approval. The
-task calls for hot and cold zones, but it does not define the cut-off values.
+The 20 percent and 80 percent thresholds were accepted by R6 on 2026-10-15. The
+task calls for hot and cold zones, but it fixes no cut-off, so the values are
+written down here to be testable.
 
 The labels are derived from current occupancy each time the recommendation is
 requested. They are not stored. "Hot" therefore means heavily used or nearly
@@ -235,9 +241,10 @@ must be rechecked when the parcel is saved:
 5. The unique partial constraint on `Location.parcelId` remains the final
    database guard.
 
-The conflict response is not in the current OpenAPI contract. R6 must add the
-status and error code before T-42-02 is implemented. Until then, the rule is a
-design dependency, not a claim that the contract is complete.
+The conflict response is not in the current OpenAPI contract. R6 ruled on
+2026-10-15 that the behaviour is right but that adding it to a frozen contract
+needs a change record first, so it is a dependency of T-42-02 and not a claim
+that the contract is complete.
 
 For batch intake, the service may calculate suggestions for a batch, but it
 must not assign them automatically. Accepted locations have to be allocated
@@ -266,9 +273,12 @@ Component tests must cover:
 
 ## 11. Completion checklist for T-20-15
 
-- [ ] R6 confirms the lexicographic order and the cold-first rotation rule.
-- [ ] R6 confirms whether ADR-004 must be amended for rules 3, 4 and 6.
-- [ ] R6 confirms the `LOCATION_UNAVAILABLE` conflict contract for stale
-      recommendations.
+- [x] R6 confirms the lexicographic order and the cold-first rotation rule
+      (2026-10-15; `location-recommender.md` section 5).
+- [x] R6 confirms that ADR-004 must be amended for rules 3, 4 and 6. The
+      amendment is made and recorded in ADR-004's Amended line.
+- [x] R6 confirms the `LOCATION_UNAVAILABLE` conflict is the right behaviour for
+      a stale recommendation, and that it stays out of the frozen contract until
+      a change record approves it.
 - [ ] The implementation task T-42-02 uses this rule table and does not add a
       weighted or learned score.

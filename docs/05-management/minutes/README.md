@@ -63,6 +63,7 @@ agreed to change.
 | 2026-10-11 | Week 1 review and retrospective | [20261011_week1-review.md](20261011_week1-review.md) |
 | 2026-10-12 | Week 1 summary, review and retrospective | [20261012_week1-summary-review.md](20261012_week1-summary-review.md) |
 | 2026-10-12 | Week 2 stand-up | [20261012_week2-standup.md](20261012_week2-standup.md) |
+| 2026-10-15 | Design review, architecture to API and UI (asynchronous document review) | [20261015_design-review.md](20261015_design-review.md) |
 
 Two files are dated 2026-10-12 because the week 1 summary ran late and the week
 2 stand-up followed it. Both are kept, because they record different meetings.

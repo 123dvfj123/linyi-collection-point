@@ -14,22 +14,41 @@
 #   another (NFR-6).
 # - CRJ-001: no complex scoring algorithm for the recommendation.
 #
+# - CR-013 (approved 2026-10-14) adds the resident read path to this contract:
+#   GET /my-parcels (FR-2), GET /my-parcels/{id} (FR-3) and
+#   GET /my-parcels/{id}/pickup-code (FR-8). CR-013 named the list and the
+#   pickup-code path; the detail path is added because FR-3 needs a detail read
+#   and the resident side must not depend on GET /parcels/{id}, which is
+#   deferred to Sprint 3.
+#
 # Requirement identifiers in the endpoint descriptions use the IS-nn identifiers
-# defined in SRS section 1.5. FR identifiers are added when SRS chapter 3
-# (issue #76, R3) defines them and the traceability matrix is built; that
-# outstanding work is tracked in issue #74 rather than only in this comment.
+# defined in SRS section 1.5 and the FR-nn identifiers defined in SRS chapter 3
+# (issue #76, R3, PR #114). Chapter 3 is a draft that R2 has not yet approved, so
+# an FR identifier used here is proposed until a change record approves it: FR-18
+# is approved by CR-003, FR-19 and FR-20 by CR-004, and FR-9 and FR-10 are
+# deferred by CR-005. The traceability matrix does not exist yet (issue #77,
+# RSK-14), so this file and docs/03-api/frontend-api-dependencies.md carry the
+# endpoint-to-requirement mapping in the meantime.
 #
 # - PickupCode and ParcelException are declared as component schemas before they
 #   have endpoints of their own. Issue #81 requires every state machine name in
 #   docs/02-design/backend-state-machines.md to match an enum here, and the
-#   frontend needs the canonical values. The /exceptions endpoints that would
-#   use them are still P1 "Proposed" in docs/03-api/frontend-api-dependencies.md
-#   until SRS chapter 3 defines the requirement identifiers.
+#   frontend needs the canonical values. PickupCode now has a caller:
+#   GET /my-parcels/{id}/pickup-code. ParcelException does not: the /exceptions
+#   endpoints that would use it are still P1 "Proposed" in
+#   docs/03-api/frontend-api-dependencies.md. SRS chapter 3 defines FR-23 and
+#   FR-24 for them, so what is still missing is R2's MoSCoW approval, not the
+#   requirement.
+#
+# - Issue #98 records two contract gaps this file does not close: shelving an
+#   already registered parcel cannot carry a storage location (FR-14), and the
+#   lost-code path has no endpoint. Both change the shape of a frozen contract,
+#   so they wait for a scope ruling instead of being closed here.
 
 openapi: 3.0.3
 info:
   title: Community Parcel Collection Point Management System API
-  version: 0.2.0-draft
+  version: 0.3.0-draft
   description: >
     Draft OpenAPI contract for Sprint 2. The backend owns the final paths and
     fields; the frontend must not invent fields before they appear here.
@@ -53,7 +72,11 @@ paths:
   /auth/login:
     post:
       summary: Login for resident, staff, owner or admin
-      description: Satisfies IS-1, role-based access control for the four roles.
+      description: >
+        Satisfies IS-1 and FR-1, a registered resident signing in. The token
+        issued here carries the role that every other endpoint is scoped by
+        (FR-45, CR-009), which is why no later request carries a role or an
+        operator identifier.
       security: []
       requestBody:
         required: true
@@ -79,7 +102,11 @@ paths:
   /parcels:
     get:
       summary: List parcels
-      description: Satisfies IS-6, parcel query and status tracking.
+      description: >
+        Satisfies IS-6, FR-11 for staff (their assigned collection point only)
+        and FR-27 with FR-34 for an owner (points that owner manages only). This
+        is not the resident read path: a resident reads their own parcels
+        through GET /my-parcels (FR-2), which CR-013 added.
       parameters:
         - name: status
           in: query
@@ -112,8 +139,9 @@ paths:
     post:
       summary: Register an incoming parcel
       description: >
-        Satisfies IS-2, registration of an incoming parcel. The parcel starts in
-        the registered state.
+        Satisfies IS-2 and FR-12, registration of an incoming parcel by staff
+        member. The parcel starts in the registered state. FR-17 requires a
+        duplicate waybill to be rejected, which is the 409 below.
       requestBody:
         required: true
         content:
@@ -141,7 +169,7 @@ paths:
     post:
       summary: Register a batch of incoming parcels
       description: >
-        Satisfies IS-2 and CR-003, which raised batch registration to a
+        Satisfies IS-2, FR-18 and CR-003, which raised batch registration to a
         must-have. Up to 50 parcels in one request. Each entry is validated on
         its own so one bad row does not discard the rest of the batch. The
         response reports which entries were created and which were rejected and
@@ -165,11 +193,17 @@ paths:
     patch:
       summary: Update parcel status
       description: >
-        Satisfies IS-3 and IS-6. The status value is restricted by CR-006, and
-        the update is guarded by expectedVersion optimistic locking. A stale
-        version is rejected with 409 rather than overwriting a newer state. A
-        transition the state machine does not allow is rejected with 422, per
-        docs/02-design/backend-state-machines.md.
+        Satisfies IS-3, IS-6 and FR-4, which is the approved status the resident
+        is shown. The status value is restricted by CR-006, and the update is
+        guarded by expectedVersion optimistic locking. A stale version is
+        rejected with 409 rather than overwriting a newer state. A transition
+        the state machine does not allow is rejected with 422, per
+        docs/02-design/backend-state-machines.md. FR-14, recording the storage
+        location when a parcel is shelved, is not yet expressible here: the body
+        carries no locationId, so a parcel that is already registered cannot be
+        shelved with its location in one call. That gap is issue #98 and is left
+        open on purpose, because adding the field changes the shape of the
+        contract that was frozen for Sprint 2.
       parameters:
         - name: id
           in: path
@@ -214,11 +248,103 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+  /my-parcels:
+    get:
+      summary: List the authenticated resident's own parcels
+      description: >
+        Satisfies FR-2 and the resident half of IS-6. CR-013 (approved
+        2026-10-14) added this path to the Sprint 2 contract. The response shape
+        is deliberately the same as GET /parcels so the frontend handles one
+        list shape. The result is scoped by the authenticated identity and never
+        by a value from the client, so a resident cannot read another resident's
+        parcels (FR-2). Requires the resident role.
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: pageSize
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        "200":
+          description: Paged list of the caller's own parcels
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PagedParcels"
+  /my-parcels/{id}:
+    get:
+      summary: Read one of the authenticated resident's own parcels
+      description: >
+        Satisfies FR-3, the own-parcel detail view that
+        docs/02-design/frontend-page-map.md marks P0 at /my-parcels/:id.
+        Requires the resident role. A parcel that does not exist and a parcel
+        that belongs to another resident both answer 404, so the response cannot
+        be used to discover whether someone else's parcel exists.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: The parcel
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Parcel"
+        "404":
+          description: >
+            No such parcel for this caller. The same response covers a parcel
+            that does not exist and one that belongs to another resident.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /my-parcels/{id}/pickup-code:
+    get:
+      summary: Retrieve the pickup code for one of the resident's own parcels
+      description: >
+        Satisfies FR-8. CR-013 delivers the pickup code from its own path rather
+        than adding it to every parcel in a list, so a sensitive credential is
+        returned only to the resident who asks for it. Ownership is taken from
+        the authenticated identity. Requires the resident role. The code value
+        is never returned inside a parcel list.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: The pickup code record for this parcel
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PickupCode"
+        "404":
+          description: >
+            No such parcel for this caller, or the parcel has no pickup code
+            record. The same response covers both, and covers another resident's
+            parcel, so it cannot be used to probe which parcels exist.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
   /locations:
     get:
       summary: List locations and occupancy
       description: >
-        Satisfies IS-4, management of storage locations. The response is a bare
+        Satisfies IS-4 and FR-15, the current availability of the storage
+        locations at a staff member's collection point. The response is a bare
         array rather than a page on purpose: the location board loads the whole
         board in one go, so the shape is agreed and is not reopened in Sprint 3.
       responses:
@@ -234,10 +360,13 @@ paths:
     post:
       summary: Recommend an available location
       description: >
-        Satisfies IS-3. This is a suggestion only, per CR-004: the staff member
-        may ignore it and assign a location by hand, and the result is never
-        applied automatically. The rule is deterministic, per CRJ-001. When no
-        location is free the endpoint still returns 200, with
+        Satisfies IS-3, FR-19 and FR-20, both approved by CR-004. This is a
+        suggestion only: the staff member may ignore it and assign a location by
+        hand, and the result is never applied automatically. The rule is
+        deterministic, per CRJ-001; the normative rule table is
+        docs/02-design/location-recommender-rules.md and the design behind it is
+        docs/02-design/location-recommender.md. When no location is free the
+        endpoint still returns 200, with
         `recommendedLocation` null and `reason` `no_location_available`, so the
         frontend can offer manual assignment.
       requestBody:
@@ -263,7 +392,9 @@ paths:
   /pickup/verify:
     post:
       summary: Verify a pickup code
-      description: Satisfies IS-7, the first half of the handover workflow.
+      description: >
+        Satisfies IS-7 and FR-21, the first half of the handover workflow: an
+        active pickup code is verified before the parcel is handed over.
       requestBody:
         required: true
         content:
@@ -287,14 +418,16 @@ paths:
     post:
       summary: Confirm handover
       description: >
-        Satisfies IS-7, the second half of the handover workflow. The operator
-        is read from the authenticated session and is not accepted from the
-        client (CR-007), because accepting it would let one staff member record
-        a handover as another and make the operation log unreliable (NFR-6).
-        The call is idempotent by pickup code: repeating it returns the
-        handover already recorded for that code, with the same 200 response, and
-        never writes a second handover row. A repeat is therefore not a conflict
-        case; the recorded result is returned unchanged.
+        Satisfies IS-7, FR-22 and FR-25, the second half of the handover
+        workflow. The handover is recorded against the operator's identity, and
+        recording it also writes an audit entry, which is why the operator is
+        read from the authenticated session and is not accepted from the client
+        (CR-007): accepting it would let one staff member record a handover as
+        another and make the operation log unreliable (NFR-6). The call is
+        idempotent by pickup code: repeating it returns the handover already
+        recorded for that code, with the same 200 response, and never writes a
+        second handover row. A repeat is therefore not a conflict case; the
+        recorded result is returned unchanged.
       requestBody:
         required: true
         content:
@@ -382,6 +515,8 @@ components:
           enum: [registered, shelved, collected]
         size:
           type: string
+          description: Parcel size, the same three values as the ERD and the create request.
+          enum: [small, medium, large]
         locationId:
           type: string
           format: uuid
@@ -524,8 +659,8 @@ components:
       description: >
         Declared so the state machine names in
         docs/02-design/backend-state-machines.md match an enum here (issue #81).
-        No endpoint returns this schema yet; see the contract decisions at the
-        top of the file.
+        Returned by GET /my-parcels/{id}/pickup-code (FR-8, CR-013). The code
+        value is only ever returned on that path, never inside a parcel list.
       properties:
         id:
           type: string
@@ -554,7 +689,9 @@ components:
         The entity is persisted as `ExceptionRecord` and modelled as
         `ParcelException`. An exception is a separate flow, not a parcel status
         (CR-006). Declared here so the state machine names match an enum
-        (issue #81); no endpoint returns this schema yet.
+        (issue #81). No endpoint returns this schema yet: the /exceptions paths
+        are still P1 and Proposed in docs/03-api/frontend-api-dependencies.md
+        even though SRS chapter 3 now defines FR-23 and FR-24 for them.
       properties:
         id:
           type: string
