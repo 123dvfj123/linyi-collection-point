@@ -3,7 +3,7 @@
 - Student ID: 14320368
 - GitHub: @Kennethli13
 - Role: R3 — Requirements Elicitation / User Research
-- Period covered: W01–W16
+- Period covered: W01–W8
 
 ## Weekly log
 
