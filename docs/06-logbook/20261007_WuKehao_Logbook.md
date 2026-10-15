@@ -2,8 +2,8 @@
 - Student ID: 14612273
 - GitHub: fannaodawang
 - Role: R8 QA Lead
-- Modules: TBD
-- Period covered: W01-W16
+- Modules: test plan, test cases, defect management, test reporting
+- Period covered: W01-W08
 ## Weekly log
 
 | Week | Date | Task | Description | Time | Hours | Status | Evidence | With | Problem and fix | Note |
