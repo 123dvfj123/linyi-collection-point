@@ -82,7 +82,7 @@ than being quietly dropped.
 | Area | Finding | Owner |
 |---|---|---|
 | Design | The zone values in the repository do not agree with each other. `glossary.md` line 33 and `ui-prototype.md` line 99 name large-item, small-item, perishable and long-stay; the high fidelity pages use Zone A to Zone D. Both are examples of a label and neither is frozen, and `Location.zone` is a free string in the ERD and the contract. Nothing is broken, but the recommender has to say what it does with the value, so the set needs to be fixed before M3 is implemented | R7 (`PLAN.md` T-42-03 gives R7 location management including zones) |
-| Management | `PLAN.md` T-42-02 describes the recommender as "size filter, zone priority, turnover score, safe under concurrency". A turnover score is a scored ranking, and **CRJ-001 rules out a complex scoring algorithm**. ADR-004 and `location-recommender.md` implement a deterministic rule instead | R1, R2. The ruling wins; the plan line needs correcting |
+| Management | `PLAN.md` T-42-02 described the recommender as "size filter, zone priority, turnover score, safe under concurrency". A turnover score is a scored ranking, and **CRJ-001 rules out a complex scoring algorithm**. ADR-004 and `location-recommender.md` implement a deterministic rule instead | R1, R2. The ruling wins; R1 corrected the plan line to the deterministic ordering in PR #124, merged before this pull request, so the finding is closed |
 
 ## 5. Decisions
 
@@ -103,7 +103,7 @@ than being quietly dropped.
 | Decide whether `--color-surface-alt` is used or removed, and record the answer in `design-system.md` | R4 | 2026-10-22 |
 | Verify the 375 px breakpoint against the built shell and counter labels | R4, R5 | Sprint 2 |
 | Fix the zone value set and record it with the storage location design | R7 | before M3 is implemented |
-| Correct the `turnover score` wording in `PLAN.md` T-42-02, or record why a score is acceptable after all | R1, R2 | 2026-10-22 |
+| ~~Correct the `turnover score` wording in `PLAN.md` T-42-02~~ Done 2026-10-15: R1 replaced the wording with the deterministic ordering from R7's rule table in PR #124, merged before this pull request | R1, R2 | done |
 | Take R7's answer on the zone values, which the recommender design note of 2026-10-15 leaves open as its last open design point | R6 | 2026-10-18 |
 | ~~Move `location-recommender-rules.md` from `Status: Proposed` to `Accepted`, or retire one of the two recommender documents~~ Done 2026-10-15: R6 moved the file to `Status: Accepted` and ruled that it, not the 2026-10-15 design note, is the normative rule table | R6 | done |
 | Raise the change record that lets `POST /parcels` answer a claimed location with the existing `409` and `code: LOCATION_UNAVAILABLE`, so T-42-02 can return it without an undocumented code | R1 with R2 and R6 | before T-42-02 |

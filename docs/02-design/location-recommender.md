@@ -302,13 +302,16 @@ The test-plan target is at least 80 % coverage for the recommender.
 | The ADR-004 refinement in ruling 3 needs a change-log row | R1 (R6 raised it) | ADR-004 changed after it was accepted, and the change log is R1's artefact. The refinement itself is recorded in ADR-004 and in this document |
 | One-click ignore of the suggestion, and the wording of the no-location panel | R4, R5 | `ui-prototype.md` 5.4 draws it; the interaction detail is the frontend's |
 | "Shelve later" depends on CD-1 / issue #98 gap 1 | R6, R2 | the contract cannot give a location to an existing parcel |
-| `PLAN.md` T-42-02 says the recommender includes a "turnover score", which CRJ-001 rules out | R1, R2 | the plan wording and the ruling disagree; the ruling wins, but the plan line should be corrected |
 | How the survey evidence is cited in the report | R1 | S4 0 of 7 and S5 4 of 7 are the "we dropped a presumed feature" example |
 
-One point that was open when this document was drafted is now closed. PR #122
+Two points that were open when this document was drafted are now closed. PR #122
 merged on 2026-10-15 with R7's file still `Status: Proposed`, because the table
 was waiting on this ruling, so the same order briefly sat in two files. R6 ruled
 on 2026-10-15 that `location-recommender-rules.md` moves to `Accepted` and is the
 normative rule table - section 4 of that file is the order T-42-02 implements -
 and that this document is the ruling and the rationale behind it. The rule is
-written down once, in R7's file.
+written down once, in R7's file. The second point was the `PLAN.md` T-42-02 line
+that described the recommender as including a "turnover score", which CRJ-001
+rules out: R1 replaced that wording with the deterministic ordering from R7's
+rule table in PR #124, which merged on 2026-10-15 before this pull request, so
+the plan and the ruling now say the same thing.
