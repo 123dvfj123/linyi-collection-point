@@ -1,4 +1,4 @@
-# Stage 1: Build stage (Use Node 20 to build static files)
+# Stage 1: Build stage (Use Node 24 to build static files)
 FROM node:24 AS builder
 WORKDIR /app
 
