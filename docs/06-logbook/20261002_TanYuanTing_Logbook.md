@@ -1,3 +1,13 @@
+# Personal Logbook - TanYuanTing
+
+- Student ID: 13374348
+- GitHub: @Christine049
+- Role: R5 frontend developer
+- Modules: frontend feature pages for M1 users and permissions, M2 parcel intake, M3 storage locations and the recommender, M4 pickup and handover, M6 billing engine, M8 exception parcels and M10 reporting, audit and admin
+- Period covered: W01-W08
+
+## Weekly log
+
 | Week | Date | Task | Description | Time | Hours | Status | Evidence | With | Problem and fix | Note |
 |---|---|---|---|---|---|---|---|---|---|---|
 | W01 | 2026-10-02 | T-00-01 | Attended the topic-selection meeting with the team. Helped confirm the community parcel collection point management system as the project topic and define the primary target users of the system. | 20:00-21:30 | 1.5 | done | [Topic selection minutes, 2 October](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/blob/develop/docs/05-management/minutes/20261002_topic-selection.md) | whole team | - | The evidence is the meeting minutes rather than a chat message, so the entry can be checked |
