@@ -107,7 +107,9 @@ async function submit() {
   border: none;
   border-radius: var(--radius-sm);
   background: var(--color-primary);
-  color: #fff;
+  /* --color-on-primary, not a literal: it is the inverse-text token the
+     design system defines for exactly this label. */
+  color: var(--color-on-primary);
   cursor: pointer;
 }
 .submit[disabled] {

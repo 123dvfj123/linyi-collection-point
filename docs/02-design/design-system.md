@@ -106,12 +106,12 @@ greyscale, so colour carries status only and never decoration.
 | `--color-focus` | `--slate-500` | focus outline |
 | `--color-on-primary` | `--paper-100` | text on the primary fill |
 | `--color-sidebar` | `--ink-900` | shell surface |
-| `--color-sidebar-gradient` | derived | shell surface, a slight sheen |
+| `--color-sidebar-gradient` | derived | the shell as a frosted pane, more transparent at the bottom |
 | `--color-sidebar-text` | `--paper-100` | text on the shell |
 | `--color-sidebar-active-bg` | derived | the current navigation item |
+| `--color-sidebar-hover-bg` | derived | a navigation item under the pointer |
 | `--color-surface-glass` | derived | frosted panel over the gradient |
 | `--color-surface-glass-gradient` | derived | the same panel, thicker at the top |
-| `--color-surface-alt` | `--slate-500` | a slate panel, reserved and currently unused |
 | `--color-accent` | `--slate-500` | the accent: focus, tints, indicators, selected states |
 | `--color-accent-strong` | derived | accent text that must reach 4.5:1, such as a link |
 | `--color-field` | derived | form controls, dimmer than a surface |

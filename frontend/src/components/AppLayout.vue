@@ -46,16 +46,29 @@ function signOut() {
 </template>
 
 <style scoped>
+/*
+ * The shell is the dark pane of the two panes of glass that design-system.md
+ * 5.5 describes, and the top bar is the frosted one. The palette for it is the
+ * sidebar group in design-system.md 5.2, which no component used until now.
+ *
+ * Every declaration below reads a token, or a colour derived from two tokens by
+ * color-mix, as frontend-conventions.md 8.9 requires. No raw value is written here.
+ */
 .layout {
   display: flex;
   min-height: 100vh;
+  background: var(--color-bg-gradient);
 }
 .sidebar {
   width: 220px;
   flex: 0 0 220px;
-  background: var(--color-surface);
-  border-right: 1px solid var(--color-border);
+  background: var(--color-sidebar-gradient);
+  /* The same frost the reviewed mock uses, so the page gradient reads through the pane. */
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+  color: var(--color-sidebar-text);
   padding: 16px 12px;
+  box-shadow: var(--shadow-resting);
 }
 .brand {
   margin: 0 0 16px;
@@ -70,13 +83,16 @@ function signOut() {
 .nav-link {
   padding: 8px 10px;
   border-radius: var(--radius-sm);
-  color: var(--color-text);
+  color: var(--color-sidebar-text);
   text-decoration: none;
   font-size: 14px;
 }
+.nav-link:hover {
+  background: var(--color-sidebar-hover-bg);
+}
 .nav-link.router-link-active {
-  background: var(--color-primary-soft);
-  color: var(--color-primary);
+  background: var(--color-sidebar-active-bg);
+  color: var(--color-sidebar-text);
 }
 .body {
   flex: 1;
@@ -89,8 +105,11 @@ function signOut() {
   align-items: center;
   gap: 12px;
   padding: 12px 20px;
+  background: var(--color-surface-glass);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
   border-bottom: 1px solid var(--color-border);
-  background: var(--color-surface);
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
 }
 .who {
   font-size: 14px;
@@ -99,7 +118,7 @@ function signOut() {
   font-size: 12px;
   color: var(--color-text-muted);
   border: 1px solid var(--color-border);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   padding: 1px 8px;
 }
 .signout {
