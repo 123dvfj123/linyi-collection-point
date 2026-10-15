@@ -48,12 +48,13 @@ role table. The diagram is tracked as a follow-up rather than silently dropped.
 
 ## Open findings raised by this baseline
 
-Tracing the diagrams against the contract surfaced two inconsistencies. They are
-recorded here instead of being invented inside a diagram.
+Tracing the diagrams against the contract surfaced two inconsistencies. Both are
+now resolved in the contract. They are kept here struck through, so that the
+trace is not lost when the row stops being an open action.
 
 | Finding | Where | What is needed |
 |---|---|---|
-| `POST /parcels` does not define the `409` that duplicate-waybill rejection needs | `docs/03-api/openapi.yaml` | R6 adds the `409` response, or the requirement is restated. The sequence diagram shows the rejection as the business rule requires. |
+| ~~`POST /parcels` does not define the `409` that duplicate-waybill rejection needs~~ | Resolved | R6 added the `409` response in PR #90; the rejection the sequence diagram shows and the contract now agree |
 | ~~`POST /pickup/confirm` carries `operatorId`~~ | Resolved | R6 removed the field in PR #90, per CR-007. The sequence diagram already reads the operator from the session. |
 
 ## How to render

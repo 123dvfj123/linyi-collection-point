@@ -1,6 +1,6 @@
 # Frontend API Dependencies
 
-- Status: Draft, aligned with OpenAPI v0.2.0-draft (CR-003, CR-004, CR-006, CR-007). The two endpoints that are needed by the frontend but are outside the Sprint 2 contract are listed under "Endpoints deferred to Sprint 3" instead of in the P0 list.
+- Status: Draft, aligned with OpenAPI v0.3.0-draft (CR-003, CR-004, CR-006, CR-007, CR-013). The two endpoints that are needed by the frontend but are outside the Sprint 2 contract are listed under "Endpoints deferred to Sprint 3" instead of in the P0 list.
 - Task: T-30-04
 - Owners: R4 Frontend Lead, R6 Backend Lead
 - Consumers: R4 and R5 frontend implementation
@@ -16,33 +16,37 @@
 - Parcel sizes use `small`, `medium` and `large`.
 - Parcel, location and exception status values are stable strings, not UI labels.
 - Endpoint paths in the table omit the `/api` base URL.
+- The requirement identifier on each row is the identifier the endpoint carries in `docs/03-api/openapi.yaml`. That file is the source for the endpoint-to-requirement mapping; this list repeats the identifier so the frontend can see which requirement a call serves.
 
 ## P0 Endpoint List
 
-| Priority | Method and path | Used by | Purpose | Important fields | Status |
-|---|---|---|---|---|---|
-| P0 | `GET /health` | Development | Service health check | status | In OpenAPI draft |
-| P0 | `POST /auth/login` | Login | Login | username, password, token, user.roles | In OpenAPI draft |
-| P0 | `GET /parcels` | Parcel list | List and filter parcels | page, pageSize, status, keyword, items, total | In OpenAPI draft |
-| P0 | `POST /parcels` | Parcel create | Register an incoming parcel | trackingNo, carrier, recipientName, recipientPhone, size, locationId | In OpenAPI draft |
-| P0 | `POST /parcels/batch` | Parcel create | Register a batch of up to 50 parcels | parcels, created, rejected | In OpenAPI draft (raised to must-have by CR-003) |
-| P0 | `PATCH /parcels/{id}/status` | Parcel detail | Controlled status update | status, reason, expectedVersion | In OpenAPI draft |
-| P0 | `GET /locations` | Dashboard, location board | List storage locations | id, code, zone, size, status, parcelId | In OpenAPI draft |
-| P0 | `POST /locations/recommend` | Parcel create | Recommend an available location | size, zone, recommendedLocation, reason | In OpenAPI draft |
-| P0 | `POST /pickup/verify` | Pickup workflow | Validate a pickup code | pickupCode, parcelSummary, location | In OpenAPI draft |
-| P0 | `POST /pickup/confirm` | Pickup workflow | Confirm handover | pickupCode, result (the operator comes from the session, CR-007) | In OpenAPI draft |
+| Priority | Method and path | Used by | Purpose | Important fields | FR | Status |
+|---|---|---|---|---|---|---|
+| P0 | `GET /health` | Development | Service health check | status | none | In OpenAPI draft |
+| P0 | `POST /auth/login` | Login | Login | username, password, token, user.roles | FR-1, FR-45 | In OpenAPI draft |
+| P0 | `GET /parcels` | Parcel list (staff, owner, admin) | List and filter parcels | page, pageSize, status, keyword, items, total | FR-11, FR-27, FR-34 | In OpenAPI draft |
+| P0 | `POST /parcels` | Parcel create | Register an incoming parcel | trackingNo, carrier, recipientName, recipientPhone, size, locationId | FR-12, FR-17 | In OpenAPI draft |
+| P0 | `POST /parcels/batch` | Parcel create | Register a batch of up to 50 parcels | parcels, created, rejected | FR-18 | In OpenAPI draft (raised to must-have by CR-003) |
+| P0 | `PATCH /parcels/{id}/status` | Parcel detail | Controlled status update | status, reason, expectedVersion | FR-4 (FR-14 is blocked, see issue #98) | In OpenAPI draft |
+| P0 | `GET /my-parcels` | Resident parcel list | List the caller's own parcels | page, pageSize, items, total | FR-2 | In OpenAPI draft (added by CR-013) |
+| P0 | `GET /my-parcels/{id}` | Resident parcel detail | Read one of the caller's own parcels | id, trackingNo, status, size, locationId, expectedVersion | FR-3 | In OpenAPI draft (added by CR-013) |
+| P0 | `GET /my-parcels/{id}/pickup-code` | Resident parcel detail | Retrieve the pickup code for one own parcel | code, status, expiresAt | FR-8 | In OpenAPI draft (added by CR-013) |
+| P0 | `GET /locations` | Dashboard, location board | List storage locations | id, code, zone, size, status, parcelId | FR-15 | In OpenAPI draft |
+| P0 | `POST /locations/recommend` | Parcel create | Recommend an available location | size, zone, recommendedLocation, reason | FR-19, FR-20 | In OpenAPI draft |
+| P0 | `POST /pickup/verify` | Pickup workflow | Validate a pickup code | pickupCode, parcelSummary, location | FR-21 | In OpenAPI draft |
+| P0 | `POST /pickup/confirm` | Pickup workflow | Confirm handover | pickupCode, result (the operator comes from the session, CR-007) | FR-22, FR-25 | In OpenAPI draft |
 
 ## P1 Endpoint List
 
 | Priority | Method and path | Used by | Purpose | Status |
 |---|---|---|---|---|
-| P1 | `GET /exceptions` | Exception list | List abnormal parcels | Proposed, needs SRS requirement IDs |
-| P1 | `POST /exceptions/{id}/resolve` | Exception detail | Resolve an exception | Proposed, needs SRS requirement IDs |
-| P1 | `GET /reports/summary` | Dashboard and reports | Retrieve summary metrics | Proposed, needs SRS requirement IDs |
-| P1 | `GET /users` | User management | List staff and resident accounts | Proposed, needs SRS requirement IDs |
-| P1 | `GET /audit-logs` | Audit page | List audit records | Proposed, needs SRS requirement IDs |
-| P1 | `GET /settings` | Settings page | Load system configuration | Proposed, needs SRS requirement IDs |
-| P1 | `PUT /settings` | Settings page | Update system configuration | Proposed, needs SRS requirement IDs |
+| P1 | `GET /exceptions` | Exception list | List abnormal parcels | Proposed. FR-23 is defined by SRS chapter 3; R2's MoSCoW approval is what is still missing |
+| P1 | `POST /exceptions/{id}/resolve` | Exception detail | Resolve an exception | Proposed. FR-24 is defined by SRS chapter 3; R2's MoSCoW approval is what is still missing |
+| P1 | `GET /reports/summary` | Dashboard and reports | Retrieve summary metrics | Proposed. FR-26, FR-29 and FR-31 are defined; R2 approval pending |
+| P1 | `GET /users` | User management | List staff and resident accounts | Proposed. FR-40 is defined; R2 approval pending. FR-41 and FR-42 need account actions this list does not carry yet |
+| P1 | `GET /audit-logs` | Audit page | List audit records | Proposed. FR-35, FR-36, FR-37 and FR-47 are defined; R2 approval pending |
+| P1 | `GET /settings` | Settings page | Load system configuration | Proposed. FR-38 and FR-44 are defined; R2 approval pending |
+| P1 | `PUT /settings` | Settings page | Update system configuration | Proposed. FR-44 is defined; R2 approval pending |
 
 ## Endpoints deferred to Sprint 3
 
