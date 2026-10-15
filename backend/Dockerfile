@@ -1,6 +1,6 @@
 # NOTE: this image cannot be built yet. It expects backend/pom.xml, the Maven
 # wrapper (.mvn/, mvnw) and backend/src, which are delivered by [T-30-02]
-# (issue #75). The backend service is therefore behind the "full" profile in
+# (issue #137). The backend service is therefore behind the "full" profile in
 # docker-compose.yml, so `docker compose up -d` does not try to build it.
 
 # Stage 1: Build stage (Use JDK and Maven wrapper to build the project)
