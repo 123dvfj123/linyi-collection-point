@@ -14,9 +14,7 @@ describe('auth store landing route', () => {
     const auth = useAuthStore()
     const landing = await auth.login('resident', 'resident')
     expect(auth.role).toBe('resident')
-
-    // Deliberately breaking the expected route to make the CI fail
-    expect(landing).toBe('/wrong-route-for-ci')
+    expect(landing).toBe('/my-parcels')
   })
 
   it.each([
