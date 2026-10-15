@@ -4,7 +4,7 @@
 - GitHub: @RookieVENENO
 - Role: R4 Frontend Lead + Product Architect A
 - Modules: frontend architecture, UI/UX, design system, API integration, code review
-- Period covered: W01-W16
+- Period covered: W01-W08
 
 ## Weekly log
 
