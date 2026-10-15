@@ -17,7 +17,7 @@ The course requires the GitHub link on the first line of the report:
 
 It must also carry a guide to install and run the project. `README.md` holds the
 guide; it is not yet runnable, because `backend/pom.xml` and the Maven wrapper
-arrive with issue #75.
+arrive with issue #137.
 
 ## How the report is marked
 
@@ -148,5 +148,5 @@ afterwards.
 |---|---|---|
 | 3, 7, 9 | SRS chapters 3 and 4, and the traceability matrix | #76, #77 |
 | 3 | the product backlog and acceptance criteria | #78 |
-| 6 | the backend skeleton, so implementation can be described as running | #75 |
+| 6 | the backend skeleton, so implementation can be described as running | #137 |
 | 7 | the test cases and the defect log | #78 depends on the matrix |

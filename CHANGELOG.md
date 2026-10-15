@@ -26,7 +26,7 @@ Sprint 1, the requirements and design baseline. Tagged on `develop`.
 
 ### Known gaps at this tag
 - SRS chapter 3 onwards does not exist yet (issue #76)
-- `backend/` holds no code: no `pom.xml` and no Maven wrapper (issue #75)
+- `backend/` holds no code: no `pom.xml` and no Maven wrapper (issue #137)
 - the resident read path, `/my-parcels`, has no endpoint; the scope ruling is CR-013, status Proposed
 - the traceability matrix and the product backlog do not exist (issue #77, issue #78)
 
