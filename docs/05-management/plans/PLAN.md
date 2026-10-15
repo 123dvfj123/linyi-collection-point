@@ -110,7 +110,7 @@ hands the parcel over. Everything else waits.
 | T-41-03 | Audit log interceptor | R7 | backend/src/main/java/com/group23/common |
 | T-41-04 | Unit tests for auth and RBAC | R8 | backend/src/test/java/com/group23 |
 | T-42-01 | Staff records a parcel, carrier recognised from the waybill prefix, duplicate waybills rejected | R7 | backend/src/main/java/com/group23/parcel |
-| T-42-02 | Storage location recommender: size filter, zone priority, turnover score, safe under concurrency | R6 | backend/src/main/java/com/group23/location |
+| T-42-02 | Storage location recommender: size filter, zone priority, the deterministic ordering from `location-recommender-rules.md`, safe under concurrency | R6 | backend/src/main/java/com/group23/location |
 | T-42-03 | Storage location management: zones, states, manual override | R7 | backend/src/main/java/com/group23/location |
 | T-42-04 | Pickup code issue and handover, one-time use, transaction and unique constraint | R6 | backend/src/main/java/com/group23/pickup |
 | T-42-05	| Pickup verification and handover page	| R4 | frontend/src/views |

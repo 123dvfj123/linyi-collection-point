@@ -39,4 +39,11 @@ Rejected. "No location available" is a normal business state, not a server error
 
 - The recommendation is predictable and testable.
 - The frontend does not need to know business rules.
-- The endpoint remains stable even if the scoring changes later.
+- The endpoint remains stable even if the ordering rules change later.
+
+## Revision history
+
+| Version | Date | Change | Author |
+|---|---|---|---|
+| v1.0 | Week 1 | Initial decision: a deterministic rule, not a complex scoring algorithm | R6 |
+| v1.1 | Week 2 | Consequences section reworded: the rule is an ordering, not a score. Confirmed against CRJ-001 and `location-recommender-rules.md` (CR-016) | R1 |
