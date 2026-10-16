@@ -340,7 +340,7 @@ seven are new and are numbered here for the first time.
 
 **These are design targets supported by a convenience sample, not population values.**
 Seven of the fourteen take their number from `survey-results.md` section 7, which
-records the answers of 11 residents, 7 staff members and 5 administrators: `NFR-1`,
+records the answers of 11 residents, 7 staff members and 4 administrators: `NFR-1`,
 `NFR-2`, `NFR-3`, `NFR-6`, `NFR-8`, `NFR-9` and `NFR-10`. That sample is small and
 self-selected, so a target states what the design must achieve to satisfy these
 respondents, and not what every user in the population requires. The other seven come
