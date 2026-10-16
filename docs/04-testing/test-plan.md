@@ -162,6 +162,14 @@ Progress is reported in `docs/04-testing/reports/`, in three forms:
    found and closed, the coverage figures, and an insight and recommendation
    entry for each significant finding.
 
+- Raw Surefire reports (XML and text): 'backend/target/surefire-reports/'
+- HTML summary: 'backend/target/site/surefire-report.html'
+- CI artifact (published every build): ‘surefire-reports’
+- Raw report reviewers: R8 and the owning developer
+- 
+- Sprint 4 consolidated report: ‘docs/04-testing/reports/’
+- Sprint 4 report readers: the team and the progress reviewer
+
 ## Revision history
 
 | Version | Date | Change | Author |
