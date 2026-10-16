@@ -5,8 +5,8 @@
 | Item | Detail |
 |---|---|
 | Document ID | SRS |
-| Task | T-10-05 |
-| Version | v0.2 (draft, Chapters 1 to 3) |
+| Task | T-10-05, T-10-06, T-10-07 |
+| Version | v0.3 (draft, Chapters 1 to 4) |
 | Author | R2 |
 | Status | Draft, pending team review |
 | Related documents | [personas.md](../elicitation/Personas.md), [user-journey-maps.md](../elicitation/user-journey-maps.md) |
@@ -16,6 +16,7 @@
 - [1. Introduction](#1-introduction)
 - [2. Overall Description](#2-overall-description)
 - [3. Functional Requirements](#3-functional-requirements)
+- [4. Non-Functional Requirements](#4-non-functional-requirements)
 ---
 
 ## 1. Introduction
@@ -315,4 +316,111 @@ Only the role-based persona identifiers are used: **Resident persona**, **Staff 
 
 Verification entries indicate **proposed tests**, not tests that have already been created or executed. R8 owns final test-case ID allocation and execution status. Time and coverage targets are defined separately in Chapter 4 and the existing test plan; this chapter does not claim those tests have passed.
 
+
+## 4. Non-Functional Requirements
+
+### 4.0 How these targets were derived and how they are stated
+
+Fourteen non-functional requirements are defined. **Seven of the identifiers were
+already reserved for this chapter by section 3.5**, and `docs/04-testing/test-plan.md`
+section 6 fixes what six of them mean by naming each one beside the high priority test
+area that checks it. Those identifiers keep the meaning the test plan already assumes.
+The remaining seven are new and are numbered here for the first time.
+
+| Reserved identifier | Where its meaning was fixed |
+|---|---|
+| `NFR-1` | `test-plan.md` section 6 — notification delay |
+| `NFR-4` | `test-plan.md` section 6 — handover idempotency under concurrency |
+| `NFR-5` | `test-plan.md` section 6 — one storage location cannot hold two parcels |
+| `NFR-6` | **Nothing fixed it.** Reserved by section 3.5 and cited by no other
+document, so the meaning is assigned here: data separation between collection points |
+| `NFR-7` | `test-plan.md` section 6 — pickup code single use and expiry |
+| `NFR-10` | `test-plan.md` section 6 — mobile viewport usability |
+| `NFR-12` | `test-plan.md` section 6 — overdue fee calculation |
+
+**These are design targets supported by a convenience sample, not population values.**
+Seven of the fourteen take their number from `survey-results.md` section 7, which
+records the answers of 11 residents, 7 staff members and 5 administrators: `NFR-1`,
+`NFR-2`, `NFR-3`, `NFR-6`, `NFR-8`, `NFR-9` and `NFR-10`. That sample is small and
+self-selected, so a target states what the design must achieve to satisfy these
+respondents, and not what every user in the population requires. The other seven come
+from `test-plan.md` section 6, `ADR-002`, `ADR-005`, `CONTRIBUTING.md` or the scope
+boundaries in section 3.0; the Source column marks which is which.
+
+Every target is numeric or binary, so it can be checked without a judgement call, and
+every row names the method used to measure it. Verification entries name the **proposed**
+approach, in the same sense as section 3.6: R8 owns final test-case identifier
+allocation, and `docs/04-testing/test-cases/README.md` defines the naming convention.
+
+### 4.1 Performance and responsiveness — 3 requirements
+
+| ID | Requirement statement | Target | Source | Verification method |
+|---|---|---|---|---|
+| NFR-1 | The system shall notify a resident that a parcel has arrived within a bounded delay of the parcel being shelved. | **Within 5 minutes** as the design target; **within 60 minutes** as the acceptable limit | `survey-results.md` section 7, row 1 (Resident R4, 6 of 11) | Record the shelving timestamp and the timestamp the notification first becomes readable; compare the difference over a sample of arrivals. `test-plan.md` section 6, notification delay. |
+| NFR-2 | The system shall let a resident complete the collection journey, from opening the parcel list to confirming that a pickup code exists, within a bounded time. | **3 to 5 minutes** as the design target; **10 minutes** as the acceptable limit | `survey-results.md` section 7, row 2 (Resident R6) | Time a scripted journey on a 375 px viewport with a prepared resident account, from the list view to the detail view showing the code. |
+| NFR-3 | The system shall let a staff member complete a single handover, from entering the pickup code to the confirmed state, within a bounded time. | **Up to 3 minutes** | `survey-results.md` section 7, row 3 (Staff S6, 6 of 7 accepted up to 3 minutes) | Time the handover with a prepared parcel and code, from code entry to the confirmed state, with the location already known. |
+
+### 4.2 Reliability and data integrity — 4 requirements
+
+| ID | Requirement statement | Target | Source | Verification method |
+|---|---|---|---|---|
+| NFR-4 | The system shall make handover confirmation idempotent: confirming the same pickup code more than once shall create exactly one handover record, and a repeat confirmation shall return the same successful answer rather than a conflict. | **Binary** — one handover record per pickup code, under concurrent requests | `test-plan.md` section 6, handover idempotency under concurrency; `CR-007` | Submit two confirmations for one code concurrently and assert that exactly one handover row exists and that both callers receive the same answer. `test-plan.md` section 6. |
+| NFR-5 | The system shall not allow one storage location to hold more than one active parcel at a time. | **Binary** — at most one active parcel per location | `test-plan.md` section 6, one storage location cannot hold two parcels | Attempt the violation deliberately: shelve a second parcel into an occupied location and assert that the write is rejected by the database constraint, not only by application code. |
+| NFR-6 | The system shall keep the data of one collection point separate from another within one shared database, by associating every collection-point-scoped record with a collection point identifier. | **Binary** — every scoped record carries a collection point identifier, and reads are filtered by it | `survey-results.md` section 7, row 5 (Administrator A5), consistent with `ADR-002`; `FR-46` | Inspect the schema for the identifier on every scoped table, then query as one collection point and assert that no row from another is returned. Depends on `FR-46`, which is open as issue #127. |
+| NFR-7 | The system shall treat a pickup code as single use and time limited: a code that has been used or has expired shall not confirm a second handover. | **Binary** — a used or expired code is refused | `test-plan.md` section 6, pickup code single use and expiry; `FR-21` | Replay a used code and assert refusal; advance past the expiry and assert refusal; assert that the parcel state is unchanged in both cases. |
+
+### 4.3 Security and privacy — 2 requirements
+
+| ID | Requirement statement | Target | Source | Verification method |
+|---|---|---|---|---|
+| NFR-8 | The system shall authorise every endpoint by the role of the authenticated session, and shall not rely on a hidden control in the interface as a security control. | **Binary** — every endpoint enforces its permitted roles and refuses others | `survey-results.md` section 7, row 4 (Administrator A4); `FR-45` | Call every endpoint with each of the four roles and assert the permitted and refused sets; assert that a refused call changes no data. |
+| NFR-9 | The system shall record an audit entry for every sensitive operation, holding the actor, the action, the target and the time, and shall mask a resident's phone number wherever it is displayed. | **Binary** — no sensitive operation without an audit entry; no unmasked phone number in any response | `FR-25`, `FR-47`; `survey-results.md` section 7, row 4 (phone masking) | Perform each sensitive operation and assert one audit row; scan every response body for an unmasked phone number. |
+
+### 4.4 Usability and accessibility — 2 requirements
+
+| ID | Requirement statement | Target | Source | Verification method |
+|---|---|---|---|---|
+| NFR-10 | The system shall be usable on a 375 px viewport, with a single column layout, no horizontal scrolling of the page, and every control reachable. | **Binary** — no horizontal scroll at 375 px, and every control reachable | `survey-results.md` section 7, row 6 (Resident R2, 9 of 11) | Render each page at 375 px and assert that the document width does not exceed the viewport; walk the keyboard focus order and assert that no control is skipped. |
+| NFR-11 | The system shall state every error in terms a resident or staff member can act on, naming what failed and what to do next, and shall not surface a bare status code or a stack trace. | **Binary** — every error message names an action, and no response exposes an internal detail | Scope boundaries in section 3.0; `survey-results.md` section 8, which records that residents were not asked about failure handling | Trigger each documented failure response and read the message; assert that it names an action and contains no status code, no exception name and no file path. |
+
+### 4.5 Maintainability and portability — 3 requirements
+
+| ID | Requirement statement | Target | Source | Verification method |
+|---|---|---|---|---|
+| NFR-12 | The system shall calculate an overdue fee that agrees with an independent recalculation for every prepared case. | **At least 20 prepared cases**, all agreeing to the cent | `test-plan.md` section 6, overdue fee calculation; `FR-39` | Recalculate each case by hand or in a separate script and compare; a single disagreement fails the target. The rule table is `docs/02-design/overdue-fee-rules.md`. |
+| NFR-13 | The system shall keep the automated test suite passing on every commit to `develop`, and shall treat a red suite as blocking rather than waived. | **Binary** — the pipeline is green on every merge into `develop` | `CONTRIBUTING.md`, the review rule; issue #73 | The continuous integration pipeline runs lint, unit tests and the build for the frontend on every pull request; a red result blocks the merge. |
+| NFR-14 | The system shall start from a clean checkout with one command, and every schema change shall be applied by a versioned migration rather than by hand. | **Binary** — one command starts the stack; no manual schema step | `ADR-005`; `PLAN.md` Sprint 2 | Run the compose command on a clean checkout and assert that all services report healthy; assert that the schema is created only by the migrations under `backend/src/main/resources`. |
+
+### 4.6 Open dependencies and confirmation needed
+
+**Two of the fourteen cannot be verified until another task lands.**
+
+- **`NFR-6`** depends on `FR-46`, each collection-point-scoped record carrying a
+  collection point identifier. That requirement has no implementation yet and is open as
+  issue #127. Until it lands, the schema inspection can only record the gap.
+- **`NFR-12`** depends on `docs/02-design/overdue-fee-rules.md`, which exists, and on the
+  twenty prepared cases, which R8 owns.
+
+**Confirmation before this chapter is frozen.** R2 to confirm the MoSCoW-style priority
+of each target and whether any is a Should rather than a Must. R6 to confirm that
+`NFR-5`, `NFR-6` and `NFR-9` are achievable in the data model as designed, in particular
+that the single-active-parcel-per-location rule is enforceable by a database constraint
+rather than only in application code. R8 to confirm that each of the fourteen can be
+mapped to at least one test case identifier, which is the input the traceability matrix
+needs.
+
+**Two targets are deliberately not survey results.** `NFR-13` and `NFR-14` come from
+`CONTRIBUTING.md` and `ADR-005` rather than from `survey-results.md`, and the Source
+column says so. They are included because the report's testing and evolution sections
+cite them, and a requirement that is never stated cannot be verified.
+
+---
+
+## Revision history
+
+| Version | Date | Change | Author |
+|---|---|---|---|
+| v0.1 | Week 2 | Chapters 1 and 2: background, problem, goals and scope | R2 |
+| v0.2 | Week 2 | Chapter 3: 47 functional requirements grouped by role, with MoSCoW and proposed verification | R3 |
+| v0.3 | Week 2 | Added chapter 4, the 14 non-functional requirements. Seven identifiers were reserved by section 3.5 and six of their meanings were fixed by `test-plan.md` section 6; those are kept. Seven targets come from `survey-results.md` section 7 and are stated as design targets supported by a convenience sample | R3, R1 |
 
