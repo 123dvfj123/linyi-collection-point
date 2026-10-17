@@ -160,8 +160,8 @@ Once these are done, the RTM satisfies all three `#77` acceptance criteria.
 
 ## Appendix: NFR numbering reference
 
-| Requirement | Correct ID | `develop` SRS says |
-|---|---|---|
+| Requirement | Correct ID |
+|---|---|
 | Notification delay | NFR-1 |
 | Resident pickup flow | NFR-2 | 
 | Error message requirements | NFR-9 | 
