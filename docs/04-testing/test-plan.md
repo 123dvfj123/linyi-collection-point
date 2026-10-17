@@ -102,7 +102,7 @@ requirement target. They are tested first and re-tested after every change.
 | Pickup code single use and expiry | Replay of a used code would allow a second handover | NFR-7 |
 | Duplicate waybill rejection | Two records for one parcel cause a dispute that cannot be settled | FR-17 |
 | Notification delay | The resident requirement states notice within one hour | FR-6, NFR-1 |
-| Mobile viewport usability | 9 of 11 residents use a phone | NFR-3 |
+| Mobile viewport usability | 9 of 11 residents use a phone | NFR-10 |
 
 ## 7. Defect management
 
