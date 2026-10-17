@@ -167,9 +167,9 @@ Once these are done, the RTM satisfies all three `#77` acceptance criteria.
 | Error message requirements | NFR-9 | 
 | Handover idempotency | NFR-4 |
 | One storage location, one parcel | NFR-5 |
-| Operator identity audit | NFR-6 | NFR-6 |
-| Pickup code single use | NFR-7 | NFR-7 |
-| Site data isolation | NFR-8 | NFR-8 |
+| Operator identity audit | NFR-6 |
+| Pickup code single use | NFR-7 |
+| Site data isolation | NFR-8 |
 | Audit log + phone masking | NFR-11|
 | 375 px mobile usability | NFR-10| 
 | Overdue fee calculation | NFR-12 |
