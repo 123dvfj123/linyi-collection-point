@@ -157,15 +157,19 @@ case is referenced in the closing comment.
 Progress is reported in `docs/04-testing/reports/`, in three forms:
 
 1. A defect list, updated continuously, with severity and status.
-2. A coverage report, produced by the continuous integration pipeline on each build.
+
+2. A coverage report. JaCoCo produces `jacoco.xml` and an HTML rendering at
+`backend/target/site/jacoco/`, which the same artefact upload step collects.
+The target is the line coverage figure in section 3
+
 3. A test report at the end of Sprint 4, containing the results, the defects
    found and closed, the coverage figures, and an insight and recommendation
    entry for each significant finding.
 
-- Raw Surefire reports (XML and text): 'backend/target/surefire-reports/'
-- HTML summary: 'backend/target/site/surefire-report.html'
-- CI artifact (published every build): ‘surefire-reports’
-- Raw report reviewers: R8 and the owning developer
+  - Raw Surefire reports (XML and text): 'backend/target/surefire-reports/'
+  - HTML summary: 'backend/target/site/surefire-report.html'
+  - CI artifact (published every build): ‘surefire-reports’
+  - Raw report reviewers: R8 and the owning developer
 
 - Sprint 4 consolidated report: ‘docs/04-testing/reports/’
 - Sprint 4 report readers: the team and the progress reviewer
