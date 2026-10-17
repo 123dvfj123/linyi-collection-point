@@ -7,7 +7,7 @@
 | Source | SRS.md (FR: Chapter 3, NFR: Chapter 4) |
 | Related | #77, test-plan.md, test-cases/README.md |
 
-## ⚠️ Submission blockers
+##  Submission blockers
 
 This RTM is a **draft**. Three items must be resolved before submission:
 
