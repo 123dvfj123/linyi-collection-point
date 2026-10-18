@@ -58,7 +58,7 @@ To ensure comprehensive testing coverage, the following five aspects must be che
 |---|---|---|---|---|
 | TC-AUTH-001 | FR-1 | Slice | A registered resident signs in and receives a session | Sprint 2 |
 | TC-AUTH-002 | FR-45 | Slice | A resident is refused an admin-only route | Sprint 2 |
-| TC-AUTH-003 | NFR-11 | Component | Every endpoint refuses a role it does not permit | Sprint 2 |
+| TC-AUTH-003 | NFR-3 | Component | Every endpoint refuses a role it does not permit | Sprint 2 |
 | TC-PARC-001 | FR-12 | Integration | A single arriving parcel is registered | Sprint 2 |
 | TC-PARC-002 | FR-17 | Integration | A duplicate waybill number is rejected | Sprint 2 |
 | TC-PARC-003 | FR-18 | Integration | A batch of 50 is registered in one operation | Sprint 2 |
