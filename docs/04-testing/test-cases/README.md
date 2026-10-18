@@ -65,4 +65,6 @@ To ensure comprehensive testing coverage, the following five aspects must be che
 | TC-PICK-001 | FR-21 | Integration | An active pickup code is verified | Sprint 2 |
 | TC-PICK-002 | NFR-7 | Integration | A used code is refused a second handover | Sprint 2 |
 | TC-PICK-003 | NFR-4 | Integration | Two concurrent confirmations write one handover | Sprint 2 |
+| TC-AUD-005 | NFR-11 | Component | Every sensitive operation is audited; phone numbers are masked | Sprint 2 |
+| TC-AUTH-003 | NFR-3 | Component | Every endpoint refuses a role it does not permit | Sprint 2 |
 
