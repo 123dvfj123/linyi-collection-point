@@ -119,6 +119,23 @@ Once these are done, the RTM satisfies all three `#77` acceptance criteria.
 | NFR-13 | The test suite stays green on every commit to `develop` | Must (proposed) | `CONTRIBUTING.md` review rule; issue #73 | `.github/workflows/ci.yml`; `CONTRIBUTING.md` review rule | `.github/workflows/ci.yml` | TC-OPS-002 | designed |
 | NFR-14 | One command starts the system; schema changes use versioned migrations | Must (proposed) | `ADR-005`; `PLAN.md` Sprint 2 | `ADR-005`; `backend/src/main/resources/db/migration/`; `docker-compose.yml` | `backend/src/main/resources/db/migration/`; `docker-compose.yml` | TC-OPS-003 | designed |
 
+## Status before submission
+
+The matrix is complete as a mapping: all 47 functional requirements and all 14
+non-functional requirements appear exactly once, every `design artefact` cell names a
+path that exists or a real task identifier from `PLAN.md`, and every cited test case
+identifier is reserved in `docs/04-testing/test-cases/README.md`.
+
+**One item remains open.**
+
+| # | Open item | Where |
+|:--:|---|---|
+| 1 | Six UML filenames in the `design artefact` column are inferred rather than listed, and should be confirmed with `ls docs/02-design/uml/` | `class-parcel-and-location.puml`, `sequence-login-role-guard.puml`, `sequence-staff-intake.puml` and three others |
+
+The forty-nine reserved identifiers whose `Level` column reads `TBD` are reserved but not
+yet assigned a test level. Assigning the level is a Sprint 2 activity and does not block
+the reservation, which is what `#77` asks for.
+
 ## Acceptance checklist
 
 ### 1. RTM covers 100 per cent of must-have requirements
