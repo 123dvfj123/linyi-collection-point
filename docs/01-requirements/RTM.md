@@ -55,7 +55,7 @@ Once these are done, the RTM satisfies all three `#77` acceptance criteria.
 
 ## Traceability matrix
 
-| ID | statement summary | priority | source | design artefact | code module | test case ID | status |
+| Requirement ID | statement summary | priority | source | design artefact | code module | test case ID | status |
 |---|---|---|---|---|---|---|---|
 | FR-1 | A registered resident signs in via the web app | Must (proposed) | SRS IS-1; frontend-page-map /login | `ERD.md` `User` (username, passwordHash, role, active); `docs/02-design/uml/class-parcel-and-location.puml` (`User` class + `UserRole` enum); `openapi.yaml` `POST /auth/login`; `docs/02-design/uml/sequence-login-role-guard.puml` (full login sequence: verify password hash → 200 {token, roles}); `frontend-page-map.md` `/login` | `backend/.../auth/`; `frontend/src/pages/Login/` | TC-AUTH-001 | implemented |
 | FR-2 | A resident sees only their own parcels in the list | Must (proposed) | R5: parcel status 3/11; CR-013; SRS IS-6 | `ERD.md` `Parcel.registeredById` / `recipientPhone`; `openapi.yaml` `GET /my-parcels`; `frontend-page-map.md` `/my-parcels` | `backend/.../parcel/`; `frontend/src/pages/MyParcels/` | TC-RES-001 | designed |
