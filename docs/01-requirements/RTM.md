@@ -1,29 +1,18 @@
 # Requirements Traceability Matrix
 
-| Version | v0.1 (draft for Sprint 1) |
+| Version | v0.2 (draft for Sprint 1) |
 |---|---|
-| Date | 2026-10-17 |
+| Date | 2026-10-19 |
 | Owner | R8 Wu Kehao |
 | Source | SRS.md (FR: Chapter 3, NFR: Chapter 4) |
 | Related | #77, test-plan.md, test-cases/README.md |
-
-##  Submission blockers
-
-This RTM is a **draft**. Three items must be resolved before submission:
-
-| # | Blocker | Where |
-|:--:|---|---|
-| 1 | Replace 14 `scheduled: T-xx-xx` placeholders with real task IDs from `PLAN.md` | … |
-| 2 | Confirm 6 inferred UML filenames with `ls docs/02-design/uml/` | … |
-| 3 | Paste the 58-row Reserved IDs table into `test-cases/README.md` | See the table in the PR description |
-
-Once these are done, the RTM satisfies all three `#77` acceptance criteria.
 
 ## Revision history
 
 | Version | Week | Change | Author |
 |---|---|---|---|
 | v0.1 | Week 2 | Initial RTM: every must-have FR and NFR mapped to design artefact, code module and reserved test case ID. Draft pending task ID assignment and UML filename confirmation. | R8 |
+| v0.2 | Week 2 | Removed the stale `Submission blockers` section, which said three items were open after they were done; corrected the sentence that said forty-nine reserved identifiers still had a `TBD` test level, since all fifty-nine were assigned one; removed a duplicated `Acceptance checklist` heading; removed a stray backtick. Prepared by R1 while R8 was unavailable, for R8 to review | R1 |
 
 ## Column definitions
 
@@ -132,11 +121,9 @@ identifier is reserved in `docs/04-testing/test-cases/README.md`.
 |:--:|---|---|
 | 1 | Six UML filenames in the `design artefact` column are inferred rather than listed, and should be confirmed with `ls docs/02-design/uml/` | `class-parcel-and-location.puml`, `sequence-login-role-guard.puml`, `sequence-staff-intake.puml` and three others |
 
-The forty-nine reserved identifiers whose `Level` column reads `TBD` are reserved but not
-yet assigned a test level. Assigning the level is a Sprint 2 activity and does not block
-the reservation, which is what `#77` asks for.
-
-## Acceptance checklist
+All fifty-nine reserved identifiers carry a test level drawn from the six the README
+defines, so the reservation table is complete. The six are `System`, `Integration`,
+`Component`, `Slice`, `Performance` and `Acceptance`.
 
 ## Acceptance checklist
 
@@ -161,7 +148,7 @@ the reservation, which is what `#77` asks for.
 - [x] `docs/01-requirements/RTM.md` exists.
 - [x] Criteria 1 and 2 above are satisfied without qualification.
 - [x] The trigger condition recorded against RSK-14 is that the matrix does not exist.
-      It exists, so the trigger no longer holds and the risk can be closed.`
+      It exists, so the trigger no longer holds and the risk can be closed.
 
 ## GAP list (to be resolved or tracked)
 
