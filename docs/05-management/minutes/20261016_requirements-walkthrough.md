@@ -40,7 +40,7 @@ Findings and actions
 
 2) CR-004 — Storage-location recommender (zone suggestion)
 - Checks:
-  - Validity: Re-survey confirms low resident interest (S4 0/7) and staff preference for manual control (S5 4/7 want manual). Business rationale changed accordingly.
+  - Validity: Re-survey confirms low staff interest (S4 0/7 chose it) and staff preference for manual control (S5 4/7 want manual). Business rationale changed accordingly.
   - Consistency: SRS previously had language that could be interpreted as "automatic assignment" in places (contract earlier drafts). This conflicts with the new decision "recommend only; never auto-apply".
   - Completeness: Need a short UI flow and a clear operator action: how a recommendation is presented, how an operator accepts/overrides it, and whether a confidence score or reason is shown.
   - Realism: Recommender algorithm (score-based zone rules) is slated for Sprint 2 design but full automated placement is not accepted; implementing a suggest-only surface is low-to-medium effort.
