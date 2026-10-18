@@ -33,7 +33,7 @@ Findings and actions
   - Realism: Backend feasibility assessed as medium effort; Flyway/DB constraints require transactional handling for bulk writes (R6). Scheduled for Sprint 2 as per PLAN.md.
   - Verifiability: Acceptance criteria exist at a high level in change-log but need explicit Given/When/Then test cases and RTM mapping.
 - Finding: SRS lacks the detailed acceptance criteria and the transaction/partial-failure behaviour is unspecified.
-- Action: R3 to update SRS FR-?? (the FR id that CR-003 maps to) to include explicit Given/When/Then acceptance criteria for batch registration, including error/partial-success behaviour; add a note that the operation must be atomic per collection-point within a single CSV upload unless a streaming partial-apply mode is chosen (decision TBD). R8 to add at least two test cases to RTM mapping to the batch flow (happy path + partial failure).
+- Action: R3 to update SRS FR-18 to include explicit Given/When/Then acceptance criteria for batch registration, including error/partial-success behaviour; add a note that the operation must be atomic per collection-point within a single CSV upload unless a streaming partial-apply mode is chosen (decision TBD). R8 to add at least two test cases to RTM mapping to the batch flow (happy path + partial failure).
 - Owner: R3 (SRS update), R8 (RTM/test cases)
 - Due: 2026-10-20
 - Closure criterion: SRS PR merged that updates FR entry; RTM rows added and a PR that references the SRS PR; change-log notes the SRS update (if a new CR is needed, R2 to open it).
