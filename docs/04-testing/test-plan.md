@@ -8,7 +8,7 @@
 |---|---|
 | Task | T-50-19 |
 | Owner | R8 |
-| Version |v0.2 (draft for Sprint 1) |
+| Version | v0.2 (draft for Sprint 1) |
 | Status | Draft, to be completed once the SRS is frozen |
 
 ## 1. Purpose and scope
