@@ -14,7 +14,7 @@
 | W02 |  2026-10-17 | T-50-19 | Add a sentence to Section 11 of `test-plan.md`: where the report is generated and who reads it | 23:58-00:34| 0.6 | done | docs/04-testing/test-plan.md | - | - | - |
 | W02 |  2026-10-17 | T-50-19 | Edit test-cases/README.md, logbook| 13:00-14:00| 1 | done | docs/04-testing/test-cases/README.md | - | Corrected errors in the logbook and added some notes to test-cases/README.md | - |
 | W02 |  2026-10-17 | T-50-19 | Create RTM.md | 19:33-22:40| 3.12 | done | docs/01-requirements/RTM.md | - | - | - |
-| W02 |  2026-10-18 2026-10-19 | T-50-19 | Modify RTM.md and test-cases/README.md and logbook | 23:39-00:37 | 0.97 | done | docs/01-requirements/RTM.md docs/04-testing/test-cases/README.md| - | - | - |
+| W02 |  2026-10-18 | T-50-19 | Modify RTM.md and test-cases/README.md and logbook | 23:39-00:37 | 0.97 | done | docs/01-requirements/RTM.md docs/04-testing/test-cases/README.md| - | - | - |
 | W02 |  2026-10-19 | T-50-19 | Modify RTM.md and test-cases/README.md and logbook | 01:43-01:53 | 0.17 | done | docs/01-requirements/RTM.md docs/04-testing/test-cases/README.md| - | - | - |
 | W02 |  2026-10-19 | T-50-19 | Modify RTM.md and test-cases/README.md and logbook | 02:20-02:31 | 0.18 | done | docs/01-requirements/RTM.md docs/04-testing/test-cases/README.md| - | - | - |
 ---
