@@ -175,3 +175,4 @@ Once these are done, the RTM satisfies all three `#77` acceptance criteria.
 | Overdue fee calculation | NFR-12 |
 | All tests green | NFR-13 |
 | One-command startup | NFR-14 |
+| Endpoint authorisation | NFR-3 |
