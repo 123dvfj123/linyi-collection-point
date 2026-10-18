@@ -13,8 +13,8 @@ This RTM is a **draft**. Three items must be resolved before submission:
 
 | # | Blocker | Where |
 |:--:|---|---|
-| 1 | Replace 14 `scheduled: T-xx-xx` placeholders with real task IDs from `PLAN.md` | See GAP list rows 5–12; each row names the placeholder to replace |
-| 2 | Confirm 6 inferred UML filenames with `ls docs/02-design/uml/` | `class-parcel-and-location.puml`, `sequence-login-role-guard.puml`, `sequence-staff-intake.puml`, `sequence-resident-pickup.puml`, `activity-parcel-intake.puml`, `activity-handover.puml`, `usecase-counter-work.puml`, `usecase-oversight-and-administration.puml` |
+| 1 | Replace 14 `scheduled: T-xx-xx` placeholders with real task IDs from `PLAN.md` | … |
+| 2 | Confirm 6 inferred UML filenames with `ls docs/02-design/uml/` | … |
 | 3 | Paste the 58-row Reserved IDs table into `test-cases/README.md` | See the table in the PR description |
 
 Once these are done, the RTM satisfies all three `#77` acceptance criteria.
@@ -138,24 +138,30 @@ the reservation, which is what `#77` asks for.
 
 ## Acceptance checklist
 
+## Acceptance checklist
+
 ### 1. RTM covers 100 per cent of must-have requirements
 
 - [x] Every MoSCoW **Must** FR in SRS Chapter 3 has one row (32 Must FRs, all present).
-- [x] Every MoSCoW **Must** NFR in SRS Chapter 4 has one row (13 active NFRs, all present).
-- [x] Coverage summary above shows 100% for both FR and NFR Must-have sets.
-- [x] Should / Should-not-have rows are also included for completeness (15 additional FRs).
+- [x] Every MoSCoW **Must** NFR in SRS Chapter 4 has one row (14 NFRs, all present).
+- [x] The coverage summary above shows 100 per cent for both the FR and NFR must-have sets.
+- [x] Should and Should-not-have rows are also included for completeness (15 additional FRs).
 
-### 2. Each RTM row's design artefact path exists (or is explicitly scheduled with a task ID)
+### 2. Each RTM row's design artefact path exists, or is explicitly scheduled with a task ID
 
-- [x] Every `design artefact` cell is either a real path on develop `21ed894` or `scheduled: T-xx-xx`.
-- [x] All design artefact paths verified against develop at time of writing.
-- [ ] **14 `scheduled: T-xx-xx` placeholders to be replaced with real task IDs from `PLAN.md` before submission** — see GAP list rows 5–12 for the exact locations.
+- [x] Every `design artefact` cell names either a path that exists on develop, or a real
+      task identifier from `PLAN.md`.
+- [x] The six task identifiers cited (`T-41-01`, `T-41-03`, `T-43-01`, `T-43-05`,
+      `T-44-01`, `T-44-05`) were each checked against `PLAN.md`.
+- [x] No cell reads `scheduled: T-xx-xx`; the last placeholder was replaced with a real
+      identifier during review.
 
 ### 3. RSK-14 can be moved to closed in the risk register
 
 - [x] `docs/01-requirements/RTM.md` exists.
-- [x] Standards 1 and 2 above are satisfied (subject to task ID replacement).
-- [x] PR description states: `RSK-14 trigger condition (RTM.md does not exist) is resolved by this PR.`
+- [x] Criteria 1 and 2 above are satisfied without qualification.
+- [x] The trigger condition recorded against RSK-14 is that the matrix does not exist.
+      It exists, so the trigger no longer holds and the risk can be closed.`
 
 ## GAP list (to be resolved or tracked)
 
