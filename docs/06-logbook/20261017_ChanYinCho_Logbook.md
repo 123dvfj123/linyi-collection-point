@@ -13,5 +13,6 @@
 | W01 |  2026-10-10 | T-10-04 | Build 3 Personas | 22:00-23:15 | 1.25 | done | docs/01-requirements/elicitation/Personas.md | - | - | - |
 | W02 |  2026-10-15 | T-10-08 | Add product backlog documentation | 1400-1600 | 2 | done | PR#154 | - | - | - |
 | W02 |  2026-10-15 | T-10-08 | Solving the product-backlog problem  | 2130-2215 | 0.75 | done | PR#158 | - | Align the backlog with the current develop SRS FR/NFR identifiers and replace the invalid custom IDs. Add Sprint task IDs to each backlog row (format: Sprint X — T-xx-xx). Set BL-005 to Must based on the project evidence. | - |
-| W02 |  2026-10-16 & 2026-10-17 | T-10-04 | Add requirements walkthrough minutes | 2230-2400 / 1700-1900 | 3.5 | done | PR#159 | - | - | - |
+| W02 |  2026-10-16 | T-10-10 | Add requirements walkthrough minutes | 2230-2400 | 1.5 | done | PR#159 | - | - | - |
+| W02 |  2026-10-17 | T-10-10 | Continue to complete adding requirements walkthrough minutes | 1700-1900 | 2 | done | PR#159 | - | - | - |
 ---
