@@ -108,7 +108,7 @@ Artifacts produced or referenced
 - This minutes file: docs/05-management/minutes/20261016_requirements-walkthrough.md
 - change-log.md (existing) — any new CRs will be added here
 - SRS (docs/01-requirements/specification/SRS.md) — to be edited by R3
-- RTM (docs/04-testing/RTM.md or docs/04-testing/README) — R8 to update
+- RTM (docs/01-requirements/RTM.md) — R8 to update
 - PRs that implement SRS/contract/ERD/migration edits will reference this minutes file and the CRs they close.
 
 Closure statement
