@@ -1,5 +1,13 @@
 # Project plan
 
+| Item | Detail |
+|---|---|
+| Task | T-00-07 |
+| Owner | R1 |
+| Version | v1.1 |
+| Status | Active, reviewed at the end of every sprint |
+
+
 Eight weeks, five sprints. Every task has an ID, an owner and a folder.
 Task IDs are used in commit messages so that any commit can be traced back
 to the task it belongs to.
@@ -188,3 +196,9 @@ A task is done when:
 4. the deliverable sits in the folder listed above
 5. the person who did it has written a logbook entry with a link
 
+## Revision history
+
+| Version | Week | Change | Author |
+|---|---|---|---|
+| v1.0 | Week 1 | Initial eight-week, five-sprint plan with a task ID, an owner and a folder for every task | R1 |
+| v1.1 | Week 2 | `T-42-02` corrected to drop the turnover score, which `CRJ-001` had rejected (`CR-016`), and the week 2 scope of issue #73 narrowed to the two jobs that could run (`CR-017`) | R1 |

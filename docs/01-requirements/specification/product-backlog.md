@@ -1,5 +1,13 @@
 # Product Backlog
 
+| Item | Detail |
+|---|---|
+| Task | T-10-08 |
+| Owner | R2 |
+| Version | v1.1 |
+| Status | Draft, reviewed for Sprint 1 |
+
+
 This Product Backlog is ordered by business value (highest first). Each row includes: ID, Item, FR / NFR (R3), MoSCoW priority, Business value rationale (with survey / change-record references), Acceptance criteria in Given / When / Then format, and Sprint assignment.
 
 > Source evidence used for prioritisation: employee survey S3, S4, S5; resident survey R5; change-log entries CR-003, CR-004, CR-005, CR-006; PLAN.md (Sprint allocations). See change-log.md for the records that changed priorities.
@@ -43,3 +51,10 @@ List of functionality explicitly excluded from current scope and the rationale (
 ---
 
 Prepared by: Product Owner (Sprint 1 closeout). For traceability, please review and approve with at least one non-author reviewer.
+
+## Revision history
+
+| Version | Week | Change | Author |
+|---|---|---|---|
+| v1.0 | Week 2 | Initial backlog: ten items ordered by business value, MoSCoW priorities, Given/When/Then acceptance criteria and the not-this-time section | R2 |
+| v1.1 | Week 2 | Identifiers renumbered against the SRS, Sprint task IDs added to every row, `BL-005` promoted to Must, and the in-system wording corrected after `OS-6` was read | R2 |

@@ -1,10 +1,13 @@
 # ERD - Community Parcel Collection Point System
 
-- Status: Draft
-- Date: 2026-10-10
-- Owners: R6 Backend Lead, R7 Backend Developer
-- Database: PostgreSQL 16
-- ORM: Spring Data JPA
+| Item | Detail |
+|---|---|
+| Status | Draft |
+| Date | 2026-10-19 |
+| Owners | R6 Backend Lead, R7 Backend Developer |
+| Version | v1.2 |
+| Database | PostgreSQL 16 |
+| ORM | Spring Data JPA |
 
 ## Entities
 
@@ -203,3 +206,11 @@ The lifecycle of each status value is modelled by these PlantUML sources:
 
 `ParcelException` is a separate record, so its ticket states do not extend
 `Parcel.status`.
+
+## Revision history
+
+| Version | Week | Change | Author |
+|---|---|---|---|
+| v1.0 | Week 1 | Initial entity model for the eight entities | R6 |
+| v1.1 | Week 2 | `Parcel.status` reduced to the three values ruled by `CR-006`, and the exception types aligned with the SRS as `CR-010` requires | R6 |
+| v1.2 | Week 3 | `CollectionPoint` added, with `collectionPointId` on the five entities that are scoped directly and a section on what is still open, per `CR-021` | R1 |
