@@ -37,6 +37,7 @@ Findings and actions
 - Owner: R3 (SRS update), R8 (RTM/test cases)
 - Due: 2026-10-20
 - Closure criterion: SRS PR merged that updates FR entry; RTM rows added and a PR that references the SRS PR; change-log notes the SRS update (if a new CR is needed, R2 to open it).
+- Status: **Open.** `FR-18` still has no acceptance criteria and no partial-failure behaviour. R3 owns the edit; a draft of the Given/When/Then block and the partial-failure rule is prepared for him to review. The contract already states the rule, in the `/parcels/batch` description: each entry is validated on its own so one bad row does not discard the rest of the batch, and the response reports `created` and `rejected` separately. The SRS is what is missing, not the semantics.
 
 2) CR-004 — Storage-location recommender (zone suggestion)
 - Checks:
@@ -50,6 +51,7 @@ Findings and actions
 - Owner: R3 (SRS/contract text), R4 (UI wording), R8 (RTM)
 - Due: 2026-10-20
 - Closure criterion: PR(s) merging SRS and contract edits that explicitly state "recommend only — operator must accept to apply"; RTM test cases added; change-log updated to reference the PR(s).
+- Status: **Closed.** `FR-19` and `FR-20` both state that the suggestion "shall never be applied automatically", and the `/locations/recommend` description in `openapi.yaml` records the same rule as the contract's own wording. No SRS or contract edit was needed; the wording was already there when the finding was written.
 
 3) CR-005 — Delegated pickup authorisation code (delegated collection)
 - Checks:
@@ -63,6 +65,7 @@ Findings and actions
 - Owner: R3 (SRS edit), R2 (raise CR status update), R8 (RTM update)
 - Due: 2026-10-20
 - Closure criterion: SRS updated and merged, RTM updated, and change-log contains a CR recording the scope reconcilliation (CR-005 status change) with links to PRs.
+- Status: **Closed.** `IS-8` now reads "Handling of exceptions: overdue, damaged, wrong-recipient, refused or lost parcels" and names delegated collection nowhere. `FR-9` and `FR-10` carry `[Future work]`, and `CR-005` records the scope change as `Approved`.
 
 4) CR-006 — Parcel status (registered / shelved / collected)
 - Checks:
@@ -76,6 +79,7 @@ Findings and actions
 - Owner: R6/R7 (schema + migration), R3 (SRS), R8 (RTM)
 - Due: 2026-10-22
 - Closure criterion: PRs merging SRS, ERD and migration; RTM updated; change-log notes the implemented alignment (CR-006 implemented when Sprint 2 begins).
+- Status: **Closed.** `ERD.md` gives `Parcel.status` as `enum(registered, shelved, collected)`, the contract carries the same enum, and the three state-machine sources use it. `out_for_delivery` and `ready_for_pickup` survive only in a note explaining why they were removed. The migration is Sprint 2 work under `T-30-03`.
 
 Additional cross-cutting findings
 --------------------------------
@@ -85,6 +89,8 @@ A) Billing scope contradiction
 - Owner: R1 (decision), R2 (record CR), R3 (SRS edits)
 - Due: 2026-10-20
 - Closure criterion: Decision recorded as a CR in change-log and SRS/design edited accordingly.
+- Ruling (2026-10-19): **eight weeks.** Payment and settlement are out; the overdue fee calculation is in and is delivered by `T-44-01`. `OS-3` already distinguishes the two, so the contradiction was a misreading of `OS-3` rather than a scope conflict. `PLAN.md`'s `T-44-01` builds the calculation, not the payment, so the plan and the SRS agree. Recorded as `CR-022`.
+- Status: **Closed.** R1 ruled on 19 October that the horizon is eight weeks. Payment and settlement stay out of scope; the overdue fee *calculation* stays in scope and is delivered by `T-44-01`. `OS-3` already draws that line, so no SRS edit is needed. Recorded as `CR-022`.
 
 B) Delegated collection appearing in SRS (duplicate of CR-005 inconsistency)
 - See CR-005 actions above. Owner: R3 / R2. Due 2026-10-20.
@@ -97,11 +103,11 @@ Meeting decisions
 
 Follow-up actions (summary)
 ---------------------------
-- R3: Apply SRS edits for CR-003, CR-004, CR-005, CR-006 to remove ambiguities and add acceptance criteria. (Due 2026-10-20)
-- R8: Add RTM/test cases for batch registration, recommender manual-confirm, delegated-collection flagged as future, and parcel-state transitions. (Due 2026-10-20)
-- R6/R7: Plan DB migration and backend enum changes for parcel status; prepare PR and Flyway migration. (Due 2026-10-22)
-- R2: If any new change record is required (e.g., to reconcile IS-8 or to log the billing decision), raise CR(s) in change-log and link PRs. (Due 2026-10-20)
-- R1: Make the final billing scope decision (8-week vs 16-week) and inform R2/R3. (Due 2026-10-20)
+- **R3: outstanding.** Apply the `FR-18` acceptance criteria and the partial-failure rule. Finding 1 is the only one still open. (Due 2026-10-20)
+- **R8: done.** The matrix landed as `docs/01-requirements/RTM.md` in PR #155 with every must-have mapped to a reserved test case. (Closed)
+- **R6/R7: carried to Sprint 2.** The three-state vocabulary is aligned in `ERD.md`, `openapi.yaml` and the state machines; the Flyway migration that creates the schema is `T-30-03`, which needs the backend skeleton from `#137` first. (Due 2026-10-22, moved to Sprint 2)
+- **R2: done.** `CR-005` records the delegated-collection scope change and `CR-011` had already recorded the `IS-8` reconciliation; `CR-022` records the billing ruling. (Closed)
+- **R1: done.** The billing scope decision is recorded in `CR-022`: eight weeks, payment out, calculation in. (Closed)
 
 Artifacts produced or referenced
 --------------------------------
@@ -113,7 +119,7 @@ Artifacts produced or referenced
 
 Closure statement
 -----------------
-Each finding in this minutes file has an owner, an action and a measurable closure criterion. The meeting closed after every attendee verbally agreed the recorded owners and dates. R2 will follow up on 2026-10-18 to ensure CRs were opened where required and that PRs are in draft.
+Each finding in this minutes file has an owner, an action and a measurable closure criterion, and since 19 October a `Status` line naming the evidence that satisfies it. The meeting closed after every attendee verbally agreed the recorded owners and dates. R2 will follow up on 2026-10-18 to ensure CRs were opened where required and that PRs are in draft.
 
 Signed-off-by: R2 (Product Owner)
 
