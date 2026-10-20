@@ -4,7 +4,7 @@
 |---|---|
 | Task | T-10-13 |
 | Owner | R2 |
-| Version | v1.1 |
+| Version | v1.2 |
 | Status | Draft |
 | Related | #79, `20261016_requirements-walkthrough.md`, `ui-prototype.md` |
 
@@ -77,7 +77,26 @@ No requirement changed as a result of this confirmation. Where the matrix marks 
 ## Limitations
 
 - This is a written confirmation: no respondents were interviewed. The record shows design coverage, not user acceptance.
-- The core set reviewed is a selected sample (20 requirement statements, plus two cross-references to NFRs) chosen to cover the most impactful user journeys; it is not an exhaustive review of all FRs.
+- The core set reviewed is a selected sample of 20 rows: 13 references to SRS functional requirements, two cross-references to NFRs, and five descriptions that have no SRS counterpart. It covers the most impactful user journeys and is not an exhaustive review of all 47 functional requirements.
+
+## Effect on RSK-03
+
+`RSK-03` records that the requirements evidence base rests on one convenience sample of 29
+questionnaire responses, so the quantitative targets are not statistically supported.
+
+**This confirmation does not widen that sample, so it does not reduce `RSK-03`.** What it
+can show is that each requirement has a place in the design; it cannot show that the targets
+are right. The risk therefore stays where it is.
+
+Its mitigation is already in place and is now recorded in a third document: the limitation is
+stated in the SRS preface and in `survey-results.md` section 1.2, and every target is
+described as a design target rather than as a population value. This record is the third
+place that says so.
+
+**Status is left at `Occurred, being handled` deliberately.** The trigger, a reviewer asking
+where a target value came from, is answered by those three documents. The likelihood cannot be
+reduced inside the project, because collecting a second sample is not in scope. Marking the
+risk closed would imply the sample had been strengthened, and it has not.
 
 ## Next steps (recommended)
 
@@ -85,9 +104,38 @@ No requirement changed as a result of this confirmation. Where the matrix marks 
 2. If the team prefers to meet the original acceptance criterion requiring three respondents, run the short interview script (five questions) with three appropriate respondents and update this file to reflect any confirmed changes.
 3. Once CRs are raised and implemented, re-run this confirmation against the updated artefacts and update the revision history.
 
+## Annex: interview script for the three-respondent route
+
+The `Next steps` item 2 above offers the interview route. These are the five questions, kept
+here so that the option is something the team can actually run rather than a reference to a
+script that exists nowhere.
+
+Show one screen at a time from `ui-prototype.md`, then ask:
+
+| # | Question | What it tests |
+|:--:|---|---|
+| 1 | Looking at this screen, do you know what to do next? | Usability |
+| 2 | Which information here is unnecessary, and which is missing? | Completeness |
+| 3 | If you worked at this counter, or received parcels here, how would this differ from what you actually do? | Realism |
+| 4 | How long would this step take? Faster or slower than now? | Whether the target values are plausible |
+| 5 | Is there anything here that should not be built, or a need it misses? | Validity and scope |
+
+**Recording rules, from `docs/05-management/ethics-statement.md` section 3.1:**
+
+- Report replies as **counts only**, for example "three of three answered yes to question 1".
+  Do not use percentages; the sample is too small and a percentage would overstate precision.
+- Identify respondents by **role and relevant experience**, never by name: "Respondent 1,
+  resident, receives parcels two or three times a month". Nothing that would let a reader
+  work out who they are.
+- Record **no** name, contact detail, student number or address.
+- Suggest three respondents with **at least one staff or owner and one resident**.
+- If a reply rejects a requirement, open a `CR` and log it. The change-log rule applies: a
+  change that is not in the log did not happen.
+
 ## Revision history
 
 | Version | Week | Change | Author |
 |---|---|---|---|
 | v1.0 | Week 3 | Initial requirement confirmation (written confirmation against artefacts) | R2 |
 | v1.1 | Week 3 | Wording refined; added confirmation matrix and next steps | R2 |
+| v1.2 | Week 3 | Added the "Effect on RSK-03" section and an annex holding the five interview questions, so that the option in Next steps is runnable. Corrected the sample count in Limitations, which read as 22 while the matrix has 20 rows | R1 |
