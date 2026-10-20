@@ -28,30 +28,30 @@ How to read the confirmation matrix below:
 
 | FR | Short description | Journey (file §) | Route (frontend) | Prototype (section) | Coverage | Evidence | Action |
 |---:|---|---|---|---|---:|---|---|
-| FR-01 | Resident parcel list (view own parcels) | user-journey-maps.md §2.1 | `/my-parcels` | ui-prototype.md §5.1 | Covered | Journey + route + prototype §5.1 | No action |
-| FR-02 | Intake single parcel | user-journey-maps.md §3.1 | `/parcels/new` | ui-prototype.md §5.4 | Covered | Journey + route + prototype §5.4 | No action |
-| FR-03 | Batch intake (multiple parcels) | user-journey-maps.md §3.2 | `/parcels/new?batch=true` | ui-prototype.md §5.4 (batch view) | Covered | Prototype shows batch UI | No action |
-| FR-04 | Handover / parcel collection flow | user-journey-maps.md §4.1 | `/handover` | ui-prototype.md §5.7 | Covered | Prototype §5.7 | No action |
-| FR-05 | Notification of ready-for-collection | user-journey-maps.md §2.2 | `/notifications` | ui-prototype.md §5.1 (indicators) | Partial | Journey indicates notifications; prototype shows indicators but not full notification settings | Consider CR if notification settings required |
-| FR-06 | Search / filter resident parcels | user-journey-maps.md §2.3 | `/my-parcels` | ui-prototype.md §5.1 (filters) | Covered | Prototype §5.1 shows filters | No action |
-| FR-07 | Administrative overview of collection points | user-journey-maps.md §7.1 | `/admin/collection-points` | — | Not covered | Journey indicates admin view; no route or prototype | CR recommended (design admin view) |
-| FR-08 | Admin: view logs per collection point | user-journey-maps.md §7.2 | `/admin/logs` | — | Not covered | No route or prototype | CR recommended (FR-47 relates to this) |
-| FR-09 | Collection-point identifiers on records | user-journey-maps.md §6.1 | (various record routes) | Prototype: record screens | Partial | Prototype screens do not surface explicit collection-point ID field | CR recommended (FR-46) |
-| FR-10 | Staff counter quick intake workflow | user-journey-maps.md §3.3 | `/staff/intake` | ui-prototype.md §5.4 (staff view) | Covered | Prototype shows staff intake view | No action |
-| FR-11 | Owner: manage collection point settings | user-journey-maps.md §8.1 | `/owner/settings` | — | Not covered | No route/prototype found | Design needed |
-| FR-12 | Access control: staff vs owner vs resident | user-journey-maps.md §1.1 | (role-based routes) | Prototype indicates role sections | Partial | Role UI present; explicit access control flows not fully documented | Review authentication/authorization design |
-| FR-13 | Parcel status history / timeline | user-journey-maps.md §5.2 | `/parcels/:id` | ui-prototype.md §5.1 (detail) | Partial | Some status indicators in prototype; full timeline view not present | Consider CR if timeline required |
-| FR-14 | Export logs / reports (admin) | user-journey-maps.md §7.3 | `/admin/reports` | — | Not covered | No artefact found | Design needed |
-| FR-15 | Manual override for handover exceptions | user-journey-maps.md §4.3 | `/handover` | ui-prototype.md §5.7 (exception modal?) | Partial | Prototype hints at exception handling but not explicit | Clarify in design |
-| FR-16 | Retention / archive of parcel records | user-journey-maps.md §9.1 | `/admin/records` | — | Not covered | No route/prototype | Discuss retention policy & design |
-| FR-17 | Audit trail for changes (admin) | user-journey-maps.md §7.4 | `/admin/audit` | — | Not covered | No artefact found | CR recommended |
-| FR-18 | Acceptance criteria for feature X (finding) | user-journey-maps.md §X | relevant route | — | Open | Finding FR-18 in walkthrough; draft acceptance criteria needed | Create CR / acceptance criteria (R3 has draft) |
-| FR-19 | Mobile/responsive interactions | user-journey-maps.md §2.4 | `/my-parcels` | ui-prototype.md (responsive notes) | Partial | Prototype includes responsive states for some screens | Review responsive completeness |
-| FR-20 | Error handling & user messages | user-journey-maps.md §error | Various | ui-prototype.md (toasts/errors) | Partial | Prototype shows some messages; not exhaustive | Complete error messaging design |
+| FR-01 | Resident parcel list (view own parcels) | user-journey-maps.md §3.2 | `/my-parcels` | ui-prototype.md §5.1 | Covered | Journey + route + prototype §5.1 | No action |
+| FR-02 | Intake single parcel | user-journey-maps.md §3.3 | `/parcels/new` | ui-prototype.md §5.4 | Covered | Journey + route + prototype §5.4 | No action |
+| FR-03 | Batch intake (multiple parcels) | user-journey-maps.md §3.3 | `/parcels/new` | ui-prototype.md §5.4 (batch mode) | Covered | Journey + prototype §5.4 batch flow | No action |
+| FR-04 | Handover / parcel collection flow | user-journey-maps.md §3.1 + §3.3 | `/pickup` | ui-prototype.md §5.6 | Covered | Journey + route + prototype §5.6 | No action |
+| FR-05 | Notification of ready-for-collection | user-journey-maps.md §3.2 | Not covered — no dedicated notification route in `frontend-page-map.md` | ui-prototype.md §5.1 (resident list state) | Partial | Notification is described in the resident journey, but no dedicated route or screen exists | CR recommended |
+| FR-06 | Search / filter resident parcels | user-journey-maps.md §3.2 | `/my-parcels` | ui-prototype.md §5.1 | Covered | Journey + route + prototype §5.1 | No action |
+| FR-07 | Administrative overview of collection points | user-journey-maps.md §3.5 | Not covered — no dedicated overview route in `frontend-page-map.md` | — | Not covered | No matching route or prototype section in the actual artefacts | CR recommended |
+| FR-08 | Admin: view logs per collection point | user-journey-maps.md §3.5 | `/audit` | ui-prototype.md §5.9 | Covered | Route + audit log prototype §5.9 | No action |
+| FR-09 | Collection-point identifiers on records | user-journey-maps.md §3.4 + §3.5 | `/parcels/:id` and `/audit` | ui-prototype.md §5.2 + §5.9 | Partial | The record and audit screen show parcel facts, but no explicit collection-point identifier field is shown | CR recommended |
+| FR-10 | Staff counter quick intake workflow | user-journey-maps.md §3.3 | `/parcels/new` | ui-prototype.md §5.4 | Covered | Journey + route + prototype §5.4 | No action |
+| FR-11 | Owner: manage collection point settings | user-journey-maps.md §3.5 | `/settings` | ui-prototype.md §5.8 | Partial | Admin settings exist, but direct owner-managed collection-point settings are not represented as an owner route | Review design ownership |
+| FR-12 | Access control: staff vs owner vs resident | user-journey-maps.md §2, §3.2–§3.5 | `/login`, `/dashboard`, `/my-parcels`, `/users`, `/settings` | ui-prototype.md §5.1–§5.9 | Partial | Role-based routes and menu access are represented, but the explicit access-control matrix is not a separate user journey section | Review access model |
+| FR-13 | Parcel status history / timeline | user-journey-maps.md §3.4 | `/parcels/:id` | ui-prototype.md §5.2 | Partial | The detail page shows progress state, but not a full history timeline | Consider CR if full timeline is required |
+| FR-14 | Export logs / reports (admin) | user-journey-maps.md §3.4 | `/reports` | — | Partial | Reporting exists as a route, but no export or report-generation interaction is shown in the prototype | Review reporting scope |
+| FR-15 | Manual override for handover exceptions | user-journey-maps.md §3.3 | `/pickup` and `/exceptions` | ui-prototype.md §5.6 | Partial | Handover verification and exception terminology are shown, but no explicit override workflow is drawn as a dedicated UI | Clarify in design |
+| FR-16 | Retention / archive of parcel records | user-journey-maps.md §6 (Open points) | `/settings` | ui-prototype.md §5.8 | Partial | Retention is configurable in settings, but archive/retention workflow is not a full parcel-record lifecycle screen | Review retention policy |
+| FR-17 | Audit trail for changes (admin) | user-journey-maps.md §3.4 + §3.5 | `/audit` | ui-prototype.md §5.9 | Covered | Audit log route and page prototype cover the required change trail | No action |
+| FR-18 | Batch registration / intake as a first-class workflow | user-journey-maps.md §3.3 | `/parcels/new` | ui-prototype.md §5.4 | Covered | Batch mode is explicitly specified in the staff journey and the prototype | No action |
+| FR-19 | Mobile / responsive interactions | user-journey-maps.md §3.2 | `/my-parcels` and `/my-parcels/:id` | ui-prototype.md §5.1 + §5.2 + §8 | Covered | Responsive requirement is explicit in the implementation design for resident mobile flows | No action |
+| FR-20 | Error handling & user messages | user-journey-maps.md §3.2–§3.5 | `/my-parcels`, `/pickup`, `/parcels/new`, `/audit` | ui-prototype.md §5.1–§5.9 | Partial | Error and validation states are covered on the key pages, but no single cross-cutting error-handling specification is provided | Consider CR if full coverage is required |
 
 Notes:
-- Rows marked "Not covered" or "Partial" are the outcome of comparing the journey maps, page map and prototype; they indicate either a gap in the frontend-page-map or the prototype, or an incomplete interaction specification.
-- FR-46 and FR-47 are represented above by FR-09 and FR-08/FR-07 respectively; both require follow-up design work (no screen/route found in the artefacts).
+- Rows marked "Not covered" or "Partial" are the outcome of comparing the user journeys, page map and prototype; they indicate either a gap in the design artefacts or an interaction that is implied rather than fully specified.
+- The intent of this confirmation is to record design coverage and follow-up actions, not to claim user acceptance without respondents.
 
 ## What was confirmed
 
@@ -87,5 +87,5 @@ No requirement changed as a result of this confirmation. Where the matrix marks 
 
 | Version | Week | Change | Author |
 |---|---|---|---|
-| v1.1 | Week 3 | Wording refined; added confirmation matrix and next steps | R2 |
 | v1.0 | Week 3 | Initial requirement confirmation (written confirmation against artefacts) | R2 |
+| v1.1 | Week 3 | Wording refined; added confirmation matrix and next steps | R2 |
