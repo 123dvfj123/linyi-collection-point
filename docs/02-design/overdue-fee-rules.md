@@ -1,11 +1,14 @@
 # Overdue Fee Rules
 
-- Status: Proposed
-- Date: 2026-10-15
-- Task: T-20-16
-- Owner: R7 Backend Developer
-- Reviewers: R2 for rule values and scope, R6 for persistence and API impact, R8 for the 20 test cases
-- Related: SRS FR-39, FR-38 and FR-44; SRS OS-3; `docs/glossary.md`; `docs/04-testing/test-plan.md`; `docs/02-design/database/ERD.md`
+| Item | Detail |
+|---|---|
+| Status | Complete for Sprint 1 |
+| Version | v1.0 |
+| Date | 2026-10-15 |
+| Task | T-20-16 |
+| Owner | R7 Backend Developer |
+| Reviewers | R2 for rule values and scope, R6 for persistence and API impact, R8 for the 20 test cases |
+| Related | SRS FR-39, FR-38 and FR-44; SRS OS-3; `docs/glossary.md`; `docs/04-testing/test-plan.md`; `docs/02-design/database/ERD.md` |
 
 ## 1. Purpose
 
@@ -304,3 +307,11 @@ Additional acceptance checks:
       T-44-01 is implemented.
 - [ ] Any screen that displays the result labels it as a calculated amount and
       offers no payment action.
+
+
+
+## Revision history
+
+| Version | Week | Change | Author |
+|---|---|---|---|
+| v1.0 | Week 2 | First version recorded in this file. The rule table `T-44-01` implements. The twenty test cases `NFR-12` needs are Sprint 3 work and do not exist yet. Any earlier edit is not listed: this file had no revision history until week 3, so records of those edits do not exist here. | R1 |

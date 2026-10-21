@@ -1,29 +1,18 @@
 # UI Prototype: Pages for the Four Login Roles
 
-- Status: Proposed
-- Date: 2026-10-13
-- Revision: 3, after the two reviews of 2026-10-13: the R4 page review (P1.1,
-  P1.2, P2.1, P2.2, P2.3, plus the other storage location write actions in CD-1)
-  and the follow-up review (exception types, the audit log page, no personal
-  names, the "suggestion only" wording, batch intake as a must-have)
-- Task: T-20-05 (Sprint 1, week 2)
-- Owner: R5 Frontend Developer
-- Reviewers: R4 Frontend Lead, R9 (usability review, T-20-10), R3 (requirement identifiers)
-- Due: 2026-10-18
-- Depends on: `SRS.md` (section 2.2 exception types, section 2.3 operation log,
-  merged to develop on 2026-10-12), the SRS change log (CR-003, CR-004, CR-006,
-  CR-009), `frontend-page-map.md` (T-30-04), `glossary.md` (T-00-07),
-  `backend-state-machines.md` (T-20-04), `ADR-003` and `ADR-004` (T-30-04),
-  `survey-results.md`, `Personas.md`, `docs/02-design/prototype/` (PR #62),
-  the API contract (OpenAPI)
-- Covers: the in-scope functions of SRS section 1.5.2 (IS-1 to IS-12), the five
-  exception types of SRS section 2.2, and the operation log scope of SRS section
-  2.3 (5.9). Functional requirement identifiers are added once R3 publishes SRS
-  chapter 3 (issue #76); until then every mapping row below carries
-  `FR: pending R3`.
-- Issue: #83. This document answers T-20-05 only. The issue also carries T-20-09
-  (the frontend conventions) and T-20-10 (the R9 usability review), so the pull
-  request does not close the issue on its own.
+| Item | Detail |
+|---|---|
+| Status | Complete for Sprint 1 |
+| Version | v1.0 |
+| Date | 2026-10-13 |
+| Revision | 3, after the two reviews of 2026-10-13: the R4 page review (P1.1, P1.2, P2.1, P2.2, P2.3, plus the other storage location write actions in CD-1) and the follow-up review (exception types, the audit log page, no personal names, the "suggestion only" wording, batch intake as a must-have) |
+| Task | T-20-05 (Sprint 1, week 2) |
+| Owner | R5 Frontend Developer |
+| Reviewers | R4 Frontend Lead, R9 (usability review, T-20-10), R3 (requirement identifiers) |
+| Due | 2026-10-18 |
+| Depends on | `SRS.md` (section 2.2 exception types, section 2.3 operation log, merged to develop on 2026-10-12), the SRS change log (CR-003, CR-004, CR-006, CR-009), `frontend-page-map.md` (T-30-04), `glossary.md` (T-00-07), `backend-state-machines.md` (T-20-04), `ADR-003` and `ADR-004` (T-30-04), `survey-results.md`, `Personas.md`, `docs/02-design/prototype/` (PR #62), the API contract (OpenAPI) |
+| Covers | the in-scope functions of SRS section 1.5.2 (IS-1 to IS-12), the five exception types of SRS section 2.2, and the operation log scope of SRS section 2.3 (5.9). Functional requirement identifiers are added once R3 publishes SRS chapter 3 (issue #76); until then every mapping row below carries `FR: pending R3`. |
+| Issue | #83. This document answers T-20-05 only. The issue also carries T-20-09 (the frontend conventions) and T-20-10 (the R9 usability review), so the pull request does not close the issue on its own. |
 
 ## 1. Purpose
 
@@ -766,3 +755,11 @@ Issue #83 also carries acceptance criteria for T-20-09 (the conventions
 document) and T-20-10 (the ten-heuristic usability review by R9). Those two are
 not part of this document and are not claimed here, so the pull request does not
 close the issue on its own.
+
+
+
+## Revision history
+
+| Version | Week | Change | Author |
+|---|---|---|---|
+| v1.0 | Week 2 | First version recorded in this file. The nine page prototypes. This is revision 4 of the document: the earlier three are described in the header's own Revision note, because the file had no revision history then. Seven contradictions against this document's own text are recorded in `#170` and are not yet fixed. Any earlier edit is not listed: this file had no revision history until week 3, so records of those edits do not exist here. | R1 |

@@ -69,7 +69,39 @@ REQUIRED = {
     'docs/05-management/risk-register.md',
     'docs/05-management/plans/PLAN.md',
     'docs/06-logbook/README.md',
+    'docs/02-design/backend-state-machines.md',
+    'docs/02-design/design-system.md',
+    'docs/02-design/frontend-conventions.md',
+    'docs/02-design/frontend-open-items.md',
+    'docs/02-design/frontend-page-map.md',
+    'docs/02-design/location-recommender-rules.md',
+    'docs/02-design/overdue-fee-rules.md',
+    'docs/02-design/ui-prototype.md',
+    'docs/03-api/frontend-api-dependencies.md',
+    'docs/04-testing/test-cases/README.md',
+    'docs/07-report/chapters/00-outline.md',
 }
+
+# The design and API baseline. These documents had no version header until week 3, so the check
+# skipped them silently while Sprint 2 built on top of them.
+DESIGN_DOCUMENTS = {
+    'docs/02-design/backend-state-machines.md',
+    'docs/02-design/design-system.md',
+    'docs/02-design/frontend-conventions.md',
+    'docs/02-design/frontend-page-map.md',
+    'docs/02-design/ui-prototype.md',
+    'docs/02-design/frontend-open-items.md',
+    'docs/02-design/location-recommender-rules.md',
+    'docs/02-design/overdue-fee-rules.md',
+    'docs/03-api/frontend-api-dependencies.md',
+    'docs/04-testing/test-cases/README.md',
+    'docs/07-report/chapters/00-outline.md',
+}
+
+# YAML documents are checked against their own `info.version` field and a comment block, because
+# they cannot carry a markdown table. Only the contract is here; it is the one a change to which
+# has to be visible.
+REQUIRED_YAML = {'docs/03-api/openapi.yaml'}
 
 SKIP_DIRS = {'.git', 'node_modules', 'dist', 'build', 'target', '.github'}
 
@@ -115,6 +147,36 @@ def check(path):
     return header.group(1), rows[-1], rows
 
 
+
+YAML_VERSION = re.compile(r'^\s{2}version:\s*([\d.]+)', re.M)
+YAML_HIST = re.compile(r'^#\s*Revision history\s*$', re.M)
+
+
+def find_yaml(root):
+    if os.path.isfile(root):
+        if root.endswith(('.yaml', '.yml')):
+            yield root
+        return
+    for dirpath, dirnames, filenames in os.walk(root):
+        dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS]
+        for name in sorted(filenames):
+            if name.endswith(('.yaml', '.yml')):
+                yield os.path.join(dirpath, name)
+
+
+def check_yaml(path):
+    """Return (declared, last, rows) for a YAML document, or None when it carries no history."""
+    with open(path, encoding='utf-8') as fh:
+        text = fh.read()
+    declared = YAML_VERSION.search(text)
+    hist = YAML_HIST.search(text)
+    if not declared or not hist:
+        return None
+    rows = re.findall(r'^#\s*(v[\d.]+)\b', text[hist.end():], re.M)
+    if not rows:
+        return None
+    return 'v' + declared.group(1), rows[-1], rows
+
 def main(argv):
     roots = argv[1:] or ['.']
     checked = 0
@@ -124,6 +186,37 @@ def main(argv):
         if not os.path.exists(root):
             print('check_doc_versions: no such path: %s' % root)
             return 2
+        for path in find_yaml(root):
+            display = display_path(path)
+            if display not in REQUIRED_YAML:
+                continue
+            checked += 1
+            result = check_yaml(path)
+            if result is None:
+                with open(path, encoding='utf-8') as fh:
+                    text = fh.read()
+                if not YAML_VERSION.search(text):
+                    problems.append(
+                        '%s\n    on the required list but has no "  version:" field under info\n'
+                        '    fix: add one, so the contract declares the version it is' % display)
+                else:
+                    problems.append(
+                        '%s\n    has an info.version but no "# Revision history" comment block\n'
+                        '    fix: add one, with a "# vX.Y.Z" line per release' % display)
+                continue
+            declared, last, rows = result
+            if declared != last:
+                problems.append(
+                    '%s\n    info.version says %s, the comment history reaches %s\n'
+                    '    fix: set "version: %s" under info' % (display, declared, last,
+                                                              last.lstrip('v')))
+            duplicates = sorted({v for v in rows if rows.count(v) > 1})
+            if duplicates:
+                problems.append(
+                    '%s\n    duplicated history label(s): %s\n'
+                    '    fix: give the later entry the next number'
+                    % (display, ', '.join(duplicates)))
+
         for path in find_markdown(root):
             display = display_path(path)
             required = display in REQUIRED

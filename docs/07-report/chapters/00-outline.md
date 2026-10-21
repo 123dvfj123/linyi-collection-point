@@ -5,6 +5,7 @@
 | Task | T-20-14 |
 | Owner | R1 |
 | Status | Skeleton, to be written |
+| Version | v0.1 |
 | Deadline | 2026-12-08 |
 | Limit | **Not more than 1000 words**, source code excluded |
 | Submitted by | the leader only, as a PDF through the OLE assignment link |
@@ -150,3 +151,11 @@ afterwards.
 | 3 | the product backlog and acceptance criteria | #78 |
 | 6 | the backend skeleton, so implementation can be described as running | #137 |
 | 7 | the test cases and the defect log | #78 depends on the matrix |
+
+
+
+## Revision history
+
+| Version | Week | Change | Author |
+|---|---|---|---|
+| v0.1 | Week 2 | First version recorded in this file. The outline and word budget for the 1000-word project report. Still a skeleton: the chapters are not written, and the outline is over the word limit at 1123 words. Any earlier edit is not listed: this file had no revision history until week 3, so records of those edits do not exist here. | R1 |
