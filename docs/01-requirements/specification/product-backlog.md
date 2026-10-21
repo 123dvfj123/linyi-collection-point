@@ -4,8 +4,8 @@
 |---|---|
 | Task | T-10-08 |
 | Owner | R2 |
-| Version | v1.1 |
-| Status | Draft, reviewed for Sprint 1 |
+| Version | v1.2 |
+| Status | Complete for Sprint 1 |
 
 
 This Product Backlog is ordered by business value (highest first). Each row includes: ID, Item, FR / NFR (R3), MoSCoW priority, Business value rationale (with survey / change-record references), Acceptance criteria in Given / When / Then format, and Sprint assignment.
@@ -58,3 +58,4 @@ Prepared by: Product Owner (Sprint 1 closeout). For traceability, please review 
 |---|---|---|---|
 | v1.0 | Week 2 | Initial backlog: ten items ordered by business value, MoSCoW priorities, Given/When/Then acceptance criteria and the not-this-time section | R2 |
 | v1.1 | Week 2 | Identifiers renumbered against the SRS, Sprint task IDs added to every row, `BL-005` promoted to Must, and the in-system wording corrected after `OS-6` was read | R2 |
+| v1.2 | Week 3 | Status changed from draft to complete for Sprint 1 | R1 |

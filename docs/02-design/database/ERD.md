@@ -2,10 +2,10 @@
 
 | Item | Detail |
 |---|---|
-| Status | Draft |
+| Status | Complete for Sprint 1 |
 | Date | 2026-10-19 |
 | Owners | R6 Backend Lead, R7 Backend Developer |
-| Version | v1.2 |
+| Version | v1.3 |
 | Database | PostgreSQL 16 |
 | ORM | Spring Data JPA |
 
@@ -214,3 +214,4 @@ The lifecycle of each status value is modelled by these PlantUML sources:
 | v1.0 | Week 1 | Initial entity model for the eight entities | R6 |
 | v1.1 | Week 2 | `Parcel.status` reduced to the three values ruled by `CR-006`, and the exception types aligned with the SRS as `CR-010` requires | R6 |
 | v1.2 | Week 3 | `CollectionPoint` added, with `collectionPointId` on the five entities that are scoped directly and a section on what is still open, per `CR-021` | R1 |
+| v1.3 | Week 3 | Status changed from draft to complete for Sprint 1. The nine entities, the ten relationships and the collection point scope are the ones Sprint 2 builds from | R1 |

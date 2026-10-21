@@ -8,8 +8,8 @@
 |---|---|
 | Task | T-50-19 |
 | Owner | R8 |
-| Version | v0.2 (draft for Sprint 1) |
-| Status | Draft, to be completed once the SRS is frozen |
+| Version | v0.3 |
+| Status | Active, extended in Sprint 2 |
 
 ## 1. Purpose and scope
 
@@ -180,3 +180,4 @@ The target is the line coverage figure in section 3
 |---|---|---|---|
 | v0.1 | Week 2 | Initial draft from the plan and the survey findings | R8 |
 | v0.2 | Week 2 | Section 11 states where each report is generated, the format (Surefire XML and text, plus an HTML summary), the CI artefact name, and who reads each one | R8 |
+| v0.3 | Week 3 | Status changed from draft to active. The SRS is frozen for Sprint 2, so the condition this document was waiting on is met; the remaining work is the Sprint 2 test cases, not the plan itself | R1 |

@@ -4,7 +4,7 @@
 |---|---|
 | Task | T-00-07 |
 | Owner | R1 |
-| Version | v1.1 |
+| Version | v1.2 |
 | Status | Active, reviewed at the end of every sprint |
 
 
@@ -43,6 +43,44 @@ usual two week length.
 | M10 | reporting, audit and admin | R6 |
 
 Frontend foundation is owned by R4: application layout, routing, Pinia setup, Axios wrapper and shared components. Feature pages are implemented by R5 under R4's standards and reviewed by R4. Page-level ownership follows docs/02-design/frontend-page-map.md
+
+## Sprint 0, week 1
+
+The setup week. `PLAN.md` named it in the sprint overview from the first draft, and this section
+is its task list: without it Sprint 0 could only be audited by guessing which files it should have
+produced.
+
+| ID | Task | Owner | Folder |
+|---|---|---|---|
+| T-00-01 | Team charter and the ethics and privacy statement | R1, R9 | `docs/05-management` |
+| T-00-02 | Repository scaffold: `README.md`, `CONTRIBUTING.md`, the issue and pull request templates, `.gitignore` | R1 | repository root |
+| T-00-03 | Logbook template and the first entries, so every member has a place to record work from day one | R1 | `docs/06-logbook` |
+| T-00-05 | Ten week 1 logbooks, each with a date, a time range, a task ID and an evidence link | All | `docs/06-logbook` |
+| T-00-06 | Weekly stand-up, risk register, change log and the contributor screenshot | R1 | `docs/05-management` |
+| T-00-07 | Project plan, release plan and glossary | R1 | `docs/05-management/plans`, `docs` |
+| T-00-08 | Consistency checklist used before each pull request | R1 | `docs/05-management` |
+| T-10-01 | Four role questionnaires, the response summary and the composite personas | R1, R2 | `docs/01-requirements/elicitation` |
+| T-10-04 | User journey maps for the four roles, referenced by the SRS | R4 | `docs/01-requirements/elicitation` |
+| T-30-01 | Docker Compose skeleton, started early so Sprint 2 can build on it | R10 | repository root |
+
+Deliverables that must exist at the end of the week:
+
+1. `README.md` and `CONTRIBUTING.md` describing the project, the team and the working agreement.
+2. `docs/05-management/team-charter.md` and `ethics-statement.md`.
+3. `docs/01-requirements/elicitation/` holding the questionnaires, the survey results and the personas.
+4. `docs/05-management/risk-register.md`, `change-log.md` and the first contributor screenshot.
+5. Ten logbooks in `docs/06-logbook/`, one per member.
+6. Release tag `v0.0.1`.
+
+> **Two notes on identifiers.** `T-00-06` is the recurring management task and appears again in
+> Sprint 1 and every sprint after it; it is not a duplicate. `T-00-04` is unused: the numbering
+> skips it because the task it was reserved for was folded into `T-00-03`. Recording the hole is
+> cheaper than renumbering every reference to it.
+
+> **On the competency review.** The sprint overview describes Sprint 0 as "repository, research,
+> competency review". The first two produced the artefacts above. The third produced no document of
+> its own: the gap analysis lives in `RSK-11`, which records that Java and Spring Boot are new to
+> part of the team. A separate competency review would restate that risk, so it was not written.
 
 ## Sprint 1, week 2
 
@@ -202,3 +240,4 @@ A task is done when:
 |---|---|---|---|
 | v1.0 | Week 1 | Initial eight-week, five-sprint plan with a task ID, an owner and a folder for every task | R1 |
 | v1.1 | Week 2 | `T-42-02` corrected to drop the turnover score, which `CRJ-001` had rejected (`CR-016`), and the week 2 scope of issue #73 narrowed to the two jobs that could run (`CR-017`) | R1 |
+| v1.2 | Week 3 | Added the Sprint 0 section, which the sprint overview named but the body never described. The task identifiers are the ones the files and commits already use, not new ones | R1 |
