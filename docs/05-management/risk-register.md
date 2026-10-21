@@ -8,7 +8,7 @@
 |---|---|
 | Task | T-00-06 |
 | Owner | R1 |
-| Version | v1.4 |
+| Version | v1.5 |
 | Status | Active, reviewed at the end of every sprint |
 
 ## How to read this register
@@ -26,7 +26,7 @@ Likelihood and impact are rated high, medium or low. Status is one of
 |---|---|---|---|---|---|---|---|
 | RSK-01 | The schedule is compressed to eight weeks, so any slippage in Sprint 1 pushes into the build sprints with no slack left | High | High | Sprint 1 has a hard deliverable list and a mid-week checkpoint on Wednesday. If the SRS is not complete by the end of week 2, scope is cut from Sprint 3 rather than from Sprint 2 | R1 | The Wednesday checkpoint shows less than half of the week's deliverables complete | Being monitored |
 | RSK-02 | Sprint 1 has no task table in the plan, so design work cannot be assigned a task ID and cannot be reviewed through the normal route | High | High | Add the Sprint 1 task table to the plan. This has already blocked one pull request of 544 lines | R1 | Design work sitting on a branch with no task ID | Occurred, being handled |
-| RSK-03 | The requirements evidence base rests on one convenience sample of 29 questionnaire responses, so the quantitative targets are not statistically supported | High | Medium | The limitation is stated in the SRS Preface and in the survey results. Targets are described as design targets supported by the questionnaire, not as values from a representative study | R2 | A reviewer questions where a target value came from | Occurred, being handled |
+| RSK-03 | The requirements evidence base rests on one convenience sample of 29 questionnaire responses, so the quantitative targets are not statistically supported | High | Medium | The limitation is stated in the SRS Preface, in the survey results and in `docs/01-requirements/elicitation/20261019_requirement-confirmation.md`, whose "Effect on RSK-03" section records the review. Three documents say the targets are design targets rather than population values. Targets are described as design targets supported by the questionnaire, not as values from a representative study | R2 | A reviewer questions where a target value came from | Occurred, being handled |
 | RSK-04 | The ERD, the OpenAPI specification and the SRS describe the same domain differently, so the frontend and backend will be built against different models | High | High | The project manager rules on the role model and the parcel status model. The ERD, OpenAPI and class diagram are then aligned to the ruling in the same sprint | R6 | Two documents in the repository give different values for the same field | Occurred, being handled |
 | RSK-05 | The backend lead carries six Sprint 1 items, including the ERD revision and the OpenAPI expansion, and is over capacity | High | Medium | Work is redistributed: the OpenAPI expansion moves to the DevOps role, the recommender design becomes a pair task with the second backend developer | R1 | The backend lead reports more than 15 hours of committed work in one week | Occurred, being handled |
 | RSK-07 | The demo fails during the progress review because the environment cannot be reproduced on the review machine | Medium | High | Docker Compose is built early, in week 2 rather than week 3. A cloud deployment and a local backup are both prepared. A recorded fallback is kept | R10 | Docker Compose does not start cleanly on a second machine | Being monitored |
@@ -66,3 +66,4 @@ Likelihood and impact are rated high, medium or low. Status is one of
 | v1.2 | Week 3 | Sprint 1 close-out review: RSK-06 and RSK-15 closed, RSK-12 number refreshed, RSK-14 blocker recorded | R1 |
 | v1.3 | Week 3 | RSK-06 and RSK-15 reformatted as closed-risk rows. Both carried the eight-column shape of the active table, which broke the Closed risks table and left their status reading "Being monitored" | R4 |
 | v1.4 | Week 3 | RSK-14 closed and moved to the closed-risk table, because `docs/01-requirements/RTM.md` landed in PR #155 and the risk described a matrix that does not exist. Recorded against issue #77 | R1 |
+| v1.5 | Week 3 | `RSK-03` response column now names the third document that records its limitation, the requirement confirmation record, and points at the section where the review is written | R1 |
