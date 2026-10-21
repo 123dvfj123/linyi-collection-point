@@ -4,7 +4,7 @@
 |---|---|
 | Task | T-00-07 |
 | Owner | R1 |
-| Version | v1.3 |
+| Version | v1.4 |
 | Status | Active, reviewed at the end of every sprint |
 
 
@@ -123,7 +123,8 @@ decisions.
 
 Deliverables that must exist at the end of the week:
 
-1. `SRS.md` complete, chapters 1 to 7.
+1. `SRS.md` complete, chapters 1 to 4: introduction, overall description,
+   functional requirements and non-functional requirements.
 2. `RTM.md` with every must-have requirement mapped to at least one test case.
 3. `docs/02-design/uml/` containing the use case, sequence, class, state and
    activity sources, all in PlantUML.
@@ -159,7 +160,7 @@ hands the parcel over. Everything else waits.
 | T-42-02 | Storage location recommender: size filter, zone priority, the deterministic ordering from `location-recommender-rules.md`, safe under concurrency | R6 | backend/src/main/java/com/group23/location |
 | T-42-03 | Storage location management: zones, states, manual override | R7 | backend/src/main/java/com/group23/location |
 | T-42-04 | Pickup code issue and handover, one-time use, transaction and unique constraint | R6 | backend/src/main/java/com/group23/pickup |
-| T-42-05	| Pickup verification and handover page	| R4 | frontend/src/views |
+| T-42-05 | Pickup verification and handover page | R4 | frontend/src/views |
 | T-42-06 | Location board component with zone filter and full-shelf warning | R5 | frontend/src/components |
 | T-42-07 | Staff workbench: intake form, suggested location, handover screen | R5 | frontend/src/views |
 | T-42-08 | Unit and integration tests for the intake to handover path | R8 | backend/src/test/java/com/group23 |
@@ -184,7 +185,7 @@ hands the parcel over. Everything else waits.
 
 | ID | Task | Owner | Folder |
 |---|---|---|---|
-| T-44-05	| Reports view: parcel volume, overdue and exception summary | R4 | frontend/src/views |
+| T-44-05 | Reports view: parcel volume, overdue and exception summary | R4 | frontend/src/views |
 | T-44-06 | End to end tests with Playwright covering the must-have flows | R8 | frontend/tests |
 | T-50-01 | System testing across the five test scope dimensions | R8 | docs/04-testing |
 | T-50-02 | Performance and concurrency testing | R8 | docs/04-testing |
@@ -242,3 +243,4 @@ A task is done when:
 | v1.1 | Week 2 | `T-42-02` corrected to drop the turnover score, which `CRJ-001` had rejected (`CR-016`), and the week 2 scope of issue #73 narrowed to the two jobs that could run (`CR-017`) | R1 |
 | v1.2 | Week 3 | Added the Sprint 0 section, which the sprint overview named but the body never described. The task identifiers are the ones the files and commits already use, not new ones | R1 |
 | v1.3 | Week 3 | Moved `T-30-06` from R10 to R6. `#137`'s fourth acceptance criterion already assigns enabling the backend CI job to R6, and one deliverable should not carry two owners; `PLAN.md` was the odd one out. R10 keeps `T-30-01` (delivered) and `T-30-05`, and wrote the commented-out `backend` block that R6 now activates | R1 |
+| v1.4 | Week 3 | Corrected the Sprint 1 deliverable from "chapters 1 to 7" to "chapters 1 to 4". The line had said 1 to 7 since it was written on 12 October, while `SRS.md` has had four chapters throughout, its table of contents lists four, and no other document mentions seven; `SRS.md` 1.7 cites IEEE 830 / ISO 29148 as its structural basis and four chapters are those standards' core sections. Also replaced two tab characters that had taken the place of the cell delimiter in the Sprint 2 and Sprint 4 task tables. `#175` took `v1.3` for the `T-30-06` ownership change while this was open, so this is `v1.4` rather than a second `v1.3` | R1 |
