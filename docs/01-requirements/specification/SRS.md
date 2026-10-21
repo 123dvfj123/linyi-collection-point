@@ -316,6 +316,45 @@ Only the role-based persona identifiers are used: **Resident persona**, **Staff 
 
 Verification entries indicate **proposed tests**, not tests that have already been created or executed. R8 owns final test-case ID allocation and execution status. Time and coverage targets are defined separately in Chapter 4 and the existing test plan; this chapter does not claim those tests have passed.
 
+### 3.7 Acceptance criteria and failure behaviour for FR-18
+
+`FR-18` is the only must-have requirement whose request carries more than one record, so it needs more than the one-line statement: a reader has to be able to tell from this document alone what a correct batch does and what a partly bad batch does. The criteria below restate the `/parcels/batch` description in `openapi.yaml` in the vocabulary of a requirement, so that the two documents say one thing rather than two.
+
+**A correct batch**
+
+- **Given** an authenticated staff member assigned to a collection point,
+- **when** they submit between 1 and 50 parcels in one request and every entry carries a waybill number not already recorded, a carrier the waybill prefix identifies, a recipient name, a recipient phone number and a size in `small`, `medium` or `large`,
+- **then** every entry is created with status `registered`, each carrying that member's collection point identifier and that member as `registeredBy`,
+- **and** the response is `201`, with every parcel in `created` and `rejected` empty.
+
+**A partly bad batch**
+
+- **Given** an authenticated staff member and a batch in which some entries are valid,
+- **when** they submit it,
+- **then** the valid entries are created and the invalid ones are not,
+- **and** one bad entry does not discard the rest of the batch,
+- **and** the response is `201`, with the created parcels in `created` and one `rejected` object per refused entry, holding that entry's zero-based `index`, its `trackingNo` where one was supplied, and a `reason` naming the field that failed,
+- **and** a refused entry leaves no partial record behind.
+
+**A batch that is invalid as a whole**
+
+- **Given** a request whose `parcels` array holds fewer than 1 or more than 50 entries,
+- **when** it is submitted,
+- **then** it is refused with `400` before any entry is examined,
+- **and** no parcel is created.
+
+**Why per-entry rather than all-or-nothing**
+
+The contract already chose per-entry validation: "Each entry is validated on its own so one bad row does not discard the rest of the batch." The operating situation the survey describes explains why. Staff unload a delivery and record what is in front of them, so a single mistyped phone number should not send forty correct parcels back to the van. All-or-nothing would also make the endpoint's `201` response meaningless, because it could never report a partial result and would have to answer `400` for a batch that was mostly accepted.
+
+**One case this does not decide**
+
+`FR-17` requires that a repeated waybill number be rejected, and the contract validates each entry on its own. That implies the first occurrence in a batch is created and the later ones are rejected. **This is not yet ruled**: the alternative, refusing the whole batch, would contradict the per-entry rule, so the implication is the consistent reading, but R6 should confirm it when the endpoint is implemented and a change record should capture whichever answer is chosen.
+
+**What this section does not change**
+
+No requirement is added, removed or renumbered. `FR-17`'s duplicate rejection applies unchanged inside a batch, `CR-003`'s limit of 50 is restated and not changed, and `openapi.yaml` needs no edit because this section follows it rather than leading it.
+
 
 ## 4. Non-Functional Requirements
 
