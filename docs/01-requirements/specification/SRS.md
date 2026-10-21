@@ -6,7 +6,7 @@
 |---|---|
 | Document ID | SRS |
 | Task | T-10-05, T-10-06, T-10-07 |
-| Version | v0.5 (draft, Chapters 1 to 4) |
+| Version | v0.6 (draft, Chapters 1 to 4) |
 | Author | R2 |
 | Status | Draft, pending team review |
 | Related documents | [personas.md](../elicitation/Personas.md), [user-journey-maps.md](../elicitation/user-journey-maps.md) |
@@ -473,4 +473,5 @@ cite them, and a requirement that is never stated cannot be verified.
 | v0.3 | Week 2 | Added chapter 4, the 14 non-functional requirements. Seven identifiers were reserved by section 3.5 and six of their meanings were fixed by `test-plan.md` section 6; those are kept. Seven targets come from `survey-results.md` section 7 and are stated as design targets supported by a convenience sample | R3, R1 |
 | v0.4 | Week 2 | Corrected `NFR-6` to the audit requirement that the handover operator identity comes from the authenticated session. Raised by R3, who spotted that `CR-007`, `openapi.yaml` line 14 and `openapi.yaml` line 426 all cite `NFR-6` for that meaning, which the first draft of chapter 4 had assigned to collection point data separation instead | R1 |
 | v0.5 | Week 2 | Kept the NFR identifiers that other documents already cite: mobile viewport usability returns to `NFR-10` because `test-plan.md` section 6 cites it there, the error message requirement takes `NFR-9`, endpoint authorisation takes `NFR-3`, and the audit entry and phone masking take `NFR-11`. An audit of every requirement citation in the repository found this as the only mismatch | R1 |
+| v0.6 | Week 3 | Added section 3.7, the acceptance criteria and failure behaviour for `FR-18`: the correct batch, the partly bad batch, the batch invalid as a whole, why per-entry rather than all-or-nothing, and the duplicate-waybill case left for R6 to rule. Added by `#168`, which did not bump the version; this row records it | R3 |
 
