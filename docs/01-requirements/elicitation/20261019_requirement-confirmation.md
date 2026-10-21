@@ -4,8 +4,8 @@
 |---|---|
 | Task | T-10-13 |
 | Owner | R2 |
-| Version | v1.3 |
-| Status | Draft |
+| Version | v1.4 |
+| Status | Complete for Sprint 1 |
 | Related | #79, `20261016_requirements-walkthrough.md`, `ui-prototype.md` |
 
 ## Method
@@ -510,3 +510,4 @@ Show one screen at a time from `ui-prototype.md`, then ask:
 | v1.1 | Week 3 | Wording refined; added confirmation matrix and next steps | R2 |
 | v1.2 | Week 3 | Added the "Effect on RSK-03" section and an annex holding the five interview questions, so that the option in Next steps is runnable. Corrected the sample count in Limitations, which read as 22 while the matrix has 20 rows | R1 |
 | v1.3 | Week 3 | Added the three respondent interviews and the findings table, and split the findings into seven prototype contradictions, four gaps against existing requirements and three scope questions. Corrected the Method and Limitations sections, which still described the record as having no respondents | R1 |
+| v1.4 | Week 3 | Status changed from draft to complete for Sprint 1 | R1 |
