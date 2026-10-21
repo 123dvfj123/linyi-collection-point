@@ -1,15 +1,15 @@
 # Frontend Engineering Conventions
 
-- Status: Accepted
-- Date: 2026-10-14
-- Task: T-20-09
-- Owner: R5 Frontend Developer
-- Agreed with: R4 Frontend Lead
-- Issue: #83, the frontend workstream issue. It carries T-20-05, T-20-09 and T-20-10, so this document answers T-20-09 only and its pull request does not
-  close the issue on its own.
-- Depends on: `docs/02-design/adr/ADR-003-frontend-architecture.md` (T-30-04),
-  `docs/02-design/frontend-page-map.md` (T-30-04),
-  `docs/02-design/design-system.md` (T-20-06), `CONTRIBUTING.md`
+| Item | Detail |
+|---|---|
+| Status | Accepted |
+| Version | v1.0 |
+| Date | 2026-10-14 |
+| Task | T-20-09 |
+| Owner | R5 Frontend Developer |
+| Agreed with | R4 Frontend Lead |
+| Issue | #83, the frontend workstream issue. It carries T-20-05, T-20-09 and T-20-10, so this document answers T-20-09 only and its pull request does not close the issue on its own. |
+| Depends on | `docs/02-design/adr/ADR-003-frontend-architecture.md` (T-30-04), `docs/02-design/frontend-page-map.md` (T-30-04), `docs/02-design/design-system.md` (T-20-06), `CONTRIBUTING.md` |
 
 ## 1. Purpose
 
@@ -285,3 +285,11 @@ Rules:
 | Formatting or calculation? | `src/utils/` |
 | Needs a colour or spacing? | a CSS variable from the design system |
 | Temporary mock? | `src/api/mock/<feature>.js`, `MOCK_<NOUN>`, with `TODO(T-xx-yy)` |
+
+
+
+## Revision history
+
+| Version | Week | Change | Author |
+|---|---|---|---|
+| v1.0 | Week 2 | First version recorded in this file. Folder structure, naming, component split and state management for `frontend/`. Any earlier edit is not listed: this file had no revision history until week 3, so records of those edits do not exist here. | R1 |

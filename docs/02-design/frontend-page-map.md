@@ -1,9 +1,12 @@
 # Frontend Page Map and Routing
 
-- Status: Active (aligned with the router, issue #82)
-- Task: T-30-04
-- Owners: R4 Frontend Lead, R5 Frontend Developer
-- Assumption: the frontend workstream has two students; R4 owns architecture and R5 implements pages under that structure.
+| Item | Detail |
+|---|---|
+| Status | Active (aligned with the router, issue #82) |
+| Version | v1.0 |
+| Task | T-30-04 |
+| Owners | R4 Frontend Lead, R5 Frontend Developer |
+| Assumption | the frontend workstream has two students; R4 owns architecture and R5 implements pages under that structure. |
 
 `frontend/src/router/index.js` registers exactly the routes in the Page List
 below: the same path, the same view name and the same role list. A view that is
@@ -79,3 +82,10 @@ means `admin`, the System Administrator role.
 3. Parcel creation, location board and pickup verification.
 4. Exception handling.
 5. Reports, users, settings and audit.
+
+
+## Revision history
+
+| Version | Week | Change | Author |
+|---|---|---|---|
+| v1.0 | Week 2 | First version recorded in this file. The route list, aligned with `frontend/src/router/index.js`. Any earlier edit is not listed: this file had no revision history until week 3, so records of those edits do not exist here. | R1 |

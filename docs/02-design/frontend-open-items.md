@@ -3,6 +3,7 @@
 | Item | Detail |
 |---|---|
 | Status | Working list, not a contract |
+| Version | v1.0 |
 | Owner | R4 Frontend Lead, with R5 |
 | Raised | 2026-10-13, from R6's Sprint 2 contract note and R4's read of the contract |
 | Revised | 2026-10-15, against OpenAPI v0.3.0-draft after CR-013 was approved, and again the same day to close item 5 |
@@ -30,3 +31,11 @@ Item 4 is the one diagram update still open: the activity diagram shows the
 single-parcel path, and the contract's per-row batch answer, created[] with
 `rejected[{ index, trackingNo, reason }]`, is not drawn. Items 6 to 8 are page
 work the frontend does when it builds the corresponding screen.
+
+
+
+## Revision history
+
+| Version | Week | Change | Author |
+|---|---|---|---|
+| v1.0 | Week 2 | First version recorded in this file. The open items from the Sprint 2 contract review. Any earlier edit is not listed: this file had no revision history until week 3, so records of those edits do not exist here. | R1 |

@@ -4,7 +4,7 @@
 |---|---|
 | Task | T-00-07 |
 | Owner | R1 |
-| Version | v1.2 |
+| Version | v1.3 |
 | Status | Active, reviewed at the end of every sprint |
 
 
@@ -150,7 +150,7 @@ hands the parcel over. Everything else waits.
 | T-30-03 | Flyway migrations and seed data | R7 | backend/src/main/resources/db/migration |
 | T-30-04 | Frontend skeleton: Vite, router, Pinia, Axios wrapper, shared layout, /login and /dashboard placeholders | R4 | frontend/src |
 | T-30-05 | Checkstyle, Spotless, commitlint, Git hooks | R10 | repository root |
-| T-30-06 | CI runs `./mvnw verify` and frontend tests | R10 | .github/workflows |
+| T-30-06 | CI runs `./mvnw verify` and frontend tests | R6 | .github/workflows |
 | T-41-01 | Registration, login, JWT, four-role RBAC | R6 | backend/src/main/java/com/group23/auth |
 | T-41-02 | Login page; connect to the auth store and route guards | R5 | frontend/src/views |
 | T-41-03 | Audit log interceptor | R7 | backend/src/main/java/com/group23/common |
@@ -241,3 +241,4 @@ A task is done when:
 | v1.0 | Week 1 | Initial eight-week, five-sprint plan with a task ID, an owner and a folder for every task | R1 |
 | v1.1 | Week 2 | `T-42-02` corrected to drop the turnover score, which `CRJ-001` had rejected (`CR-016`), and the week 2 scope of issue #73 narrowed to the two jobs that could run (`CR-017`) | R1 |
 | v1.2 | Week 3 | Added the Sprint 0 section, which the sprint overview named but the body never described. The task identifiers are the ones the files and commits already use, not new ones | R1 |
+| v1.3 | Week 3 | Moved `T-30-06` from R10 to R6. `#137`'s fourth acceptance criterion already assigns enabling the backend CI job to R6, and one deliverable should not carry two owners; `PLAN.md` was the odd one out. R10 keeps `T-30-01` (delivered) and `T-30-05`, and wrote the commented-out `backend` block that R6 now activates | R1 |

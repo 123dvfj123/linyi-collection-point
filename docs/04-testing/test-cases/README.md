@@ -1,5 +1,10 @@
 # Test case conventions
 
+| Item | Detail |
+|---|---|
+| Status | Active |
+| Version | v1.0 |
+
 All test cases must use the standard 12-column format. Copy the Markdown table below when creating a new test case:
 
 ## Naming Convention
@@ -115,3 +120,11 @@ To ensure comprehensive testing coverage, the following five aspects must be che
 | TC-OWN-009 | FR-34 | Integration | Owner parcel queries are limited to managed points | Sprint 2 |
 | TC-OWN-010 | FR-38 | Slice | An owner views the retention period of a managed point | Sprint 2 |
 | TC-OWN-011 | NFR-8 | Component | Each point's data is separated by a collection point identifier | Sprint 2 |
+
+
+
+## Revision history
+
+| Version | Week | Change | Author |
+|---|---|---|---|
+| v1.0 | Week 2 | First version recorded in this file. The test case format, the identifier conventions and the 59 reserved identifiers. `#171` adds cases to it. Any earlier edit is not listed: this file had no revision history until week 3, so records of those edits do not exist here. | R1 |
