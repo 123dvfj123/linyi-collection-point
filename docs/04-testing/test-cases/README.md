@@ -3,7 +3,7 @@
 | Item | Detail |
 |---|---|
 | Status | Active |
-| Version | v1.0 |
+| Version | v1.1|
 
 All test cases must use the standard 12-column format. Copy the Markdown table below when creating a new test case:
 
