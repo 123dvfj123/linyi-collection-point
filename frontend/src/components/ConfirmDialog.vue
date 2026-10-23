@@ -1,6 +1,9 @@
 <script setup>
 import { ElButton, ElDialog } from 'element-plus'
-import 'element-plus/dist/index.css'
+import 'element-plus/theme-chalk/base.css'
+import 'element-plus/theme-chalk/el-overlay.css'
+import 'element-plus/theme-chalk/el-dialog.css'
+import 'element-plus/theme-chalk/el-button.css'
 
 // modelValue is used to control whether the dialog is open.
 // loading is true when the dialog is submitting, preventing duplicate submissions.
