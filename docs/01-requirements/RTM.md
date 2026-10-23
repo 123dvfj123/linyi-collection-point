@@ -1,6 +1,6 @@
 # Requirements Traceability Matrix
 
-| Version | v0.3 (draft for Sprint 1) |
+| Version | v0.4 |
 |---|---|
 | Date | 2026-10-19 |
 | Owner | R8 Wu Kehao |
@@ -14,6 +14,7 @@
 | v0.1 | Week 2 | Initial RTM: every must-have FR and NFR mapped to design artefact, code module and reserved test case ID. Draft pending task ID assignment and UML filename confirmation. | R8 |
 | v0.2 | Week 2 | Removed the stale `Submission blockers` section, which said three items were open after they were done; corrected the sentence that said forty-nine reserved identifiers still had a `TBD` test level, since all fifty-nine were assigned one; removed a duplicated `Acceptance checklist` heading; removed a stray backtick. Prepared by R1 while R8 was unavailable, for R8 to review | R1 |
 | v0.3 | Week 3 | Brought the matrix in line with CR-021: `CollectionPoint` and `collectionPointId` are now in `ERD.md`, so the FR-26, FR-46 and NFR-8 design artefact cells no longer say the entity is missing, and the two GAP rows about it collapse into one that names what actually remains, the migration. GAP 12 now states the join table that owner and administrator scope still need | R1 |
+| v0.4 | Week 3 | #171: FR-18 links TC-PARC-006, TC-PARC-007 and blocked TC-PARC-008; added GAP 13 for #168; reserved identifier count corrected to 62. | R8 |
 
 ## Column definitions
 
@@ -64,7 +65,7 @@
 | FR-15 | Storage location availability is displayed to staff | Must (proposed) | S5 (4/7 preferred manual/no suggestion); frontend-page-map `/locations` | `ERD.md` `Location.status` enum; `openapi.yaml` `GET /locations`; `docs/02-design/uml/state-storage-location.puml` (full transitions: `available → reserved → occupied`, plus `disabled` and `enable`; note "Disabled locations are excluded from recommendations"); `design-system.md` §10 `LocationGrid`; `frontend-page-map.md` `/locations` | `backend/.../location/`; `frontend/src/pages/Locations/` | TC-LOC-002 | designed |
 | FR-16 | Staff manually select a storage location | Must (proposed) | S5 (4/7 preferred manual/no suggestion); CR-004 | `ERD.md` `Parcel.locationId` / `Location.parcelId`; `docs/02-design/uml/class-parcel-and-location.puml` (`Location holds Parcel`); `openapi.yaml` `POST /locations/recommend` (description explicitly says manual assign); `docs/02-design/uml/sequence-staff-intake.puml` ("accept the suggestion or choose another location"); `docs/02-design/uml/activity-parcel-intake.puml` ("A suitable location is free?" → no → "Choose a location manually"); `docs/02-design/uml/state-storage-location.puml` (`Available --> Reserved : reserve for parcel` — **GAP:** no reserve/cancel endpoint; the `Reserved` state has no entry point in the contract, same class as issue #98); `frontend-page-map.md` `/locations`; **GAP:** no standalone shelve endpoint, issue #98 | `backend/.../location/`; `frontend/src/pages/Locations/` | TC-LOC-003 | designed |
 | FR-17 | A duplicate waybill number is rejected | Must (proposed) | `test-plan.md` §6 (FR-17); SRS IS-2 | `ERD.md` `Parcel.trackingNo` unique constraint; `openapi.yaml` `POST /parcels` 409 `DUPLICATE_TRACKING_NO`; `docs/02-design/uml/sequence-staff-intake.puml` (`find parcel by trackingNo` → duplicate → 409 Conflict → "Parcel already registered"); `docs/02-design/uml/activity-parcel-intake.puml` ("Duplicate waybill?" → yes → "Reject and show the existing parcel") | `backend/.../parcel/` | TC-PARC-002 | designed |
-| FR-18 | A batch of up to 50 parcels is registered in one operation | Must (approved — CR-003) | **S3: 4/7**; **CR-003** | `ERD.md` `Parcel`; `openapi.yaml` `POST /parcels/batch` (CR-003); `docs/02-design/uml/usecase-counter-work.puml` (`Courier --> UC_Register : delivers batch` — **GAP/CONFLICT:** the Courier actor conflicts with SRS §2.3/2.4, which states "Couriers have no direct system role in this version"; pending R4/R6 ruling); `frontend-page-map.md` `/parcels/new` | `backend/.../parcel/`; `frontend/src/pages/Parcels/` | TC-PARC-003 | designed |
+| FR-18 | A batch of up to 50 parcels is registered in one operation | Must (approved — CR-003) | **S3: 4/7**; **CR-003** | `ERD.md` `Parcel`; `openapi.yaml` `POST /parcels/batch` (CR-003); `docs/02-design/uml/usecase-counter-work.puml` (`Courier --> UC_Register : delivers batch` — **GAP/CONFLICT:** the Courier actor conflicts with SRS §2.3/2.4, which states "Couriers have no direct system role in this version"; pending R4/R6 ruling); `frontend-page-map.md` `/parcels/new` | `backend/.../parcel/`; `frontend/src/pages/Parcels/` | TC-PARC-003, TC-PARC-006, TC-PARC-007, TC-PARC-008 (blocked: #168) | designed |
 | FR-19 | An optional location suggestion is shown, never auto-applied | Should (approved — CR-004) | **S4: 0/7** chose it; **CR-004** | `openapi.yaml` `POST /locations/recommend` (description explicitly names FR-19/CR-004); `docs/02-design/uml/sequence-staff-intake.puml` (`POST /locations/recommend` → 200 `recommendedLocation`); `docs/02-design/uml/activity-parcel-intake.puml` ("Recommend a storage location"); `docs/02-design/uml/state-storage-location.puml` (note: "Disabled locations are excluded from recommendations" — basis for excluding disabled locations from recommendations); `frontend-page-map.md` `/locations` | `frontend/src/pages/Locations/` | TC-LOC-004 | designed |
 | FR-20 | Staff can ignore a location suggestion and shelve manually | Should (approved — CR-004) | **S5: 4/7** preferred manual/no suggestion; **CR-004** | `openapi.yaml` `POST /locations/recommend` (description explicitly names FR-20/CR-004); `docs/02-design/uml/sequence-staff-intake.puml` ("show the suggestion, which may be ignored"); `docs/02-design/uml/activity-parcel-intake.puml` ("Choose a location manually", ignoring the suggestion); `ERD.md` `Parcel.locationId`; `frontend-page-map.md` `/locations` | `backend/.../location/`; `frontend/src/pages/Locations/` | TC-LOC-005 | designed |
 | FR-21 | Staff verify an active pickup code before handover | Must (proposed) | **S4: 3/7**; frontend-page-map `/pickup` | `ERD.md` `PickupCode` (code, status=active, expiresAt); `docs/02-design/uml/class-parcel-and-location.puml` (`PickupCode` class + `PickupCodeStatus` enum); `docs/02-design/uml/state-pickup-code.puml` (only `active` can confirm handover: `Active --> Used : confirm handover`; `Used` / `Expired` / `Revoked` are all terminal and cannot return to `Active`); `openapi.yaml` `POST /pickup/verify`; `docs/02-design/uml/sequence-resident-pickup.puml` (`POST /pickup/verify` → 200 `{parcelSummary, location}` → "show the parcel and its location"); `docs/02-design/uml/activity-handover.puml` ("Enter the pickup code" → "Pickup code found?" → "Show the parcel and its location"); `docs/02-design/uml/usecase-counter-work.puml` (`UC_Handover` "Verify pickup code and hand over", first half); `frontend-page-map.md` `/pickup` | `backend/.../pickup/`; `frontend/src/pages/Pickup/` | TC-PICK-001 | designed |
@@ -122,9 +123,7 @@ identifier is reserved in `docs/04-testing/test-cases/README.md`.
 |:--:|---|---|
 | 1 | Six UML filenames in the `design artefact` column are inferred rather than listed, and should be confirmed with `ls docs/02-design/uml/` | `class-parcel-and-location.puml`, `sequence-login-role-guard.puml`, `sequence-staff-intake.puml` and three others |
 
-All fifty-nine reserved identifiers carry a test level drawn from the six the README
-defines, so the reservation table is complete. The six are `System`, `Integration`,
-`Component`, `Slice`, `Performance` and `Acceptance`.
+All sixty-two reserved identifiers carry a test level. TC-PARC-008 is reserved but marked blocked (#168) and is not counted as executable coverage.
 
 ## Acceptance checklist
 
@@ -167,6 +166,7 @@ defines, so the reservation table is complete. The six are `System`, `Integratio
 | 10 | No admin endpoints in openapi.yaml | FR-40, FR-41, FR-42, FR-44, FR-47 | R6 |  (5 rows need task ID) |
 | 11 | `/settings` is Admin-only in frontend-page-map.md but FR-38 needs Owner read | FR-38 | R4 | — (page-map fix) |
 | 12 | The `User`-to-`CollectionPoint` join table that owner and administrator scope need is not designed. `User.collectionPointId` is nullable and covers staff assignment only | FR-27, FR-28, FR-30, FR-32, FR-33, FR-34 | R6 | `T-41-01` |
+| 13 | Same-batch duplicate waybill behaviour in batch registration is unresolved (#168, R6 ruling). TC-PARC-008 is reserved but blocked; expected result cannot be written until R6 rules. | FR-18, FR-17 | R6 | — (tracked as #168) |
 
 ## Appendix: NFR numbering reference
 

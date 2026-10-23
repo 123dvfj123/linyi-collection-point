@@ -3,7 +3,7 @@
 | Item | Detail |
 |---|---|
 | Status | Active |
-| Version | v1.0 |
+| Version | v1.1|
 
 All test cases must use the standard 12-column format. Copy the Markdown table below when creating a new test case:
 
@@ -120,7 +120,9 @@ To ensure comprehensive testing coverage, the following five aspects must be che
 | TC-OWN-009 | FR-34 | Integration | Owner parcel queries are limited to managed points | Sprint 2 |
 | TC-OWN-010 | FR-38 | Slice | An owner views the retention period of a managed point | Sprint 2 |
 | TC-OWN-011 | NFR-8 | Component | Each point's data is separated by a collection point identifier | Sprint 2 |
-
+| TC-PARC-006 | FR-18 | Integration | A mixed batch registers every valid row and reports each invalid row (partial success); valid rows remain committed and visible | Sprint 2 |
+| TC-PARC-007 | FR-18 | Integration | A batch where every row is invalid registers nothing and returns an actionable error for each row | Sprint 2 |
+| TC-PARC-008 | FR-18 | Integration | **BLOCKED — #168, R6 ruling pending:** same-batch duplicate waybill behaviour (reject whole batch / dedupe / per-row error) is undefined, so no expected result can be written yet. Do not execute until R6 rules. | Sprint 2 (blocked — #168) |
 
 
 ## Revision history
@@ -128,3 +130,4 @@ To ensure comprehensive testing coverage, the following five aspects must be che
 | Version | Week | Change | Author |
 |---|---|---|---|
 | v1.0 | Week 2 | First version recorded in this file. The test case format, the identifier conventions and the 59 reserved identifiers. `#171` adds cases to it. Any earlier edit is not listed: this file had no revision history until week 3, so records of those edits do not exist here. | R1 |
+| v1.1 | Week 3 | #171: added TC-PARC-006 (mixed batch partial success), TC-PARC-007 (all-invalid batch), and TC-PARC-008 (same-batch duplicate waybill), marked BLOCKED pending R6 ruling on #168. Reserved identifiers now 62. | R8 |
