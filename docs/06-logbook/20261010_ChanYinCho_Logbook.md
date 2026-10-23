@@ -15,5 +15,5 @@
 | W02 |  2026-10-15 | T-10-08 | Solving the product-backlog problem  | 21:30-22:15 | 0.75 | done | docs/01-requirements/specification/product-backlog.md (merged via PR #159) | - | Align the backlog with the current develop SRS FR/NFR identifiers and replace the invalid custom IDs. Add Sprint task IDs to each backlog row (format: Sprint X — T-xx-xx). Set BL-005 to Must based on the project evidence. | - |
 | W02 |  2026-10-16 | T-10-10 | Add requirements walkthrough minutes | 22:25-23:55 | 1.5 | done | PR#159 | - | - | - |
 | W02 |  2026-10-17 | T-10-10 | Continue to complete adding requirements walkthrough minutes | 17:00-19:00 | 2 | done | PR#159 | - | - | - |
-| W03 |  2026-10-21 | T-00-11 | Update change log with 3 adjudication decisions for recommendation, full-shelf fallback, and batch cap | 22:45-23:45 | 1 | done | PR#186 | - | - | - |
+| W03 |  2026-10-21 | T-10-11 | Update change log with 3 adjudication decisions for recommendation, full-shelf fallback, and batch cap | 22:45-23:45 | 1 | done | PR#191 | - | - | - |
 ---
