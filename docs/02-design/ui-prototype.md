@@ -3,9 +3,10 @@
 | Item | Detail |
 |---|---|
 | Status | Complete for Sprint 1 |
-| Version | v1.0 |
+| Version | v1.1 |
 | Date | 2026-10-13 |
-| Revision | 3, after the two reviews of 2026-10-13: the R4 page review (P1.1, P1.2, P2.1, P2.2, P2.3, plus the other storage location write actions in CD-1) and the follow-up review (exception types, the audit log page, no personal names, the "suggestion only" wording, batch intake as a must-have) |
+| Revised | 2026-10-23 |
+| Revision | 4, adding the R4 corrections for `#170` findings 2, 3, 4, 6 and 7, and specifying page behaviour for findings 9 and 10 |
 | Task | T-20-05 (Sprint 1, week 2) |
 | Owner | R5 Frontend Developer |
 | Reviewers | R4 Frontend Lead, R9 (usability review, T-20-10), R3 (requirement identifiers) |
@@ -454,21 +455,16 @@ must finish a handover in three minutes or less.
 ┌───────────────────────────────────────────────────────────────┐
 │ Verify a pickup code                                          │
 │  ┌─────────────────────────────┐                              │
-│  │ 4 8 2 1                     │   keyboard or scanner        │
+│  │ 4 8 2 1                     │                              │
 │  └─────────────────────────────┘                              │
-│  [ Verify ]         Resident lost the code? Use identity      │
-├───────────────────────────────────────────────────────────────┤
-│ Result                                                        │
-│ SF1234567890 · resident · Zone A · A-03-2                     │
-│ [ Confirm handover ]                                          │
-├───────────────────────────────────────────────────────────────┤
-│ last: 4821 handed over 19:14 by staff1                        │
+│  [ Verify ]                                                   │
 └───────────────────────────────────────────────────────────────┘
 ```
 
-No person is named on any screen. The result row shows the role and the facts,
+No person is named on any screen. The result view shows the role and the facts,
 not a person, because the ethics statement promises that nobody who took part in
-the survey is identified (CR-009).
+the survey is identified (CR-009). The Result region appears only after a
+successful verification; the idle screen does not draw an empty result block.
 
 States:
 
@@ -479,16 +475,23 @@ States:
 - invalid code: "This code is not recognised", with the attempt count kept low
   and no hint about which digits are wrong
 - expired or already used: the reason is stated and the next action is offered
-  (issue a new code, or hand over after the identity fallback)
-- delegated code: the parcel and the authorised person are shown so staff can
-  confirm the name before the handover
-- identity fallback: phone number plus surname, recorded as an alternative
-  verification method, per the survey decision; the screen says the fallback is
-  recorded in the audit trail. `POST /pickup/verify` accepts only `pickupCode`
-  today, so the fallback needs a contract decision (CD-2) before it can be built
+  (issue a new code); the identity fallback is not available in Sprint 2
+- parcel not on shelf: the code is valid but the parcel is absent from the
+  recorded shelf. Keep the shelf location prominent, disable handover
+  confirmation, and tell staff to re-check that location. The final API
+  representation of this state remains an R6/R2 contract decision.
+- API error: show the normalised message and a retry action without clearing the
+  entered code
 
-Steps: 3 for the happy path (scan or type the code, verify, confirm). Target: three
-minutes or less per handover, and no more than two screens.
+Enter after a scanner or keyboard entry starts verification directly; the
+separate `Verify` button remains available for a mouse or touch interaction.
+
+The delegated-code state is future work under `FR-9` and `FR-10`, so it is not
+drawn or treated as available in Sprint 2. The identity fallback remains
+unavailable until `#98/CD-2` settles the contract.
+
+Steps: 3 for the happy path (scan or type the code, verify, confirm). Target:
+three minutes or less per handover, and no more than two screens.
 
 ### 5.7 Users — `/users` — owner, admin — R5 — IS-11 (FR: pending R3)
 
@@ -763,3 +766,4 @@ close the issue on its own.
 | Version | Week | Change | Author |
 |---|---|---|---|
 | v1.0 | Week 2 | First version recorded in this file. The nine page prototypes. This is revision 4 of the document: the earlier three are described in the header's own Revision note, because the file had no revision history then. Seven contradictions against this document's own text are recorded in `#170` and are not yet fixed. Any earlier edit is not listed: this file had no revision history until week 3, so records of those edits do not exist here. | R1 |
+| v1.1 | Week 3 | Corrected R4 findings 2, 3, 4, 6 and 7 in the pickup prototype: removed the staff identifier, unavailable identity action, future delegated state, developer note and empty idle result. Added the parcel-not-on-shelf state and Enter-to-verify behaviour for findings 9 and 10 | R4 |

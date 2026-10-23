@@ -4,7 +4,7 @@ import axios from 'axios'
 // wrapper so that pages never talk to Axios directly: a page imports this
 // module and never imports axios itself.
 //
-// Two shapes are defined by the contract (OpenAPI v0.2.0-draft) and this file
+// Two shapes are defined by the contract (OpenAPI v0.3.0-draft) and this file
 // is the one place that knows about them:
 //
 //   success  the payload is returned FLAT, with no envelope. For example
