@@ -28,10 +28,10 @@ services:
       retries: 5
 
   # 3. Spring Boot backend.
-  #    Deliberately behind the "full" profile: backend/pom.xml and the Maven
-  #    wrapper are delivered by T-30-02 (issue #137), so the image cannot be
-  #    built yet. Until then, `docker compose up -d` starts the database, the
-  #    cache and the frontend only. Once T-30-02 lands, use:
+  #    Built from backend/ by T-30-02 (issue #137). Behind the "full" profile
+  #    because the image takes a few minutes to build and most work does not
+  #    need it. `docker compose up -d` starts the database, the cache and the
+  #    frontend; add the backend with:
   #        docker compose --profile full up -d
   backend:
     profiles: ["full"]

@@ -1,6 +1,6 @@
 # Continuous integration.
-# The sanity and frontend jobs always run. The backend job is enabled in
-# Sprint 2 once backend/pom.xml exists.
+# Three jobs: sanity checks the repository itself, backend builds and tests the Java
+# service, and frontend lints, tests and builds the Vue application.
 
 name: CI
 
@@ -39,26 +39,25 @@ jobs:
       - name: Check that every markdown table row has as many cells as its header
         run: python3 scripts/check_table_columns.py .
 
-  # Uncomment in Sprint 2, once backend/pom.xml exists.
-  # backend:
-  #   runs-on: ubuntu-latest
-  #   defaults:
-  #     run:
-  #       working-directory: backend
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: actions/setup-java@v4
-  #       with:
-  #         distribution: temurin
-  #         java-version: '17'
-  #         cache: maven
-  #     - run: ./mvnw -B verify
-  #     - name: Upload test reports
-  #       if: always()
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: surefire-reports
-  #         path: backend/target/surefire-reports/
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+      - run: ./mvnw -B verify
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          path: backend/target/surefire-reports/
 
   frontend:
     runs-on: ubuntu-latest
