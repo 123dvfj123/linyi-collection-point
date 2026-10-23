@@ -20,6 +20,9 @@
     <properties>
         <java.version>17</java.version>
         <springdoc.version>2.6.0</springdoc.version>
+        <flyway.url>jdbc:postgresql://localhost:5432/lms</flyway.url>
+        <flyway.user>lms</flyway.user>
+        <flyway.password>lms_dev_only</flyway.password>
     </properties>
 
     <dependencies>
@@ -69,6 +72,25 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <configuration>
+                    <url>${flyway.url}</url>
+                    <user>${flyway.user}</user>
+                    <password>${flyway.password}</password>
+                    <locations>
+                        <location>filesystem:src/main/resources/db/migration</location>
+                    </locations>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.postgresql</groupId>
+                        <artifactId>postgresql</artifactId>
+                        <version>${postgresql.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
