@@ -136,4 +136,40 @@ function signOut() {
   flex: 1;
   padding: 20px;
 }
+
+/* design-system.md 10: the sidebar becomes a single row below 641 px. */
+@media (max-width: 640px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex: 0 0 auto;
+    padding: var(--space-3);
+  }
+
+  .brand {
+    margin-bottom: var(--space-2);
+  }
+
+  .nav {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .nav-link {
+    white-space: nowrap;
+  }
+
+  .topbar {
+    flex-wrap: wrap;
+    padding: var(--space-2) var(--space-3);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  }
+
+  .content {
+    padding: var(--space-4);
+  }
+}
 </style>

@@ -1,5 +1,5 @@
 <script setup>
-import { computed, nextTick, ref } from 'vue'
+import { computed, nextTick, onMounted, ref } from 'vue'
 import { confirmHandover, verifyPickupCode } from '../api/pickup'
 import ConfirmDialog from '../components/ConfirmDialog.vue'
 import ErrorState from '../components/ErrorState.vue'
@@ -44,6 +44,13 @@ const noticeTitles = {
   used: 'Pickup code already used',
   'not-on-shelf': 'Parcel not at the recorded shelf',
 }
+
+// A route-mounted input does not reliably honour the HTML autofocus attribute,
+// so explicitly focus it after Vue has rendered the page for scanner input.
+onMounted(async () => {
+  await nextTick()
+  pickupInput.value?.focus()
+})
 
 function normaliseError(error) {
   return {

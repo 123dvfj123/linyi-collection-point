@@ -1,4 +1,5 @@
 import { flushPromises, mount } from '@vue/test-utils'
+import { nextTick } from 'vue'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { confirmHandover, verifyPickupCode } from '../../src/api/pickup.js'
 import PickupVerifyView from '../../src/views/PickupVerifyView.vue'
@@ -74,6 +75,16 @@ describe('PickupVerifyView', () => {
 
     expect(wrapper.text()).toContain('Pickup verification')
     expect(wrapper.get('[data-test="verify"]').attributes('disabled')).toBeDefined()
+  })
+
+  it('focuses the pickup input for scanner input', async () => {
+    const wrapper = mount(PickupVerifyView, {
+      attachTo: document.body,
+    })
+    await nextTick()
+
+    expect(document.activeElement).toBe(wrapper.get('#pickup-code').element)
+    wrapper.unmount()
   })
 
   it('verifies on Enter and shows the shelf location prominently', async () => {
