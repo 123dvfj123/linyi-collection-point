@@ -32,4 +32,24 @@ describe('route guard', () => {
     await router.push('/parcels')
     expect(router.currentRoute.value.path).toBe('/parcels')
   })
+
+  it('sends a resident away from the staff pickup page', async () => {
+    const { useAuthStore } = await import('../../src/stores/auth.js')
+    await useAuthStore().login('resident', 'resident')
+
+    const router = (await import('../../src/router/index.js')).default
+    await router.push('/pickup')
+
+    expect(router.currentRoute.value.path).toBe('/403')
+  })
+
+  it('lets staff open the pickup page', async () => {
+    const { useAuthStore } = await import('../../src/stores/auth.js')
+    await useAuthStore().login('staff', 'staff')
+
+    const router = (await import('../../src/router/index.js')).default
+    await router.push('/pickup')
+
+    expect(router.currentRoute.value.path).toBe('/pickup')
+  })
 })

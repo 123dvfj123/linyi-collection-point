@@ -11,6 +11,7 @@ const router = useRouter()
 const MENU = [
   { to: '/dashboard', label: 'Dashboard', roles: ['staff', 'owner', 'admin'] },
   { to: '/my-parcels', label: 'My parcels', roles: ['resident'] },
+  { to: '/pickup', label: 'Pickup', roles: ['staff'] },
 ]
 
 const menu = computed(() => MENU.filter((item) => item.roles.includes(auth.role)))
