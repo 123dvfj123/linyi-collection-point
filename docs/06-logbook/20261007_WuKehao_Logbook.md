@@ -17,5 +17,6 @@
 | W02 |  2026-10-18 | T-50-19 | Modify RTM.md and test-cases/README.md and logbook | 23:39-00:37 | 0.97 | done | docs/01-requirements/RTM.md docs/04-testing/test-cases/README.md| - | - | - |
 | W02 |  2026-10-19 | T-50-19 | Modify RTM.md and test-cases/README.md and logbook | 01:43-01:53 | 0.17 | done | docs/01-requirements/RTM.md docs/04-testing/test-cases/README.md| - | - | - |
 | W02 |  2026-10-19 | T-50-19 | Modify RTM.md and test-cases/README.md and logbook | 02:20-02:31 | 0.18 | done | docs/01-requirements/RTM.md docs/04-testing/test-cases/README.md| - | - | - |
+| W03 |  2026-10-23 | T-42-08 | README added TC-PARC-006/007; TC-PARC-008 (blocked). RTM FR-18 updated; README/RTM bumped to v1.1/v0.4.) | 23:37-00:00 | 0.38 | done | docs/01-requirements/RTM.md docs/04-testing/test-cases/README.md| - | - | - |
 ---
 
