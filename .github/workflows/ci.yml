@@ -1,6 +1,7 @@
 # Continuous integration.
-# Three jobs: sanity checks the repository itself, backend builds and tests the Java
-# service, and frontend lints, tests and builds the Vue application.
+# Four jobs: sanity checks the repository itself, backend builds and tests the Java
+# service, frontend lints, tests and builds the Vue application, and docker-smoke
+# starts the complete Compose stack and checks its health endpoints.
 
 name: CI
 
@@ -41,6 +42,7 @@ jobs:
 
   backend:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     defaults:
       run:
         working-directory: backend
@@ -58,6 +60,24 @@ jobs:
         with:
           name: surefire-reports
           path: backend/target/surefire-reports/
+
+  docker-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Start the full stack
+        run: docker compose --profile full up -d --build --wait --wait-timeout 300
+      - name: Verify the backend health endpoint
+        run: curl --fail --silent --show-error http://localhost:8080/api/health
+      - name: Verify that all four services are running
+        run: test "$(docker compose --profile full ps --status running --services | wc -l)" -eq 4
+      - name: Show service logs on failure
+        if: failure()
+        run: docker compose --profile full logs
+      - name: Stop the full stack
+        if: always()
+        run: docker compose --profile full down --volumes --remove-orphans
 
   frontend:
     runs-on: ubuntu-latest
