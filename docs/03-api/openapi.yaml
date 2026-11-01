@@ -46,6 +46,9 @@
 #   issue #98: locationId may be omitted when a parcel cannot be placed on a
 #   shelf, and ErrorResponse.code has one explicit vocabulary shared by the
 #   backend and frontend.
+# - CR-033 (proposed): extend that vocabulary with the generic protocol codes already
+#   emitted by the security and exception handlers, so every structured failure
+#   response remains valid against the same schema.
 
 #
 # Revision history
@@ -53,11 +56,18 @@
 # v0.3.0 | Week 2 | First version recorded in this file. The Sprint 2 contract: 12 paths and 16 component schemas, frozen for the frontend. Any earlier edit is
 # not listed: this file had no revision history until week 3, so records of
 # those edits do not exist here.
+#
+# v0.4.0 | Week 4 | The pickup endpoints gained their failure vocabulary. /pickup/verify and
+# /pickup/confirm return 404 with PICKUP_CODE_INVALID, PICKUP_CODE_EXPIRED or
+# PICKUP_CODE_USED, and 409 with PARCEL_NOT_ON_SHELF. ErrorResponse.code now enumerates the
+# four protocol codes the security and exception handlers already emit (CR-033), so every
+# structured failure response validates against the same schema. A code whose handover is
+# already recorded is not a failure: NFR-4 returns that handover with the same 200 response.
 
 openapi: 3.0.3
 info:
   title: Community Parcel Collection Point Management System API
-  version: 0.3.0-draft
+  version: 0.4.0-draft
   description: >
     Draft OpenAPI contract for Sprint 2. The backend owns the final paths and
     fields; the frontend must not invent fields before they appear here.
@@ -520,7 +530,9 @@ paths:
           description: >
             The code is unknown, revoked, expired or already used without a
             recorded handover. The body uses PICKUP_CODE_INVALID,
-            PICKUP_CODE_EXPIRED or PICKUP_CODE_USED.
+            PICKUP_CODE_EXPIRED or PICKUP_CODE_USED. A code whose handover is
+            already recorded is not a failure: NFR-4 returns that recorded
+            handover with the same 200 response.
           content:
             application/json:
               schema:
@@ -822,13 +834,17 @@ components:
               enum:
                 - INVALID_CREDENTIALS
                 - VALIDATION_ERROR
+                - UNAUTHORIZED
+                - ACCESS_DENIED
                 - FORBIDDEN
+                - NOT_FOUND
+                - UNPROCESSABLE_ENTITY
                 - DUPLICATE_TRACKING_NO
+                - BATCH_LIMIT_EXCEEDED
                 - PARCEL_NOT_ON_SHELF
                 - PICKUP_CODE_INVALID
                 - PICKUP_CODE_EXPIRED
                 - PICKUP_CODE_USED
-                - BATCH_LIMIT_EXCEEDED
             message:
               type: string
             requestId:
