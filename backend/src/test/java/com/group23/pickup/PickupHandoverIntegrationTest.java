@@ -8,7 +8,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.group23.security.AuthenticatedUser;
 import com.group23.user.UserRole;
+import java.sql.Types;
 import java.time.Instant;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -26,6 +28,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.SqlParameterValue;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.DynamicPropertyRegistry;
@@ -286,14 +289,19 @@ class PickupHandoverIntegrationTest {
                 parcelId,
                 pickupCode,
                 codeStatus,
-                expiresAt,
-                usedAt);
+                timestampWithTimeZone(expiresAt),
+                timestampWithTimeZone(usedAt));
         jdbcTemplate.update(
                 "UPDATE parcels SET location_id = ?, pickup_code_id = ? WHERE id = ?",
                 locationId,
                 pickupCodeId,
                 parcelId);
         return new ShelfFixture(parcelId, locationId, pickupCodeId, pickupCode);
+    }
+
+    private SqlParameterValue timestampWithTimeZone(Instant timestamp) {
+        return new SqlParameterValue(
+                Types.TIMESTAMP_WITH_TIMEZONE, timestamp == null ? null : timestamp.atOffset(ZoneOffset.UTC));
     }
 
     private void assertOperationalState(ShelfFixture fixture) {
