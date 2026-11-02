@@ -5,7 +5,7 @@
 | Task | T-20-14 |
 | Owner | R1 |
 | Status | Outline trimmed; chapters 1 and 2 drafted |
-| Version | v0.4 |
+| Version | v0.5 |
 | Deadline | 2026-12-08 |
 | Limit | Not more than 1000 words, source code excluded |
 | Submitted by | the leader only, as a PDF through the OLE assignment link |
@@ -89,11 +89,15 @@ The team would freeze requirements before design and write the traceability matr
 
 | Section | Status | Source |
 |---|---|---|
-| 1. The problem and context | Drafted; needs reduction to its 130-word allocation | `chapters/01-introduction.md` |
-| 2. Process | Drafted; needs reduction to its 150-word allocation | `chapters/02-process.md` |
-| 3. Requirements engineering | Drafted; within budget | `chapters/03-requirements.md` ([PR #257](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/257)) |
-| 4. System modeling | Drafted; within budget | `chapters/04-modeling.md` ([PR #258](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/258)) |
-| 5-9 | Outline and section notes only | `00-outline.md` and the cited project artefacts |
+| 1. The problem and context | Drafted; within budget (123 of 130) | `chapters/01-introduction.md` |
+| 2. Process | Drafted; within budget (147 of 150) | `chapters/02-process.md` |
+| 3. Requirements engineering | Drafted; within budget (109 of 115) | `chapters/03-requirements.md` ([PR #257](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/257)) |
+| 4. System modeling | Drafted; within budget (88 of 90) | `chapters/04-modeling.md` ([PR #258](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/258)) |
+| 5. Architectural and database design | Drafted; within budget (76 of 75) | `chapters/05-architecture.md` |
+| 6. Design and implementation | Drafted; within budget (92 of 100) | `chapters/06-implementation.md` ([PR #261](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/261)) |
+| 7. Testing and validation | Drafted; within budget (95 of 95) | `chapters/07-testing.md` |
+| 8. Software evolution | Drafted; within budget (163 of 165) | `chapters/08-evolution.md` |
+| 9. Conclusion and reflection | Drafted; within budget (55 of 60) | `chapters/09-conclusion.md` |
 
 ## Revision history
 | Version | Week | Change | Author |
@@ -102,3 +106,4 @@ The team would freeze requirements before design and write the traceability matr
 | v0.2 | Week 3 | Trimmed redundant text to bring the outline body under the 1000-word limit while preserving section structure. Clarified that the limit applies to the submitted report, not metadata. | R9 |
 | v0.3 | Week 3 | The word budget table added to **1150 against a limit of 1000**, and the sentence above it promised "about 100 words for the conclusion" while the table gave the conclusion 80. Chapter 1 is raised from 80 to 130 because it now cites the resident and staff pain points with their counts, which is what the requirement engineering criterion asks for, and cutting it back would turn evidence into assertion. The 150 words come from chapters 3 to 9, and chapter 8 keeps the largest single share because this outline itself calls it the section that distinguishes the report. Chapter 2 keeps 150, so its drafted 176 words need a 26-word trim rather than a budget change | R1 |
 | v0.4 | Week 3 | Corrected the stale runnable-state note now that the backend and full Compose stack are delivered. Replaced the obsolete missing-artefact table, whose issues are closed, with the current drafting status; found that both drafted chapters still need trimming to their budget | R4 |
+| v0.5 | Week 4 | Added chapters 5, 7, 8 and 9, and recorded every chapter's actual word count against its budget. Corrected chapters 1 and 2, which the status table still listed as needing reduction when both were already inside their allocation. The nine chapters now total 947 words | R1 |
