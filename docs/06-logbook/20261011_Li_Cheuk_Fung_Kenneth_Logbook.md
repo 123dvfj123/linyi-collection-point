@@ -31,6 +31,9 @@
 | W03 | 2026-10-26 | T-10-06 / #187 | Updated FR-19 and FR-20 from Should to Could under CR-023; recorded that the recommendation panel is deferred from Sprint 2. | Not recorded | 0.5 | Merged | [PR #223](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/223) | R2 / Team | Preserved CR-004 as superseded by CR-023 rather than amended. | Retrospective allocation estimate; exact time not recorded. |
 | W03 | 2026-10-26 | T-10-06 / #187 | Updated SRS section 3.5 under CR-024 and corrected the unsupported full-shelf fallback statement following review feedback. | Not recorded | 0.5 | Merged | [PR #223](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/223) | R2 / Team | The API contract did not define the assumed fallback. Documented #98 gap 1 and the pending CR-024 decision instead. | Retrospective allocation estimate; exact time not recorded. |
 | W03 | 2026-10-26 | T-10-06 / #187 | Clarified FR-18's 50-parcel hard limit and HTTP 400 rejection under CR-025; updated SRS section 3.7 and raised the document version to v0.8. | Not recorded | 0.5 | Merged | [PR #223](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/223) | R2 / Team | Specified that oversized batches must be split and resubmitted without an overflow queue. FR-48 remained pending R6 at the time. | Retrospective allocation estimate; exact time not recorded. |
+| W04 | 2026-11-02 | T-10-06 / #98 | Reviewed CR-028 and CR-029 against SRS requirements and identified the outdated PENDING holding-slot description. | Not recorded | 0.5 | Done | [PR #274](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/274) | R2 / Team | CR-028's temporary holding-slot interpretation was superseded by CR-029's nullable locationId approach. | Actual duration confirmed retrospectively by R3; exact start and end times not recorded. |
+| W04 | 2026-11-02 | T-10-06 / #98 | Revised SRS section 3.5 to allow registered parcels with null locationId, without adding a PENDING location status. | Not recorded | 0.5 | Merged | [PR #274](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/274) | R2 / Team | Removed the conflicting holding-slot description while keeping FR-14 and FR-15 unchanged. | Actual duration confirmed retrospectively by R3; exact start and end times not recorded. |
+| W04 | 2026-11-02 | T-10-06 / #98 | Updated SRS from v0.9 to v0.10, added revision history and submitted PR #274. | Not recorded | 0.5 | Merged | [PR #274](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/274) | Team | Aligned SRS with the approved CR-029 contract decision. | Actual duration confirmed retrospectively by R3; exact start and end times not recorded. |
 ## Work Hours Summary
 
 | Week | Recorded entries | Estimated / reported hours |
@@ -38,6 +41,7 @@
 | W01 | 4 | 4.5 |
 | W02 | 15 | 15.0 |
 | W03 | 3 | 1.5 |
-| **Total** | **22** | **21.0** |
+| W04 | 3 | 1.5 |
+| **Total** | **25** | **22.5** |
 
-*W01 and W02 hours are retrospective estimates. W03's total duration of 1.5 hours was reported by R3; the 0.5-hour allocation per activity is estimated because individual timings were not recorded.*
+*W01 and W02 hours are retrospective estimates. W03's total duration of 1.5 hours was reported by R3, with estimated allocation across activities. W04's total duration of 1.5 hours and individual activity durations were confirmed retrospectively by R3. Exact start and end times for W03 and W04 were not recorded.*
