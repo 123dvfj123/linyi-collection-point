@@ -156,4 +156,12 @@ public class Parcel {
         this.status = ParcelStatus.collected;
         this.locationId = null;
     }
+
+    public void shelveAt(UUID locationId) {
+        if (status != ParcelStatus.registered) {
+            throw new IllegalStateException("only a registered parcel can be shelved");
+        }
+        this.status = ParcelStatus.shelved;
+        this.locationId = locationId;
+    }
 }

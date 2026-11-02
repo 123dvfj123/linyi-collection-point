@@ -96,4 +96,12 @@ public class Location {
         this.status = LocationStatus.available;
         this.parcelId = null;
     }
+
+    public void occupy(UUID parcelId) {
+        if (status != LocationStatus.available || this.parcelId != null) {
+            throw new IllegalStateException("only an available location can be occupied");
+        }
+        this.status = LocationStatus.occupied;
+        this.parcelId = parcelId;
+    }
 }

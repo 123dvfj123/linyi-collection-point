@@ -8,7 +8,9 @@ import com.group23.parcel.BatchLimitExceededException;
 import com.group23.parcel.DuplicateTrackingNoException;
 import com.group23.parcel.InvalidParcelBatchException;
 import com.group23.parcel.MissingCollectionPointException;
+import com.group23.parcel.ParcelNotFoundException;
 import com.group23.parcel.ParcelRegistrationException;
+import com.group23.parcel.ParcelShelvingException;
 import com.group23.pickup.InvalidHandoverResultException;
 import com.group23.pickup.ParcelNotOnShelfException;
 import com.group23.pickup.PickupCodeExpiredException;
@@ -110,6 +112,21 @@ public class ApiExceptionHandler {
     @ExceptionHandler(InvalidLocationTransitionException.class)
     public ResponseEntity<ApiErrorResponse> invalidLocationTransition(
             HttpServletRequest request, InvalidLocationTransitionException exception) {
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
+                .body(ApiErrorResponse.of(
+                        "UNPROCESSABLE_ENTITY", exception.getMessage(), RequestIds.getOrCreate(request)));
+    }
+
+    @ExceptionHandler(ParcelNotFoundException.class)
+    public ResponseEntity<ApiErrorResponse> parcelNotFound(
+            HttpServletRequest request, ParcelNotFoundException exception) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(ApiErrorResponse.of("NOT_FOUND", exception.getMessage(), RequestIds.getOrCreate(request)));
+    }
+
+    @ExceptionHandler(ParcelShelvingException.class)
+    public ResponseEntity<ApiErrorResponse> parcelShelving(
+            HttpServletRequest request, ParcelShelvingException exception) {
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
                 .body(ApiErrorResponse.of(
                         "UNPROCESSABLE_ENTITY", exception.getMessage(), RequestIds.getOrCreate(request)));

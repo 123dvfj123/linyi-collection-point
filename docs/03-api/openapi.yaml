@@ -63,11 +63,17 @@
 # four protocol codes the security and exception handlers already emit (CR-033), so every
 # structured failure response validates against the same schema. A code whose handover is
 # already recorded is not a failure: NFR-4 returns that handover with the same 200 response.
+#
+# v0.5.0 | Week 4 | Added PATCH /parcels/{id}/location, which places a registered parcel on a
+# chosen storage location in one transaction and marks that location occupied. This closes gap
+# 1 of issue #98: a parcel that is already registered previously had no way to be given a
+# location, because PATCH /parcels/{id}/status changes the status but does not name a location.
+# CR-029 left "until one is assigned" without an assignment operation; this is that operation.
 
 openapi: 3.0.3
 info:
   title: Community Parcel Collection Point Management System API
-  version: 0.4.0-draft
+  version: 0.5.0-draft
   description: >
     Draft OpenAPI contract for Sprint 2. The backend owns the final paths and
     fields; the frontend must not invent fields before they appear here.
@@ -260,6 +266,62 @@ paths:
             shelved -> collected are allowed (CR-006). The body uses the shared
             ErrorResponse shape, so the frontend handles one error form whatever
             the status code.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /parcels/{id}/location:
+    patch:
+      summary: Place a registered parcel on a storage location
+      description: >
+        Closes gap 1 of issue #98. A parcel that is already `registered` can be
+        given a storage location, which marks the parcel `shelved` and the
+        location `occupied` in one transaction. The previous status endpoint
+        changes a parcel's status but cannot name a location, so it cannot
+        satisfy this case. Both records must belong to the caller's collection
+        point; a location owned by another point is reported as 404 rather than
+        403 so the response does not disclose that it exists. A parcel that is
+        not `registered`, or a location that is not `available`, is rejected with
+        422 and the parcel is left unchanged.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ParcelShelveRequest"
+      responses:
+        "200":
+          description: Parcel shelved and location occupied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Parcel"
+        "403":
+          description: Caller is not a staff member assigned to a collection point
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: >
+            The parcel or the location does not exist at the caller's collection
+            point. The body uses code NOT_FOUND.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "422":
+          description: >
+            The parcel is not `registered`, already names a location, or the
+            chosen location is not `available`. The body uses code
+            UNPROCESSABLE_ENTITY.
           content:
             application/json:
               schema:
@@ -646,6 +708,17 @@ components:
           type: string
           format: uuid
           nullable: true
+    ParcelShelveRequest:
+      type: object
+      required: [locationId]
+      properties:
+        locationId:
+          type: string
+          format: uuid
+          description: >
+            A storage location in the caller's collection point that is currently
+            `available`. The parcel is marked `shelved` and this location
+            `occupied` in the same transaction.
     ParcelBatchCreateRequest:
       type: object
       required: [parcels]
