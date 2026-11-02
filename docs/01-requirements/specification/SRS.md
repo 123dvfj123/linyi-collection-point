@@ -6,7 +6,7 @@
 |---|---|
 | Document ID | SRS |
 | Task | T-10-05, T-10-06, T-10-07 |
-| Version | v0.9 (Chapters 1 to 4) |
+| Version | v0.10 (Chapters 1 to 4) |
 | Author | R2 |
 | Status | Complete for Sprint 1 |
 | Related documents | [personas.md](../elicitation/Personas.md), [user-journey-maps.md](../elicitation/user-journey-maps.md) |
@@ -312,7 +312,7 @@ Only the role-based persona identifiers are used: **Resident persona**, **Staff 
 
 **No current implementation promise for deferred items:** `FR-9` and `FR-10` remain future work under `CR-005`. Staff location suggestions `FR-19` and `FR-20` are optional only, may be ignored, and are **never automatically applied** (`CR-004`). Exception types follow the five approved glossary values (`CR-010` / `CR-011`); parcel lifecycle is `registered`, `shelved`, `collected` (`CR-006`). The system can calculate overdue fees (`FR-39`) but does not take online payments (`SRS OS-3`).
 
-**Sprint 2 shelving scope (CR-024, CR-028):** The `shelve later` workflow is deferred and is not part of Sprint 2. **Default fallback (`CR-028`):** when no storage location is available, the parcel is placed in a temporary `PENDING` holding slot until a valid storage location is assigned. **This is the only temporary holding behaviour Sprint 2 promises** — there is no `shelve later` route and no overflow queue. The gap this closes is recorded as `#98` gap 1. `FR-14` and `FR-15` remain unchanged.
+**Sprint 2 shelving scope (CR-024, CR-028, CR-029):** The `shelve later` workflow remains deferred from Sprint 2. Under the approved full-shelf fallback, a parcel may be registered without an assigned storage location when no suitable location is available. Its `locationId` remains `null` and its status remains `registered` until a valid storage location is assigned. No temporary `PENDING` storage slot or new location status is introduced. This supersedes the temporary holding-slot interpretation of CR-028 in accordance with CR-029. The contract gap was recorded in `#98` gap 1. `FR-14` and `FR-15` remain unchanged.
 
 ### 3.6 Verification approach
 
@@ -481,3 +481,4 @@ cite them, and a requirement that is never stated cannot be verified.
 | v0.7 | Week 3 | Status changed from draft to complete for Sprint 1, and the word "draft" removed from the version. The chapter range is unchanged at chapters 1 to 4, which is what this document was scoped to; `PLAN.md` asked for 1 to 7 and has been corrected to match, so the two documents now agree | R1 |
 | v0.8 | Week 3 | Updated FR-19 and FR-20 from Should to Could and deferred the recommendation panel (CR-023); confirmed that `shelve later` is outside Sprint 2 (CR-024); clarified FR-18's 50-parcel hard limit, HTTP 400 rejection and manual splitting in section 3.7 (CR-025). | R3 |
 | v0.9 | Week 4 | Section 3.5 now states the `CR-028` default fallback instead of saying that no defined fallback exists, and names `CR-028` rather than `CR-027` | R2 |
+| v0.10 | Week 4 | Corrected section 3.5 to align with approved CR-029: parcels may remain `registered` with a null `locationId` when no storage location is available. Removed the temporary `PENDING` holding-slot interpretation of CR-028, preserved the deferral of `shelve later`, and retained FR-14 and FR-15 unchanged. | R3 |
