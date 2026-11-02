@@ -76,6 +76,7 @@ than a discrepancy to chase.
 | W01 | `20261012_contributors-1.jpg`, `20261012_contributors-2.jpg` | 2026-10-12 | 2026-09-28 to 2026-10-12 |
 | W02 | `20261021_contributors-1.jpg`, `20261021_contributors-2.jpg` | 2026-10-21 | 2026-10-12 to 2026-10-19 |
 | W03 | `20261028_contributors-1.jpg`, `20261028_contributors-2.jpg` | 2026-10-28 | 2026-10-19 to 2026-10-28 |
+| W04 | `20261102_contributors-1.jpg`, `20261102_contributors-2.jpg` | 2026-11-02 | 2026-10-25 to 2026-11-01 |
 
 ### What the W01 screenshot records
 
@@ -305,8 +306,56 @@ independent record, and it only does that if it is captured before the deadline 
 consecutive late captures is the thing to raise at the week 4 stand-up; the figures are unaffected,
 the independence is.
 
-## A note on not re-taking an old screenshot
+### What the W04 capture records
 
+The panel's range label reads **"Weekly from 2026-10-25 to 2026-11-01"**, so this is the week that
+closed on 1 November. **All ten members appear for the first time**, which is the one thing this
+artefact exists to prove and the one thing issue `#185`'s definition of done names explicitly.
+
+| Rank | Account | Member | Commits in the period shown | Insertions | Deletions |
+|---|---|---|---|---|---|
+| 1 | RavenG7 | R9 Guo Yuhui | 18 | 116 | 119 |
+| 2 | fannaodawang | R8 Wu Kehao | 14 | 138 | 53 |
+| 3 | Django-coder6 | R1 Liu JiaHao | 13 | 1,060 | 118 |
+| 4 | ohcyc246 | R2 Chan Yin Cho | 9 | 36 | 23 |
+| 5 | RookieVENENO | R4 Yuan Chong Jun | 5 | 127 | 33 |
+| 6 | smcheese9731-sys | R10 Chan Sung Ming William | 5 | 2,197 | 8 |
+| 7 | Allen06914 | R7 Huang Wei Jia | 5 | 1,642 | 6 |
+| 8 | 123dvfj123 | R6 Hu Qing Kai | 3 | 1,504 | 19 |
+| 9 | Kennethli13 | R3 Li Cheuk Fung Kenneth | 3 | 37 | 11 |
+| 10 | Christine049 | R5 Tan Yuan Ting | 2 | 12 | 5 |
+
+**Seventy-seven commits across the ten accounts.**
+
+**Ranks 1 and 2 belong to the two members who took on the most document work this week** — R9 wrote
+chapters 3, 4 and the logbook, R8 wrote the coverage report, the test plan revision and the handover
+test mapping. **The ordering of a week-4 panel says more about who was writing prose than about who
+was writing code**, because a documentation commit is one commit and an implementation is often one
+commit as well.
+
+**Two rows are worth reading rather than ranking.** `smcheese9731-sys` carries the largest insertion
+count of the ten (2,197 lines) from five commits, and `123dvfj123` carries 1,504 from three. **The
+panel counts lines added, not work done**: one long document and one long test class both inflate the
+number, and neither is more effort than a hundred small corrections. **R7's 1,642 lines from five
+commits are the parcel registration implementation plus its 195-line integration test, which the
+commit count conceals entirely.**
+
+**The figures are lower than W03's for everyone except R9 and R8.** That is the release week: the
+implementation tasks had landed by 1 November, and what remained was review, records and the report.
+
+#### This capture is one day late, and that is an improvement
+
+**The logbook deadline was Sunday 1 November at 21:00. The screenshots were taken on Monday 2
+November.** By the reasoning set out for the W02 and W03 captures, the buckets labelled 26 October and
+2 November are closed and cannot gain commits afterwards, so reading them on the 2nd reads what
+reading them on the 1st would have shown. The rule the note at the foot of this file requires is that
+the real capture date is recorded, which it is.
+
+**The process gap narrowed rather than closed.** W02 was two days late, W03 three days, W04 one day.
+**Three consecutive late captures is the trend, even if the direction has improved**, and it is
+recorded here rather than smoothed over.
+
+## A note on not re-taking an old screenshot
 A screenshot of a live panel is a dated artefact, not a maintained document. Do
 not go back and retake an earlier week's screenshot to make the numbers look
 better; the point of the evidence is that it was captured at the time.
