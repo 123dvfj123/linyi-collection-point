@@ -28,13 +28,16 @@
 | W02 | 2026-10-17 | T-10-07 / #77 | Confirmed with the team leader that NFR-6 refers to authenticated operator attribution. | 00:30-01:00 | 0.5 | Done | [PR #156](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/156); `CR-007` | R1 | Resolved the NFR-6 definition conflict. | Retrospective time estimate. |
 | W02 | 2026-10-17 | T-10-07 / #77 | Checked Chapter 4 numbering and corrected the administrator survey response count. | 01:00-02:00 | 1.0 | Done | [PR #156](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/156) | R1 | Confirmed NFR-8 data separation and corrected the survey count. | Retrospective time estimate. |
 | W02 | 2026-10-17 | T-10-07 / #77 | Submitted the revised SRS Chapter 4 for review. | 02:00-03:00 | 1.0 | Merged | [PR #156](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/156) | R1 / Team | Submitted 14 revised NFRs on the existing documentation branch. | Retrospective time estimate. |
-
+| W03 | 2026-10-26 | T-10-06 / #187 | Updated FR-19 and FR-20 from Should to Could under CR-023; recorded that the recommendation panel is deferred from Sprint 2. | Not recorded | 0.5 | Merged | [PR #223](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/223) | R2 / Team | Preserved CR-004 as superseded by CR-023 rather than amended. | Retrospective allocation estimate; exact time not recorded. |
+| W03 | 2026-10-26 | T-10-06 / #187 | Updated SRS section 3.5 under CR-024 and corrected the unsupported full-shelf fallback statement following review feedback. | Not recorded | 0.5 | Merged | [PR #223](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/223) | R2 / Team | The API contract did not define the assumed fallback. Documented #98 gap 1 and the pending CR-024 decision instead. | Retrospective allocation estimate; exact time not recorded. |
+| W03 | 2026-10-26 | T-10-06 / #187 | Clarified FR-18's 50-parcel hard limit and HTTP 400 rejection under CR-025; updated SRS section 3.7 and raised the document version to v0.8. | Not recorded | 0.5 | Merged | [PR #223](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/223) | R2 / Team | Specified that oversized batches must be split and resubmitted without an overflow queue. FR-48 remained pending R6 at the time. | Retrospective allocation estimate; exact time not recorded. |
 ## Work Hours Summary
 
-| Week | Recorded entries | Estimated hours |
+| Week | Recorded entries | Estimated / reported hours |
 |---|---:|---:|
 | W01 | 4 | 4.5 |
 | W02 | 15 | 15.0 |
-| **Total** | **19** | **19.5** |
+| W03 | 3 | 1.5 |
+| **Total** | **22** | **21.0** |
 
-*All time ranges and hours are retrospective estimates and should be corrected if they do not match actual work performed.*
+*W01 and W02 hours are retrospective estimates. W03's total duration of 1.5 hours was reported by R3; the 0.5-hour allocation per activity is estimated because individual timings were not recorded.*
