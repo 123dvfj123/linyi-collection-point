@@ -4,7 +4,7 @@
 |---|---|
 | Task | T-43-08 |
 | Owner | R1, with R2 and R3 as co-presenters |
-| Version | v0.1 |
+| Version | v0.2 |
 | Status | Proposed; team decision needed on 2026-11-04 |
 | Assumed review date | 2026-11-15 (confirm the actual slot) |
 | Working branch | `fix/p0-reachability` |
@@ -17,7 +17,17 @@ days is therefore:
 1. make the existing staff flow demonstrable end to end;
 2. make the **requirements-engineering story** the centre of the review;
 3. make every claim in the report and the slides match the repository;
-4. rehearse three speakers until the 10 minutes are predictable.
+4. leave the slides, script and rehearsal until **2026-11-14**, after the
+   engineering evidence is stable.
+
+The individual Week 5 task sheets are indexed at
+[`../week5/README.md`](../week5/README.md).
+
+**Update 2026-11-03 (R1 decision).** Week 5 does **not** produce slides, script
+or a rehearsal. Those start on 11/14. Week 5 is for the P0 fixes, test evidence,
+report numbers and logbooks. The first review run is therefore on 11/14, with a
+second run on 11/15 or the morning of the review, depending on the confirmed
+slot.
 
 It is **not** a reason to add notifications, exceptions, stocktake, billing or
 an admin console. Those remain deferred.
@@ -192,14 +202,20 @@ The detailed requirements-engineering narrative for R2/R3 is in
 
 | Date | Activity | Output |
 |---|---|---|
-| 2026-11-06 | Slide skeleton + table read | Every slide has one claim and one owner |
-| 2026-11-09 | Full run 1, timed | 10:30 or less; cut 30 seconds |
-| 2026-11-12 | Full run 2 with Q&A | 9:30 or less; questions assigned |
-| 2026-11-14 | Final run + record fallback | Backup video and screenshots stored locally |
+| 2026-11-14 | Produce the slides/script and run 1, timed | Every slide has one claim and one owner; 10:30 or less |
+| 2026-11-15 | Run 2 with Q&A and record fallback | 9:30 or less; backup video and screenshots stored locally |
 
-If the actual review slot is earlier, move every date earlier by the same number
-of days. Do not wait for the “official” slide template; the rubric only asks for
-structure and clarity.
+If the confirmed review slot is later than 11/15, add one more run on the day
+before. If it is earlier, move the 11/14 production date earlier by the same
+number of days; do not wait for the “official” slide template. The rubric only
+asks for structure and clarity.
+
+### What not to do in Week 5
+
+Do not start the slides, script or rehearsal before 11/14. The Week 5 task
+sheets deliberately contain no review-production work. The risk of stale
+numbers and a demo that no longer matches the branch is higher than the risk of
+having one fewer rehearsal.
 
 ---
 
@@ -211,25 +227,25 @@ week would not work. The realistic proposal is:
 
 ### Sprint 3A — 2026-11-04 to 2026-11-10
 
-Goal: a demonstrable staff flow and a complete review pack.
+Goal: a demonstrable staff flow and stable evidence. **No slides or rehearsal.**
 
 - Merge and verify the P0 fixes.
 - Freeze feature scope after the demo path.
-- Finish the progress-review slides and one full rehearsal.
 - R8 produces the interim test report and closes the P0 defects.
 - R9 compiles the report draft and checks the word count.
-- Every member adds the meeting log and presentation contribution to their
+- Every member adds the meeting log and presentation contribution column to their
   logbook.
 
-### Sprint 3B — 2026-11-11 to 2026-11-17
+### Sprint 3B — 2026-11-11 to 2026-11-13
 
-Goal: review delivery and buffer.
+Goal: final evidence and report/logbook, then stop.
 
-- Final rehearsal and Q&A.
 - Fix only defects found in the demo path.
 - Final report and logbook checks.
 - Do **not** start notifications, exceptions, stocktake, billing or admin pages
   before the review.
+- On **2026-11-14**, produce the review slides/script and run the first timed
+  rehearsal. Do not pull this work forward into Week 5.
 
 ### What to do with `PLAN.md`
 
@@ -323,3 +339,4 @@ why. The rubric rewards a defensible process, not a perfect feature list.
 | Version | Date | Change | Author |
 |---|---|---|---|
 | v0.1 | 2026-11-03 | First version: fixes already on the branch, role actions, 10-minute storyboard, Sprint 3A/3B proposal, logbook template and Q&A | R1 |
+| v0.2 | 2026-11-03 | Moved review production to 2026-11-14 per R1: Week 5 is engineering evidence only; Sprint 3B ends 11/13; first timed run 11/14, second run 11/15 | R1 |
