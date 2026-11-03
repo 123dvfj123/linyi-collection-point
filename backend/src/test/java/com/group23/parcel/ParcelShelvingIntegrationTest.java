@@ -86,9 +86,15 @@ class ParcelShelvingIntegrationTest {
                 .andExpect(jsonPath("$.locationId").value(locationId.toString()));
 
         Map<String, Object> parcel = jdbcTemplate.queryForMap(
-                "SELECT status::text AS status, location_id FROM parcels WHERE id = ?", parcelId);
+                "SELECT status::text AS status, location_id, pickup_code_id FROM parcels WHERE id = ?", parcelId);
         assertThat(parcel.get("status")).isEqualTo("shelved");
         assertThat(parcel.get("location_id")).isEqualTo(locationId);
+
+        Map<String, Object> pickupCode = jdbcTemplate.queryForMap(
+                "SELECT id, code, status::text AS status FROM pickup_codes WHERE parcel_id = ?", parcelId);
+        assertThat(pickupCode.get("status")).isEqualTo("active");
+        assertThat((String) pickupCode.get("code")).isNotBlank();
+        assertThat(parcel.get("pickup_code_id")).isEqualTo(pickupCode.get("id"));
 
         Map<String, Object> location = jdbcTemplate.queryForMap(
                 "SELECT status::text AS status, parcel_id FROM locations WHERE id = ?", locationId);

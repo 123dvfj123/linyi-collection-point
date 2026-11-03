@@ -16,10 +16,15 @@ public class ParcelRegistrationService {
 
     private final ParcelRepository parcelRepository;
     private final ParcelLocationPolicy locationPolicy;
+    private final ParcelShelvingService shelvingService;
 
-    public ParcelRegistrationService(ParcelRepository parcelRepository, ParcelLocationPolicy locationPolicy) {
+    public ParcelRegistrationService(
+            ParcelRepository parcelRepository,
+            ParcelLocationPolicy locationPolicy,
+            ParcelShelvingService shelvingService) {
         this.parcelRepository = parcelRepository;
         this.locationPolicy = locationPolicy;
+        this.shelvingService = shelvingService;
     }
 
     @Audited(
@@ -33,6 +38,9 @@ public class ParcelRegistrationService {
         requireOwnedLocation(request.locationId(), actor.collectionPointId());
         try {
             Parcel parcel = parcelRepository.saveAndFlush(Parcel.register(request, actor));
+            if (request.locationId() != null) {
+                return shelvingService.shelve(parcel.getId(), new ParcelShelveRequest(request.locationId()), actor);
+            }
             return ParcelResponse.from(parcel);
         } catch (DataIntegrityViolationException exception) {
             if (isDuplicateTrackingNo(exception)) {

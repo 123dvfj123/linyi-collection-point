@@ -18,6 +18,9 @@ app:
     secret: ${JWT_SECRET:dev-only-collection-point-jwt-secret-override-in-deployment}
     issuer: collection-point-backend
     token-lifetime: ${JWT_TOKEN_LIFETIME:PT8H}
+  pickup-code:
+    # Seven days is a demo default; production deployments can override it.
+    validity: ${PICKUP_CODE_VALIDITY:P7D}
 
 springdoc:
   swagger-ui:

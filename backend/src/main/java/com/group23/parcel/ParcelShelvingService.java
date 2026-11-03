@@ -5,6 +5,8 @@ import com.group23.location.Location;
 import com.group23.location.LocationNotFoundException;
 import com.group23.location.LocationRepository;
 import com.group23.location.LocationStatus;
+import com.group23.pickup.PickupCode;
+import com.group23.pickup.PickupCodeIssuanceService;
 import com.group23.security.AuthenticatedUser;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
@@ -19,10 +21,15 @@ public class ParcelShelvingService {
 
     private final ParcelRepository parcelRepository;
     private final LocationRepository locationRepository;
+    private final PickupCodeIssuanceService pickupCodeIssuanceService;
 
-    public ParcelShelvingService(ParcelRepository parcelRepository, LocationRepository locationRepository) {
+    public ParcelShelvingService(
+            ParcelRepository parcelRepository,
+            LocationRepository locationRepository,
+            PickupCodeIssuanceService pickupCodeIssuanceService) {
         this.parcelRepository = parcelRepository;
         this.locationRepository = locationRepository;
+        this.pickupCodeIssuanceService = pickupCodeIssuanceService;
     }
 
     @Audited(
@@ -63,7 +70,10 @@ public class ParcelShelvingService {
         parcel.shelveAt(location.getId());
         location.occupy(parcel.getId());
 
+        PickupCode pickupCode = pickupCodeIssuanceService.issueFor(parcel);
+        parcel.attachPickupCode(pickupCode.getId());
+
         locationRepository.saveAndFlush(location);
-        return ParcelResponse.from(parcelRepository.saveAndFlush(parcel));
+        return ParcelResponse.from(parcelRepository.saveAndFlush(parcel), pickupCode.getCode());
     }
 }

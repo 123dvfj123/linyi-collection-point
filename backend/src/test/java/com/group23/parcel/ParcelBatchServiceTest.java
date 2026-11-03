@@ -87,6 +87,7 @@ class ParcelBatchServiceTest {
                 ParcelStatus.registered,
                 request.size(),
                 request.locationId(),
+                null,
                 0,
                 Instant.parse("2026-10-29T00:00:00Z"),
                 Instant.parse("2026-10-29T00:00:00Z"));

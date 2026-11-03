@@ -170,6 +170,44 @@ class ParcelRegistrationIntegrationTest {
     }
 
     @Test
+    void registersAndShelvesWithPickupCodeInOneRequest() throws Exception {
+        UUID locationId = insertAvailableLocation();
+        String trackingNo = "SHELVE-" + UUID.randomUUID();
+        ParcelCreateRequest request = new ParcelCreateRequest(
+                trackingNo, "SF Express", "Recipient", "13812345678", ParcelSize.small, locationId);
+
+        String response = mockMvc.perform(post("/api/parcels")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.status").value("shelved"))
+                .andExpect(jsonPath("$.locationId").value(locationId.toString()))
+                .andExpect(jsonPath("$.pickupCode").isNotEmpty())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        UUID parcelId =
+                UUID.fromString(objectMapper.readTree(response).get("id").asText());
+        String pickupCode = objectMapper.readTree(response).get("pickupCode").asText();
+
+        Map<String, Object> code = jdbcTemplate.queryForMap(
+                "SELECT id, code, status::text AS status FROM pickup_codes WHERE parcel_id = ?", parcelId);
+        assertThat(code.get("code")).isEqualTo(pickupCode);
+        assertThat(code.get("status")).isEqualTo("active");
+
+        Map<String, Object> parcel =
+                jdbcTemplate.queryForMap("SELECT pickup_code_id, location_id FROM parcels WHERE id = ?", parcelId);
+        assertThat(parcel.get("pickup_code_id")).isEqualTo(code.get("id"));
+        assertThat(parcel.get("location_id")).isEqualTo(locationId);
+
+        Map<String, Object> location = jdbcTemplate.queryForMap(
+                "SELECT status::text AS status, parcel_id FROM locations WHERE id = ?", locationId);
+        assertThat(location.get("status")).isEqualTo("occupied");
+        assertThat(location.get("parcel_id")).isEqualTo(parcelId);
+    }
+
+    @Test
     void rejectsALocationOwnedByAnotherCollectionPoint() throws Exception {
         UUID locationAtAnotherPoint = UUID.fromString("30000000-0000-4000-8000-000000000005");
         ParcelCreateRequest request = new ParcelCreateRequest(
@@ -187,6 +225,19 @@ class ParcelRegistrationIntegrationTest {
                 .andExpect(jsonPath("$.error.code").value("VALIDATION_ERROR"))
                 .andExpect(jsonPath("$.error.message")
                         .value(org.hamcrest.Matchers.containsString("from your collection point")));
+    }
+
+    private UUID insertAvailableLocation() {
+        UUID id = UUID.randomUUID();
+        jdbcTemplate.update(
+                """
+                INSERT INTO locations (id, code, zone, size, status, parcel_id, collection_point_id, updated_at)
+                VALUES (?, ?, 'Z', 'small'::parcel_size, 'available', NULL, ?::uuid, CURRENT_TIMESTAMP)
+                """,
+                id,
+                "REG-" + id,
+                COLLECTION_POINT_ID);
+        return id;
     }
 
     private static ParcelCreateRequest request(String trackingNo) {

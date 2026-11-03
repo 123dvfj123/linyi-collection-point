@@ -72,6 +72,10 @@ class AuthSecurityIntegrationTest {
                     HttpMethod.PATCH,
                     "/api/parcels/40000000-0000-4000-8000-000000000001/status",
                     Set.of(UserRole.staff)),
+            new ProtectedEndpoint(
+                    HttpMethod.PATCH,
+                    "/api/parcels/40000000-0000-4000-8000-000000000001/location",
+                    Set.of(UserRole.staff)),
             new ProtectedEndpoint(HttpMethod.GET, "/api/my-parcels", Set.of(UserRole.resident)),
             new ProtectedEndpoint(
                     HttpMethod.GET, "/api/my-parcels/40000000-0000-4000-8000-000000000001", Set.of(UserRole.resident)),

@@ -10,6 +10,7 @@ import static org.mockito.Mockito.when;
 
 import com.group23.security.AuthenticatedUser;
 import com.group23.user.UserRole;
+import java.time.Instant;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -22,7 +23,9 @@ class ParcelRegistrationServiceTest {
 
     private final ParcelRepository parcelRepository = mock(ParcelRepository.class);
     private final ParcelLocationPolicy locationPolicy = mock(ParcelLocationPolicy.class);
-    private final ParcelRegistrationService service = new ParcelRegistrationService(parcelRepository, locationPolicy);
+    private final ParcelShelvingService shelvingService = mock(ParcelShelvingService.class);
+    private final ParcelRegistrationService service =
+            new ParcelRegistrationService(parcelRepository, locationPolicy, shelvingService);
 
     @Test
     void registersParcelInTheAuthenticatedStaffCollectionPoint() {
@@ -67,6 +70,38 @@ class ParcelRegistrationServiceTest {
                 .isInstanceOf(ParcelRegistrationException.class)
                 .hasMessageContaining("from your collection point");
         verify(parcelRepository, never()).saveAndFlush(any(Parcel.class));
+    }
+
+    @Test
+    void delegatesRegistrationWithALocationToTheShelvingService() {
+        UUID locationId = UUID.randomUUID();
+        ParcelCreateRequest request = new ParcelCreateRequest(
+                "SF-1001", "SF Express", "Recipient", "13812345678", ParcelSize.small, locationId);
+        when(locationPolicy.belongsToCollectionPoint(locationId, COLLECTION_POINT_ID))
+                .thenReturn(true);
+        when(parcelRepository.saveAndFlush(any(Parcel.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        ParcelResponse expected = new ParcelResponse(
+                UUID.randomUUID(),
+                "SF-1001",
+                "SF Express",
+                "Recipient",
+                "138****5678",
+                ParcelStatus.shelved,
+                ParcelSize.small,
+                locationId,
+                "12345678",
+                0,
+                Instant.now(),
+                Instant.now());
+        when(shelvingService.shelve(any(), any(ParcelShelveRequest.class), any(AuthenticatedUser.class)))
+                .thenReturn(expected);
+
+        ParcelResponse response = service.register(request, STAFF);
+
+        assertThat(response).isSameAs(expected);
+        assertThat(response.status()).isEqualTo(ParcelStatus.shelved);
+        assertThat(response.pickupCode()).isEqualTo("12345678");
+        verify(shelvingService).shelve(any(), any(ParcelShelveRequest.class), any(AuthenticatedUser.class));
     }
 
     private static ParcelCreateRequest request(String trackingNo) {

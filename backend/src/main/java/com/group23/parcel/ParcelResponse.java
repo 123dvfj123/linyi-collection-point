@@ -14,6 +14,7 @@ import java.util.UUID;
     "status",
     "size",
     "locationId",
+    "pickupCode",
     "expectedVersion",
     "createdAt",
     "updatedAt"
@@ -27,11 +28,20 @@ public record ParcelResponse(
         ParcelStatus status,
         ParcelSize size,
         UUID locationId,
+        String pickupCode,
         long expectedVersion,
         Instant createdAt,
         Instant updatedAt) {
 
     public static ParcelResponse from(Parcel parcel) {
+        return from(parcel, null);
+    }
+
+    /**
+     * Includes the pickup code only on the response that issued it. List, detail
+     * and verification responses must not expose the code.
+     */
+    public static ParcelResponse from(Parcel parcel, String pickupCode) {
         return new ParcelResponse(
                 parcel.getId(),
                 parcel.getTrackingNo(),
@@ -41,6 +51,7 @@ public record ParcelResponse(
                 parcel.getStatus(),
                 parcel.getSize(),
                 parcel.getLocationId(),
+                pickupCode,
                 parcel.getExpectedVersion(),
                 parcel.getCreatedAt(),
                 parcel.getUpdatedAt());

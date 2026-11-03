@@ -43,6 +43,31 @@ public class PickupCode {
 
     protected PickupCode() {}
 
+    /**
+     * Creates a new active pickup code for a parcel. The caller persists the
+     * entity and links it to the parcel in the same transaction.
+     */
+    static PickupCode issue(UUID parcelId, String code, Instant expiresAt) {
+        if (parcelId == null) {
+            throw new IllegalArgumentException("parcelId must be provided");
+        }
+        if (code == null || code.isBlank()) {
+            throw new IllegalArgumentException("pickup code must not be blank");
+        }
+        if (expiresAt == null) {
+            throw new IllegalArgumentException("expiresAt must be provided");
+        }
+
+        PickupCode pickupCode = new PickupCode();
+        pickupCode.id = UUID.randomUUID();
+        pickupCode.parcelId = parcelId;
+        pickupCode.code = code;
+        pickupCode.status = PickupCodeStatus.active;
+        pickupCode.expiresAt = expiresAt;
+        pickupCode.createdAt = Instant.now();
+        return pickupCode;
+    }
+
     public UUID getId() {
         return id;
     }
