@@ -5,10 +5,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.group23.security.AuthenticatedUser;
 import com.group23.user.UserRole;
 import java.sql.Types;
+import java.time.Duration;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.util.List;
@@ -200,7 +202,18 @@ class PickupHandoverIntegrationTest {
                 .getResponse()
                 .getContentAsString();
 
-        assertThat(second).isEqualTo(first);
+        JsonNode firstBody = objectMapper.readTree(first);
+        JsonNode secondBody = objectMapper.readTree(second);
+        assertThat(secondBody.get("id")).isEqualTo(firstBody.get("id"));
+        assertThat(secondBody.get("parcelId")).isEqualTo(firstBody.get("parcelId"));
+        assertThat(secondBody.get("result")).isEqualTo(firstBody.get("result"));
+        // Postgres stores timestamps with microsecond precision, so the first
+        // response can still carry nanoseconds from Instant.now(). Compare the
+        // same instant instead of the raw strings.
+        Duration drift = Duration.between(
+                Instant.parse(firstBody.get("createdAt").asText()),
+                Instant.parse(secondBody.get("createdAt").asText()));
+        assertThat(drift.abs()).isLessThan(Duration.ofMillis(1));
         assertThat(count("handovers", "parcel_id", fixture.parcelId())).isEqualTo(1);
         assertThat(count("audit_logs", "target_id", fixture.parcelId())).isEqualTo(1);
     }

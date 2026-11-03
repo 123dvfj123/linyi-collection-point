@@ -164,7 +164,59 @@ jobs:
           distribution: temurin
           java-version: '17'
           cache: maven
+      # Testcontainers reads DOCKER_HOST, not the context the docker CLI uses.
+      # The integration tests were skipped on 2026-11-03 because nothing set
+      # it, so find the socket that exists and tell the JVM where it is.
+      - name: Locate the Docker socket for Testcontainers
+        run: |
+          docker context ls || true
+          ls -l /var/run/docker.sock 2>/dev/null || true
+          found=""
+          for socket in /var/run/docker.sock "${XDG_RUNTIME_DIR:-/nonexistent}/docker.sock"; do
+            if [ -S "$socket" ]; then
+              echo "DOCKER_HOST=unix://$socket" >> "$GITHUB_ENV"
+              found="$socket"
+            fi
+          done
+          if [ -n "$found" ]; then
+            echo "using $found"
+          else
+            echo "::warning::no docker socket found"
+          fi
+          # Fails the job when the daemon is unreachable, before Maven starts.
+          docker version
       - run: ./mvnw -B verify
+      # A skipped integration test would otherwise look like a green build, so
+      # make the missing Docker visible instead of reporting a false pass.
+      - name: Fail when Testcontainers tests were skipped
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import glob
+          import sys
+          import xml.etree.ElementTree as ET
+
+          skipped = []
+          total = 0
+          for path in glob.glob("target/surefire-reports/*.xml"):
+              suite = ET.parse(path).getroot()
+              total += int(suite.get("tests", "0"))
+              count = int(suite.get("skipped", "0"))
+              if count:
+                  skipped.append(f'{suite.get("name")}: {count} skipped')
+
+          # No report at all means the tests never ran, which is the same false
+          # pass as a skip: a job that tested nothing must not report success.
+          if not total:
+              print("::error::no surefire reports with tests, so nothing was verified")
+              sys.exit(1)
+          if skipped:
+              print("::error::integration tests were skipped, so Docker verification did not happen")
+              for line in skipped:
+                  print(f"  {line}")
+              sys.exit(1)
+          print(f"{total} tests ran, no skipped tests")
+          PY
       - name: Upload test reports
         if: always()
         uses: actions/upload-artifact@v4
