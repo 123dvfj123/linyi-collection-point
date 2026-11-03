@@ -2,7 +2,7 @@
 name: Defect
 about: Something found during testing or use
 title: "[BUG] "
-labels: type/bug
+labels: bug
 assignees: ''
 ---
 
@@ -24,7 +24,7 @@ Requirement: FR-x.x
 ## Environment
 
 - Browser and version:
-- Account role: resident / staff / admin / courier
+- Account role: resident / staff / owner / admin
 - Test data:
 
 ## Evidence

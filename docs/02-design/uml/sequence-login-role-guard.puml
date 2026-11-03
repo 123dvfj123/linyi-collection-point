@@ -1,0 +1,26 @@
+@startuml sequence-login-role-guard
+title Sequence Diagram(Login and Role Guard)
+actor User
+participant "Web UI" as UI
+participant "Auth API" as API
+database "PostgreSQL" as SQL
+
+User -> UI : submit username and password
+UI -> API : POST /auth/login (username, password)
+API -> SQL : find user by username
+API -> SQL : verify password hash
+alt invalid credentials
+  API --> UI : 401 Unauthorized
+  UI -> User : reject login
+else valid credentials
+  API -> SQL : load roles
+  API --> UI : 200 { token, roles }
+  UI -> UI : store the token
+  UI -> UI : route guard picks the landing page
+  alt role is resident
+    UI --> User : open /my-parcels
+  else role is staff, owner or admin
+    UI --> User : open /dashboard
+  end
+end
+@enduml

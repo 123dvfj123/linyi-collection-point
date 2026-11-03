@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Register a parcel - Community Parcel Collection Point</title>
+<link rel="stylesheet" href="hi-fi.css">
+</head>
+<body><div class="shell">
+  <nav class="sidebar" aria-label="Main">
+    <p class="brand">Collection Point</p>
+    <ul class="nav">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="#">My parcels</a></li>
+      <li><a href="#">Parcels</a></li>
+      <li><a href="#">Locations</a></li>
+      <li><a href="pickup.html">Pickup</a></li>
+      <li><a href="#">Exceptions</a></li>
+      <li><a href="#">Reports</a></li>
+      <li><a href="#">Users</a></li>
+      <li><a href="#">Settings</a></li>
+      <li><a href="#">Audit</a></li>
+    </ul>
+  </nav>
+  <div class="main">
+    <header class="topbar">
+      <span class="caption muted">Block A collection point</span>
+      <div class="who"><span>staff1</span><span class="tag tag--neutral">Staff</span><a class="btn btn--link" href="#">Sign out</a></div>
+    </header>
+    <main class="content">      <div class="page-header">
+        <div>
+          <h1>Register a parcel</h1>
+          <p>Scan or type the waybill. The size drives the storage location filter.</p>
+        </div>
+        <div class="page-actions"></div>
+      </div>
+
+      <div class="modes seg" role="group" aria-label="Intake mode">
+        <button aria-pressed="true">Single</button>
+        <button aria-pressed="false">Batch</button>
+      </div>
+
+      <div class="split split--top">
+        <section class="card">
+          <h2>Parcel</h2>
+          <div class="field">
+            <label for="waybill">Waybill <span class="req">*</span></label>
+            <div><input id="waybill" class="mono" type="text" value="SF1234567890" autocomplete="off"><div class="hint">Required and unique. A duplicate is refused, never overwritten.</div></div>
+          </div>
+          <div class="field">
+            <label for="carrier">Carrier</label>
+            <div><input id="carrier" type="text" value="SF Express" readonly><div class="hint">Read from the waybill prefix; it may be corrected.</div></div>
+          </div>
+          <div class="field">
+            <label for="phone">Recipient phone <span class="req">*</span></label>
+            <div><input id="phone" type="text" value="138 0000 8888"><div class="hint">The contract names this field recipientPhone.</div></div>
+          </div>
+          <div class="field">
+            <label for="name">Recipient name</label>
+            <div><input id="name" type="text" value="Chen Wei"></div>
+          </div>
+          <div class="field">
+            <label id="size-label">Size <span class="req">*</span></label>
+            <div>
+              <div class="seg" role="group" aria-labelledby="size-label">
+                <button aria-pressed="false">S</button>
+                <button aria-pressed="true">M</button>
+                <button aria-pressed="false">L</button>
+              </div>
+              <div class="hint">Drives the storage location filter.</div>
+            </div>
+          </div>
+          <div class="field">
+            <label for="note">Note</label>
+            <div><textarea id="note" rows="2"></textarea></div>
+          </div>
+          <div style="display:flex;justify-content:flex-end"><button class="btn btn--primary">Register parcel</button></div>
+        </section>
+
+        <section class="card">
+          <h2>Suggested storage location</h2>
+          <div class="cell cell--success" style="border-left-width:4px">
+            <b class="mono">Zone A &middot; A-03-2</b>
+            <small>size fits &middot; zone priority &middot; least loaded in zone</small>
+          </div>
+          <p class="caption muted" style="margin-top: var(--space-3)">Suggestion only. It is never applied automatically, and it may be overridden.</p>
+          <div class="page-actions">
+            <button class="btn btn--primary">Accept</button>
+            <button class="btn">Choose&hellip;</button>
+          </div>
+          <p class="caption muted" style="margin-top: var(--space-3)">When no location is free the service answers <span class="mono">recommendedLocation: null</span> with reason <span class="mono">no_location_available</span>, and the manual picker opens instead.</p>
+        </section>
+      </div>    </main>
+  </div>
+</div>

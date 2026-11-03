@@ -1,0 +1,32 @@
+@startuml usecase-oversight-and-administration
+left to right direction
+title Use Case Diagram(Oversight and Administration)
+
+actor "Owner" as Owner
+actor "System Administrator" as Admin
+
+rectangle "Community Parcel Collection Point System" {
+  usecase "View reports for owned points"              as UC_OwnerReports
+  usecase "Review overdue parcels"                     as UC_OwnerOverdue
+  usecase "Compare owned collection points"            as UC_OwnerCompare
+  usecase "Review the operation log for owned points"  as UC_OwnerAudit
+  usecase "Manage staff accounts for owned points"     as UC_OwnerStaff
+
+  usecase "Manage user accounts"                       as UC_AdminUsers
+  usecase "Set up a collection point"                  as UC_AdminPoint
+  usecase "Configure system settings"                  as UC_AdminSettings
+  usecase "Review the operation log for all points"    as UC_AdminAudit
+}
+
+Owner --> UC_OwnerReports
+Owner --> UC_OwnerOverdue
+Owner --> UC_OwnerCompare
+Owner --> UC_OwnerAudit
+Owner --> UC_OwnerStaff
+
+Admin --> UC_AdminUsers
+Admin --> UC_AdminPoint
+Admin --> UC_AdminSettings
+Admin --> UC_AdminAudit
+
+@enduml

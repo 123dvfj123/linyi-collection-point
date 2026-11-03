@@ -1,0 +1,34 @@
+@startuml state-parcel-lifecycle
+title State Diagram(Parcel Lifecycle)
+!pragma layout smetana
+
+' Source: CR-006, ERD.md and backend-state-machines.md.
+
+state "registered" as Registered
+state "shelved" as Shelved
+state "collected" as Collected
+
+[*] --> Registered : register parcel
+Registered --> Shelved : assign storage location
+Shelved --> Collected : confirm handover
+Collected --> [*]
+
+state "ParcelException (separate flow)" as ExceptionFlow {
+  state "open" as ExceptionOpen
+  state "processing" as ExceptionProcessing
+  state "resolved" as ExceptionResolved
+
+  [*] --> ExceptionOpen
+  ExceptionOpen --> ExceptionProcessing : start processing
+  ExceptionProcessing --> ExceptionResolved : resolve
+  ExceptionOpen --> ExceptionResolved : resolve directly
+  ExceptionResolved --> [*]
+}
+
+note right of ExceptionFlow
+  The exception ticket is a separate record. An open ticket does not add
+  an exception value to Parcel.status, and the parcel keeps its current
+  registered, shelved or collected state.
+end note
+
+@enduml

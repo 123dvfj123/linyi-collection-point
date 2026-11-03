@@ -1,6 +1,7 @@
 # Continuous integration.
-# Weeks 1 to 6 only check the repository structure. From week 7 the backend and
-# frontend jobs are enabled once the skeletons exist.
+# Five jobs: commitlint validates new commit messages; sanity checks the repository itself, backend builds and tests the Java
+# service, frontend lints, tests and builds the Vue application, and docker-smoke
+# starts the complete Compose stack and checks its health endpoints.
 
 name: CI
 
@@ -11,6 +12,117 @@ on:
     branches: [main, develop]
 
 jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - run: npm ci
+        env:
+          HUSKY: '0'
+      - name: Check commit messages in this change
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD: ${{ github.event.pull_request.head.sha }}
+          PUSH_BASE: ${{ github.event.before }}
+          PUSH_HEAD: ${{ github.sha }}
+          PUSH_BRANCH: ${{ github.ref_name }}
+        run: |
+          if [ "$EVENT_NAME" = "pull_request" ]; then
+            if [ -z "$PR_BASE" ] || [ -z "$PR_HEAD" ]; then
+              echo "::error::the pull request base or head is empty, so there is nothing to range over"
+              exit 1
+            fi
+            # Lint what this pull request adds, and nothing else — the same rule the push path
+            # below applies.
+            #
+            # The naive range `--from "$PR_BASE" --to "$PR_HEAD"` is wrong for the release pull
+            # request that first brings `main` up to date. `main` has not moved since the
+            # repository scaffold, so that range is the whole history: 595 commits, 143 of them
+            # written before these rules existed and each already reviewed by its own pull
+            # request into `develop`. Judging the repository's past against rules written later
+            # is not what this job is for, and it fails the only change that matters.
+            #
+            # So exclude what either integration branch already holds. A commit that is only on
+            # the pull request's own branch is still linted, which is the case this job exists
+            # to catch.
+            exclusions=()
+            if git cat-file -e "$PR_BASE^{commit}" 2>/dev/null; then
+              exclusions+=("$PR_BASE")
+            fi
+            for branch in main develop; do
+              if git show-ref --verify --quiet "refs/remotes/origin/$branch"; then
+                exclusions+=("refs/remotes/origin/$branch")
+              fi
+            done
+
+            if [ ${#exclusions[@]} -eq 0 ]; then
+              echo "::warning::no base could be resolved and no integration branch is available, so only the head commit is checked"
+              printf '%s\n' "$PR_HEAD" > "$RUNNER_TEMP/commitlint-commits"
+            else
+              # --no-merges: a merge commit's message is composed by GitHub, not written by a
+              # member, and commitlint cannot rewrite it.
+              git rev-list --no-merges "$PR_HEAD" --not "${exclusions[@]}" \
+                > "$RUNNER_TEMP/commitlint-commits"
+            fi
+
+            count=$(wc -l < "$RUNNER_TEMP/commitlint-commits")
+            echo "Checking $count commit(s):"
+            while IFS= read -r commit; do
+              echo "  $commit $(git log -1 --format=%s "$commit")"
+              git show -s --format=%B "$commit" | npm run commitlint -- --verbose
+            done < "$RUNNER_TEMP/commitlint-commits"
+          else
+            # Lint what this push adds, and nothing else.
+            #
+            # The base is the previous tip of the pushed ref. It is all zeroes on a branch's first
+            # push, and it can name a commit that no longer exists after a force push. A base that
+            # cannot be resolved must not reach `--not`: git exits with `fatal: bad revision`. And an
+            # exclusion list that ends up empty degenerates to `git rev-list HEAD --not`, which lists
+            # every commit in the repository, so a branch push would be judged against history that
+            # predates these rules.
+            exclusions=()
+            if ! [[ "$PUSH_BASE" =~ ^0+$ ]] && git cat-file -e "$PUSH_BASE^{commit}" 2>/dev/null; then
+              exclusions+=("$PUSH_BASE")
+            fi
+            for branch in main develop; do
+              if [ "$PUSH_BRANCH" != "$branch" ] &&
+                 git show-ref --verify --quiet "refs/remotes/origin/$branch"; then
+                exclusions+=("refs/remotes/origin/$branch")
+              fi
+            done
+
+            if [ ${#exclusions[@]} -eq 0 ]; then
+              # Nothing to exclude, so lint the head commit alone rather than the whole repository.
+              # That checks less than it should, so say so: a silent fallback is how a check that
+              # stopped working looks the same as a check that passes.
+              echo "::warning::no base could be resolved and no integration branch is available, so only the head commit is checked"
+              printf '%s\n' "$PUSH_HEAD" > "$RUNNER_TEMP/commitlint-commits"
+            else
+              # --no-merges: a merge commit's message is composed by GitHub, not written by a member,
+              # and commitlint cannot rewrite it.
+              git rev-list --no-merges "$PUSH_HEAD" --not "${exclusions[@]}" \
+                > "$RUNNER_TEMP/commitlint-commits"
+            fi
+
+            # Say what is being checked. Without this a job that lints four hundred commits looks
+            # exactly like a job that lints one and rejects it.
+            count=$(wc -l < "$RUNNER_TEMP/commitlint-commits")
+            echo "Checking $count commit(s):"
+            while IFS= read -r commit; do
+              echo "  $commit $(git log -1 --format=%s "$commit")"
+              git show -s --format=%B "$commit" | npm run commitlint -- --verbose
+            done < "$RUNNER_TEMP/commitlint-commits"
+          fi
+      - run: npm run test:tooling
+
   sanity:
     runs-on: ubuntu-latest
     steps:
@@ -22,6 +134,7 @@ jobs:
           test -f CONTRIBUTING.md
           test -d docs/01-requirements
           test -d docs/06-logbook
+          test -d backend/src/main/java/com/group23
           echo "structure check passed"
 
       - name: Check that no environment file was committed
@@ -32,19 +145,84 @@ jobs:
           fi
           echo "no environment file tracked"
 
-      # Uncomment from week 7, once backend/package.json exists.
-      # backend:
-      #   runs-on: ubuntu-latest
-      #   defaults:
-      #     run:
-      #       working-directory: backend
-      #   steps:
-      #     - uses: actions/checkout@v4
-      #     - uses: actions/setup-node@v4
-      #       with:
-      #         node-version: '18'
-      #         cache: npm
-      #         cache-dependency-path: backend/package-lock.json
-      #     - run: npm ci
-      #     - run: npm run lint
-      #     - run: npm test -- --coverage
+      - name: Check that every document version header matches its revision history
+        run: python3 scripts/check_doc_versions.py .
+
+      - name: Check that every markdown table row has as many cells as its header
+        run: python3 scripts/check_table_columns.py .
+
+  backend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+      - run: ./mvnw -B verify
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          path: backend/target/surefire-reports/
+      - name: Upload JaCoCo coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report
+          path: backend/target/site/jacoco/
+          if-no-files-found: warn
+          
+  docker-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Start the full stack
+        run: docker compose --profile full up -d --build --wait --wait-timeout 300
+      - name: Verify the backend health endpoint
+        run: curl --fail --silent --show-error http://localhost:8080/api/health
+      - name: Verify that a seeded account can sign in
+        run: |
+          curl --fail --silent --show-error -X POST http://localhost:8080/api/auth/login \
+            -H 'Content-Type: application/json' \
+            -d '{"username":"demo_staff_1","password":"password"}' > /tmp/login.json
+          grep -q '"token"' /tmp/login.json
+          grep -q '"roles":\["staff"\]' /tmp/login.json
+      - name: Verify that a wrong password is refused
+        run: |
+          test "$(curl --silent --output /dev/null --write-out '%{http_code}' \
+            -X POST http://localhost:8080/api/auth/login \
+            -H 'Content-Type: application/json' \
+            -d '{"username":"demo_staff_1","password":"wrong"}')" = "401"
+      - name: Verify that all four services are running
+        run: test "$(docker compose --profile full ps --status running --services | wc -l)" -eq 4
+      - name: Show service logs on failure
+        if: failure()
+        run: docker compose --profile full logs
+      - name: Stop the full stack
+        if: always()
+        run: docker compose --profile full down --volumes --remove-orphans
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run test:run
+      - run: npm run build

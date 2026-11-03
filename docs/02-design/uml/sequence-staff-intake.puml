@@ -1,0 +1,30 @@
+@startuml sequence-staff-intake
+title Sequence Diagram(Staff Intake And Shelving)
+actor Staff
+participant "Web UI" as UI
+participant "Parcel API" as API
+database "PostgreSQL" as DB
+
+Staff -> UI : scan the waybill and enter the size
+UI -> API : POST /locations/recommend (size)
+API -> DB : find a free location of that size
+alt no location is free
+  API --> UI : 200 recommendedLocation = null, reason = no_location_available
+  UI --> Staff : ask for a location to be chosen by hand
+else a location is free
+  API --> UI : 200 recommendedLocation
+  UI --> Staff : show the suggestion, which may be ignored
+end
+Staff -> UI : accept the suggestion or choose another location
+UI -> API : POST /parcels (trackingNo, carrier, size, locationId)
+API -> DB : find parcel by trackingNo
+alt duplicate waybill
+  API --> UI : 409 Conflict
+  UI --> Staff : Parcel already registered
+else new parcel
+  API -> DB : insert parcel (transaction)
+  DB --> API : parcel id
+  API --> UI : 201 Parcel
+  UI --> Staff : show the parcel and its location
+end
+@enduml
