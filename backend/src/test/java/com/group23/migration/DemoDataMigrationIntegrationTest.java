@@ -56,20 +56,22 @@ class DemoDataMigrationIntegrationTest {
      */
     @AfterEach
     void restoreDemoCodes() {
-        jdbcTemplate.update("""
+        jdbcTemplate.update(
+                """
                 UPDATE pickup_codes
                 SET status = 'active'::pickup_code_status,
                     used_at = NULL,
                     expires_at = CURRENT_TIMESTAMP + INTERVAL '30 days'
                 WHERE code IN (?, ?)
-                """, FIRST_DEMO_CODE, SECOND_DEMO_CODE);
+                """,
+                FIRST_DEMO_CODE,
+                SECOND_DEMO_CODE);
     }
 
     @Test
     void appliesEveryMigrationInOrderOnACleanDatabase() {
         List<String> versions = jdbcTemplate.queryForList(
-                "SELECT version FROM flyway_schema_history WHERE success ORDER BY installed_rank",
-                String.class);
+                "SELECT version FROM flyway_schema_history WHERE success ORDER BY installed_rank", String.class);
 
         assertThat(versions).containsExactly("1", "2", "3", "4");
     }
@@ -94,8 +96,7 @@ class DemoDataMigrationIntegrationTest {
 
         assertThat(isActiveWithFutureExpiry(FIRST_DEMO_CODE)).isTrue();
         Map<String, Object> secondCode = jdbcTemplate.queryForMap(
-                "SELECT status::text AS status, used_at FROM pickup_codes WHERE code = ?",
-                SECOND_DEMO_CODE);
+                "SELECT status::text AS status, used_at FROM pickup_codes WHERE code = ?", SECOND_DEMO_CODE);
         assertThat(secondCode.get("status")).isEqualTo("used");
         assertThat(secondCode.get("used_at")).isNotNull();
         assertThat(isUsed(USED_DEMO_CODE)).isTrue();
@@ -103,21 +104,25 @@ class DemoDataMigrationIntegrationTest {
 
     @Test
     void everyParcelAndPickupCodeStillPointAtEachOther() {
-        Integer parcelsWithBrokenLink = jdbcTemplate.queryForObject("""
+        Integer parcelsWithBrokenLink = jdbcTemplate.queryForObject(
+                """
                 SELECT count(*)
                 FROM parcels p
                 LEFT JOIN pickup_codes c ON c.id = p.pickup_code_id
                 WHERE p.pickup_code_id IS NOT NULL
                   AND (c.id IS NULL OR c.parcel_id <> p.id)
-                """, Integer.class);
+                """,
+                Integer.class);
         assertThat(parcelsWithBrokenLink).isZero();
 
-        Integer codesWithoutParcel = jdbcTemplate.queryForObject("""
+        Integer codesWithoutParcel = jdbcTemplate.queryForObject(
+                """
                 SELECT count(*)
                 FROM pickup_codes c
                 LEFT JOIN parcels p ON p.id = c.parcel_id
                 WHERE p.id IS NULL
-                """, Integer.class);
+                """,
+                Integer.class);
         assertThat(codesWithoutParcel).isZero();
 
         assertThat(hasForeignKey("parcels", "pickup_code_id", "pickup_codes")).isTrue();
@@ -137,27 +142,28 @@ class DemoDataMigrationIntegrationTest {
     }
 
     private void runV4Again() {
-        ResourceDatabasePopulator populator = new ResourceDatabasePopulator(
-                new ClassPathResource("db/migration/V4__refresh_demo_pickup_codes.sql"));
+        ResourceDatabasePopulator populator =
+                new ResourceDatabasePopulator(new ClassPathResource("db/migration/V4__refresh_demo_pickup_codes.sql"));
         populator.execute(dataSource);
     }
 
     private boolean isActiveWithFutureExpiry(String code) {
         Boolean matches = jdbcTemplate.queryForObject(
                 "SELECT status = 'active' AND expires_at > CURRENT_TIMESTAMP FROM pickup_codes WHERE code = ?",
-                Boolean.class, code);
+                Boolean.class,
+                code);
         return Boolean.TRUE.equals(matches);
     }
 
     private boolean isUsed(String code) {
         Boolean used = jdbcTemplate.queryForObject(
-                "SELECT status = 'used' AND used_at IS NOT NULL FROM pickup_codes WHERE code = ?",
-                Boolean.class, code);
+                "SELECT status = 'used' AND used_at IS NOT NULL FROM pickup_codes WHERE code = ?", Boolean.class, code);
         return Boolean.TRUE.equals(used);
     }
 
     private boolean hasForeignKey(String table, String column, String referencedTable) {
-        Integer count = jdbcTemplate.queryForObject("""
+        Integer count = jdbcTemplate.queryForObject(
+                """
                 SELECT count(*)
                 FROM pg_constraint con
                 JOIN pg_class src ON src.oid = con.conrelid
@@ -167,12 +173,17 @@ class DemoDataMigrationIntegrationTest {
                   AND src.relname = ?
                   AND dst.relname = ?
                   AND att.attname = ?
-                """, Integer.class, table, referencedTable, column);
+                """,
+                Integer.class,
+                table,
+                referencedTable,
+                column);
         return count != null && count > 0;
     }
 
     private boolean hasUniqueConstraint(String table, String column) {
-        Integer count = jdbcTemplate.queryForObject("""
+        Integer count = jdbcTemplate.queryForObject(
+                """
                 SELECT count(*)
                 FROM pg_constraint con
                 JOIN pg_class src ON src.oid = con.conrelid
@@ -180,7 +191,10 @@ class DemoDataMigrationIntegrationTest {
                 WHERE con.contype = 'u'
                   AND src.relname = ?
                   AND att.attname = ?
-                """, Integer.class, table, column);
+                """,
+                Integer.class,
+                table,
+                column);
         return count != null && count > 0;
     }
 }
