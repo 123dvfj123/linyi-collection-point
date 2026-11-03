@@ -197,18 +197,25 @@ jobs:
           import xml.etree.ElementTree as ET
 
           skipped = []
+          total = 0
           for path in glob.glob("target/surefire-reports/*.xml"):
               suite = ET.parse(path).getroot()
+              total += int(suite.get("tests", "0"))
               count = int(suite.get("skipped", "0"))
               if count:
                   skipped.append(f'{suite.get("name")}: {count} skipped')
 
+          # No report at all means the tests never ran, which is the same false
+          # pass as a skip: a job that tested nothing must not report success.
+          if not total:
+              print("::error::no surefire reports with tests, so nothing was verified")
+              sys.exit(1)
           if skipped:
               print("::error::integration tests were skipped, so Docker verification did not happen")
               for line in skipped:
                   print(f"  {line}")
               sys.exit(1)
-          print("no skipped tests")
+          print(f"{total} tests ran, no skipped tests")
           PY
       - name: Upload test reports
         if: always()
