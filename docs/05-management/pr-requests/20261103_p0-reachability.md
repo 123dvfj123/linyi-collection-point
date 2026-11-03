@@ -43,8 +43,10 @@ The change makes the staff vertical slice actually reachable:
 - `153057b` — backend: shelve intake and issue pickup codes
 - `b29504f` — deploy/frontend: Nginx proxy and pickup-code display
 - `e9aaa92` — docs: defect log, report numbers, process model and 12-day plan
-- `970f52e` — docs: Week 5 role task sheets and issue specifications
-- `f970a72` — docs: refine Week 5 role sheets and add the evidence folder
+- `aa6c81b` — compose: start frontend after backend health
+
+The branch also contains documentation commits that added and then removed the
+private Week 5 task sheets. Those files are deliberately not in the final PR.
 
 ### Tests run locally
 
@@ -57,16 +59,22 @@ The change makes the staff vertical slice actually reachable:
 - `python scripts/check_table_columns.py .` — all tables valid.
 - `git diff --check` — clean.
 
-### Not yet verified (must be done before merge)
+### CI
 
-- [ ] R6: `cd backend && ./mvnw -B verify` with Docker, so the 27
-      Testcontainers tests run.
-- [ ] R10: `docker compose --profile full up -d --build --wait`, then
-      `http://localhost:80` login and `/api/health` through Nginx.
-- [ ] R8: the full browser flow (register → pickup code → verify → confirm)
-      and the test report.
+Run `41633115022` on PR #283 is green: all five jobs (`commitlint`, `sanity`,
+`backend`, `frontend`, `docker-smoke`) completed successfully. The backend job
+runs the Testcontainers tests; `docker-smoke` logs in through
+`http://localhost:80`, so the Nginx proxy path is exercised.
+
+### Verification still owned by reviewers
+
+- [ ] R6: review the transaction and migration diff rather than repeating the
+      CI run; flag any missing edge case.
+- [ ] R10: review the Compose/Nginx change; the CI smoke test covers the happy
+      path, not a volume restore.
 - [ ] R2: confirm that registration with a location should produce `shelved`
       directly (CR-034).
+- [ ] R8: review the test evidence and the defect log entries.
 
 ### Risk and rollout
 
@@ -89,12 +97,11 @@ The change makes the staff vertical slice actually reachable:
 - [ ] V4 applies on both a clean and an existing database.
 - [ ] `http://localhost:80` can log in through the Nginx proxy.
 
-### How to open it
+### Status
 
-```bash
-git push -u origin fix/p0-reachability
-```
+PR #283 is already open:
+https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/283
 
-Then open the compare link above, use the title and body in this file, add the
-reviewers and labels, and create the PR. Do not merge until R6 and R10 have
-checked the two boxes under “Not yet verified”.
+Use the title and body in this file to keep the PR description current. Do not
+open a second PR. Do not merge until the reviewers have resolved the “Verification
+still owned by reviewers” section.

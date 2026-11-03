@@ -4,7 +4,7 @@
 |---|---|
 | Task | T-43-08 |
 | Owner | R1, with R2 and R3 as co-presenters |
-| Version | v0.2 |
+| Version | v0.3 |
 | Status | Proposed; team decision needed on 2026-11-04 |
 | Assumed review date | 2026-11-15 (confirm the actual slot) |
 | Working branch | `fix/p0-reachability` |
@@ -20,8 +20,8 @@ days is therefore:
 4. leave the slides, script and rehearsal until **2026-11-14**, after the
    engineering evidence is stable.
 
-The individual Week 5 task sheets are indexed at
-[`../week5/README.md`](../week5/README.md).
+The individual Week 5 task sheets are distributed privately to each member.
+They are deliberately not committed to this repository.
 
 **Update 2026-11-03 (R1 decision).** Week 5 does **not** produce slides, script
 or a rehearsal. Those start on 11/14. Week 5 is for the P0 fixes, test evidence,
@@ -340,3 +340,4 @@ why. The rubric rewards a defensible process, not a perfect feature list.
 |---|---|---|---|
 | v0.1 | 2026-11-03 | First version: fixes already on the branch, role actions, 10-minute storyboard, Sprint 3A/3B proposal, logbook template and Q&A | R1 |
 | v0.2 | 2026-11-03 | Moved review production to 2026-11-14 per R1: Week 5 is engineering evidence only; Sprint 3B ends 11/13; first timed run 11/14, second run 11/15 | R1 |
+| v0.3 | 2026-11-03 | Removed the repository link to the individual Week 5 task sheets; they are distributed privately and are not committed | R1 |
