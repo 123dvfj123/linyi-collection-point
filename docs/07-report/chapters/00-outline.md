@@ -30,9 +30,9 @@ The 12 per cent evaluates whether the team used software engineering deliberatel
 
 ## Word budget
 
-The nine chapters now total **929 words** as measured from the Markdown. Add
+The nine chapters now total **930 words** as measured from the Markdown. Add
 about 15 words for the title block and repository link and 30 for three figure
-captions, and the target is about **974 words**, inside the 1000-word limit with
+captions, and the target is about **975 words**, inside the 1000-word limit with
 a small safety margin. The table below records the current counts.
 
 | Section | Words | Rubric concept | Evidence to cite |
@@ -44,11 +44,11 @@ a small safety margin. The table below records the current counts.
 | 4. System modeling | 88 | system modeling | the twelve .puml sources; uml/README.md |
 | 5. Architectural and database design | 100 | architectural design | ADR-002 to ADR-005; ERD.md; backend-state-machines.md |
 | 6. Design and implementation | 108 | design and implementation | openapi.yaml; ADR-002/003; design-system.md; tokens.css |
-| 7. Testing and validation | 108 | software testing | test-plan.md; 87 backend test methods and 68 frontend tests; RTM.md |
+| 7. Testing and validation | 109 | software testing | test-plan.md; 87 backend test methods and 68 frontend tests; RTM.md |
 | 8. Software evolution | 116 | software evolution | change-log.md; risk-register.md; the cases below |
 | 9. Conclusion and reflection | 60 | - | - |
-| **Total (chapters)** | **929** | | |
-| **With title/link and captions** | **~974** | | |
+| **Total (chapters)** | **930** | | |
+| **With title/link and captions** | **~975** | | |
 
 ## Section notes
 
@@ -99,7 +99,7 @@ The team would freeze requirements before design and write the traceability matr
 | 4. System modeling | Drafted (88 words) | `chapters/04-modeling.md` ([PR #258](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/258)) |
 | 5. Architectural and database design | Drafted (100 words) | `chapters/05-architecture.md` |
 | 6. Design and implementation | Drafted (108 words) | `chapters/06-implementation.md` ([PR #261](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/261)) |
-| 7. Testing and validation | Drafted (108 words) | `chapters/07-testing.md` |
+| 7. Testing and validation | Drafted (109 words) | `chapters/07-testing.md` |
 | 8. Software evolution | Drafted (116 words) | `chapters/08-evolution.md` |
 | 9. Conclusion and reflection | Drafted (60 words) | `chapters/09-conclusion.md` |
 

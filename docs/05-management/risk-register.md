@@ -8,7 +8,7 @@
 |---|---|
 | Task | T-00-06 |
 | Owner | R1 |
-| Version | v1.7 |
+| Version | v1.8 |
 | Status | Active, reviewed at the end of every sprint |
 
 ## How to read this register
@@ -35,9 +35,9 @@ Likelihood and impact are rated high, medium or low. Status is one of
 | RSK-10 | Members have outside commitments such as examinations and part-time work that collide with the sprint schedule | High | Medium | Busy weeks are collected at the start and the plan avoids them where possible. Effort is sized at five to six hours per person per week, which leaves margin | R1 | A member misses two stand-ups in a row | Being monitored |
 | RSK-12 | The repository carries 38 branches, most of them merged or auto-generated, which makes the history hard to read | High | Low | The DevOps role removes the auto-generated branches and the merged working branches, leaving `develop` and `main`. A few branches with unmerged work are assessed first. The count was re-checked on 14 October: 38 remote branches, so the cleanup has not been done yet | R10 | A reviewer cannot tell which branches matter | Being monitored |
 | RSK-13 | Simulated survey data exists on an unmerged branch and would contradict the real questionnaire results if it were merged | Medium | High | The branch is not merged. The simulated files are left on the branch and the branch is closed. A note is added to the pull request explaining why | R3 | Any file named simulation, or any response count that does not match the real survey | Occurred, being handled |
-| RSK-16 | A test passes on a fixture state that the application itself cannot reach, so green tests hide an unreachable user journey | High | High | Add one system/E2E test that starts from the public API or UI and reaches the handover state. Record the fixture-vs-application gap in `defect-log.md`; CR-034/035/036 fix the first instances | R8 | A test inserts a state (`shelved`, a pickup code) that no endpoint can produce | Occurred, being handled |
+| RSK-16 | A test passes on a fixture state that the application itself cannot reach, so green tests hide an unreachable user journey | High | High | Add one system/E2E test that starts from the public API or UI and reaches the handover state. Record the fixture-vs-application gap in `defect-log.md`; CR-034/035/036 fix the first instances, and PR #294 makes skipped Testcontainers tests fail the backend job | R8 | A test inserts a state (`shelved`, a pickup code) that no endpoint can produce | Occurred, being handled |
 | RSK-17 | Report and slide claims drift from the repository as numbers and implementation status change | High | High | Freeze every number against the final commit; add the claim check to the consistency checklist; run the report check after the last merge | R9 | A report/test-plan number differs from the current suite or database | Occurred, being handled |
-| RSK-18 | The progress-review pack is not ready in time, or the demo fails on the review machine | High | High | Follow `docs/05-management/plans/progress-review-12-day-plan.md`: three speakers, one timed run by 2026-11-09, a second run by 2026-11-12, and a recorded fallback | R1 | No slide skeleton by 2026-11-06, or no full run by 2026-11-09 | Being monitored |
+| RSK-18 | The progress-review pack is not ready in time, or the demo fails on the review machine | High | High | Follow `docs/05-management/plans/progress-review-12-day-plan.md`: three speakers, first timed run on 2026-11-14, second run on 2026-11-15, and a recorded fallback. R10 runs the manual Compose flow on 2026-11-04 | R1 | No slide skeleton by 2026-11-14, or no full run by 2026-11-14 | Being monitored |
 
 ## Closed risks
 
@@ -72,3 +72,4 @@ Likelihood and impact are rated high, medium or low. Status is one of
 | v1.5 | Week 3 | `RSK-03` response column now names the third document that records its limitation, the requirement confirmation record, and points at the section where the review is written | R1 |
 | v1.6 | Week 3 | RSK-11 closed and moved to the closed-risk table. Its trigger was “by the end of week 3 the application does not start”, and `docker-smoke` now starts the full Compose stack, signs in as a seeded account and refuses a wrong password on every pull request, so the trigger did not fire. The risk text is kept unchanged and the evidence is recorded, because a risk is closed with evidence rather than by deleting it | R1 |
 | v1.7 | Week 5 | Added RSK-16 (a test fixture can hide an unreachable state), RSK-17 (report claims drift from the repository) and RSK-18 (progress-review pack not ready). Updated RSK-11's test count from 29 to 87 test methods | R1 |
+| v1.8 | Week 5 | Updated RSK-16 with the PR #294 fail-on-skip control and RSK-18 with the 11/14–11/15 review run dates and R10's 11/04 Compose slot | R1 |
