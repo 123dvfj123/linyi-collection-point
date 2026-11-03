@@ -78,14 +78,15 @@ cd ..
 # build environment variable
 cp .env.example .env
 
-# Start the database, the cache and the frontend.
-# The backend image is built from backend/ (T-30-02, issue #137) and sits behind
-# the "full" profile because building it takes a few minutes.
-docker compose up -d
-
-# Add the backend image when you need the whole stack:
-docker compose --profile full up -d
+# Start the full stack (database, cache, backend and frontend).
+# The backend is in the "full" profile because its image takes a few minutes
+# to build. Use --wait so the command fails if a service does not become healthy.
+docker compose --profile full up -d --build --wait
 ```
+
+The frontend is served at `http://localhost:80`. Nginx proxies `/api/` to the
+backend container, so the browser uses the same `/api` path as the Vite dev
+server.
 
 
 | Service | URL |
@@ -103,9 +104,9 @@ The project runs for eight weeks.
 | Sprint | Week | Goal | Status |
 |---|---|---|---|
 | Sprint 0 | 1 | topic, repository, user research, competency review | done |
-| Sprint 1 | 2 | requirements and design baseline | in progress |
-| Sprint 2 | 3-4 | intake, shelving and pickup working end to end | not started |
-| Sprint 3 | 5-6 | notifications, exceptions, stocktake, billing, progress review | not started |
+| Sprint 1 | 2 | requirements and design baseline | done (`v0.1.0`) |
+| Sprint 2 | 3-4 | intake, shelving and pickup working end to end | done (`v0.2.0`; pickup-code issuance and the end-to-end path are being closed in Sprint 3) |
+| Sprint 3 | 5-6 | notifications, exceptions, stocktake, billing, progress review | in progress |
 | Sprint 4 | 7-8 | full test pass, report, presentation, logbooks | not started |
 
 See `docs/05-management/plans/PLAN.md` for the task breakdown and

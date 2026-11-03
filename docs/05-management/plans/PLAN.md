@@ -4,7 +4,7 @@
 |---|---|
 | Task | T-00-07 |
 | Owner | R1 |
-| Version | v1.5 |
+| Version | v1.6 |
 | Status | Active, reviewed at the end of every sprint |
 
 
@@ -26,6 +26,12 @@ Sprint 0 and Sprint 1 are one week each rather than the usual two to four.
 This is a deliberate compression during the startup phase, where the work is
 documentation and setup rather than development. Sprints 2 to 4 follow the
 usual two week length.
+
+> **Sprint 3 contingency (proposed, not active).** The 12-day progress-review
+> plan in [`progress-review-12-day-plan.md`](progress-review-12-day-plan.md)
+> proposes a Sprint 3A/3B split and a scope cut so the review pack is ready
+> before new features. It does not change this plan until R1/R2/R3 agree it at
+> the 2026-11-04 meeting and the decision is recorded in `change-log.md`.
 
 ## Module ownership
 
@@ -245,3 +251,4 @@ A task is done when:
 | v1.3 | Week 3 | Moved `T-30-06` from R10 to R6. `#137`'s fourth acceptance criterion already assigns enabling the backend CI job to R6, and one deliverable should not carry two owners; `PLAN.md` was the odd one out. R10 keeps `T-30-01` (delivered) and `T-30-05`, and wrote the commented-out `backend` block that R6 now activates | R1 |
 | v1.4 | Week 3 | Corrected the Sprint 1 deliverable from "chapters 1 to 7" to "chapters 1 to 4". The line had said 1 to 7 since it was written on 12 October, while `SRS.md` has had four chapters throughout, its table of contents lists four, and no other document mentions seven; `SRS.md` 1.7 cites IEEE 830 / ISO 29148 as its structural basis and four chapters are those standards' core sections. Also replaced two tab characters that had taken the place of the cell delimiter in the Sprint 2 and Sprint 4 task tables. `#175` took `v1.3` for the `T-30-06` ownership change while this was open, so this is `v1.4` rather than a second `v1.3` | R1 |
 | v1.5 | Week 4 | `T-42-02` marked deferred under `CR-023` rather than deleted: `FR-19` and `FR-20` are Could, the panel is not built in Sprint 2, and `location-recommender.md` stays as the design input for the release that does build it. `T-42-07`'s description corrected from "suggested location" to "manual location selection", which is what `#205` delivered | R1 |
+| v1.6 | Week 5 | Added a pointer to the proposed 12-day progress-review plan and Sprint 3A/3B split. The pointer is explicitly non-active: the plan is unchanged until R1/R2/R3 agree and the decision is recorded in `change-log.md` | R1 |

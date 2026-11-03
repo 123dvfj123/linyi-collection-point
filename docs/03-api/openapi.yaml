@@ -76,11 +76,16 @@
 # says so, in the same words /locations/recommend already used. The resident pages behind the two
 # GET /my-parcels paths are static placeholders, so the contract was the only place the gap was
 # still invisible. No path, schema or response changed.
+#
+# v0.7.0 | Week 5 | POST /parcels with locationId now performs registration and shelving in one
+# transaction, marks the location occupied and returns the newly issued pickupCode. This closes the
+# reachability gap between the staff intake screen and the pickup flow; the seven-day validity is a
+# demo default and is configurable with PICKUP_CODE_VALIDITY.
 
 openapi: 3.0.3
 info:
   title: Community Parcel Collection Point Management System API
-  version: 0.6.0-draft
+  version: 0.7.0-draft
   description: >
     Draft OpenAPI contract for Sprint 2. The backend owns the final paths and
     fields; the frontend must not invent fields before they appear here.
@@ -175,7 +180,10 @@ paths:
         member. The parcel starts in the registered state. FR-17 requires a
         duplicate waybill to be rejected, which is the 409 below. CR-029 allows
         locationId to be omitted when no storage location is available; the
-        parcel remains registered until a location is assigned.
+        parcel remains registered until a location is assigned. When locationId
+        is supplied, the parcel and location are updated in the same transaction,
+        the parcel reads shelved, and the response carries the newly issued
+        pickup code (FR-14, FR-21).
       requestBody:
         required: true
         content:
@@ -711,6 +719,13 @@ components:
           type: string
           format: uuid
           nullable: true
+        pickupCode:
+          type: string
+          nullable: true
+          description: >
+            Returned only on the registration or shelving response that issued
+            the code. List, detail and verification responses omit it so the
+            pickup credential is not exposed broadly. Seven-day expiry by default.
         expectedVersion:
           type: integer
           format: int64
@@ -739,6 +754,11 @@ components:
           type: string
           format: uuid
           nullable: true
+          description: >
+            Optional. When supplied, the parcel is placed on this available
+            location in the same transaction, its status becomes `shelved`, and
+            the response includes the newly issued `pickupCode`. When omitted,
+            the parcel stays `registered` until it is shelved separately.
     ParcelShelveRequest:
       type: object
       required: [locationId]

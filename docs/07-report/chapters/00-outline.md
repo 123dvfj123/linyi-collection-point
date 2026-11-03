@@ -4,8 +4,8 @@
 |---|---|
 | Task | T-20-14 |
 | Owner | R1 |
-| Status | Outline trimmed; chapters 1 and 2 drafted |
-| Version | v0.5 |
+| Status | Chapters drafted and fact-checked; figures and final PDF pending |
+| Version | v0.6 |
 | Deadline | 2026-12-08 |
 | Limit | Not more than 1000 words, source code excluded |
 | Submitted by | the leader only, as a PDF through the OLE assignment link |
@@ -29,22 +29,26 @@ Course rubric, Project Report (15 per cent):
 The 12 per cent evaluates whether the team used software engineering deliberately. Every section names the artefact that evidences it, so the writing points at something rather than asserts.
 
 ## Word budget
-1000 words is not much. This split leaves 60 words for the conclusion, and the
-nine section figures below add to 980 rather than the 1130 they added to before this
-revision, because the earlier table was 150 words over its own limit.
+
+The nine chapters now total **929 words** as measured from the Markdown. Add
+about 15 words for the title block and repository link and 30 for three figure
+captions, and the target is about **974 words**, inside the 1000-word limit with
+a small safety margin. The table below records the current counts.
 
 | Section | Words | Rubric concept | Evidence to cite |
 |---|---|---|---|
-| Title block and repository link | 20 | - | README.md |
-| 1. The problem and the context | 130 | requirement engineering | SRS 1.2, 1.3; survey-results.md |
-| 2. Process | 150 | software processes | PLAN.md; team-charter.md; the sprint minutes |
-| 3. Requirements engineering | 115 | requirement engineering | SRS; survey-results.md; personas; user-journey-maps.md; change-log.md CR-002 |
-| 4. System modeling | 90 | system modeling | the twelve .puml sources; uml/README.md |
-| 5. Architectural and database design | 75 | architectural design | ADR-002 to ADR-005; ERD.md; backend-state-machines.md |
-| 6. Design and implementation | 100 | design and implementation | design-system.md; tokens.css; openapi.yaml; the frontend skeleton |
-| 7. Testing and validation | 95 | software testing | test-plan.md; 29 backend and 68 frontend tests; RTM.md |
-| 8. Software evolution | 165 | software evolution | change-log.md; risk-register.md; the cases below |
+| Title block and repository link | 15 | - | README.md |
+| 1. The problem and the context | 96 | requirement engineering | SRS 1.2, 1.3; survey-results.md |
+| 2. Process | 162 | software processes | PLAN.md; team-charter.md; the sprint minutes |
+| 3. Requirements engineering | 91 | requirement engineering | SRS; survey-results.md; personas; user-journey-maps.md; change-log.md CR-002 |
+| 4. System modeling | 88 | system modeling | the twelve .puml sources; uml/README.md |
+| 5. Architectural and database design | 100 | architectural design | ADR-002 to ADR-005; ERD.md; backend-state-machines.md |
+| 6. Design and implementation | 108 | design and implementation | openapi.yaml; ADR-002/003; design-system.md; tokens.css |
+| 7. Testing and validation | 108 | software testing | test-plan.md; 91 backend test methods and 68 frontend tests; RTM.md |
+| 8. Software evolution | 116 | software evolution | change-log.md; risk-register.md; the cases below |
 | 9. Conclusion and reflection | 60 | - | - |
+| **Total (chapters)** | **929** | | |
+| **With title/link and captions** | **~974** | | |
 
 ## Section notes
 
@@ -52,7 +56,7 @@ revision, because the earlier table was 150 words over its own limit.
 Five sprints in eight weeks, with Sprint 0 and Sprint 1 one week each. Execution included a Wednesday checkpoint, a Sunday logbook deadline, one approval before a merge, and protected main/develop branches. The process held for design but slipped for requirements, as the risk register records.
 
 ### 3. Requirements engineering
-The elicitation method changed mid-project. Initial interviews provided weak evidence and were replaced by two questionnaires (29 responses) and four composite personas. Chapters 1 and 2 were then corrected to align with this new basis (CR-002, CR-008, CR-009). The limitation is a single convenience sample, meaning targets are design targets rather than statistically supported (RSK-03).
+The elicitation method changed mid-project. Initial interviews provided weak evidence and were replaced by four role-specific questionnaires (29 responses) and four composite personas. Chapters 1 and 2 were then corrected to align with this new basis (CR-002, CR-008, CR-009). The limitation is a single convenience sample, meaning targets are design targets rather than statistically supported (RSK-03).
 
 ### 4. System modeling
 Twelve PlantUML sources are kept as text for reviewable changes. Tracing these models against the contract revealed two real defects in the contract (one fixed, one open), proving the models' value.
@@ -64,7 +68,7 @@ Four ADRs detail the chosen alternatives and rejected options. The parcel status
 The frontend uses Vue 3, with the design system expressed as CSS custom properties to prevent raw colors or sizes in components. The backend uses Java 17 and Spring Boot 3.3. The contract was frozen before any code, so the frontend could be built against it in parallel; by week 3 the backend implements login, JWT, four-role access control, the audit log and the Flyway baseline.
 
 ### 7. Testing and validation
-The test plan prioritizes handover idempotency under concurrency, single location per parcel, duplicate waybill rejection, and single-use pickup codes. Continuous verification runs on every pull request: ESLint, 68 frontend tests, 29 backend tests, Flyway and a Compose smoke test that signs in as a seeded account.
+The test plan prioritizes handover idempotency under concurrency, single location per parcel, duplicate waybill rejection, and single-use pickup codes. Continuous verification runs on every pull request: ESLint, 68 frontend tests, 91 backend test methods, Flyway and a Compose smoke test that signs in as a seeded account.
 
 ### 8. Software evolution
 Five cases, each with a decision behind it:
@@ -89,15 +93,15 @@ The team would freeze requirements before design and write the traceability matr
 
 | Section | Status | Source |
 |---|---|---|
-| 1. The problem and context | Drafted; within budget (123 of 130) | `chapters/01-introduction.md` |
-| 2. Process | Drafted; within budget (147 of 150) | `chapters/02-process.md` |
-| 3. Requirements engineering | Drafted; within budget (109 of 115) | `chapters/03-requirements.md` ([PR #257](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/257)) |
-| 4. System modeling | Drafted; within budget (88 of 90) | `chapters/04-modeling.md` ([PR #258](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/258)) |
-| 5. Architectural and database design | Drafted; within budget (76 of 75) | `chapters/05-architecture.md` |
-| 6. Design and implementation | Drafted; within budget (92 of 100) | `chapters/06-implementation.md` ([PR #261](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/261)) |
-| 7. Testing and validation | Drafted; within budget (95 of 95) | `chapters/07-testing.md` |
-| 8. Software evolution | Drafted; within budget (163 of 165) | `chapters/08-evolution.md` |
-| 9. Conclusion and reflection | Drafted; within budget (55 of 60) | `chapters/09-conclusion.md` |
+| 1. The problem and context | Drafted (96 words) | `chapters/01-introduction.md` |
+| 2. Process | Drafted (162 words) | `chapters/02-process.md` |
+| 3. Requirements engineering | Drafted (91 words) | `chapters/03-requirements.md` ([PR #257](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/257)) |
+| 4. System modeling | Drafted (88 words) | `chapters/04-modeling.md` ([PR #258](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/258)) |
+| 5. Architectural and database design | Drafted (100 words) | `chapters/05-architecture.md` |
+| 6. Design and implementation | Drafted (108 words) | `chapters/06-implementation.md` ([PR #261](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/261)) |
+| 7. Testing and validation | Drafted (108 words) | `chapters/07-testing.md` |
+| 8. Software evolution | Drafted (116 words) | `chapters/08-evolution.md` |
+| 9. Conclusion and reflection | Drafted (60 words) | `chapters/09-conclusion.md` |
 
 ## Revision history
 | Version | Week | Change | Author |
@@ -107,3 +111,4 @@ The team would freeze requirements before design and write the traceability matr
 | v0.3 | Week 3 | The word budget table added to **1150 against a limit of 1000**, and the sentence above it promised "about 100 words for the conclusion" while the table gave the conclusion 80. Chapter 1 is raised from 80 to 130 because it now cites the resident and staff pain points with their counts, which is what the requirement engineering criterion asks for, and cutting it back would turn evidence into assertion. The 150 words come from chapters 3 to 9, and chapter 8 keeps the largest single share because this outline itself calls it the section that distinguishes the report. Chapter 2 keeps 150, so its drafted 176 words need a 26-word trim rather than a budget change | R1 |
 | v0.4 | Week 3 | Corrected the stale runnable-state note now that the backend and full Compose stack are delivered. Replaced the obsolete missing-artefact table, whose issues are closed, with the current drafting status; found that both drafted chapters still need trimming to their budget | R4 |
 | v0.5 | Week 4 | Added chapters 5, 7, 8 and 9, and recorded every chapter's actual word count against its budget. Corrected chapters 1 and 2, which the status table still listed as needing reduction when both were already inside their allocation. The nine chapters now total 947 words | R1 |
+| v0.6 | Week 5 | Fact-checked all nine chapters: corrected the questionnaire count from two to four, the database foreign-key count from nineteen to eighteen, the backend test count from 74 to 91 methods, the coverage claim from current to historical, and the CR-013 wording from "added endpoints" to "added to the contract, not implemented". Added the hybrid process rationale and the fixture-blind-spot testing insight. The chapters now total 929 words; figures and final PDF are still pending | R1 |

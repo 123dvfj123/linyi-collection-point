@@ -8,7 +8,7 @@
 |---|---|
 | Task | T-00-01 |
 | Owner | R9 |
-| Version | v1.0 |
+| Version | v1.1 |
 | Status | Active |
 | Basis | Course material on professional ethics and codes of conduct |
 
@@ -29,7 +29,7 @@ and the data the team collected while doing the project.
 | Resident phone number | Identifies the recipient and is used at the counter when a pickup code has been lost | Masked in every list view as `138****8888`. Not written to application logs. Not returned by list endpoints |
 | Recipient name | Confirms the parcel belongs to the person collecting it | Shown only on the single parcel detail screen to the staff member handling that parcel |
 | Parcel waybill number | Links the parcel to the courier's record | Visible to staff and to the resident it belongs to |
-| Pickup code | Verifies that the person collecting is entitled to the parcel | One-time use, expires, and is stored hashed rather than in plain text |
+| Pickup code | Verifies that the person collecting is entitled to the parcel | One-time use, expires, and is returned only on the response that issues it; list and detail responses omit it. The current course build stores the code in the `pickup_codes` table so the counter can verify it; a production deployment should store a hash and compare the hash instead |
 | Staff account details | Access control | Passwords stored with bcrypt and a per-user salt. Not visible to other staff |
 | Audit log entries | Resolves disputes and shows who handled a parcel | Append only. Records the actor, action, target and time. Contains no phone numbers or full names |
 
@@ -115,3 +115,4 @@ through a pull request like any other document.
 | Version | Date | Change | Author |
 |---|---|---|---|
 | v1.0 | Week 2 | Initial statement, covering system data and questionnaire data | R9 |
+| v1.1 | Week 5 | Corrected the pickup-code row: the current build stores the code for counter verification and returns it only on the issuing response; a production deployment should store a hash. The previous text claimed hashing that the schema did not implement | R1 |
