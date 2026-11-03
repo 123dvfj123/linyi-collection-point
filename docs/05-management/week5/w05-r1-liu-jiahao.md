@@ -1,9 +1,9 @@
-# Week 5 任務單 — 劉嘉浩（R1 組長 / 專案經理）
+# Week 5 任務單 — Liu JiaHao（R1 組長 / 專案經理）
 
 | 專案 | 內容 |
 |---|---|
 | 期間 | 2026-11-04（三）至 2026-11-10（二） |
-| 負責人 | 劉嘉浩 / Liu JiaHao / @Django-coder6 |
+| 負責人 | Liu JiaHao / @Django-coder6 |
 | 所屬 | COMP 3500SEF Group 23 |
 | 本週主題 | 收斂 P0、補齊證據、凍結範圍；**11/14 前不做 review 簡報** |
 | 工作分支 | `fix/p0-reachability`（3 個 commit，尚未合併） |

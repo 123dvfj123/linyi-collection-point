@@ -1,9 +1,9 @@
-# Week 5 任務單 — 胡慶凱（R6 後端主管 / 產品架構 B）
+# Week 5 任務單 — Hu Qing Kai（R6 後端主管 / 產品架構 B）
 
 | 專案 | 內容 |
 |---|---|
 | 期間 | 2026-11-04（三）至 2026-11-10（二） |
-| 負責人 | 胡慶凱 / Hu Qing Kai / @123dvfj123 |
+| 負責人 | Hu Qing Kai / @123dvfj123 |
 | 所屬 | COMP 3500SEF Group 23 |
 | 本週主題 | 收斂 P0、補齊證據、凍結範圍；**11/14 前不做 review 簡報** |
 | 工作分支 | `fix/p0-reachability`（3 個 commit，尚未合併） |

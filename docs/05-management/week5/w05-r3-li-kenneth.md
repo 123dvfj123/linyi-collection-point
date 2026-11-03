@@ -1,9 +1,9 @@
-# Week 5 任務單 — 李卓峰（R3 需求工程師）
+# Week 5 任務單 — Li Cheuk Fung Kenneth（R3 需求工程師）
 
 | 專案 | 內容 |
 |---|---|
 | 期間 | 2026-11-04（三）至 2026-11-10（二） |
-| 負責人 | 李卓峰 / Li Cheuk Fung Kenneth / @Kennethli13 |
+| 負責人 | Li Cheuk Fung Kenneth / @Kennethli13 |
 | 所屬 | COMP 3500SEF Group 23 |
 | 本週主題 | 收斂 P0、補齊證據、凍結範圍；**11/14 前不做 review 簡報** |
 | 工作分支 | `fix/p0-reachability`（3 個 commit，尚未合併） |

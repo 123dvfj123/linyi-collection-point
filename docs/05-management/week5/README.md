@@ -3,18 +3,18 @@
 期間：2026-11-04（三）至 2026-11-10（二）  
 主題：收斂 P0、補齊證據、凍結範圍；**11/14 前不做 review 簡報**。
 
-| 角色 | 姓名 | 任務單 |
+| 角色 | Name | 任務單 |
 |---|---|---|
-| R1 | 劉嘉浩 | [w05-r1-liu-jiahao.md](w05-r1-liu-jiahao.md) |
-| R2 | 陳彥祖 | [w05-r2-chan-yin-cho.md](w05-r2-chan-yin-cho.md) |
-| R3 | 李卓峰 | [w05-r3-li-kenneth.md](w05-r3-li-kenneth.md) |
-| R4 | 袁崇俊 | [w05-r4-yuan-chong-jun.md](w05-r4-yuan-chong-jun.md) |
-| R5 | 陳圓婷 | [w05-r5-tan-yuan-ting.md](w05-r5-tan-yuan-ting.md) |
-| R6 | 胡慶凱 | [w05-r6-hu-qing-kai.md](w05-r6-hu-qing-kai.md) |
-| R7 | 黃偉嘉 | [w05-r7-huang-wei-jia.md](w05-r7-huang-wei-jia.md) |
-| R8 | 吳科浩 | [w05-r8-wu-ke-hao.md](w05-r8-wu-ke-hao.md) |
-| R9 | 郭宇輝 | [w05-r9-guo-yu-hui.md](w05-r9-guo-yu-hui.md) |
-| R10 | 陳崇銘 | [w05-r10-chan-sung-ming.md](w05-r10-chan-sung-ming.md) |
+| R1 | Liu JiaHao | [w05-r1-liu-jiahao.md](w05-r1-liu-jiahao.md) |
+| R2 | Chan Yin Cho | [w05-r2-chan-yin-cho.md](w05-r2-chan-yin-cho.md) |
+| R3 | Li Cheuk Fung Kenneth | [w05-r3-li-kenneth.md](w05-r3-li-kenneth.md) |
+| R4 | Yuan Chong Jun | [w05-r4-yuan-chong-jun.md](w05-r4-yuan-chong-jun.md) |
+| R5 | Tan Yuan Ting | [w05-r5-tan-yuan-ting.md](w05-r5-tan-yuan-ting.md) |
+| R6 | Hu Qing Kai | [w05-r6-hu-qing-kai.md](w05-r6-hu-qing-kai.md) |
+| R7 | Huang Wei Jia | [w05-r7-huang-wei-jia.md](w05-r7-huang-wei-jia.md) |
+| R8 | Wu Kehao | [w05-r8-wu-ke-hao.md](w05-r8-wu-ke-hao.md) |
+| R9 | Guo Yuhui | [w05-r9-guo-yu-hui.md](w05-r9-guo-yu-hui.md) |
+| R10 | Chan Sung Ming William | [w05-r10-chan-sung-ming.md](w05-r10-chan-sung-ming.md) |
 
 ## 配套檔案
 

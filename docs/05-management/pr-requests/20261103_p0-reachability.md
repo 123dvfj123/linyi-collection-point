@@ -43,6 +43,7 @@ The change makes the staff vertical slice actually reachable:
 - `153057b` — backend: shelve intake and issue pickup codes
 - `b29504f` — deploy/frontend: Nginx proxy and pickup-code display
 - `e9aaa92` — docs: defect log, report numbers, process model and 12-day plan
+- `970f52e` — docs: Week 5 role task sheets and issue specifications
 
 ### Tests run locally
 

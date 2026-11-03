@@ -1,9 +1,9 @@
-# Week 5 任務單 — 袁崇俊（R4 前端主管 / 產品架構 A）
+# Week 5 任務單 — Yuan Chong Jun（R4 前端主管 / 產品架構 A）
 
 | 專案 | 內容 |
 |---|---|
 | 期間 | 2026-11-04（三）至 2026-11-10（二） |
-| 負責人 | 袁崇俊 / Yuan Chong Jun / @RookieVENENO |
+| 負責人 | Yuan Chong Jun / @RookieVENENO |
 | 所屬 | COMP 3500SEF Group 23 |
 | 本週主題 | 收斂 P0、補齊證據、凍結範圍；**11/14 前不做 review 簡報** |
 | 工作分支 | `fix/p0-reachability`（3 個 commit，尚未合併） |
