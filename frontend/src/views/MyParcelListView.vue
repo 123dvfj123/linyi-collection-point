@@ -7,7 +7,8 @@
   <section>
     <h1 class="title">My parcels</h1>
     <p class="note">
-      Placeholder. Parcel status, storage location and pickup code are implemented in Sprint 2.
+      Placeholder. The resident read path is not built yet: no backend route serves
+      `/my-parcels`, and this view renders no data.
     </p>
   </section>
 </template>
