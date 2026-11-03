@@ -40,7 +40,45 @@ jobs:
               echo "::error::the pull request base or head is empty, so there is nothing to range over"
               exit 1
             fi
-            npm run commitlint -- --from "$PR_BASE" --to "$PR_HEAD" --verbose
+            # Lint what this pull request adds, and nothing else — the same rule the push path
+            # below applies.
+            #
+            # The naive range `--from "$PR_BASE" --to "$PR_HEAD"` is wrong for the release pull
+            # request that first brings `main` up to date. `main` has not moved since the
+            # repository scaffold, so that range is the whole history: 595 commits, 143 of them
+            # written before these rules existed and each already reviewed by its own pull
+            # request into `develop`. Judging the repository's past against rules written later
+            # is not what this job is for, and it fails the only change that matters.
+            #
+            # So exclude what either integration branch already holds. A commit that is only on
+            # the pull request's own branch is still linted, which is the case this job exists
+            # to catch.
+            exclusions=()
+            if git cat-file -e "$PR_BASE^{commit}" 2>/dev/null; then
+              exclusions+=("$PR_BASE")
+            fi
+            for branch in main develop; do
+              if git show-ref --verify --quiet "refs/remotes/origin/$branch"; then
+                exclusions+=("refs/remotes/origin/$branch")
+              fi
+            done
+
+            if [ ${#exclusions[@]} -eq 0 ]; then
+              echo "::warning::no base could be resolved and no integration branch is available, so only the head commit is checked"
+              printf '%s\n' "$PR_HEAD" > "$RUNNER_TEMP/commitlint-commits"
+            else
+              # --no-merges: a merge commit's message is composed by GitHub, not written by a
+              # member, and commitlint cannot rewrite it.
+              git rev-list --no-merges "$PR_HEAD" --not "${exclusions[@]}" \
+                > "$RUNNER_TEMP/commitlint-commits"
+            fi
+
+            count=$(wc -l < "$RUNNER_TEMP/commitlint-commits")
+            echo "Checking $count commit(s):"
+            while IFS= read -r commit; do
+              echo "  $commit $(git log -1 --format=%s "$commit")"
+              git show -s --format=%B "$commit" | npm run commitlint -- --verbose
+            done < "$RUNNER_TEMP/commitlint-commits"
           else
             # Lint what this push adds, and nothing else.
             #
