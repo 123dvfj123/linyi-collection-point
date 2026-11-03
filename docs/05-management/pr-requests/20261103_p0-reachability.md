@@ -50,7 +50,7 @@ private Week 5 task sheets. Those files are deliberately not in the final PR.
 
 ### Tests run locally
 
-- `backend`: `./mvnw -B verify` — BUILD SUCCESS; 91 test methods, 27
+- `backend`: `./mvnw -B verify` — BUILD SUCCESS; 87 test methods, 27
   Testcontainers integration tests skipped because the local machine has no
   Docker.
 - `frontend`: `npm run lint`, `npm run test:run` (68/68), `npm run build` —

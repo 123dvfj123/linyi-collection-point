@@ -44,7 +44,7 @@ a small safety margin. The table below records the current counts.
 | 4. System modeling | 88 | system modeling | the twelve .puml sources; uml/README.md |
 | 5. Architectural and database design | 100 | architectural design | ADR-002 to ADR-005; ERD.md; backend-state-machines.md |
 | 6. Design and implementation | 108 | design and implementation | openapi.yaml; ADR-002/003; design-system.md; tokens.css |
-| 7. Testing and validation | 108 | software testing | test-plan.md; 91 backend test methods and 68 frontend tests; RTM.md |
+| 7. Testing and validation | 108 | software testing | test-plan.md; 87 backend test methods and 68 frontend tests; RTM.md |
 | 8. Software evolution | 116 | software evolution | change-log.md; risk-register.md; the cases below |
 | 9. Conclusion and reflection | 60 | - | - |
 | **Total (chapters)** | **929** | | |
@@ -68,7 +68,7 @@ Four ADRs detail the chosen alternatives and rejected options. The parcel status
 The frontend uses Vue 3, with the design system expressed as CSS custom properties to prevent raw colors or sizes in components. The backend uses Java 17 and Spring Boot 3.3. The contract was frozen before any code, so the frontend could be built against it in parallel; by week 3 the backend implements login, JWT, four-role access control, the audit log and the Flyway baseline.
 
 ### 7. Testing and validation
-The test plan prioritizes handover idempotency under concurrency, single location per parcel, duplicate waybill rejection, and single-use pickup codes. Continuous verification runs on every pull request: ESLint, 68 frontend tests, 91 backend test methods, Flyway and a Compose smoke test that signs in as a seeded account.
+The test plan prioritizes handover idempotency under concurrency, single location per parcel, duplicate waybill rejection, and single-use pickup codes. Continuous verification runs on every pull request: ESLint, 68 frontend tests, 87 backend test methods, Flyway and a Compose smoke test that signs in as a seeded account.
 
 ### 8. Software evolution
 Five cases, each with a decision behind it:
@@ -111,4 +111,4 @@ The team would freeze requirements before design and write the traceability matr
 | v0.3 | Week 3 | The word budget table added to **1150 against a limit of 1000**, and the sentence above it promised "about 100 words for the conclusion" while the table gave the conclusion 80. Chapter 1 is raised from 80 to 130 because it now cites the resident and staff pain points with their counts, which is what the requirement engineering criterion asks for, and cutting it back would turn evidence into assertion. The 150 words come from chapters 3 to 9, and chapter 8 keeps the largest single share because this outline itself calls it the section that distinguishes the report. Chapter 2 keeps 150, so its drafted 176 words need a 26-word trim rather than a budget change | R1 |
 | v0.4 | Week 3 | Corrected the stale runnable-state note now that the backend and full Compose stack are delivered. Replaced the obsolete missing-artefact table, whose issues are closed, with the current drafting status; found that both drafted chapters still need trimming to their budget | R4 |
 | v0.5 | Week 4 | Added chapters 5, 7, 8 and 9, and recorded every chapter's actual word count against its budget. Corrected chapters 1 and 2, which the status table still listed as needing reduction when both were already inside their allocation. The nine chapters now total 947 words | R1 |
-| v0.6 | Week 5 | Fact-checked all nine chapters: corrected the questionnaire count from two to four, the database foreign-key count from nineteen to eighteen, the backend test count from 74 to 91 methods, the coverage claim from current to historical, and the CR-013 wording from "added endpoints" to "added to the contract, not implemented". Added the hybrid process rationale and the fixture-blind-spot testing insight. The chapters now total 929 words; figures and final PDF are still pending | R1 |
+| v0.6 | Week 5 | Fact-checked all nine chapters: corrected the questionnaire count from two to four, the database foreign-key count from nineteen to eighteen, the backend test count from 74 to 87 methods, the coverage claim from current to historical, and the CR-013 wording from "added endpoints" to "added to the contract, not implemented". Added the hybrid process rationale and the fixture-blind-spot testing insight. The chapters now total 929 words; figures and final PDF are still pending | R1 |
