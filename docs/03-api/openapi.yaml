@@ -70,10 +70,17 @@
 # location, because PATCH /parcels/{id}/status changes the status but does not name a location.
 # CR-029 left "until one is assigned" without an assignment operation; this is that operation.
 
+# v0.6.0 | Week 4 | Marked the four paths that no backend route serves as specified and not built.
+# PATCH /parcels/{id}/status, GET /my-parcels, GET /my-parcels/{id} and
+# GET /my-parcels/{id}/pickup-code read as Sprint 2 deliverables and were not implemented. Each now
+# says so, in the same words /locations/recommend already used. The resident pages behind the two
+# GET /my-parcels paths are static placeholders, so the contract was the only place the gap was
+# still invisible. No path, schema or response changed.
+
 openapi: 3.0.3
 info:
   title: Community Parcel Collection Point Management System API
-  version: 0.5.0-draft
+  version: 0.6.0-draft
   description: >
     Draft OpenAPI contract for Sprint 2. The backend owns the final paths and
     fields; the frontend must not invent fields before they appear here.
@@ -226,6 +233,14 @@ paths:
         rejected with 409 rather than overwriting a newer state. A transition
         the state machine does not allow is rejected with 422, per
         docs/02-design/backend-state-machines.md.
+
+        **Specified and not built.** `ParcelController` exposes `POST /parcels`,
+        `POST /parcels/batch` and `PATCH /parcels/{id}/location`; no route serves this path.
+        The `expectedVersion` conflict handling and the 409 and 422 responses described above
+        are therefore not implemented. The single transition this path was written for —
+        `registered` to `shelved` — is performed by `PATCH /parcels/{id}/location` instead,
+        which changes the status and names the storage location in one transaction. A general
+        status-update path with optimistic locking is carried into Sprint 3.
       parameters:
         - name: id
           in: path
@@ -336,6 +351,12 @@ paths:
         list shape. The result is scoped by the authenticated identity and never
         by a value from the client, so a resident cannot read another resident's
         parcels (FR-2). Requires the resident role.
+
+        **Specified and not built.** No backend route serves this path in Sprint 2, so no
+        resident can list their own parcels yet. The frontend route `/my-parcels` exists and
+        resolves to `frontend/src/views/MyParcelListView.vue`, which is a static placeholder
+        with no components, no request and no data; `frontend/src/api/` has no client function
+        for this path. It stays here as the contract for the release that does build it.
       parameters:
         - name: page
           in: query
@@ -363,6 +384,11 @@ paths:
         Requires the resident role. A parcel that does not exist and a parcel
         that belongs to another resident both answer 404, so the response cannot
         be used to discover whether someone else's parcel exists.
+
+        **Specified and not built.** No backend route serves this path in Sprint 2. The
+        frontend route `/my-parcels/:id` resolves to
+        `frontend/src/views/MyParcelDetailView.vue`, which is a static placeholder carrying no
+        behaviour. It stays here as the contract for the release that does build it.
       parameters:
         - name: id
           in: path
@@ -394,6 +420,11 @@ paths:
         returned only to the resident who asks for it. Ownership is taken from
         the authenticated identity. Requires the resident role. The code value
         is never returned inside a parcel list.
+
+        **Specified and not built.** No backend route serves this path in Sprint 2. The
+        pickup-code credential a resident would read here is instead supplied to the staff
+        pickup flow, which verifies a code against a parcel. It stays here as the contract for
+        the release that does build it.
       parameters:
         - name: id
           in: path
