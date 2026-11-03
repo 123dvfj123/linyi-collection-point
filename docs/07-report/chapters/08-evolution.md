@@ -1,13 +1,3 @@
 # 8. Software evolution
 
-Change is recorded rather than remembered: thirty-three change records carry every decision this
-project made. Five of them show the process working. CR-013 added the resident endpoints that the
-specification listed as must-have while the contract lacked them. CR-010 and CR-011 corrected the
-exception types to five values, because CR-006 had only governed parcel status. CR-012 single-sourced
-an exception list that seven documents each restated. CR-029 corrected CR-028, which had invented a
-pending storage slot that the schema cannot represent given one parcel per location row. CR-033 made
-handover confirmation idempotent, matching the ERD and NFR-4 against a task description that claimed
-the opposite. Each was raised, recorded with the alternatives it rejected, and approved before the
-code moved. Two smaller cases completed the set: a case-sensitivity regression between `personas.md`
-and `Personas.md` was fixed by rewriting the link check to compare exactly, and the risk register
-closes a risk only with evidence and records the rest as blocked, reviewed every sprint.
+Change is recorded rather than remembered: thirty-six change records carry every decision. CR-013 added the resident read paths to the contract, exposing that they were absent from the implementation; they remain specified and not built. CR-010/011 corrected the exception types to five values, because CR-006 governed only parcel status. CR-012 single-sourced an exception list seven documents restated. CR-029 corrected CR-028, which invented a pending storage slot the schema cannot represent. CR-033 made handover idempotent, matching NFR-4 against a task description that claimed the opposite. CR-029 and CR-033 were later corrections, showing the log is used rather than ceremonial. CR-034–036 record the reachability fixes. The risk register closes a risk only with evidence.

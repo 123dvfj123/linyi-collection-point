@@ -159,14 +159,18 @@ async function submitSingle() {
       (location) => location.id === parcel.locationId,
     )?.code
 
-    successMessage.value = `${parcel.trackingNo} registered at ${
+    const pickupCode = parcel.pickupCode
+      ? ` Pickup code: ${parcel.pickupCode}.`
+      : ''
+    successMessage.value = `${parcel.trackingNo} registered and shelved at ${
       locationCode ?? 'the selected location'
-    }.`
+    }.${pickupCode}`
 
     single.trackingNo = ''
     single.recipientName = ''
     single.recipientPhone = ''
     single.locationId = ''
+    await loadLocations()
   } catch (value) {
     if (value?.code === 'DUPLICATE_TRACKING_NO') {
       fieldErrors.trackingNo = value.message

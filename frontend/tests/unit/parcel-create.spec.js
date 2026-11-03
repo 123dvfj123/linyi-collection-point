@@ -61,9 +61,10 @@ const createdParcel = {
   carrier: 'SF Express',
   recipientName: 'Alex Chan',
   recipientPhone: '13800000000',
-  status: 'registered',
+  status: 'shelved',
   size: 'medium',
   locationId: '10000000-0000-4000-8000-000000000003',
+  pickupCode: '87654321',
   expectedVersion: 1,
   createdAt: '2026-10-25T00:00:00Z',
   updatedAt: '2026-10-25T00:00:00Z',
@@ -139,7 +140,8 @@ describe('ParcelCreateView', () => {
       size: 'medium',
       locationId: '10000000-0000-4000-8000-000000000003',
     })
-    expect(view.text()).toContain('SF1234567890 registered at C-01-1')
+    expect(view.text()).toContain('SF1234567890 registered and shelved at C-01-1')
+    expect(view.text()).toContain('Pickup code: 87654321')
   })
 
   it('shows a duplicate waybill as a field-level error', async () => {

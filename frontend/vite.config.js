@@ -22,5 +22,9 @@ export default defineConfig({
     // Unit tests run in jsdom so that localStorage, window and crypto exist.
     environment: 'jsdom',
     include: ['tests/**/*.spec.js'],
+    // The router-guard test dynamically imports the route views; on a cold
+    // Vite transform that can exceed the 5 s default. Keep the assertion but
+    // give the first run enough time to compile the route modules.
+    testTimeout: 15000,
   },
 })

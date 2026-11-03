@@ -48,6 +48,9 @@ public class Parcel {
     @Column(name = "location_id")
     private UUID locationId;
 
+    @Column(name = "pickup_code_id")
+    private UUID pickupCodeId;
+
     @Column(name = "registered_by_id", nullable = false)
     private UUID registeredById;
 
@@ -74,7 +77,8 @@ public class Parcel {
         this.recipientPhone = request.recipientPhone().trim();
         this.size = request.size();
         this.status = ParcelStatus.registered;
-        this.locationId = request.locationId();
+        this.locationId = null;
+        this.pickupCodeId = null;
         this.registeredById = actor.userId();
         this.collectionPointId = actor.collectionPointId();
     }
@@ -127,6 +131,21 @@ public class Parcel {
 
     public UUID getLocationId() {
         return locationId;
+    }
+
+    public UUID getPickupCodeId() {
+        return pickupCodeId;
+    }
+
+    /**
+     * Links the parcel to the pickup code issued when it is shelved. The code is
+     * created first so the foreign key can be written in the same transaction.
+     */
+    void attachPickupCode(UUID pickupCodeId) {
+        if (pickupCodeId == null) {
+            throw new IllegalArgumentException("pickupCodeId must be provided");
+        }
+        this.pickupCodeId = pickupCodeId;
     }
 
     public UUID getRegisteredById() {

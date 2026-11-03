@@ -13,6 +13,8 @@ public interface PickupCodeRepository extends JpaRepository<PickupCode, UUID> {
 
     Optional<PickupCode> findByCode(String code);
 
+    Optional<PickupCode> findByParcelId(UUID parcelId);
+
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("select c from PickupCode c where c.code = :code")
     Optional<PickupCode> findForUpdateByCode(@Param("code") String code);

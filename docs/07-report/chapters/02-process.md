@@ -1,7 +1,9 @@
 # 2. Process
 
-The project spans eight weeks across five sprints: Sprint 0 and Sprint 1 are one week each, followed by three two-week sprints. Every task has an identifier, an owner, and a folder in `PLAN.md`. This ensures that a task cannot begin without an owner and cannot be marked complete without a corresponding artefact.
+The project spans eight weeks across five sprints: Sprint 0 and Sprint 1 one week each, then three two-week sprints. Every task has an identifier, owner and folder in `PLAN.md`; completion requires its artefact.
 
-The cadence is documented in `team-charter.md` and the sprint minutes: a Wednesday checkpoint, a Sunday logbook deadline, mandatory non-author approval before merging, and protected `main` and `develop` branches. A core rule is that a change not recorded in `change-log.md` did not happen. That rule enables the Software Evolution section.
+We used a hybrid incremental and plan-driven model: two-week sprints, a product backlog and retrospectives inside a fixed SRS/architecture baseline and change log. This fitted a fixed assessment calendar with moving requirements; waterfall would have frozen the wrong scope, while pure Scrum would have under-produced the artefact trail the rubric assesses.
 
-Design work adhered to the schedule; the requirements phase did not. Requirements documents were still being revised in week 3, after coding had started. `RSK-01` predicted exactly this — eight weeks leaves no buffer, so Sprint 1 slippage spills into the build sprints.
+The cadence is in `team-charter.md` and the sprint minutes: a Wednesday checkpoint, a Sunday logbook deadline, non-author review before merge, and protected branches. Review evidence is the PR thread, not always a formal approval. A change not in `change-log.md` did not happen.
+
+Design held to schedule; requirements did not. Documents were still changing in week 3, after coding began; `RSK-01` predicted that eight weeks leaves no buffer, so Sprint 1 slippage spills into build.

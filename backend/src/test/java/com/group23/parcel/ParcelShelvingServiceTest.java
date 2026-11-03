@@ -1,5 +1,6 @@
 package com.group23.parcel;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -7,8 +8,12 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import com.group23.location.Location;
 import com.group23.location.LocationNotFoundException;
 import com.group23.location.LocationRepository;
+import com.group23.location.LocationStatus;
+import com.group23.pickup.PickupCode;
+import com.group23.pickup.PickupCodeIssuanceService;
 import com.group23.security.AuthenticatedUser;
 import com.group23.user.UserRole;
 import java.util.Optional;
@@ -24,7 +29,9 @@ class ParcelShelvingServiceTest {
 
     private final ParcelRepository parcelRepository = mock(ParcelRepository.class);
     private final LocationRepository locationRepository = mock(LocationRepository.class);
-    private final ParcelShelvingService service = new ParcelShelvingService(parcelRepository, locationRepository);
+    private final PickupCodeIssuanceService pickupCodeIssuanceService = mock(PickupCodeIssuanceService.class);
+    private final ParcelShelvingService service =
+            new ParcelShelvingService(parcelRepository, locationRepository, pickupCodeIssuanceService);
 
     @Test
     void rejectsAStaffMemberWithoutACollectionPoint() {
@@ -64,14 +71,14 @@ class ParcelShelvingServiceTest {
     }
 
     @Test
-    void rejectsAParcelThatAlreadyNamesALocation() {
-        UUID existingLocation = UUID.randomUUID();
-        Parcel parcel = Parcel.register(createRequest(existingLocation), STAFF);
-        when(parcelRepository.findById(any())).thenReturn(Optional.of(parcel));
+    void registrationDoesNotWriteALocationBeforeShelving() {
+        UUID requestedLocation = UUID.randomUUID();
 
-        assertThatThrownBy(() -> service.shelve(UUID.randomUUID(), request(), STAFF))
-                .isInstanceOf(ParcelShelvingException.class)
-                .hasMessageContaining("already names a storage location");
+        Parcel parcel = Parcel.register(createRequest(requestedLocation), STAFF);
+
+        assertThat(parcel.getStatus()).isEqualTo(ParcelStatus.registered);
+        assertThat(parcel.getLocationId()).isNull();
+        assertThat(parcel.getPickupCodeId()).isNull();
     }
 
     @Test
@@ -83,6 +90,31 @@ class ParcelShelvingServiceTest {
         assertThatThrownBy(() -> service.shelve(UUID.randomUUID(), request(), STAFF))
                 .isInstanceOf(LocationNotFoundException.class);
         verify(parcelRepository, never()).saveAndFlush(any(Parcel.class));
+    }
+
+    @Test
+    void shelvesTheParcelAndReturnsTheIssuedPickupCode() {
+        Parcel parcel = Parcel.register(createRequest(), STAFF);
+        Location location = mock(Location.class);
+        UUID locationId = UUID.randomUUID();
+        PickupCode pickupCode = mock(PickupCode.class);
+        when(parcelRepository.findById(any())).thenReturn(Optional.of(parcel));
+        when(locationRepository.findByIdAndCollectionPointId(any(), any())).thenReturn(Optional.of(location));
+        when(location.getStatus()).thenReturn(LocationStatus.available);
+        when(location.getId()).thenReturn(locationId);
+        when(pickupCode.getId()).thenReturn(UUID.randomUUID());
+        when(pickupCode.getCode()).thenReturn("12345678");
+        when(pickupCodeIssuanceService.issueFor(parcel)).thenReturn(pickupCode);
+        when(locationRepository.saveAndFlush(location)).thenReturn(location);
+        when(parcelRepository.saveAndFlush(parcel)).thenReturn(parcel);
+
+        ParcelResponse response = service.shelve(UUID.randomUUID(), request(), STAFF);
+
+        assertThat(response.status()).isEqualTo(ParcelStatus.shelved);
+        assertThat(response.locationId()).isEqualTo(locationId);
+        assertThat(response.pickupCode()).isEqualTo("12345678");
+        verify(location).occupy(parcel.getId());
+        verify(pickupCodeIssuanceService).issueFor(parcel);
     }
 
     private static AuthenticatedUser staffAt(UUID collectionPointId) {

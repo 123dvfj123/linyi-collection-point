@@ -17,8 +17,9 @@ RUN npm run build
 # Stage 2: Serve stage (Use Nginx to provide static web services)
 FROM nginx:alpine
 
-# Copy the static files compiled by the frontend to the default hosting directory of Nginx
+# Copy the compiled static files and the API proxy configuration.
 COPY --from=builder /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Declare the default Nginx port
 EXPOSE 80
