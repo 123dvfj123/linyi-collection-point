@@ -2,12 +2,13 @@
 
 | Item | Detail |
 |---|---|
-| Branch | `fix/p0-reachability` |
+| Branch | `fix/p0-reachability` (merged) |
 | Base | `develop` |
 | Title | `fix: close the intake-to-handover reachability gap [T-42-04]` |
+| Status | **Merged**: PR #283 `1401e66`, PR #294 `b6011b5`; develop CI `41658317363` green |
 | Reviewers | R6 @123dvfj123, R10 @smcheese9731-sys; R2 @ohcyc246 for the product behaviour; R8 @fannaodawang for the test evidence |
 | Labels | `type: code`, `prio: high` |
-| Milestone | Sprint 3 (create it first; the repo currently has Sprint 1 and Sprint 2 only) |
+| Milestone | Sprint 3 |
 
 ## Compare link
 
@@ -99,9 +100,9 @@ runs the Testcontainers tests; `docker-smoke` logs in through
 
 ### Status
 
-PR #283 is already open:
-https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/283
+**Merged.**
+- PR #283: https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/283
+- PR #294: https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/294
+- Develop CI `41658317363`: all five jobs green, 87 tests, 0 skipped.
 
-Use the title and body in this file to keep the PR description current. Do not
-open a second PR. Do not merge until the reviewers have resolved the “Verification
-still owned by reviewers” section.
+This file is kept as the merge record. Do not open a duplicate PR.
