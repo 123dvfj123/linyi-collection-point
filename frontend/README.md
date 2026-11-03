@@ -41,17 +41,16 @@ failure  4xx  { error: { code, message, requestId } }
 straight to the caller and rejects with `{ status, code, message, requestId }`,
 so a page handles one error shape and never reads an axios error. A `401`
 clears the session and sends the browser to `/login`.
-## Skeleton status
+## Current status
 
-T-30-04 delivers the shell only: application layout, routing, route guards, the
+T-30-04 delivered the shell: application layout, routing, route guards, the
 Pinia auth store, the single Axios wrapper and one placeholder view per page in
-the frontend page map.
+the frontend page map. Sprint 2 replaced the mock login with the real
+`POST /api/auth/login` call and connected intake, locations and pickup to the
+backend. The resident, owner and admin read pages are still placeholders and
+are tracked in the page map.
 
 Every route in `src/router/index.js` also appears in
 `docs/02-design/frontend-page-map.md`, with the same path, view name and role
 list. A view that is still a placeholder says so and names the role that will
 implement it.
-
-Sign-in currently uses mock accounts in `src/stores/auth.js`, because
-`POST /auth/login` belongs to T-41-01. The store is the only file that changes
-when the real endpoint lands.

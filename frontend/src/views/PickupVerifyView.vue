@@ -6,8 +6,7 @@ import ErrorState from '../components/ErrorState.vue'
 import LoadingState from '../components/LoadingState.vue'
 import PageHeader from '../components/PageHeader.vue'
 
-// T-42-05: staff pickup verification and handover.
-// The API adapter currently points at the mock until T-42-04 lands.
+// T-42-05: staff pickup verification and handover, wired to the real API.
 const pickupCode = ref('')
 const pickupInput = ref(null)
 const viewState = ref('idle')
