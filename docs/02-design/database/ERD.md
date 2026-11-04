@@ -3,9 +3,9 @@
 | Item | Detail |
 |---|---|
 | Status | Complete for Sprint 1 |
-| Date | 2026-10-19 |
+| Date | 2026-11-04 |
 | Owners | R6 Backend Lead, R7 Backend Developer |
-| Version | v1.4 |
+| Version | v1.5 |
 | Database | PostgreSQL 16 |
 | ORM | Spring Data JPA |
 
@@ -56,6 +56,8 @@ D3 in the week 1 review. `out_for_delivery`, `ready_for_pickup` and `returned`
 described courier and logistics stages, and SRS section 1.5 puts dispatch and
 delivery tracking outside the system boundary, so they are not parcel states.
 An exception is not a parcel state either; see `ParcelException` below.
+
+Single registration without a location leaves `locationId` and `pickupCodeId` empty. With an available location, registration links the parcel, location and pickup code in one transaction and returns the shelved parcel with its newly issued code (CR-034).
 
 ### Location
 
@@ -217,3 +219,4 @@ The lifecycle of each status value is modelled by these PlantUML sources:
 | v1.2 | Week 3 | `CollectionPoint` added, with `collectionPointId` on the five entities that are scoped directly and a section on what is still open, per `CR-021` | R1 |
 | v1.3 | Week 3 | Status changed from draft to complete for Sprint 1. The nine entities, the ten relationships and the collection point scope are the ones Sprint 2 builds from | R1 |
 | v1.4 | Week 3 | `Setting.key` corrected from `unique` to unique within a collection point (`CR-026`). The schema has always used `UNIQUE (collection_point_id, key)`, and this document's own relationship line already says `CollectionPoint 1 --- N Setting`, so the correction makes the entity match both | R1 |
+| v1.5 | Week 5 | Document the parcel, location and pickup code links created together under CR-034. | R10 |
