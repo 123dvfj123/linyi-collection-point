@@ -43,7 +43,7 @@ public class ParcelShelvingService {
         UUID collectionPointId = actor.collectionPointId();
 
         Parcel parcel = parcelRepository
-                .findById(parcelId)
+                .findForUpdateById(parcelId)
                 .filter(candidate -> collectionPointId.equals(candidate.getCollectionPointId()))
                 .orElseThrow(ParcelNotFoundException::new);
 
@@ -59,7 +59,7 @@ public class ParcelShelvingService {
         }
 
         Location location = locationRepository
-                .findByIdAndCollectionPointId(request.locationId(), collectionPointId)
+                .findForUpdateByIdAndCollectionPointId(request.locationId(), collectionPointId)
                 .orElseThrow(LocationNotFoundException::new);
 
         if (location.getStatus() != LocationStatus.available) {
