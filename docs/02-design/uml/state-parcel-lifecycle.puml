@@ -8,7 +8,8 @@ state "registered" as Registered
 state "shelved" as Shelved
 state "collected" as Collected
 
-[*] --> Registered : register parcel
+[*] --> Registered : register without a location
+[*] --> Shelved : register and shelve atomically with a location
 Registered --> Shelved : assign storage location
 Shelved --> Collected : confirm handover
 Collected --> [*]

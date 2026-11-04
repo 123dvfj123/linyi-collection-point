@@ -144,6 +144,7 @@ paths:
         and FR-27 with FR-34 for an owner (points that owner manages only). This
         is not the resident read path: a resident reads their own parcels
         through GET /my-parcels (FR-2), which CR-013 added.
+        This list operation is specified but has no controller mapping on the W05 baseline.
       parameters:
         - name: status
           in: query
@@ -177,7 +178,7 @@ paths:
       summary: Register an incoming parcel
       description: >
         Satisfies IS-2 and FR-12, registration of an incoming parcel by staff
-        member. The parcel starts in the registered state. FR-17 requires a
+        member. FR-17 requires a
         duplicate waybill to be rejected, which is the 409 below. CR-029 allows
         locationId to be omitted when no storage location is available; the
         parcel remains registered until a location is assigned. When locationId

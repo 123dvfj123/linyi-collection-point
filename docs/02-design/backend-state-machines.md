@@ -3,8 +3,8 @@
 | Item | Detail |
 |---|---|
 | Status | Complete for Sprint 1 |
-| Version | v1.0 |
-| Date | 2026-10-10 |
+| Version | v1.1 |
+| Date | 2026-11-04 |
 | Owners | R6 Backend Lead |
 | Related | CR-006, CR-007, docs/02-design/database/ERD.md |
 
@@ -24,6 +24,8 @@ Allowed transitions:
 registered -> shelved
 shelved -> collected
 ```
+
+Under CR-034, single registration without a location returns `registered`. With an available `locationId`, the same transaction registers and shelves the parcel, occupies the location and links a newly issued pickup code. The caller sees `shelved` on success. A failed shelving operation rolls back registration.
 
 An exception is not a parcel state. It is recorded as a `ParcelException`
 (`open -> processing -> resolved`) against the parcel, and the parcel keeps the
@@ -102,3 +104,4 @@ Illegal transitions are rejected by the service layer and produce a `422 Unproce
 | Version | Week | Change | Author |
 |---|---|---|---|
 | v1.0 | Week 2 | First version recorded in this file. The four state machines the backend implements, with the enum values `CR-006` fixed. Any earlier edit is not listed: this file had no revision history until week 3, so records of those edits do not exist here. | R1 |
+| v1.1 | Week 5 | Record the registration result with and without a location. | R10 |
