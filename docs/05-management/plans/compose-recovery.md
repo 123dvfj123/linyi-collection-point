@@ -30,7 +30,8 @@ Compare the migration rows and checksums with the fresh run. The used pickup cod
 ## Back up and restore to a separate volume
 
 ```bash
-backup_dir=../Tasks/W05/Evidence
+# Choose a local directory outside the repository for the dump.
+backup_dir="../backups/w05"
 mkdir -p "$backup_dir"
 dump="$backup_dir/w05-r10-$(date +%Y%m%d-%H%M%S).dump"
 docker compose exec -T postgres pg_dump -U lms -d lms -Fc > "$dump" &&
