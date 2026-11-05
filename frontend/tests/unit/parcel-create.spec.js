@@ -142,6 +142,7 @@ describe('ParcelCreateView', () => {
     })
     expect(view.text()).toContain('SF1234567890 registered and shelved at C-01-1')
     expect(view.text()).toContain('Pickup code: 87654321')
+    expect(fetchLocations).toHaveBeenCalledTimes(2)
   })
 
   it('shows a duplicate waybill as a field-level error', async () => {
