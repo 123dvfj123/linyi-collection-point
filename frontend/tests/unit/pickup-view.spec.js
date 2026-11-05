@@ -161,5 +161,6 @@ describe('PickupVerifyView', () => {
 
     expect(wrapper.text()).toContain('Handover recorded')
     expect(wrapper.text()).toContain('The handover was recorded successfully.')
+    expect(wrapper.findAll('.fact-list dd')[1].text()).toBe('collected')
   })
 })
