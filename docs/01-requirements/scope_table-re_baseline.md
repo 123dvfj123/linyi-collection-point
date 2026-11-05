@@ -59,14 +59,14 @@ For this review, count as evidenced implemented only the narrow, reachable paths
 
 ## RTM alignment note
 
-This scope table is a single evidence artifact; it does not silently rewrite SRS MoSCoW priorities or claim that all 32 Must FRs are release commitments. To finish the separate RTM alignment, R8 should retain the three state meanings (`designed`, `implemented`, `tested`) and update only rows supported by implementation/test evidence after review. Do not label a row `tested` merely because its test ID is reserved or the overall CI workflow is green. R2 must create/approve scope CRs for the proposed future-release Must items before recording a Must-to-Could/Will-not-have change in the backlog, SRS, or RTM.
+This scope table is a single evidence artifact; it does not silently rewrite SRS MoSCoW priorities or claim that all 32 Must FRs are release commitments. To finish the separate RTM alignment, R3 should retain the three state meanings (`designed`, `implemented`, `tested`) and update only rows supported by implementation/test evidence after review. Do not label a row `tested` merely because its test ID is reserved or the overall CI workflow is green. R2 must create/approve scope CRs for the proposed future-release Must items before recording a Must-to-Could/Will-not-have change in the backlog, SRS, or RTM.
 
 ## Evidence references
 
 - `docs/01-requirements/RTM.md` v0.5: FR status, design gaps, and reserved test IDs.
 - `docs/01-requirements/specification/SRS.md` §§3.1–3.4: requirement definitions and existing MoSCoW values.
 - `docs/03-api/openapi.yaml`: resident paths explicitly specified and not built; exceptions remain proposed; CR-034 registration contract.
-- `docs/05-management/change-log.md` v1.23: CR-034–036 marked implemented; develop CI `41658317363` (87 tests, 0 skipped), V4 5/5.
+- `docs/05-management/change-log.md` v1.24: CR-034–036 marked implemented; develop CI `41658317363` (90 tests, 0 skipped), V4 5/5.
 - `docs/05-management/pr-requests/20261103_p0-reachability.md`: merged reachability evidence and remaining reviewer checks.
 
 ## Revision history
