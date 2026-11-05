@@ -17,6 +17,45 @@ npm run test:run   # Vitest once, for CI
 npm run build      # production build into dist/
 ```
 
+## Full-stack demo flow
+
+Run the following from the repository root with Docker Desktop using Linux
+containers:
+
+```bash
+docker compose --profile full up -d --build --wait --wait-timeout 300
+```
+
+Open `http://localhost`, then use the seeded staff account:
+
+```text
+username: demo_staff_1
+password: password
+```
+
+Verify the primary staff workflow:
+
+1. Open **Register parcel** and choose an available storage location.
+2. Submit a parcel and confirm the success message shows both the location code
+   and the newly issued pickup code. Record the tracking number and pickup code.
+3. Reload the location board and confirm the selected location is `occupied`.
+4. Open **Pickup**, enter the issued pickup code, and confirm the parcel and
+   storage location shown are correct.
+5. Confirm the handover and check that the page reports it as recorded. A
+   repeated confirmation is idempotent and returns the same handover.
+
+Repeat the register-success and pickup screens at a 375 px viewport and check
+that the page has no horizontal scrolling and every action remains visible.
+
+The 2026-11-05 verification of this flow is recorded in
+`docs/04-testing/evidence/W05-R4/README.md`.
+
+Stop the stack when the check is complete:
+
+```bash
+docker compose --profile full down
+```
+
 ## API base path
 
 The browser calls `/api`. ADR-003 fixes this base path, and the Vite dev server
