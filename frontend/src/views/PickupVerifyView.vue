@@ -110,6 +110,7 @@ async function submitHandover() {
 
   try {
     handover.value = await confirmHandover(result.value.pickupCode, 'collected')
+    result.value.parcelSummary.status = 'collected'
     confirmOpen.value = false
     viewState.value = 'completed'
   } catch (error) {
