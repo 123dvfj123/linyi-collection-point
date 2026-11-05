@@ -3,8 +3,8 @@
 | Item | Detail |
 |---|---|
 | Status | Active (aligned with the router, issue #82) |
-| Version | v1.3 |
-| Revised | 2026-11-03 |
+| Version | v1.4 |
+| Revised | 2026-11-05 |
 | Task | T-30-04 |
 | Owners | R4 Frontend Lead, R5 Frontend Developer |
 | Assumption | the frontend workstream has two students; R4 owns architecture and R5 implements pages under that structure. |
@@ -31,10 +31,10 @@ one file, change the other.
 | P0 | `/my-parcels` | `MyParcelListView.vue` | Resident | View own parcels, status and pickup code | R5 | placeholder |
 | P0 | `/my-parcels/:id` | `MyParcelDetailView.vue` | Resident | View one parcel and its storage location | R5 | placeholder |
 | P0 | `/parcels` | `ParcelListView.vue` | Staff, Owner, Admin | Search, filter and review parcels | R5 | placeholder |
-| P0 | `/parcels/new` | `ParcelCreateView.vue` | Staff | Register an incoming parcel | R5 | implemented against the real API; with a location it registers and shelves in one request |
+| P0 | `/parcels/new` | `ParcelCreateView.vue` | Staff | Register an incoming parcel | R5 | implemented against the real API; full-stack register verified on 2026-11-05, including location and pickup-code success output |
 | P0 | `/parcels/:id` | `ParcelDetailView.vue` | Staff, Owner, Admin | View parcel status and handling history | R5 | placeholder |
-| P0 | `/locations` | `LocationBoardView.vue` | Staff, Owner, Admin | View and manage storage locations | R4 | implemented against the real API |
-| P0 | `/pickup` | `PickupVerifyView.vue` | Staff | Verify a pickup code and confirm handover | R4 | implemented against the real API |
+| P0 | `/locations` | `LocationBoardView.vue` | Staff, Owner, Admin | View and manage storage locations | R4 | implemented; full-stack registration was verified to mark `DEMO-A-01-3` occupied before pickup |
+| P0 | `/pickup` | `PickupVerifyView.vue` | Staff | Verify a pickup code and confirm handover | R4 | implemented; full-stack verify and idempotent handover verified on 2026-11-05 |
 | P1 | `/exceptions` | `ExceptionListView.vue` | Staff, Owner, Admin | Register and process abnormal parcels | R5 | placeholder |
 | P1 | `/reports` | `ReportView.vue` | Owner, Admin | View parcel-volume and overdue reports | R4 | placeholder |
 | P1 | `/users` | `UserListView.vue` | Owner, Admin | Manage staff and resident accounts | R5 | placeholder |
@@ -93,3 +93,4 @@ means `admin`, the System Administrator role.
 | v1.1 | Week 3 | Marked `/pickup` implemented with the mock-backed API boundary and recorded the page's verification and handover states | R4 |
 | v1.2 | Week 3 | Marked `/parcels/new` and `/locations` implemented with their mock-backed API boundaries after PR #205 | R4 |
 | v1.3 | Week 5 | Marked intake, locations and pickup as implemented against the real API; recorded that intake with a location registers and shelves in one request | R1 |
+| v1.4 | Week 5 | Recorded the full-stack browser verification for intake, occupied shelf state and pickup handover, with screenshot evidence under `docs/04-testing/evidence/W05-R4/` | R4 |
