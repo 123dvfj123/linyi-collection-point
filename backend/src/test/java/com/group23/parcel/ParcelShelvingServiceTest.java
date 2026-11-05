@@ -44,7 +44,7 @@ class ParcelShelvingServiceTest {
 
     @Test
     void rejectsAParcelThatDoesNotExist() {
-        when(parcelRepository.findById(any())).thenReturn(Optional.empty());
+        when(parcelRepository.findForUpdateById(any())).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> service.shelve(UUID.randomUUID(), request(), STAFF))
                 .isInstanceOf(ParcelNotFoundException.class);
@@ -53,7 +53,7 @@ class ParcelShelvingServiceTest {
     @Test
     void hidesAParcelOwnedByAnotherCollectionPoint() {
         Parcel parcel = Parcel.register(createRequest(), staffAt(OTHER_POINT_ID));
-        when(parcelRepository.findById(any())).thenReturn(Optional.of(parcel));
+        when(parcelRepository.findForUpdateById(any())).thenReturn(Optional.of(parcel));
 
         assertThatThrownBy(() -> service.shelve(UUID.randomUUID(), request(), STAFF))
                 .isInstanceOf(ParcelNotFoundException.class);
@@ -63,7 +63,7 @@ class ParcelShelvingServiceTest {
     void rejectsAParcelThatIsNotRegistered() {
         Parcel parcel = Parcel.register(createRequest(), STAFF);
         parcel.shelveAt(UUID.randomUUID());
-        when(parcelRepository.findById(any())).thenReturn(Optional.of(parcel));
+        when(parcelRepository.findForUpdateById(any())).thenReturn(Optional.of(parcel));
 
         assertThatThrownBy(() -> service.shelve(UUID.randomUUID(), request(), STAFF))
                 .isInstanceOf(ParcelShelvingException.class)
@@ -84,8 +84,9 @@ class ParcelShelvingServiceTest {
     @Test
     void rejectsALocationThatDoesNotExistAtTheCallersCollectionPoint() {
         Parcel parcel = Parcel.register(createRequest(), STAFF);
-        when(parcelRepository.findById(any())).thenReturn(Optional.of(parcel));
-        when(locationRepository.findByIdAndCollectionPointId(any(), any())).thenReturn(Optional.empty());
+        when(parcelRepository.findForUpdateById(any())).thenReturn(Optional.of(parcel));
+        when(locationRepository.findForUpdateByIdAndCollectionPointId(any(), any()))
+                .thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> service.shelve(UUID.randomUUID(), request(), STAFF))
                 .isInstanceOf(LocationNotFoundException.class);
@@ -98,8 +99,9 @@ class ParcelShelvingServiceTest {
         Location location = mock(Location.class);
         UUID locationId = UUID.randomUUID();
         PickupCode pickupCode = mock(PickupCode.class);
-        when(parcelRepository.findById(any())).thenReturn(Optional.of(parcel));
-        when(locationRepository.findByIdAndCollectionPointId(any(), any())).thenReturn(Optional.of(location));
+        when(parcelRepository.findForUpdateById(any())).thenReturn(Optional.of(parcel));
+        when(locationRepository.findForUpdateByIdAndCollectionPointId(any(), any()))
+                .thenReturn(Optional.of(location));
         when(location.getStatus()).thenReturn(LocationStatus.available);
         when(location.getId()).thenReturn(locationId);
         when(pickupCode.getId()).thenReturn(UUID.randomUUID());
