@@ -49,6 +49,7 @@ handover completed.
 | `06-pickup-375-handover.png` | Pickup result fits the 375 x 812 responsive viewport |
 | `07-register-375.png` | Registration form fits the 375 x 812 responsive viewport |
 | `08-register-success-375.png` | A second registration succeeds at 375 x 812 and shows its location and pickup code |
+| `09-console-no-errors.png` | Console is clear after refresh and contains no red errors |
 
 The 375 px screenshots show no horizontal page overflow and keep the primary
 control inside the viewport.
@@ -64,8 +65,8 @@ pickup status   | active
 shelf status    | occupied
 ```
 
-A captured DevTools Console panel with zero errors was not obtained, so it is
-not claimed as passed here.
+The DevTools Console was cleared and the page reloaded; the captured Console
+contains no red errors.
 
 ## Finding
 
