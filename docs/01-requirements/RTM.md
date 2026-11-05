@@ -2,7 +2,7 @@
 
 | Version | v0.6 |
 |---|---|
-| Date | 2026-10-19 |
+| Date | 2026-11-05 |
 | Owner | R8 Wu Kehao |
 | Source | SRS.md (FR: Chapter 3, NFR: Chapter 4) |
 | Related | #77, test-plan.md, test-cases/README.md |
@@ -17,6 +17,7 @@
 | v0.4 | Week 3 | #171: FR-18 links TC-PARC-006, TC-PARC-007 and blocked TC-PARC-008; added GAP 13 for #168; reserved identifier count corrected to 62. | R8 |
 | v0.5 | Week 3 | FR-19 and FR-20 move from Should to Could and cite `CR-023`: the recommendation panel is deferred and the Sprint 2 path is manual selection. `CR-004` is recorded as superseded rather than amended | R8 |
 | v0.6 | Week 5 | Reconciled six unimplemented OpenAPI operations against the backend endpoint audit in #289. Recorded GET /parcels as a Sprint 3 implementation gap under R2's ruling while preserving FR-11 as Must and leaving the API contract unchanged. Clarified affected RTM implementation statuses, documented the CR-023 recommendation deferral, and added GAP 14–19. | R3 |
+
 ## Column definitions
 
 | Column | Meaning |
@@ -28,22 +29,25 @@
 | design artefact | Path to ERD / OpenAPI / UML / ADR / page map; or `scheduled: T-xx-xx` |
 | code module | Frontend or backend module expected to implement it |
 | test case ID | Reserved ID from `test-cases/README.md` |
-| status | `designed` / `implemented` / `tested` |
+| status | `designed` / `implemented` / `tested` / `not implemented` / `deferred` |
 
 > `designed`: covered by a design artefact, no code yet.
 > `implemented`: code exists, tests not necessarily green.
 > `tested`: at least one linked test case passes in CI.
+> `not implemented`: the OpenAPI contract exists, but there is no controller mapping; tracked by a GAP row.
+> `deferred`: intentionally postponed under an approved CR; not a missing implementation.
 
 ## Coverage summary
 
 | Category | Must-have count | Rows in RTM | Coverage |
 |---|:--:|:--:|:--:|
-| FR (Chapter 3) | 32 | 47 (incl. 15 Should/deferred) | 100% of Must |
-| NFR (Chapter 4) | 13 | 14 (incl. NFR-3 vacant) | 100% of Must |
-| **Total** | **45** | **61** | **100% of Must** |
+| FR (Chapter 3) | 32 | 47 (incl. 15 Should/deferred) | 100% of Must rows mapped |
+| NFR (Chapter 4) | 13 | 14 (incl. NFR-3 vacant) | 100% of Must rows mapped |
+| **Total** | **45** | **61** | **100% of Must rows mapped** |
 
 > FR-9 and FR-10 are `Should not have (deferred — CR-005)`; listed for completeness but not counted as Must.
 > NFR-3 is vacant after renumbering; see Appendix.
+> "Coverage" here means RTM row coverage, not implementation or test coverage. FR-11 is Must but not implemented; see GAP 14.
 
 ## Traceability matrix
 
@@ -52,7 +56,7 @@
 | FR-1 | A registered resident signs in via the web app | Must (proposed) | SRS IS-1; frontend-page-map /login | `ERD.md` `User` (username, passwordHash, role, active); `docs/02-design/uml/class-parcel-and-location.puml` (`User` class + `UserRole` enum); `openapi.yaml` `POST /auth/login`; `docs/02-design/uml/sequence-login-role-guard.puml` (full login sequence: verify password hash → 200 {token, roles}); `frontend-page-map.md` `/login` | `backend/.../auth/`; `frontend/src/pages/Login/` | AuthSecurityIntegrationTest | implemented |
 | FR-2 | A resident sees only their own parcels in the list | Must (proposed) | R5: parcel status 3/11; CR-013; SRS IS-6 | `ERD.md` `Parcel.registeredById` / `recipientPhone`; `openapi.yaml` `GET /my-parcels`; `frontend-page-map.md` `/my-parcels` | `backend/.../parcel/`; `frontend/src/pages/MyParcels/` | TC-RES-001 | designed (GET /my-parcels not implemented; GAP 16) |
 | FR-3 | A resident opens a detail view of their own parcel | Must (proposed) | R5: status 3/11; frontend-page-map `/my-parcels/:id` | `ERD.md` `Parcel`; `openapi.yaml` `GET /my-parcels/{id}`; `frontend-page-map.md` `/my-parcels/:id` | `backend/.../parcel/`; `frontend/src/pages/MyParcels/` | TC-RES-002 | designed (GET /my-parcels/{id} not implemented; GAP 17) |
-| FR-4 | Each parcel shows its current approved lifecycle status to its resident | Must (proposed) | R5: status 3/11; CR-006 | `ERD.md` `Parcel.status` enum; `docs/02-design/uml/class-parcel-and-location.puml` (`ParcelStatus` enum); `openapi.yaml` `Parcel.status` enum; `docs/02-design/uml/state-parcel-lifecycle.puml` (full transitions: `[*] → Registered → Shelved → Collected → [*]`); `design-system.md` §5.3 status mapping; `frontend-page-map.md` `/my-parcels` | `backend/.../parcel/`; `frontend/src/pages/MyParcels/` | TC-RES-003 | designed (status-update operation not implemented; GAP 15; resident list GAP 16) |
+| FR-4 | Each parcel shows its current approved lifecycle status to its resident | Must (proposed) | R5: status 3/11; CR-006 | `ERD.md` `Parcel.status` enum; `docs/02-design/uml/class-parcel-and-location.puml` (`ParcelStatus` enum); `openapi.yaml` `Parcel.status` enum; `docs/02-design/uml/state-parcel-lifecycle.puml` (full transitions: `[*] → Registered → Shelved → Collected → [*]`); `design-system.md` §5.3 status mapping; `frontend-page-map.md` `/my-parcels` | `backend/.../parcel/`; `frontend/src/pages/MyParcels/` | TC-RES-003 | designed (resident list GAP 16; resident detail GAP 17) |
 | FR-5 | A shelved parcel's storage location is shown to its resident | Must (proposed) | R3: location-related problems 5/11; R5: location 2/11 | `ERD.md` `Parcel.locationId` → `Location.code`; `docs/02-design/uml/class-parcel-and-location.puml` (`Location "1" -- "0..1" Parcel : holds`); `openapi.yaml` `Parcel.locationId`; `frontend-page-map.md` `/my-parcels/:id` | `backend/.../parcel/`; `frontend/src/pages/MyParcels/` | TC-RES-004 | designed (resident detail operation not implemented; GAP 17) |
 | FR-6 | Shelving a parcel creates one in-system arrival notification | Must (proposed) | R3: late notification 4/11; R4: 9/11 within 1 hour; test-plan §6 | `scheduled: T-43-01` (Notification entity not yet in ERD; no notification endpoint in openapi.yaml); `docs/02-design/uml/activity-parcel-intake.puml` (fork branch "Notify the resident"); `test-plan.md` §6 | `backend/.../parcel/`; `backend/.../notification/` (planned) | TC-NOTI-001 | designed |
 | FR-7 | A resident views their own in-system arrival notifications | Must (proposed) | R5: notification 4/11; SRS IS-5; OS-6 | `scheduled: T-43-01` (Notification entity not yet in ERD; no notification route in frontend-page-map.md); `test-plan.md` §6 | `backend/.../notification/` (planned); `frontend/src/pages/MyParcels/` | TC-NOTI-002 | designed |
@@ -60,9 +64,9 @@
 | FR-9 | [Future work] A resident issues a time-limited delegated collection authorization | Should not have (deferred — CR-005) | R5: delegated code 0/11; CR-005 | — (deferred, CR-005) | — (deferred) | — (deferred) | — |
 | FR-10 | [Future work] A resident revokes an unused delegated collection authorization | Should not have (deferred — CR-005) | R5: delegated code 0/11; CR-005 | — (deferred, CR-005) | — (deferred) | — (deferred) | — |
 | FR-11 | Staff view parcels at their assigned collection point | Must (proposed) | SRS §2.3; frontend-page-map `/parcels`; A5 (3/4), directional | `ERD.md` `Parcel` (collection point scoping gap — issue #127); `openapi.yaml` `GET /parcels`; `frontend-page-map.md` `/parcels`; **GAP 14:** endpoint has no controller implementation; deferred to Sprint 3 under #289 | `backend/.../parcel/`; `frontend/src/pages/Parcels/` | TC-PARC-004 | not implemented (Sprint 3 gap — #289) |
-| FR-12 | A staff member registers a single arriving parcel | Must (proposed) | S2 (3/7 spreadsheets, 2/7 software); SRS IS-2 | `ERD.md` `Parcel`; `openapi.yaml` `POST /parcels`; `docs/02-design/uml/state-parcel-lifecycle.puml` (`[*] --> Registered : register parcel` — creation starting point); `docs/02-design/uml/sequence-staff-intake.puml` (`POST /parcels` → 201 Parcel); `docs/02-design/uml/activity-parcel-intake.puml` ("Scan or type the waybill" → `POST /parcels`); `docs/02-design/uml/usecase-counter-work.puml` (`UC_Register` "Register incoming parcel", Staff actor); `frontend-page-map.md` `/parcels/new` | `backend/.../parcel/`; `frontend/src/pages/Parcels/` | TC-PARC-001 | designed |
+| FR-12 | A staff member registers a single arriving parcel | Must (proposed) | S2 (3/7 spreadsheets, 2/7 software); SRS IS-2 | `ERD.md` `Parcel`; `openapi.yaml` `POST /parcels`; `docs/02-design/uml/state-parcel-lifecycle.puml` (`[*] --> Registered : register parcel` — creation starting point); `docs/02-design/uml/sequence-staff-intake.puml` (`POST /parcels` → 201 Parcel); `docs/02-design/uml/activity-parcel-intake.puml` ("Scan or type the waybill" → `POST /parcels`); `docs/02-design/uml/usecase-counter-work.puml` (`UC_Register` "Register incoming parcel", Staff actor); `frontend-page-map.md` `/parcels/new` | `backend/.../parcel/`; `frontend/src/pages/Parcels/` | TC-PARC-001 | implemented (ParcelRegistrationIntegrationTest; CI 41977146617) |
 | FR-13 | Staff view a parcel's handling history | Must (proposed) | S4 (3/7 handover confirmation); CR-007; frontend-page-map `/parcels/:id` | `ERD.md` `AuditLog` (targetType/targetId); `Handover`; `frontend-page-map.md` `/parcels/:id` (description includes handling history); **GAP:** no history endpoint in openapi.yaml | `backend/.../parcel/`; `backend/.../audit/`; `frontend/src/pages/Parcels/` | TC-PARC-005 | designed |
-| FR-14 | Staff record a parcel's storage location when shelving | Must (proposed) | SRS IS-3; CR-006; frontend-page-map `/locations` | `ERD.md` `Parcel.locationId`; `docs/02-design/uml/class-parcel-and-location.puml` (`Location holds Parcel`); `openapi.yaml` `ParcelCreateRequest.locationId`; `docs/02-design/uml/state-parcel-lifecycle.puml` (`Registered --> Shelved : assign storage location` — the state machine requires shelving to carry a storage location); `docs/02-design/uml/state-storage-location.puml` (`Reserved --> Occupied : shelve parcel` — shelving transition); `docs/02-design/uml/sequence-staff-intake.puml` (`POST /parcels` body carries `locationId` — create-with-shelving path is complete); `docs/02-design/uml/activity-parcel-intake.puml` (fork branch "Record the location"); `docs/02-design/uml/usecase-counter-work.puml` (`UC_Shelve` "Shelve parcel", `..> UC_Code : <<include>>` — shelve transaction includes issuing a pickup code); `frontend-page-map.md` `/locations`; **GAP:** issue #98 (`PATCH /parcels/{id}/status` body has no `locationId`; the state machine's transition precondition cannot be satisfied through that path) | `backend/.../parcel/`; `backend/.../location/`; `frontend/src/pages/Parcels/`; `frontend/src/pages/Locations/` | TC-LOC-001 | designed |
+| FR-14 | Staff record a parcel's storage location when shelving | Must (proposed) | SRS IS-3; CR-006; frontend-page-map `/locations` | `ERD.md` `Parcel.locationId`; `docs/02-design/uml/class-parcel-and-location.puml` (`Location holds Parcel`); `openapi.yaml` `ParcelCreateRequest.locationId`; `docs/02-design/uml/state-parcel-lifecycle.puml` (`Registered --> Shelved : assign storage location` — the state machine requires shelving to carry a storage location); `docs/02-design/uml/state-storage-location.puml` (`Reserved --> Occupied : shelve parcel` — shelving transition); `docs/02-design/uml/sequence-staff-intake.puml` (`POST /parcels` body carries `locationId` — create-with-shelving path is complete); `docs/02-design/uml/activity-parcel-intake.puml` (fork branch "Record the location"); `docs/02-design/uml/usecase-counter-work.puml` (`UC_Shelve` "Shelve parcel", `..> UC_Code : <<include>>` — shelve transaction includes issuing a pickup code); `frontend-page-map.md` `/locations`; **GAP:** issue #98 (`PATCH /parcels/{id}/status` body has no `locationId`; the state machine's transition precondition cannot be satisfied through that path) | `backend/.../parcel/`; `backend/.../location/`; `frontend/src/pages/Parcels/`; `frontend/src/pages/Locations/` | TC-LOC-001 | implemented (ParcelRegistrationIntegrationTest.registersAndShelvesWithPickupCodeInOneRequest; CI 41977146617) |
 | FR-15 | Storage location availability is displayed to staff | Must (proposed) | S5 (4/7 preferred manual/no suggestion); frontend-page-map `/locations` | `ERD.md` `Location.status` enum; `openapi.yaml` `GET /locations`; `docs/02-design/uml/state-storage-location.puml` (full transitions: `available → reserved → occupied`, plus `disabled` and `enable`; note "Disabled locations are excluded from recommendations"); `design-system.md` §10 `LocationGrid`; `frontend-page-map.md` `/locations` | `backend/.../location/`; `frontend/src/pages/Locations/` | TC-LOC-002 | designed |
 | FR-16 | Staff manually select a storage location | Must (proposed) | S5 (4/7 preferred manual/no suggestion); CR-004 | `ERD.md` `Parcel.locationId` / `Location.parcelId`; `docs/02-design/uml/class-parcel-and-location.puml` (`Location holds Parcel`); `openapi.yaml` `POST /locations/recommend` (description explicitly says manual assign); `docs/02-design/uml/sequence-staff-intake.puml` ("accept the suggestion or choose another location"); `docs/02-design/uml/activity-parcel-intake.puml` ("A suitable location is free?" → no → "Choose a location manually"); `docs/02-design/uml/state-storage-location.puml` (`Available --> Reserved : reserve for parcel` — **GAP:** no reserve/cancel endpoint; the `Reserved` state has no entry point in the contract, same class as issue #98); `frontend-page-map.md` `/locations`; **GAP:** no standalone shelve endpoint, issue #98 | `backend/.../location/`; `frontend/src/pages/Locations/` | TC-LOC-003 | designed (generic status-update operation not implemented; GAP 15) |
 | FR-17 | A duplicate waybill number is rejected | Must (proposed) | `test-plan.md` §6 (FR-17); SRS IS-2 | `ERD.md` `Parcel.trackingNo` unique constraint; `openapi.yaml` `POST /parcels` 409 `DUPLICATE_TRACKING_NO`; `docs/02-design/uml/sequence-staff-intake.puml` (`find parcel by trackingNo` → duplicate → 409 Conflict → "Parcel already registered"); `docs/02-design/uml/activity-parcel-intake.puml` ("Duplicate waybill?" → yes → "Reject and show the existing parcel") | `backend/.../parcel/` | TC-PARC-002 | designed |
@@ -174,6 +178,7 @@ All sixty-two reserved identifiers carry a test level. TC-PARC-008 is reserved b
 | 17 | `GET /my-parcels/{id}` is specified in OpenAPI but has no resident-scoped parcel detail controller implementation. | FR-3, FR-5 | R6 | Endpoint audit — #289 |
 | 18 | `GET /my-parcels/{id}/pickup-code` is specified in OpenAPI but has no controller implementation for authenticated resident pickup-code retrieval. | FR-8 | R6 | Endpoint audit — #289 |
 | 19 | `POST /locations/recommend` has no controller implementation. The recommendation feature is intentionally deferred under CR-023, and FR-19 and FR-20 remain Could rather than Must. | FR-19, FR-20 | R2 / R6 | Deferred — CR-023 |
+
 ## Appendix: NFR numbering reference
 
 | Requirement | Correct ID |
