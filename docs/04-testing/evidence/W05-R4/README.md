@@ -48,11 +48,24 @@ handover completed.
 | `05-handover-recorded.png` | Confirmation reports a recorded handover |
 | `06-pickup-375-handover.png` | Pickup result fits the 375 x 812 responsive viewport |
 | `07-register-375.png` | Registration form fits the 375 x 812 responsive viewport |
+| `08-register-success-375.png` | A second registration succeeds at 375 x 812 and shows its location and pickup code |
 
 The 375 px screenshots show no horizontal page overflow and keep the primary
-control inside the viewport. A 375 px *registration-success* screenshot and a
-captured Console panel with zero errors were not obtained, so they are not
-claimed as passed here.
+control inside the viewport.
+
+The responsive registration re-run used:
+
+```text
+tracking number | SF202611052121
+pickup code     | 87133264
+shelf           | DEMO-A-01-3
+parcel status   | shelved
+pickup status   | active
+shelf status    | occupied
+```
+
+A captured DevTools Console panel with zero errors was not obtained, so it is
+not claimed as passed here.
 
 ## Finding
 
