@@ -5,7 +5,7 @@
 | Task | T-20-14 |
 | Owner | R1 |
 | Status | Chapters drafted and fact-checked; figures and final PDF pending |
-| Version | v0.6 |
+| Version | v0.7 |
 | Deadline | 2026-12-08 |
 | Limit | Not more than 1000 words, source code excluded |
 | Submitted by | the leader only, as a PDF through the OLE assignment link |
@@ -30,9 +30,9 @@ The 12 per cent evaluates whether the team used software engineering deliberatel
 
 ## Word budget
 
-The nine chapters now total **930 words** as measured from the Markdown. Add
+The nine chapters now total **933 words** as measured from the Markdown. Add
 about 15 words for the title block and repository link and 30 for three figure
-captions, and the target is about **975 words**, inside the 1000-word limit with
+captions, and the target is about **978 words**, inside the 1000-word limit with
 a small safety margin. The table below records the current counts.
 
 | Section | Words | Rubric concept | Evidence to cite |
@@ -44,11 +44,11 @@ a small safety margin. The table below records the current counts.
 | 4. System modeling | 88 | system modeling | the twelve .puml sources; uml/README.md |
 | 5. Architectural and database design | 100 | architectural design | ADR-002 to ADR-005; ERD.md; backend-state-machines.md |
 | 6. Design and implementation | 108 | design and implementation | openapi.yaml; ADR-002/003; design-system.md; tokens.css |
-| 7. Testing and validation | 109 | software testing | test-plan.md; 87 backend test methods and 68 frontend tests; RTM.md |
+| 7. Testing and validation | 112 | software testing | test-plan.md; 90 backend test methods and 68 frontend tests; RTM.md |
 | 8. Software evolution | 116 | software evolution | change-log.md; risk-register.md; the cases below |
 | 9. Conclusion and reflection | 60 | - | - |
-| **Total (chapters)** | **930** | | |
-| **With title/link and captions** | **~975** | | |
+| **Total (chapters)** | **933** | | |
+| **With title/link and captions** | **~978** | | |
 
 ## Section notes
 
@@ -68,7 +68,7 @@ Four ADRs detail the chosen alternatives and rejected options. The parcel status
 The frontend uses Vue 3, with the design system expressed as CSS custom properties to prevent raw colors or sizes in components. The backend uses Java 17 and Spring Boot 3.3. The contract was frozen before any code, so the frontend could be built against it in parallel; by week 3 the backend implements login, JWT, four-role access control, the audit log and the Flyway baseline.
 
 ### 7. Testing and validation
-The test plan prioritizes handover idempotency under concurrency, single location per parcel, duplicate waybill rejection, and single-use pickup codes. Continuous verification runs on every pull request: ESLint, 68 frontend tests, 87 backend test methods, Flyway and a Compose smoke test that signs in as a seeded account.
+The test plan prioritizes handover idempotency under concurrency, single location per parcel, duplicate waybill rejection, and single-use pickup codes. Continuous verification runs on every pull request: ESLint, 68 frontend tests, 90 backend test methods, Flyway and a Compose smoke test that signs in as a seeded account.
 
 ### 8. Software evolution
 Five cases, each with a decision behind it:
@@ -99,7 +99,7 @@ The team would freeze requirements before design and write the traceability matr
 | 4. System modeling | Drafted (88 words) | `chapters/04-modeling.md` ([PR #258](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/258)) |
 | 5. Architectural and database design | Drafted (100 words) | `chapters/05-architecture.md` |
 | 6. Design and implementation | Drafted (108 words) | `chapters/06-implementation.md` ([PR #261](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/261)) |
-| 7. Testing and validation | Drafted (109 words) | `chapters/07-testing.md` |
+| 7. Testing and validation | Drafted (112 words) | `chapters/07-testing.md` |
 | 8. Software evolution | Drafted (116 words) | `chapters/08-evolution.md` |
 | 9. Conclusion and reflection | Drafted (60 words) | `chapters/09-conclusion.md` |
 
@@ -112,3 +112,4 @@ The team would freeze requirements before design and write the traceability matr
 | v0.4 | Week 3 | Corrected the stale runnable-state note now that the backend and full Compose stack are delivered. Replaced the obsolete missing-artefact table, whose issues are closed, with the current drafting status; found that both drafted chapters still need trimming to their budget | R4 |
 | v0.5 | Week 4 | Added chapters 5, 7, 8 and 9, and recorded every chapter's actual word count against its budget. Corrected chapters 1 and 2, which the status table still listed as needing reduction when both were already inside their allocation. The nine chapters now total 947 words | R1 |
 | v0.6 | Week 5 | Fact-checked all nine chapters: corrected the questionnaire count from two to four, the database foreign-key count from nineteen to eighteen, the backend test count from 74 to 87 methods, the coverage claim from current to historical, and the CR-013 wording from "added endpoints" to "added to the contract, not implemented". Added the hybrid process rationale and the fixture-blind-spot testing insight. The chapters now total 929 words; figures and final PDF are still pending | R1 |
+| v0.7 | Week 5 | Updated the test count to 90 methods / 35 Testcontainers tests after PR #299; chapter 7 is 112 words and the chapters total 933, about 978 with title and captions | R1 |

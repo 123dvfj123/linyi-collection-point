@@ -24,6 +24,6 @@ The sixth unmatched OpenAPI operation, POST /locations/recommend, is deferred un
 
 Only the shelving service passes the issued credential to `ParcelResponse.from(parcel, code)`. Registration with a location delegates to that service. The single-argument factory supplies null, including for the parcel summary in pickup verification. The verification envelope separately echoes the code the staff member submitted. Staff and resident parcel list/detail handlers are absent on this revision, so their payloads cannot be verified at runtime. The security matcher and `AuthSecurityIntegrationTest` both include staff PATCH access to the parcel location route.
 
-The [develop CI run](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/actions/runs/41663749113) recorded 87 passing tests, including the named registration transaction, ordered migrations, V4 used-code preservation and the parcel/code reference checks.
+The [develop CI run](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/actions/runs/41977146617) recorded 90 passing tests, including the named registration transaction, ordered migrations, V4 used-code preservation, the parcel/code reference checks and the three concurrency cases added by PR #299.
 
-Local Maven verification on 4 November also passed all 87 tests with zero failures, errors or skips, including 32 test cases in seven Testcontainers classes.
+Local Maven verification on 4 November passed 87 tests; after PR #299, the suite is 90 tests with 35 test cases in seven Testcontainers classes.

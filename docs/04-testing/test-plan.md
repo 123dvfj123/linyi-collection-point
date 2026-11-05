@@ -8,7 +8,7 @@
 |---|---|
 | Task | T-50-19 |
 | Owner | R8 |
-| Version | v0.8 |
+| Version | v0.9 |
 | Status | Active, extended in Sprint 3 |
 
 ## 1. Purpose and scope
@@ -47,17 +47,18 @@ integration and payment, because both are outside the system boundary.
 These come from the non-functional requirements. They are targets, not
 aspirations: the build reports them, and a shortfall is recorded as a defect.
 
-**Coverage measurement (post-merge).** On `develop` `b6011b5`, CI run
-`41658317363` measured **88.78%** line coverage (807 of 909 lines) and **64.64%**
-branch coverage (170 of 263 branches). The run included the pickup, location and
-migration tests, and 87 backend tests passed with 0 skipped. The POM generates a
-JaCoCo report but does **not** run `jacoco:check`, so 60% is a target, not an
-enforced gate. Full results are in `reports/Coverage-Report2.md`.
+**Coverage measurement (post-merge).** On `develop` `b336754`, CI run
+`41977146617` measured **88.78%** line coverage (807 of 909 lines) and **64.64%**
+branch coverage (170 of 263 branches). The run included 90 backend tests with
+0 skipped, 35 Testcontainers tests in seven classes, and the new concurrency
+cases in `ParcelShelvingIntegrationTest`. The POM generates a JaCoCo report but
+does **not** run `jacoco:check`, so 60% is a target, not an enforced gate. Full
+results are in `reports/Coverage-Report3.md`.
 
 | Area | Target | Current Status |
 |---|---|---|
-| Line coverage overall | At least 60 per cent | **88.78%** (post-merge, `b6011b5`) |
-| Branch coverage overall | (Not originally specified) | **64.64%** (post-merge, `b6011b5`) |
+| Line coverage overall | At least 60 per cent | **88.78%** (post-merge, `b336754`) |
+| Branch coverage overall | (Not originally specified) | **64.64%** (post-merge, `b336754`) |
 | Handover service | At least 80 per cent | Implemented; covered by `PickupHandoverIntegrationTest` |
 | Storage location recommender | At least 80 per cent | Deferred under `CR-023` |
 | Overdue fee engine | At least 80 per cent | Not yet implemented |
@@ -168,10 +169,10 @@ Progress is reported in `docs/04-testing/reports/`, in three forms:
 
 2. A coverage report. JaCoCo is bound to `verify` and writes `jacoco.xml` and an HTML rendering
    to `backend/target/site/jacoco/`, which the `backend` CI job uploads as the `jacoco-report`
-   artefact. The post-merge run `41658317363` on `b6011b5` measured **88.78% line** and
-   **64.64% branch** coverage with 87 tests and 0 skipped. The 60% target is not a CI gate because
+   artefact. The post-merge run `41977146617` on `b336754` measured **88.78% line** and
+   **64.64% branch** coverage with 90 tests and 0 skipped. The 60% target is not a CI gate because
    the POM has no `jacoco:check`; the detailed breakdown is in
-   `docs/04-testing/reports/Coverage-Report2.md`.
+   `docs/04-testing/reports/Coverage-Report3.md`.
 
 3. A test report at the end of Sprint 4, containing the results, the defects
    found and closed, the coverage figures, and an insight and recommendation
@@ -197,3 +198,4 @@ Progress is reported in `docs/04-testing/reports/`, in three forms:
 | v0.6 | Week 4 | Updated the coverage figures in sections 3 and 11 to reflect the inclusion of the `parcel` module (#250). Total denominator increased to 547 lines, overall line coverage adjusted to 85.92%. | R8 |
 | v0.7 | Week 5 | Corrected the coverage claim: the 85.92/87.14 figures are historical and exclude pickup; the POM has no `jacoco:check`, so 60% is a target rather than a gate. Marked handover and location as implemented with coverage pending. | R1 |
 | v0.8 | Week 5 | Recorded the post-merge run `41658317363`: 87 tests, 0 skipped, 88.78% line and 64.64% branch coverage; added `Coverage-Report2.md`. | R1 |
+| v0.9 | Week 5 | Recorded the 90-test run `41977146617` on `b336754`: 35 Testcontainers tests in seven classes, coverage unchanged at 88.78% line / 64.64% branch; added `Coverage-Report3.md`. | R1 |

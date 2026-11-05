@@ -1,5 +1,8 @@
 # Test Coverage Report — post-merge
 
+> **Historical:** this report covers the 87-test baseline. The current 90-test
+> baseline is in `Coverage-Report3.md`.
+
 | Field | Detail |
 |---|---|
 | Date | 2026-11-03 |

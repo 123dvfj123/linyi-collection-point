@@ -8,7 +8,7 @@
 |---|---|
 | Task | T-00-06 |
 | Owner | R1, with process sections maintained by R2 |
-| Version | v1.23 |
+| Version | v1.24 |
 | Status | Active |
 
 ## 1. What this log records
@@ -141,3 +141,4 @@ it shows the option was weighed.
 | v1.21 | 2026-11-02 | Approved CR-032 and CR-033; finalised the CI branch-policy and protocol error-code updates for the recorded design and process decisions | R2 |
 | v1.22 | Week 5 | Added CR-034, CR-035 and CR-036 for the Week 4 reachability defects: registration with a location now shelves and issues a pickup code, the production frontend proxies `/api`, and the location endpoint is authorised. All three are implemented on `fix/p0-reachability` and await R2/R6/R10 review | R1 |
 | v1.23 | Week 5 | Marked CR-034, CR-035 and CR-036 Implemented after PR #283 and #294 merged to `develop`; evidence is develop CI `41658317363` (87 tests, 0 skipped) and V4 `5/5` | R1 |
+| v1.24 | Week 5 | Recorded the 90-test baseline after PR #299; CR-034/035/036 remain Implemented at their merge evidence, and the current suite is 90 tests with 35 Testcontainers tests | R1 |
