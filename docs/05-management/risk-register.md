@@ -8,7 +8,7 @@
 |---|---|
 | Task | T-00-06 |
 | Owner | R1 |
-| Version | v1.10 |
+| Version | v1.11 |
 | Status | Active, reviewed at the end of every sprint |
 
 ## How to read this register
@@ -48,7 +48,7 @@ Likelihood and impact are rated high, medium or low. Status is one of
 | RSK-06 | The frontend has no code at all, only folders, so Sprint 2 cannot start on the frontend | Closed in the week 3 close-out review. The folder-only state no longer holds: the Vue 3 skeleton with the router, the store and the API wrapper landed in PR #97. Owner R4; the trigger was no runnable frontend by the end of Wednesday in week 3 |
 | RSK-15 | Diagram sources are committed as exported images rather than text, so changes cannot be reviewed | Closed in the week 3 close-out review. The working agreement requires PlantUML, draw.io or Mermaid sources, and exported images go only to the report figures folder. Owner R4; the trigger was a pull request adding a `.png` where a `.puml` is expected |
 | RSK-14 | The requirements traceability matrix does not exist, so no requirement can be shown to have a test | Closed on 19 October. `docs/01-requirements/RTM.md` maps all 47 functional requirements and all 14 non-functional requirements to a design artefact, a code module and a reserved test case identifier, and `test-plan.md` section 6 and SRS chapter 4 agree on every identifier they share. Landed in PR #155 and corrected in PR #161. Owner R8; the trigger was a requirement quoted in review with no test reference |
-| RSK-11 | Java and Spring Boot are new to part of the team, so Sprint 2 falls behind while people learn the framework | Closed in the week 3 close-out review. **The trigger did not fire.** It was set as “by the end of week 3 the application does not start”, and on `develop` it starts: the `docker-smoke` job runs `docker compose --profile full up --wait` on every pull request, asserts `/api/health`, signs in as a seeded account through `POST /api/auth/login`, checks that the response carries `"roles":["staff"]`, and checks that a wrong password returns `401`; the `backend` job compiles and runs the backend suite (87 test methods, 27 of them Testcontainers integration tests). Both backend members did learn the framework in week 3 — the skeleton, Flyway, auth and the audit log all landed — so the response was followed as written. Recorded rather than deleted, because a risk whose trigger did not fire is evidence about the response that was chosen |
+| RSK-11 | Java and Spring Boot are new to part of the team, so Sprint 2 falls behind while people learn the framework | Closed in the week 3 close-out review. **The trigger did not fire.** It was set as “by the end of week 3 the application does not start”, and on `develop` it starts: the `docker-smoke` job runs `docker compose --profile full up --wait` on every pull request, asserts `/api/health`, signs in as a seeded account through `POST /api/auth/login`, checks that the response carries `"roles":["staff"]`, and checks that a wrong password returns `401`; the `backend` job compiles and runs the backend suite (90 test methods, 35 of them Testcontainers integration tests). Both backend members did learn the framework in week 3 — the skeleton, Flyway, auth and the audit log all landed — so the response was followed as written. Recorded rather than deleted, because a risk whose trigger did not fire is evidence about the response that was chosen |
 
 ## Review record
 
@@ -75,3 +75,4 @@ Likelihood and impact are rated high, medium or low. Status is one of
 | v1.8 | Week 5 | Updated RSK-16 with the PR #294 fail-on-skip control and RSK-18 with the 11/14–11/15 review run dates and R10's 11/04 Compose slot | R1 |
 | v1.9 | Week 5 | Rechecked RSK-12 after merge. The pre-push inventory found three remote heads and no merged working branch eligible for deletion. | R10 |
 | v1.10 | Week 5 | Distinguished the 4 November inventory from the later reuse of the merged branch name for W05 evidence. | R10 |
+| v1.11 | Week 5 | Updated RSK-11 to 90 backend tests and 35 Testcontainers tests after PR #299. | R1 |
