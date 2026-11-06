@@ -91,7 +91,7 @@ async function switchToBatch(view) {
 }
 
 beforeEach(() => {
-  vi.clearAllMocks()
+  vi.resetAllMocks()
   fetchLocations.mockResolvedValue(locations)
   registerParcel.mockResolvedValue(createdParcel)
   registerParcelBatch.mockResolvedValue({
@@ -126,6 +126,13 @@ describe('ParcelCreateView', () => {
   })
 
   it('registers a valid single parcel', async () => {
+    fetchLocations
+      .mockResolvedValueOnce(locations)
+      .mockResolvedValueOnce(locations.map((location) => (
+        location.id === createdParcel.locationId
+          ? { ...location, status: 'occupied', parcelId: createdParcel.id }
+          : location
+      )))
     const view = await mountView()
     await fillSingle(view)
 
@@ -142,6 +149,11 @@ describe('ParcelCreateView', () => {
     })
     expect(view.text()).toContain('SF1234567890 registered and shelved at C-01-1')
     expect(view.text()).toContain('Pickup code: 87654321')
+    expect(
+      view.findAll('select[name="locationId"] option')
+        .map((option) => option.text()),
+    ).toEqual(['Select an available location'])
+    expect(fetchLocations).toHaveBeenCalledTimes(2)
   })
 
   it('shows a duplicate waybill as a field-level error', async () => {
