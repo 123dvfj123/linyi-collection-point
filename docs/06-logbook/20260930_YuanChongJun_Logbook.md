@@ -51,6 +51,86 @@ records a meeting rather than tool work carries the meeting time itself.
 | W03 | 2026-10-25 | T-00-06 / T-00-05 | Fast-forwarded `develop` from `6f2c341` to `c4a9cfa`, reviewed the 23-25 October changes, corrected the implemented status of `/parcels/new` and `/locations`, reconciled all `#170` outcomes, and requested R6's final decision on finding 11. | 16:04-16:15 | 0.18 | done | [Issue #170](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/issues/170), `docs/02-design/frontend-page-map.md`, `docs/01-requirements/elicitation/20261019_requirement-confirmation.md` | R6 | The issue still said that no finding was fixed, although findings 1 to 10 were delivered and CR-023 to CR-025 had resolved the three scope questions. The issue now records those outcomes and remains open only for the R6 decision on multi-parcel collection. | The local branch and remote `develop` were confirmed at the same commit before this documentation update. |
 | W04 | 2026-10-31 | T-50-11 / T-30-04 | Completed the 90-word report chapter 6, then audited the frontend errors against the real backend. Aligned the OpenAPI error vocabulary, defined the pickup `404` and `409` responses, recorded the idempotent confirmation rule and opened PR #261 and PR #262. | 20:00-21:05 | 1.08 | done | [PR #261](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/261), [PR #262](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/262) | R1, R6 | The handoff and mock assumptions were stale. The latest `develop` already had real parcel and location APIs, and the error audit found four backend codes missing from the approved enum plus a contradiction between issue #238 and NFR-4. I verified the current code, corrected the contract and documented the change in the change log. | Time is the observed conversation working window from first drafting through the final push, extended by the requested 30-minute wrap-up to 21:05. R1 later renumbered the proposed CR-032 to CR-033 because another merge had taken the number. |
 | W05 | 2026-11-05 | T-42-09 / T-42-05 / T-00-05 | Installed and started Docker Desktop, synced and verified the latest `develop`, and ran the full Compose stack through register → verify → confirm. Recorded desktop, 375 x 812 and Console evidence, verified parcel, pickup-code, shelf and handover state in PostgreSQL, fixed the stale post-handover status in PR #303, and published the page-map/README evidence in PR #304. Responded to #287 and supported the resident-path go/no-go. | 21:00-22:45 | 1.75 | done | [PR #303](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/303), [PR #304](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/304), [Issue #287](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/issues/287), `docs/04-testing/evidence/W05-R4/` | R1, R5, R6, R8 | Docker and its CLI were initially absent, so the real-stack check could not start. I installed Docker Desktop with user approval, fixed the temporary credential-helper PATH, started the four-service stack, and used manually captured evidence after automated browser control could not verify the external browser URL. The run exposed that the handover view kept `shelved` after the backend stored `collected`; PR #303 synchronises the display and adds a regression test. | Time is the observed conversation working window through the final evidence update, extended by the requested 30-minute wrap-up to 22:45. Two registrations were used: `SF202611052120` / pickup `92338129` for the full desktop flow and `SF202611052121` / pickup `87133264` for the 375 px flow. |
+| W05 | 2026-11-07 | T-42-09 / T-00-05 | Completed the cold-cache frontend check with `npm ci`, an absent `.vite` cache, lint, 68/68 tests and production build. Migrated binary screenshots to GitHub issue attachments, opened PR #308 to remove them from the source repository, linked the evidence from #291, and added the mandatory meeting, report/presentation and reflection sections to this logbook. | 22:15-23:15 | 1.0 | done | [Cold-cache evidence #291](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/issues/291#issuecomment-6708382603), [screenshot attachments #287](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/issues/287#issuecomment-6708380334), [PR #308](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/308) | R1, R8 | The updated task sheet requires a cold-cache run and forbids committing screenshots, while the previous evidence PR had stored PNGs in Git. I re-ran the frontend from a clean dependency install, verified the cache was absent, uploaded the binary evidence as issue attachments, and opened a text-only cleanup PR. The logbook also lacked the required meeting, contribution and reflection sections. | Time is the observed conversation working window through the final logbook/evidence update, extended by the requested 30-minute wrap-up to 23:15. `npm ci` reported 10 dependency advisories; no automatic audit fix was applied because this task did not change dependencies. |
+
+## Meeting log
+
+### 2026-10-02 — Topic selection and role allocation (20:00–21:30)
+
+- **Agenda:** Choose the project topic, allocate R1–R10, and agree how the team would work.
+- **Plans:** Submit the topic, create the repository, draft the charter, and complete one practice pull request.
+- **Participation:** All ten members attended.
+- **Summary:** The team selected a software-only community parcel collection point system. The system records receiving, shelving, handover and reporting through a web interface and does not control hardware. Roles and the initial working method were allocated.
+- **My contribution:** I took the frontend lead and product architecture role, reviewed the proposed page boundaries, and argued that the product should follow the actual collection-point workflow rather than a generic parcel-delivery flow. That led to the navigation and page structure used in later designs.
+- **Evidence:** [minutes](../05-management/minutes/20261002_topic-selection.md)
+
+### 2026-10-05 — Week 1 stand-up (20:00–20:30)
+
+- **Agenda:** Confirm repository access, week 1 outputs and the working agreement.
+- **Plans:** Finish questionnaire drafts, create the first issues and complete one practice pull request.
+- **Participation:** All ten members attended.
+- **Summary:** Everyone could access the repository. The team accepted protected integration branches, one non-author approval, a 48-hour logbook rule and four role-specific questionnaires. It also fixed the project vocabulary.
+- **My contribution:** I reviewed the repository workflow and frontend terminology, confirmed that the application shell and design work could follow the agreed branch process, and prepared to apply the naming and evidence rules to my own pull requests.
+- **Evidence:** [minutes](../05-management/minutes/20261005_week1-standup.md)
+
+### 2026-10-11 — Week 1 review and retrospective (21:00–22:00)
+
+- **Agenda:** Demonstrate Sprint 0, compare the plan with delivery, and choose Sprint 1 changes.
+- **Plans:** Add the missing Sprint 1 task table, rule on domain conflicts, close the exploration branch, and reopen the design work.
+- **Participation:** All ten members attended.
+- **Summary:** The repository, plan, glossary, charter and CI were demonstrated. The review found that early design had no task IDs, parcel status values disagreed, generated files sat on an exploration branch, and `main` had received direct commits.
+- **My contribution:** I raised the missing Sprint 1 task IDs because the UML pull request had been closed without a valid task identifier. The team corrected the plan and reopened the design work.
+- **Evidence:** [minutes](../05-management/minutes/20261011_week1-review.md)
+
+### 2026-10-12 — Week 1 summary and retrospective (20:00–20:18)
+
+- **Agenda:** Hear each member's report, record project problems, and set the next week.
+- **Plans:** Add Sprint 1 issues, finish the design baseline, write requirements and build the RTM.
+- **Participation:** R1, R2, R4, R5, R6, R7, R8 and R9 attended; R3 and R10 were absent.
+- **Summary:** The meeting confirmed the questionnaire-only elicitation basis, three parcel states, session-derived handover identity, and the rejection of generated data. It also recorded the missing task-table problem and the incorrect R7 account link.
+- **My contribution:** I reported the frontend/design work and the open naming issue, then helped ensure the reopened diagram work would use the new Sprint 1 task IDs rather than an invented identifier.
+- **Evidence:** [minutes](../05-management/minutes/20261012_week1-summary-review.md)
+
+### 2026-10-12 — Week 2 stand-up (20:00–20:30)
+
+- **Agenda:** Publish the Sprint 1 task table, confirm each owner's work and collect blockers.
+- **Plans:** Reopen the UML pull request, create the design system, finish the requirement and test baselines.
+- **Participation:** R2–R10 attended; R1 joined five minutes late.
+- **Summary:** The task table unlocked the design work. The team moved OpenAPI expansion to R10, paired the recommender design with R7 and confirmed that only three questionnaire files would leave the exploration branch.
+- **My contribution:** I confirmed the frontend/design task split, prepared to reopen the UML baseline under its task ID, and continued aligning the page map, design system and prototype with the same requirements.
+- **Evidence:** [minutes](../05-management/minutes/20261012_week2-standup.md)
+
+### 2026-10-16 — Requirements walkthrough (19:00–20:00)
+
+- **Agenda:** Apply validity, consistency, completeness, realism and verifiability checks to CR-003 to CR-006.
+- **Plans:** Assign every finding an owner, action and closure criterion, with changes recorded in the RTM and change log.
+- **Participation:** R1, R2, R3, R4, R5, R6 and R8 attended; none were absent.
+- **Summary:** The walkthrough confirmed batch registration, the recommend-only storage location rule, deferred delegated collection and the three-state parcel lifecycle. It also found that user-interface wording must not imply automatic assignment.
+- **My contribution:** I reviewed the frontend and prototype implications, especially that the location suggestion must remain operator-confirmed and that status vocabulary must match the design system and API.
+- **Evidence:** [minutes](../05-management/minutes/20261016_requirements-walkthrough.md)
+
+### Asynchronous and reconstructed records
+
+These records are included for completeness but are not described as meetings.
+
+- **2026-10-15 — design review:** asynchronous review; no meeting or attendee list. I was a listed reviewer. UI findings covered raw colour use, unused tokens and unverified 375px behaviour. [minutes](../05-management/minutes/20261015_design-review.md)
+- **2026-10-21 — priority review:** reconstructed record; no meeting was held. It consolidates the earlier CR-003/CR-004 decisions. I did not claim participation in a meeting. [minutes](../05-management/minutes/20261021_priority-review.md)
+- **2026-10-22 — Sprint 1 review:** asynchronous review; no meeting. It records the delivered requirements/design baseline and the lesson that missing task IDs blocked design work. [minutes](../05-management/minutes/20261022_sprint1-review.md)
+- **2026-11-02 — Sprint 2 review:** asynchronous review; no meeting. It records the P0 reachability finding that test fixtures hid the missing `registered → shelved` application path. [minutes](../05-management/minutes/20261102_sprint2-review.md)
+
+## Report / presentation contribution
+
+| Item | What I wrote, designed or presented | Evidence |
+|---|---|---|
+| Report chapter 6 | Drafted the 90-word design-and-implementation section around the semantic status-token system and contract-first API boundary | [PR #261](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/261) |
+| Report evidence | Supplied the frontend design, page-state and browser-flow evidence used to keep chapters 6 and 7 aligned with the delivered system | [PR #304](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/304), [evidence record](../04-testing/evidence/W05-R4/README.md) |
+| Design contribution | Authored the design-system/token structure, page map and interface models that the report cites | `docs/02-design/design-system.md`, `frontend/src/styles/tokens.css`, `docs/02-design/frontend-page-map.md` |
+| QA contribution | Found and fixed the stale post-handover status, and supplied cold-cache, browser, Console and SQL evidence | [PR #303](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/303), [#287](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/issues/287) |
+| Presentation contribution | For the 14 November review, provide the frontend implementation claims, live-demo fallback evidence and Q&A material; no slides or script were produced during Week 5, per the plan | `docs/05-management/plans/progress-review-12-day-plan.md` |
+
+## Reflection
+
+Working on W05 changed how I judge a passing test suite. The frontend had 68 green tests, yet the real browser exposed a stale `shelved` label after a successful handover and the database showed the true state was `collected`. I learned that evidence must be reproducible and cross-checked: screenshots were stronger when combined with Console output, SQL results and command logs. When Docker and automated browser control failed, I changed the verification method instead of treating tool failure as evidence. Next time I would run the real-stack journey before reporting completion and add a browser-level regression test earlier. I would also keep binary evidence as issue attachments and commit only a text index that links to it.
 
 ## AI use
 
