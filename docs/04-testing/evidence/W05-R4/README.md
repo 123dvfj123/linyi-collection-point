@@ -33,23 +33,24 @@ pickup status   | used
 handover result | collected
 ```
 
-The shelf `DEMO-A-01-3` was visible as `Occupied` after registration
-(`03-location-board-occupied.png`) and was released to `available` after the
+The shelf `DEMO-A-01-3` was visible as `Occupied` after registration in the
+attached location-board screenshot and was released to `available` after the
 handover completed.
 
 ## Screenshots
 
-| File | What it proves |
-|---|---|
-| `01-signed-in-dashboard.png` | Staff authentication and application shell |
-| `02-register-success.png` | Registration success shows tracking, location code and issued pickup code |
-| `03-location-board-occupied.png` | The selected shelf is occupied before pickup |
-| `04-verify-success.png` | Pickup code resolves to the correct parcel and shelf |
-| `05-handover-recorded.png` | Confirmation reports a recorded handover |
-| `06-pickup-375-handover.png` | Pickup result fits the 375 x 812 responsive viewport |
-| `07-register-375.png` | Registration form fits the 375 x 812 responsive viewport |
-| `08-register-success-375.png` | A second registration succeeds at 375 x 812 and shows its location and pickup code |
-| `09-console-no-errors.png` | Console is clear after refresh and contains no red errors |
+The binary screenshots are deliberately not tracked in the repository. The
+complete nine-image attachment set is in [#287](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/issues/287#issuecomment-6708380334).
+
+The set proves:
+
+- staff authentication and the application shell
+- registration success with tracking, location code and issued pickup code
+- the selected shelf is occupied before pickup
+- pickup verification resolves the correct parcel and shelf
+- confirmation reports a recorded handover
+- pickup and registration states fit the 375 x 812 responsive viewport
+- the Console is clear after refresh and contains no red errors
 
 The 375 px screenshots show no horizontal page overflow and keep the primary
 control inside the viewport.
@@ -67,6 +68,20 @@ shelf status    | occupied
 
 The DevTools Console was cleared and the page reloaded; the captured Console
 contains no red errors.
+
+## Cold-cache frontend verification
+
+Repeated on 2026-11-07 against `develop` `f73d5b4`:
+
+```text
+npm ci                      passed
+node_modules/.vite          absent after install
+npm run lint                passed
+npm run test:run            11 files, 68 tests passed
+npm run build               passed
+```
+
+The test and build output was also linked on [#291](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/issues/291#issuecomment-6708382603).
 
 ## Finding
 
