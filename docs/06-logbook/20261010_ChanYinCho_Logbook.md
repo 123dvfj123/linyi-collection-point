@@ -30,8 +30,9 @@
 ## W05 close-out
 
 - **Completed:** the scope re-baseline table ([PR #302](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/302)), the backlog alignment ([PR #311](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/311)), the approved SRS Must baseline ([PR #312](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/pull/312)), and the answers on [#285](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/issues/285), [#286](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/issues/286) and [#289](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/issues/289).
-- **Not completed — task 1 of the weekly sheet:** a product-review comment on the `CR-034` semantics. The R2 comments recorded in this period are on `#285`, `#286` and `#289` only, and the `#283` / `#294` review threads carry none, so that review stays open.
-- **Not completed — task 4 of the weekly sheet:** the one-page decision sheet for `CR-003`, `CR-004`, `CR-005` and `CR-023`. The evidence currently sits in the backlog rationale and `change-log.md`; no single artefact exists yet.
+- **Incomplete:**
+  - a product-review comment on the `CR-034` semantics. The R2 comments recorded in this period are on `#285`, `#286` and `#289` only, and the `#283` / `#294` review threads carry none, so that review stays open.
+  - the one-page decision sheet for `CR-003`, `CR-004`, `CR-005` and `CR-023`. The evidence currently sits in the backlog rationale and `change-log.md`; no single artefact exists yet.
 - **Blocked by others:** the RTM still labels the same requirements `Must (proposed)`; that synchronisation is R3's edit under [#286](https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/issues/286).
 
 ## Report / presentation contribution
