@@ -4,10 +4,11 @@
 |---|---|
 | Version | v1.0 |
 | Date | 2026-11-07 |
-| Participant | R5 #288 first-time user |
+| Participant | R5 #288 first-time user 1 (issue #288) |
 | Observed by | R8 |
+| Acceptance source | R5 #288 first-time user walkthrough (3 participants) |
 | Environment | GitHub Codespaces, forwarded URL for port 80, Docker Compose `--profile full` |
-| Build / CI | tested commit 30f776b; local run 2026-11-07 |
+| Build / CI | tested final test commit; local run 2026-11-07 |
 
 ## Observations
 
@@ -33,14 +34,14 @@
 | Field | Detail |
 |---|---|
 | Date | 2026-11-07 |
-| Participant | R5 #288 first-time user 2 |
+| Participant | R5 #288 first-time user 2 (issue #288) |
 | Observed by | R8 |
 | Parcel type | Standard parcel (small) — duplicate waybill on `/parcels/new` |
 | Scenario | Duplicate waybill |
 | Steps observed | /parcels/new, register same trackingNo again. |
 | Expected | clear duplicate error; no second parcel row. |
 | Actual | `/parcels/new` rejected the duplicate trackingNo with `409 DUPLICATE_TRACKING_NO` (clear duplicate error in UI); parcels count for that trackingNo remained 1. |
-| Completion time | 5s |
+| Completion time | ~5 s (estimated from R5 #288 walkthrough; not separately timed) |
 | Blockers | None. Duplicate waybill was exercised through `/parcels/new`; duplicate rejection is also covered by system test ST-SYS-002. |
 | Verdict | PASS |
 | Evidence | UI observation on `/parcels/new` (no artifact captured); duplicate rejection also covered by ST-SYS-002 |
@@ -50,7 +51,7 @@
 | Field | Detail |
 |---|---|
 | Date | 2026-11-07 |
-| Participant | R5 #288 first-time user 3 |
+| Participant | R5 #288 first-time user 3 (issue #288) |
 | Observed by | R8 |
 | Parcel type | Standard parcel (small) — same parcel as ACC-W05-001 |
 | Scenario | Used pickup code |
@@ -74,3 +75,4 @@
 - `/dashboard` and `/parcels` list remain placeholders in this build. `/parcels/new` registration UI is implemented and was exercised; `/pickup` and `/locations` are also implemented. Registration was performed through `/parcels/new`, not via API. The `/parcels` list placeholder is a known scope item and does not block the registration-to-pickup flow.
 - ACC-W05-002 exercises duplicate waybill directly through `/parcels/new`; duplicate rejection is also covered by system test ST-SYS-002.
 - Completion times for ACC-W05-001 and ACC-W05-003 are estimated from R5's first-time user walkthrough in #288, because timing was not started during the original run. The estimate is marked as such and is not presented as a measured value.
+- Acceptance participants are the 3 first-time users from R5 #288. R8 observed and recorded the results in this report. Completion times are estimates, not measured values.
