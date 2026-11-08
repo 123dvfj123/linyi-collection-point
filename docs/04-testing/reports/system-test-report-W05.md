@@ -6,7 +6,7 @@
 | Date | 2026-11-08 |
 | Environment | GitHub Codespaces, Docker Compose (`--profile full`), http://localhost:80 |
 | Tester | R8 |
-| Build / CI | System tests: commit `30f776b`; final build and report commit: `6e32f86`; CI run `42394179858` on PR #301 (`https://github.com/Django-coder6/3500SEF-Group23-Project-LMS/actions/runs/42394179858`); all jobs pass. |
+| Build / CI |  PR #301 final checks; system tests executed locally against the final test commit. |
 | Contract | docs/03-api/openapi.yaml v0.7.0-draft |
 
 ## Scope
