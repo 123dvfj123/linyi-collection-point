@@ -8,7 +8,7 @@
 | Task | T-10-05, T-10-06, T-10-07 |
 | Version | v0.11 (Chapters 1 to 4) |
 | Author | R2 |
-| Status | Approved — Sprint 3 baseline |
+| Status | Approved — product requirements baseline |
 | Related documents | [personas.md](../elicitation/Personas.md), [user-journey-maps.md](../elicitation/user-journey-maps.md) |
 
 ## Table of Contents
@@ -224,11 +224,13 @@ flowchart LR
 
 **Task:** T-10-06 · **Related issue:** #76 · **Status:** Approved by R2 — 2026-11-08 · **Contribution:** R3
 
+**Approval scope:** R2 approved the Must priorities as the product requirements baseline on 2026-11-08. The Sprint 3 release baseline is defined by `docs/01-requirements/scope_table-re_baseline.md` and the gaps recorded in `RTM.md`; not every Must is delivered in Sprint 3.
+
 This draft identifies **47 functional requirements** grouped by the four agreed login roles. Each row records a stable proposed requirement identifier, one verifiable statement, rationale, source evidence or change record, MoSCoW priority and a proposed verification method. Where survey evidence does not independently support a behavior, the supporting SRS scope, design artifact, test-plan reference or CR is named instead. No synthetic interview or simulated dataset is used as empirical evidence.
 
 ### 3.0 Requirement conventions and numbering
 
-The planned 47 functional requirements are grouped as follows: Resident `FR-1–FR-10`, Staff `FR-11–FR-25`, Owner `FR-26–FR-39`, and System administrator `FR-40–FR-47`. **Route A (proposed)** preserves known meanings for `FR-6`, `FR-9`, `FR-10`, `FR-17`, `FR-18`, `FR-19`, `FR-20`, and `FR-39` because they are already referenced in the test plan or change log. This numbering allocation is proposed for R2 approval and is **not yet frozen**.
+The planned 47 functional requirements are grouped as follows: Resident `FR-1–FR-10`, Staff `FR-11–FR-25`, Owner `FR-26–FR-39`, and System administrator `FR-40–FR-47`. **Route A (approved)** preserves known meanings for `FR-6`, `FR-9`, `FR-10`, `FR-17`, `FR-18`, `FR-19`, `FR-20`, and `FR-39` because they are already referenced in the test plan or change log. The numbering allocation was approved by R2 on 2026-11-08 and is frozen.
 
 Requirement statements use *shall* for testable required behavior and *should* for lower-priority proposals. The MoSCoW column uses a consistent format: `Must (approved)`, `Should (proposed)`, `Must (approved — CR-003)`, `Should (approved — CR-004)`, and `Should not have (deferred — CR-005)`. All proposed priorities require R2 confirmation; approvals and deferrals refer to the cited change records. FR-8, FR-33, and FR-39 require specific scope or API confirmation as noted in their sources and verification methods.
 
@@ -255,7 +257,7 @@ Only the role-based persona identifiers are used: **Resident persona**, **Staff 
 
 | ID | Requirement statement | Rationale | Source | MoSCoW | Verification method |
 |---|---|---|---|---|---|
-| FR-11 | The system shall allow an authenticated staff member to view a list of parcels belonging to their assigned collection point. | Enables the operational parcel workspace without cross-point exposure. | SRS §2.3; frontend-page-map `/parcels`; A5 (3/4), directional | Must (proposed) | Role-scope query test: staff list contains assigned-point parcels only. |
+| FR-11 | The system shall allow an authenticated staff member to view a list of parcels belonging to their assigned collection point. | Enables the operational parcel workspace without cross-point exposure. | SRS §2.3; frontend-page-map `/parcels`; A5 (3/4), directional | Must (approved) | Role-scope query test: staff list contains assigned-point parcels only. |
 | FR-12 | The system shall allow an authenticated staff member to register a single arriving parcel at their assigned collection point. | Supports basic manual intake without courier integration. | S2 (3/7 spreadsheets, 2/7 software); SRS IS-2 | Must (approved) | API integration test: staff can register one valid parcel. |
 | FR-13 | The system shall allow an authenticated staff member to view the handling history of a parcel belonging to their assigned collection point. | Provides a traceable record for operational disputes. | S4 (3/7 handover confirmation); CR-007; frontend-page-map `/parcels/:id` | Must (approved) | Parcel history integration test: events displayed for eligible parcel. |
 | FR-14 | The system shall allow staff to record a parcel's assigned storage location when shelving the parcel. | Supports accurate shelf placement. | SRS IS-3; CR-006; frontend-page-map `/locations` | Must (approved) | Shelving test: saved parcel location matches staff selection. |
@@ -306,9 +308,9 @@ Only the role-based persona identifiers are used: **Resident persona**, **Staff 
 
 ### 3.5 Numbering and approval handoff
 
-**Selected route:** Route A — retain every FR identifier already cited by the repository and align its new definition to that citation. Identifiers preserved: `FR-6`, `FR-9`, `FR-10`, `FR-17`, `FR-18`, `FR-19`, `FR-20`, `FR-39`. The remaining role-grouped IDs are proposed and must be confirmed by R2 before the requirement baseline is frozen. The referenced NFR IDs (`NFR-1`, `NFR-4`, `NFR-5`, `NFR-6`, `NFR-7`, `NFR-10`, `NFR-12`) are reserved for Chapter 4 and are not silently renumbered here.
+**Selected route:** Route A — retain every FR identifier already cited by the repository and align its new definition to that citation. Identifiers preserved: `FR-6`, `FR-9`, `FR-10`, `FR-17`, `FR-18`, `FR-19`, `FR-20`, `FR-39`. The role-grouped IDs were confirmed by R2 on 2026-11-08. The referenced NFR IDs (`NFR-1`, `NFR-4`, `NFR-5`, `NFR-6`, `NFR-7`, `NFR-10`, `NFR-12`) are reserved for Chapter 4 and are not silently renumbered here.
 
-**Checks before approval:** R2 to confirm MoSCoW and proposed ID meanings; R6 to confirm endpoint/data-model feasibility (especially proposed CR-013 resident pickup-code access); R8 to map each Must-have to a concrete test case and confirm FR-39 fee calculation rules; R4 to confirm `FR-47` matches `UC_AdminAudit`, while Owner audit remains limited to managed points via `FR-35`.
+**Approval note:** R2 confirmed the MoSCoW priorities and the identifier meanings on 2026-11-08, so the Must baseline is approved. The implementation checks remain open with the owners they were assigned to: R6 to confirm endpoint and data-model feasibility (especially the `CR-013` resident pickup-code access), R8 to map each Must-have to a concrete test case and confirm the `FR-39` fee calculation rules, and R4 to confirm `FR-47` matches `UC_AdminAudit`, while Owner audit remains limited to managed points via `FR-35`.
 
 **No current implementation promise for deferred items:** `FR-9` and `FR-10` remain future work under `CR-005`. Staff location suggestions `FR-19` and `FR-20` are optional only, may be ignored, and are **never automatically applied** (`CR-004`). Exception types follow the five approved glossary values (`CR-010` / `CR-011`); parcel lifecycle is `registered`, `shelved`, `collected` (`CR-006`). The system can calculate overdue fees (`FR-39`) but does not take online payments (`SRS OS-3`).
 
@@ -482,4 +484,4 @@ cite them, and a requirement that is never stated cannot be verified.
 | v0.8 | Week 3 | Updated FR-19 and FR-20 from Should to Could and deferred the recommendation panel (CR-023); confirmed that `shelve later` is outside Sprint 2 (CR-024); clarified FR-18's 50-parcel hard limit, HTTP 400 rejection and manual splitting in section 3.7 (CR-025). | R3 |
 | v0.9 | Week 4 | Section 3.5 now states the `CR-028` default fallback instead of saying that no defined fallback exists, and names `CR-028` rather than `CR-027` | R2 |
 | v0.10 | Week 4 | Corrected section 3.5 to align with approved CR-029: parcels may remain `registered` with a null `locationId` when no storage location is available. Removed the temporary `PENDING` holding-slot interpretation of CR-028, preserved the deferral of `shelve later`, and retained FR-14 and FR-15 unchanged. | R3 |
-| v0.11 | Week 5 | Approved the Must priority baseline; aligned header and chapter 3 status. No FR priority changed. | R2 |
+| v0.11 | Week 5 | Approved the Must priorities as the product requirements baseline, aligned the header, chapter 3 status and the section 3.0/3.5 approval wording, and recorded that the Sprint 3 release baseline is set by the scope table and the RTM gaps rather than by this approval. No FR priority changed. | R2 |
