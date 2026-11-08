@@ -6,7 +6,7 @@
 | Date | 2026-11-08 |
 | Environment | GitHub Codespaces, Docker Compose (`--profile full`), http://localhost:80 |
 | Tester | R8 |
-| Build / CI | PR #301 final checks; system tests executed locally against the final test commit. |
+| Build / CI | PR #301 final checks; system tests executed locally against the final test commit. See final PR #301 checks; all five jobs pass. |
 | Contract | docs/03-api/openapi.yaml v0.7.0-draft |
 
 ## Scope
@@ -70,4 +70,3 @@ End-to-end staff flow through the Nginx proxy on port 80.
 3. **`recipientPhone` masked in create response.** The registration response masks the phone as `138****8888`, matching the ethics statement's masking rule; the test does not depend on the unmasked value.
 4. **Compose profile.** `docker compose` commands must run with `--profile full` (or `COMPOSE_PROFILES=full` in the same shell), otherwise `frontend` fails with `undefined service "backend"` because the backend service lives in the `full` profile. This is a startup ergonomics issue, not a system defect.
 5. **Codespaces port-forward.** `curl` in the Codespaces terminal uses `http://localhost:80`; browser/UI checks use the PORTS-panel forwarded URL.
-6. **CI status.** CI status is tracked in PR #301 checks; all five jobs pass. The system tests in this report were executed locally in Codespaces against the final test commit with the full Compose stack (postgres, redis, backend, frontend all healthy). This does not change the local test verdicts above.
