@@ -4,8 +4,8 @@
 |---|---|
 | Task | T-43-08 |
 | Owner | R1, with R2 and R3 as co-presenters |
-| Version | v0.6 |
-| Status | Active; asynchronous decision window 2026-11-11 20:00 – 2026-11-12 20:00 |
+| Version | v0.7 |
+| Status | Active; asynchronous decision completed 2026-11-09 (9/10 AGREE, 0 OBJECT) |
 | Assumed review date | 2026-11-14 (review production start; confirm the exact slot) |
 | Working branch | `fix/p0-reachability` |
 
@@ -29,13 +29,12 @@ report numbers and logbooks. The first review run is therefore on 11/14, with a
 second run on 11/15 or the morning of the review, depending on the confirmed
 slot.
 
-**Update 2026-11-09 (R1 decision).** Because the team cannot schedule a
-synchronous 11/04 meeting, the Week 5 decision is an asynchronous group-chat
-thread from **2026-11-11 20:00 to 2026-11-12 20:00**. R1 posts numbered
-proposals, every decision owner replies `AGREE` or `OBJECT + reason`, silence
-is not consent, and R1 commits the decision record within 24 hours of the close.
-The record is
-`docs/05-management/minutes/20261112_week5-async-decision.md`.
+**Update 2026-11-09 (R1 decision).** Because the team could not schedule a
+synchronous 11/04 meeting, the Week 5 decision ran as an asynchronous group-chat
+thread from **2026-11-09 19:37 to 20:08 HKT**. Nine of ten members replied
+`AGREE 1-5`; no `OBJECT` was received. R1 recorded the decision in
+`docs/05-management/minutes/20261109_week5-async-decision.md`. The thread was
+shorter than 24 hours because quorum was met and every affected owner replied.
 
 It is **not** a reason to add notifications, exceptions, stocktake, billing or
 an admin console. Those remain deferred.
@@ -359,4 +358,5 @@ why. The rubric rewards a defensible process, not a perfect feature list.
 | v0.3 | 2026-11-03 | Removed the repository link to the individual Week 5 task sheets; they are distributed privately and are not committed | R1 |
 | v0.4 | 2026-11-03 | Recorded PR #283/#294 as merged, develop CI `41658317363` as green with 87 tests and 0 skips, closed the P0 docs, and moved the remaining runtime item to R10's 11/04 manual Compose flow | R1 |
 | v0.5 | 2026-11-05 | Recorded PR #298/#299, the 90-test baseline `41977146617`, and R10's completed manual Compose flow; no runtime P0 item remains | R1 |
-| v0.6 | 2026-11-09 | Replaced the 11/04 synchronous decision meeting with a time-boxed asynchronous group-chat thread on 11/11–11/12; updated the decision, quorum, logbook and record requirements | R1 |
+| v0.6 | 2026-11-09 | Replaced the 11/04 synchronous decision meeting with a time-boxed asynchronous group-chat thread; updated the decision, quorum, logbook and record requirements | R1 |
+| v0.7 | 2026-11-09 | Recorded the completed 11/09 19:37–20:08 thread: 9/10 explicit AGREE, 0 OBJECT; linked `20261109_week5-async-decision.md` | R1 |

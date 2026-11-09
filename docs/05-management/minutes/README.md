@@ -53,6 +53,7 @@ group-chat decision thread instead. It is valid only when all of these hold:
 - R1 posts a numbered proposal in the team group chat and links the GitHub
   issue it answers.
 - The thread has a stated opening and closing time, normally a 24-hour window.
+  It may close earlier when quorum is met and every affected owner has replied.
 - Every decision owner is asked for an explicit `AGREE` or `OBJECT + reason`.
   Silence, absence and "seen" are **not** agreement.
 - No unresolved objection remains. If quorum is not met, the decision stays
@@ -69,7 +70,7 @@ A chat transcript alone is not a decision. The committed record is the decision.
 The file uses the close date in its name, for example:
 
 ```text
-20261112_week5-async-decision.md
+20261109_week5-async-decision.md
 ```
 
 Do not backdate an asynchronous record to the date of a meeting that did not
@@ -99,6 +100,7 @@ agreed to change.
 | 2026-10-15 | Design review, architecture to API and UI (asynchronous document review) | [20261015_design-review.md](20261015_design-review.md) |
 | 2026-10-21 | Priority review, resident convenience against staff effort (reconstructed record, no meeting) | [20261021_priority-review.md](20261021_priority-review.md) |
 | 2026-10-22 | Sprint 1 review and retrospective (asynchronous review, no meeting) | [20261022_sprint1-review.md](20261022_sprint1-review.md) |
+| 2026-11-09 | Week 5 decision (asynchronous group-chat thread, no meeting) | [20261109_week5-async-decision.md](20261109_week5-async-decision.md) |
 
 Two files are dated 2026-10-12 because the week 1 summary ran late and the week
 2 stand-up followed it. Both are kept, because they record different meetings.
@@ -113,6 +115,10 @@ ended on 19 October and every member had other commitments afterwards, so the re
 was conducted against the repository rather than in a room, and the Sprint 2
 kick-off went out as an individual message to each member. The file states both
 facts in its header and claims no attendee list.
+
+`20261109_week5-async-decision.md` records the Week 5 decision as a time-boxed
+group-chat thread. No synchronous meeting was held; the record names the
+responders and states the quorum, rather than claiming an attendee list.
 
 ## Recordings
 
