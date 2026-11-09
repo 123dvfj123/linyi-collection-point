@@ -30,7 +30,7 @@ The captured thread shows these display names:
 - 神原
 - R8
 - R9
-- +86 135 3723 3985
+- +86 *** (phone-number display name; number redacted)
 - R2
 - R10
 - 黄维家
