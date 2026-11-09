@@ -285,7 +285,7 @@ A log entry should include: task ID, description, time spent, status, evidence l
 | `docs/03-api/` | OpenAPI specification (`openapi.yaml`) | R6 |
 | `docs/04-testing/test-cases/` | Test cases | R8 |
 | `docs/04-testing/reports/` | Test reports | R8 |
-| `docs/05-management/minutes/` | Meeting minutes | R1 |
+| `docs/05-management/minutes/` | Meeting minutes and asynchronous decision records | R1 |
 | `docs/05-management/plans/` | Plans | R1 |
 | `docs/05-management/weekly/` | Weekly reports | R1 |
 | `docs/06-logbook/` | Personal logbooks | All members |
