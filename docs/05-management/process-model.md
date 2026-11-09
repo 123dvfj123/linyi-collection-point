@@ -4,8 +4,8 @@
 |---|---|
 | Task | T-00-07 |
 | Owner | R1, for R2 and the team to review |
-| Version | v0.1 |
-| Status | Draft for Sprint 3 review |
+| Version | v0.2 |
+| Status | Draft for Sprint 3 review; asynchronous decision rule added |
 | Related | `PLAN.md`, `team-charter.md`, `change-log.md`, `docs/05-management/minutes/` |
 
 ## 1. Context
@@ -39,7 +39,8 @@ We used a **hybrid incremental and plan-driven process**:
 
 The process is deliberately documented in the artefacts a reader can inspect,
 not only in meeting chat: `PLAN.md` for the plan, `team-charter.md` for the
-working agreement, `change-log.md` for decisions, and the minutes for meetings.
+working agreement, `change-log.md` for decisions, and the minutes or
+asynchronous decision records for meetings and time-boxed group-chat decisions.
 
 ## 3. Tailoring
 
@@ -49,6 +50,7 @@ working agreement, `change-log.md` for decisions, and the minutes for meetings.
 | Story points / velocity | Task IDs and a completed/committed task count per sprint | The assessment needs traceability to artefacts more than relative estimation |
 | Dedicated Scrum Master | R1 facilitated, R2 owned the backlog | A ten-person course team could not justify a non-delivery role |
 | Sprint review meeting | Sometimes asynchronous, recorded against the repository | Members had examinations and outside commitments; the evidence is the increment, not a meeting that did not happen |
+| Decision meeting | Synchronous when possible; a time-boxed group-chat thread with explicit `AGREE`/`OBJECT` and a committed record when not | Ten timetables made a synchronous meeting unreliable; silence is not consent, so the record must show who replied |
 | Potentially shippable increment | A tagged release (`v0.0.1`, `v0.1.0`, `v0.2.0`) plus CI evidence | The course needs a demonstrable build at the progress review |
 
 The team kept the parts that carried assessment value: a prioritised backlog,
@@ -82,3 +84,4 @@ the parts that would have produced ceremony without evidence.
 | Version | Date | Change | Author |
 |---|---|---|---|
 | v0.1 | Week 5 | First version: context, hybrid decision, tailoring table, evaluation and four changes | R1 |
+| v0.2 | 2026-11-09 | Added the time-boxed asynchronous decision-thread rule and the requirement for an explicit `AGREE`/`OBJECT` record | R1 |

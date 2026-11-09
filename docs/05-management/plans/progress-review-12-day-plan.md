@@ -4,9 +4,9 @@
 |---|---|
 | Task | T-43-08 |
 | Owner | R1, with R2 and R3 as co-presenters |
-| Version | v0.5 |
-| Status | Proposed; team decision needed on 2026-11-04 |
-| Assumed review date | 2026-11-15 (confirm the actual slot) |
+| Version | v0.6 |
+| Status | Active; asynchronous decision window 2026-11-11 20:00 – 2026-11-12 20:00 |
+| Assumed review date | 2026-11-14 (review production start; confirm the exact slot) |
 | Working branch | `fix/p0-reachability` |
 
 This plan assumes the review is in **12 days**. It is deliberately not a
@@ -28,6 +28,14 @@ or a rehearsal. Those start on 11/14. Week 5 is for the P0 fixes, test evidence,
 report numbers and logbooks. The first review run is therefore on 11/14, with a
 second run on 11/15 or the morning of the review, depending on the confirmed
 slot.
+
+**Update 2026-11-09 (R1 decision).** Because the team cannot schedule a
+synchronous 11/04 meeting, the Week 5 decision is an asynchronous group-chat
+thread from **2026-11-11 20:00 to 2026-11-12 20:00**. R1 posts numbered
+proposals, every decision owner replies `AGREE` or `OBJECT + reason`, silence
+is not consent, and R1 commits the decision record within 24 hours of the close.
+The record is
+`docs/05-management/minutes/20261112_week5-async-decision.md`.
 
 It is **not** a reason to add notifications, exceptions, stocktake, billing or
 an admin console. Those remain deferred.
@@ -253,7 +261,8 @@ Goal: final evidence and report/logbook, then stop.
 
 ### What to do with `PLAN.md`
 
-Do not rewrite the official plan unilaterally. At the 2026-11-04 meeting:
+Do not rewrite the official plan unilaterally. In the asynchronous decision
+thread (2026-11-11 20:00 – 2026-11-12 20:00):
 
 1. R1 proposes the Sprint 3A/3B split.
 2. R2 confirms the scope cut (which Must items move to `Could`/future).
@@ -261,17 +270,20 @@ Do not rewrite the official plan unilaterally. At the 2026-11-04 meeting:
 4. R1 records the change in `change-log.md` as a process change, then updates
    `PLAN.md` and the README status.
 
-If the team does not agree, keep the existing plan and treat this document as a
-contingency plan; the review preparation still takes priority over new features.
+If the team does not agree, or quorum is not met, keep the existing plan and
+treat this document as a contingency plan; the review preparation still takes
+priority over new features.
 
 ---
 
 ## 5. Logbook: minimum compliant structure
 
 The course asks for the agenda, plans, participation and summary of **every
-group meeting** (≤200 words), the member’s own contribution (≤100 words), and
-their contribution to the project, report and presentation. Add these sections
-to each logbook before 2026-11-08:
+synchronous meeting or asynchronous decision thread** (≤200 words), the member’s
+own contribution (≤100 words), and their contribution to the project, report and
+presentation. Add these sections to each logbook before 2026-11-08. For an
+asynchronous thread, record the window, the channel and whether you explicitly
+replied; silence is not participation.
 
 ```markdown
 ## Meeting log
@@ -347,3 +359,4 @@ why. The rubric rewards a defensible process, not a perfect feature list.
 | v0.3 | 2026-11-03 | Removed the repository link to the individual Week 5 task sheets; they are distributed privately and are not committed | R1 |
 | v0.4 | 2026-11-03 | Recorded PR #283/#294 as merged, develop CI `41658317363` as green with 87 tests and 0 skips, closed the P0 docs, and moved the remaining runtime item to R10's 11/04 manual Compose flow | R1 |
 | v0.5 | 2026-11-05 | Recorded PR #298/#299, the 90-test baseline `41977146617`, and R10's completed manual Compose flow; no runtime P0 item remains | R1 |
+| v0.6 | 2026-11-09 | Replaced the 11/04 synchronous decision meeting with a time-boxed asynchronous group-chat thread on 11/11–11/12; updated the decision, quorum, logbook and record requirements | R1 |
