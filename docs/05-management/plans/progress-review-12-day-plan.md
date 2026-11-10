@@ -4,10 +4,17 @@
 |---|---|
 | Task | T-43-08 |
 | Owner | R1, with R2 and R3 as co-presenters |
-| Version | v0.7 |
-| Status | Active; asynchronous decision completed 2026-11-09 (9/10 AGREE, 0 OBJECT) |
-| Assumed review date | 2026-11-14 (review production start; confirm the exact slot) |
+| Version | v0.8 |
+| Status | Active; presentation 2026-11-17; slide production starts 2026-11-13 |
+| Assumed review date | 2026-11-17 (confirmed by R1) |
 | Working branch | `fix/p0-reachability` |
+
+**Update 2026-11-10 (R1 decision).** The presentation is confirmed for
+**2026-11-17**. Slide/script production and the first rehearsal start on
+**2026-11-13**, not 11/14. The final PDF freezes on **11/12 18:00**; code
+freezes on **11/12 21:00**; rehearsals run **11/13, 11/14 and 11/15**; the
+final pack is **11/16**. This update supersedes the 11/14 and 11/15 dates
+below where they conflict.
 
 This plan assumes the review is in **12 days**. It is deliberately not a
 feature plan. The course rubric gives 5% for structure and 5% for clarity, and
@@ -17,17 +24,16 @@ days is therefore:
 1. make the existing staff flow demonstrable end to end;
 2. make the **requirements-engineering story** the centre of the review;
 3. make every claim in the report and the slides match the repository;
-4. leave the slides, script and rehearsal until **2026-11-14**, after the
+4. leave the slides, script and rehearsal until **2026-11-13**, after the
    engineering evidence is stable.
 
 The individual Week 5 task sheets are distributed privately to each member.
 They are deliberately not committed to this repository.
 
 **Update 2026-11-03 (R1 decision).** Week 5 does **not** produce slides, script
-or a rehearsal. Those start on 11/14. Week 5 is for the P0 fixes, test evidence,
-report numbers and logbooks. The first review run is therefore on 11/14, with a
-second run on 11/15 or the morning of the review, depending on the confirmed
-slot.
+or a rehearsal. Those start on 11/13. Week 5 is for the P0 fixes, test evidence,
+report numbers and logbooks. The first review run is therefore on 11/13, with a
+second run on 11/14 and a third on 11/15; presentation is 11/17.
 
 **Update 2026-11-09 (R1 decision).** Because the team could not schedule a
 synchronous 11/04 meeting, the Week 5 decision ran as an asynchronous group-chat
@@ -213,17 +219,18 @@ The detailed requirements-engineering narrative for R2/R3 is in
 
 | Date | Activity | Output |
 |---|---|---|
-| 2026-11-14 | Produce the slides/script and run 1, timed | Every slide has one claim and one owner; 10:30 or less |
-| 2026-11-15 | Run 2 with Q&A and record fallback | 9:30 or less; backup video and screenshots stored locally |
+| 2026-11-13 | Produce the slides/script and run 1, timed | Every slide has one claim and one owner; 10:30 or less |
+| 2026-11-14 | Run 2 with Q&A | 9:30 or less |
+| 2026-11-15 | Run 3 with Q&A; record fallback | 9:00 or less; backup video and screenshots stored locally |
+| 2026-11-16 | Final dry run and pack | Final PDF/deck/fallback ready for 11/17 |
 
-If the confirmed review slot is later than 11/15, add one more run on the day
-before. If it is earlier, move the 11/14 production date earlier by the same
-number of days; do not wait for the “official” slide template. The rubric only
-asks for structure and clarity.
+If the confirmed presentation slot moves, move the rehearsal dates with it; do
+not move the 11/13 production rule again. Do not wait for the “official” slide
+template. The rubric only asks for structure and clarity.
 
 ### What not to do in Week 5
 
-Do not start the slides, script or rehearsal before 11/14. The Week 5 task
+Do not start the slides, script or rehearsal before 11/13. The Week 5 task
 sheets deliberately contain no review-production work. The risk of stale
 numbers and a demo that no longer matches the branch is higher than the risk of
 having one fewer rehearsal.
@@ -255,7 +262,7 @@ Goal: final evidence and report/logbook, then stop.
 - Final report and logbook checks.
 - Do **not** start notifications, exceptions, stocktake, billing or admin pages
   before the review.
-- On **2026-11-14**, produce the review slides/script and run the first timed
+- On **2026-11-13**, produce the review slides/script and run the first timed
   rehearsal. Do not pull this work forward into Week 5.
 
 ### What to do with `PLAN.md`
@@ -360,3 +367,4 @@ why. The rubric rewards a defensible process, not a perfect feature list.
 | v0.5 | 2026-11-05 | Recorded PR #298/#299, the 90-test baseline `41977146617`, and R10's completed manual Compose flow; no runtime P0 item remains | R1 |
 | v0.6 | 2026-11-09 | Replaced the 11/04 synchronous decision meeting with a time-boxed asynchronous group-chat thread; updated the decision, quorum, logbook and record requirements | R1 |
 | v0.7 | 2026-11-09 | Recorded the completed 11/09 19:37–20:08 thread: 9/10 explicit AGREE, 0 OBJECT; linked `20261109_week5-async-decision.md` | R1 |
+| v0.8 | 2026-11-10 | Confirmed presentation 11/17; moved slide production/rehearsal 1 to 11/13, PDF freeze to 11/12 18:00 and code freeze to 11/12 21:00; added rehearsals on 11/14 and 11/15 and final pack 11/16 | R1 |
