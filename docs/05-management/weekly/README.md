@@ -77,6 +77,7 @@ than a discrepancy to chase.
 | W02 | `20261021_contributors-1.jpg`, `20261021_contributors-2.jpg` | 2026-10-21 | 2026-10-12 to 2026-10-19 |
 | W03 | `20261028_contributors-1.jpg`, `20261028_contributors-2.jpg` | 2026-10-28 | 2026-10-19 to 2026-10-28 |
 | W04 | `20261102_contributors-1.jpg`, `20261102_contributors-2.jpg` | 2026-11-02 | 2026-10-25 to 2026-11-01 |
+| W05 | `20261109_contributors-1.jpg`, `20261109_contributors-2.jpg` | 2026-11-09 | 2026-11-01 to 2026-11-08 |
 
 ### What the W01 screenshot records
 
@@ -354,6 +355,109 @@ the real capture date is recorded, which it is.
 **The process gap narrowed rather than closed.** W02 was two days late, W03 three days, W04 one day.
 **Three consecutive late captures is the trend, even if the direction has improved**, and it is
 recorded here rather than smoothed over.
+
+### What the W05 capture records
+
+Captured on **2026-11-09**, covering **2026-11-01 to 2026-11-08**. Two images,
+one session. This is the first capture after the P0 merge: the week includes the
+reachability fixes, the test and acceptance evidence, the SRS/backlog/RTM
+alignment, and the report draft.
+
+#### The panel
+
+| Rank | Account | Member | Commits in the period shown | Insertions | Deletions |
+|---|---|---|---|---|---|
+| 1 | Django-coder6 | R1 Liu JiaHao | 23 | 4,862 | 2,326 |
+| 2 | ohcyc246 | R2 Chan Yin Cho | 11 | 232 | 133 |
+| 3 | RookieVENENO | R4 Yuan Chong Jun | 9 | 337 | 40 |
+| 4 | fannaodawang | R8 Wu Kehao | 6 | 414 | 43 |
+| 5 | 123dvfj123 | R6 Hu Qing Kai | 6 | 319 | 23 |
+| 6 | Kennethli13 | R3 Li Cheuk Fung Kenneth | 6 | 141 | 64 |
+| 7 | smcheese9731-sys | R10 Chan Sung Ming William | 4 | 134 | 34 |
+| 8 | RavenG7 | R9 Guo Yuhui | 3 | 79 | 2 |
+| 9 | Allen06914 | R7 Huang Wei Jia | 2 | 5 | 0 |
+| 10 | Christine049 | R5 Tan Yuan Ting | 1 | 7 | 0 |
+
+**Totals: 71 commits, 6,530 insertions, 2,665 deletions.** All ten members appear.
+
+The total is six commits below W04's 77. The highest count rose from 18 to 23,
+and the lowest fell from 2 to 1. Those two facts point in opposite directions,
+which is why the pull-request table below matters more than the ordering.
+
+#### This week the pull requests are the better record
+
+Every member merged at least one pull request between 1 and 8 November:
+
+| Member | Pull requests merged | What they carried |
+|---|---|---|
+| **R1** Liu JiaHao | `#283`, `#295`, `#300` | the P0 intake-to-handover reachability fix; post-merge verification and the Week 5 change record; the 90-test baseline |
+| **R2** Chan Yin Cho | `#302`, `#311`, `#312`, `#313` | the FR scope baseline; backlog v1.3; SRS v0.11; the Week 5 scope/SRS logbook record |
+| **R3** Li Cheuk Fung Kenneth | `#307` | the RTM reconciliation of the six unimplemented API operations and GAP 14–19 |
+| **R4** Yuan Chong Jun | `#303`, `#304`, `#305`, `#308`, `#309` | the collected-status fix; browser-flow evidence; the W05 logbook; removal of committed screenshots; the required logbook structure |
+| **R5** Tan Yuan Ting | `#306`, `#315` | the location-refresh assertion after registration; the frontend/acceptance logbook |
+| **R6** Hu Qing Kai | `#294` | the real Docker verification and the V4 demo-code coverage |
+| **R7** Huang Wei Jia | `#299` | serialised pickup-code shelving under concurrency |
+| **R8** Wu Kehao | `#301` | the system/acceptance evidence and the DEF-OPS-001 close-out |
+| **R9** Guo Yuhui | `#314`, `#316` | the Week 5 report draft; the W05 report/audit logbook entries |
+| **R10** Chan Sung Ming William | `#296`, `#297`, `#298` | Compose recovery and endpoint verification; the port-80 P0 verification; the W05 logbook |
+
+The two low panel rows are the clearest example of why the panel is not a
+contribution score:
+
+- **R5's one commit and seven insertions** sit beside #306, the frontend
+  assertion that makes the location refresh observable, and #315, the logbook
+  that records the 68/68 tests and the acceptance observations.
+- **R7's two commits and five insertions** sit beside #299, the concurrency fix
+  that serialises pickup-code shelving.
+
+Neither row means the member did little. A small, targeted change can be one
+commit; a generated document or a merge can be thousands of insertions.
+
+**R1's 4,862 insertions are mostly management and merge volume**, not a claim
+that the P0 fix was four thousand lines of new code. The P0 change itself is
+small; the inserts include the plan, report, logbook and integration work that
+made the fix reviewable. The same caution applies to R2's document PRs and R4's
+test evidence.
+
+#### What changed since W04
+
+- **Commits:** 77 → 71. The week was shorter on implementation because the P0
+  fix and the test evidence had to be reviewed and recorded.
+- **Highest count:** 18 (R9) → 23 (R1). The top row moved from report writing
+  to integration and merge work.
+- **Lowest count:** 2 (R5) → 1 (R5). The floor is noise, not a performance
+  signal; the PR table shows why.
+- **All ten active:** this remains the one claim the panel is designed to
+  support.
+
+#### Post-capture merges
+
+The screenshot was taken before the last Week 5 PRs merged. These are not in the
+panel but belong to the same close-out:
+
+| Member | Pull request | What it carried |
+|---|---|---|
+| R1 | `#317` | the asynchronous decision-record rule and the 9/10 AGREE record |
+| R3 | `#319` | RTM v0.7: 31 FR Must labels → approved; the FR-12 traceability chain |
+| R7 | `#318` | the W05 logbook update |
+| R1 | `#320` | FR-18 CR-025 correction in the RTM |
+
+This is not a second capture and does not change the W05 figures. It records
+what happened after the screenshot, so the PR record and the panel can be read
+together without pretending the panel saw the future.
+
+#### This capture is one day late, again
+
+The logbook deadline was Sunday **2026-11-08 at 21:00**; the screenshots were
+taken on **2026-11-09**. The panel's 1–8 November bucket is closed, so reading
+it one day later reads the same figures that reading it on the 8th would have
+shown. The real capture date is recorded in the index.
+
+That is the fourth consecutive late capture: W02 two days, W03 three, W04 one,
+W05 one. The trend improved after W03 but has not closed. The process gap is
+that the screenshot is supposed to check the logbooks before their deadline; a
+late capture weakens that independence even when the bucket is stable. Raise it
+at the next stand-up rather than smoothing it over.
 
 ## A note on not re-taking an old screenshot
 A screenshot of a live panel is a dated artefact, not a maintained document. Do
